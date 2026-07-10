@@ -25,6 +25,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 - [ ] Commit + push research updates (RUBRIC.md §0, TODO.md)
 
 ### Done (newest first, with commit)
+- [x] Deep research: past editions 3rd–5th, winners (Spine/OmniCall), dual-track model, jury process, PT agenda → RUBRIC.md §0.5 (2026-07-10 ~23:55 ICT)
 - [x] Hour-0 env checks: repo outside sync folders, .gitignore complete, clean tree pushed (`1454ce5`, 2026-07-10 18:50 ICT)
 - [x] Repo created from hackathon-template → supawichza40/hacknation-hackathon (2026-07-10 18:45 ICT)
 

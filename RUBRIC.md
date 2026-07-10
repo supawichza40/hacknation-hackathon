@@ -14,6 +14,28 @@ Photograph every slide that mentions judging, prizes, or submission. Fill this b
 - **5th-ed judges signal:** Greylock VCs on panel; Fridolin Haugg (Harvard). Venture framing scores.
 - **Format:** finalists pitch 2–3 min live + Q&A to operators/investors
 
+## 0.5 Past-edition record (deep research 2026-07-10 — winners, tracks, judging)
+
+**Edition timeline** (reconciled from winner-post dates; numbering was fuzzy in sources):
+| Ed. | Date | Notes |
+|---|---|---|
+| 1st–2nd | 2025 | Born in MIT Sloan AI Club; 2nd ed. "with MIT Sloan & OpenAI" |
+| 3rd | Nov 8–9 2025 | w/ MIT Sloan AI Club |
+| 4th | Feb 7–8 2026 | 3,000+ applicants / 1,500+ selected; hubs MIT, Stanford, ETH, TUM |
+| 5th | Apr 25–26 2026 | Online + India satellite (noClue/Masters' Union Devpost, $28.5k) |
+| 6th | **Jul 18–19 2026** | ours |
+
+**Track structure (stable across editions):** ~5 challenges per event, dual-track model — **Corporate track** = predefined problem statements designed by sponsor companies (named after them: "OpenAI track", "Databricks Track", ElevenLabs) · **VC/Venture challenge** = open-ended, no predefined problem, startup potential. Track sentence example (4th ed., OpenAI track, verbatim): **"Build the Superhuman AI Chief of Staff"**.
+
+**Judging process (from MIT Alumni jury call, 6th ed.):** jury = MIT alumni + "leaders from OpenAI, Google, Microsoft … and other world-class institutions"; VCs (Greylock) on past panels. Flow: local pitches Sat ~4PM PT → jury meets Sun 8AM–12PM PT after submission deadline → top-3 per challenge → 3-min global finalist pitches + Q&A Jul 25. Prizes 6th ed.: **$35K in OpenAI API prizes + Google Cloud credits** (+cash pool). Organizer contact: Linn Bieske (MIT CNC).
+
+**Recorded winners & what won:**
+- **Spine** (1st prize, 4th ed., OpenAI track) — Karlo Vrancic + 2, MIT hub. Org-intelligence platform: communication graph from corporate email, centrality/Louvain analytics, GraphRAG Q&A, auto-reports. Pitch frame: "Companies pay McKinsey $500K+ for org assessments that take months … we do it in minutes." Stack: FastAPI + NetworkX + Next.js + OpenAI GPT-5/embeddings, deployed on Vercel in ~18h. Demo data: Enron corpus; upload flow *simulated* plug-and-play over pre-computed analytics. → near-verbatim track-sentence instantiation + consulting-cost economics + live deployed URL.
+- **OmniCall AI** (3rd place, 4th ed., ElevenLabs) — voice-agent build; sponsor-tool visibility.
+- 4th-ed. Databricks Track had placed winners (IG reel, names unverified).
+
+**Playbook confirmations:** winners = sponsor-track sentence instantiated near-verbatim · killer economic stat in first line · deployed URL · staged/pre-computed demo data behind a live-looking flow · sponsor API visibly load-bearing. Matches §5 unwritten layer.
+
 ## 1. Stated mark scheme (copy from slides, verbatim)
 
 _Not published pre-event. 5th-edition Devpost listed only "Energy" as a criterion (placeholder-grade). Real criteria expected at challenge reveal — capture VERBATIM at kickoff, Sat Jul 18 12:50 ET._

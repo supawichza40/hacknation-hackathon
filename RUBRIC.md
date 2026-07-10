@@ -2,7 +2,21 @@
 
 Photograph every slide that mentions judging, prizes, or submission. Fill this before ideation. Re-read it before every scope decision.
 
+## 0. Event facts (pre-event research, 2026-07-10 — sources: hack-nation.ai, luma, Devpost 5th ed.)
+
+- **Event:** Hack-Nation 6th Global AI Hackathon · hybrid, 14 hubs + online · MIT-ecosystem (MIT Club N. California + MIT Club of Germany)
+- **Clock (all ET):** Sat Jul 18 12:00 kickoff · 12:50 challenge reveal · 13:00 hacking begins · **Sun Jul 19 09:00 SUBMISSION DEADLINE** (20h window) · Sat Jul 25 12:00 finalist pitches (3 min, top-3 per challenge) · 14:15 awards
+- **ICT conversion:** kickoff Sat 23:00 · hacking Sun 00:00 · submission Sun 20:00 · finals Sat Jul 25 23:00
+- **Prizes:** $35k+ cash & credits, per-challenge 1st/2nd/3rd; Venture Track (3-month program) for top teams
+- **Challenges revealed AT kickoff** — no pre-published tracks; ideation constraint: prepare per-domain, lock at reveal
+- **Application:** batch-gated via Google Form; Batch 6 (final) deadline **Jul 10** — walk-ins impossible, hub admission separate approval (London hub = luma kr0cbgnv)
+- **Past sponsors (5th ed. Devpost + site):** OpenAI, GitHub, Lovable, Databricks, Supabase, Vercel, ElevenLabs, DSV, Masters' Union, Hudson River Trading, Mozilla — expect challenge sponsors from this pool
+- **5th-ed judges signal:** Greylock VCs on panel; Fridolin Haugg (Harvard). Venture framing scores.
+- **Format:** finalists pitch 2–3 min live + Q&A to operators/investors
+
 ## 1. Stated mark scheme (copy from slides, verbatim)
+
+_Not published pre-event. 5th-edition Devpost listed only "Energy" as a criterion (placeholder-grade). Real criteria expected at challenge reveal — capture VERBATIM at kickoff, Sat Jul 18 12:50 ET._
 
 | Weight | Criterion | Their exact wording |
 |---|---|---|
@@ -11,6 +25,8 @@ Photograph every slide that mentions judging, prizes, or submission. Fill this b
 | _%_ | | |
 
 ## 2. Tracks / prizes (VERBATIM one-line definitions)
+
+_Challenges revealed 12:50 PM ET Jul 18. Known structure: Corporate Track (partner problem statements) + Venture Track (startup potential). Fill verbatim at reveal._
 
 | Track | Exact sentence from organizers | Prize |
 |---|---|---|

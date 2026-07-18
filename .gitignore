@@ -42,3 +42,6 @@ Thumbs.db
 *.log
 tmp/
 *.zip
+
+# --- cloned demo repo mirrors (78M+; only keep derived graph+replay artifacts) ---
+data/demo/repos/

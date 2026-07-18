@@ -1,0 +1,19 @@
+{
+  "spike": "wave-0-ecc-knowledge-graph",
+  "repo": "supawichza40/ECC (github.com/affaan-m/ECC)",
+  "repoCommitSha": "2bc924faf2f8e893bfe0af86b1931283693c30ae",
+  "promptVersion": "ecc-kg-v1",
+  "promptFile": "data/replay/spike/prompt.txt",
+  "rawModelOutput": "data/replay/spike/raw-model-output.json",
+  "graphFile": "data/demo/graphs/ecc/knowledge-graph.json",
+  "model": [
+    "claude-opus-4-8"
+  ],
+  "totalCostUsd": 0.998823,
+  "durationMs": 67746,
+  "sessionId": "2b288e62-2709-4b6b-aab7-b89d101b11d8",
+  "isoTimestamp": "2026-07-18T23:40:51.835675+00:00",
+  "nodeCount": 42,
+  "edgeCount": 49,
+  "generator": "claude -p --output-format json (subscription auth, headless)"
+}

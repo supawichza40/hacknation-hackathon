@@ -1,0 +1,2136 @@
+You are a code-analysis engine. Read the flattened repository files below (delimited by === FILE: <path> === markers) and produce a KNOWLEDGE GRAPH of this codebase as STRICT JSON only (no prose, no markdown fences).
+
+Target ~40 nodes. Schema EXACTLY:
+{"nodes":[{"id":string,"type":"file"|"concept"|"claim","name":string,"summary":string,"sourceRef":{"file":string,"lines":string}}],"edges":[{"source":string,"target":string,"relation":string}]}
+
+Rules: every node id is unique; every edge source/target must reference an existing node id; type is one of file|concept|claim; sourceRef.file is a real path from the markers below (for concept/claim nodes use the most relevant file); sourceRef.lines is a string like "1-40" or "n/a". Include a mix: ~15 file nodes for the most important files, ~15 concept nodes (architecture ideas, subsystems), ~10 claim nodes (verifiable assertions about what the code does). Edges express relations like defines, imports, implements, depends_on, supports, part_of. Output ONLY the JSON object.
+
+=== BEGIN REPOSITORY (repo: ecc-universal) ===
+
+=== FILE: README.md ===
+**Language:** English | [Português (Brasil)](docs/pt-BR/README.md) | [简体中文](README.zh-CN.md) | [繁體中文](docs/zh-TW/README.md) | [日本語](docs/ja-JP/README.md) | [한국어](docs/ko-KR/README.md) | [Türkçe](docs/tr/README.md) | [Русский](docs/ru/README.md) | [Tiếng Việt](docs/vi-VN/README.md) | [ไทย](docs/th/README.md) | [Deutsch](docs/de-DE/README.md) | [Español](docs/es/README.md)
+
+![ECC — the agent harness operating system](assets/hero.png)
+
+[![Discord](https://img.shields.io/discord/1496644400590094540?logo=discord&logoColor=white&label=Join%20the%20Discord&color=5865F2)](https://discord.gg/36yGMHGFbR)
+[![Website](https://img.shields.io/badge/Website-ecc.tools-E07856?logo=googlechrome&logoColor=white)](https://ecc.tools)
+[![GitHub App](https://img.shields.io/badge/GitHub%20App-ECC%20Tools-181717?logo=github&logoColor=white)](https://github.com/apps/ecc-tools)
+[![Guides](https://img.shields.io/badge/Guides-Start%20here-1f6feb?logo=readme&logoColor=white)](#the-guides)
+
+[![Stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.ecc.tools%2Fbadge%2Fstars&style=flat)](https://github.com/affaan-m/ECC/stargazers)
+[![Forks](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.ecc.tools%2Fbadge%2Fforks&style=flat)](https://github.com/affaan-m/ECC/network/members)
+[![Contributors](https://img.shields.io/github/contributors/affaan-m/ECC?style=flat)](https://github.com/affaan-m/ECC/graphs/contributors)
+[![npm ecc-universal](https://img.shields.io/npm/dw/ecc-universal?label=ecc-universal%20weekly%20downloads&logo=npm)](https://www.npmjs.com/package/ecc-universal)
+[![npm ecc-agentshield](https://img.shields.io/npm/dw/ecc-agentshield?label=ecc-agentshield%20weekly%20downloads&logo=npm)](https://www.npmjs.com/package/ecc-agentshield)
+[![GitHub App Install](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.ecc.tools%2Fbadge%2Finstalls&logo=github)](https://github.com/marketplace/ecc-tools)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Shell](https://img.shields.io/badge/-Shell-4EAA25?logo=gnu-bash&logoColor=white)
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white)
+![Go](https://img.shields.io/badge/-Go-00ADD8?logo=go&logoColor=white)
+![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white)
+![Perl](https://img.shields.io/badge/-Perl-39457E?logo=perl&logoColor=white)
+![Markdown](https://img.shields.io/badge/-Markdown-000000?logo=markdown&logoColor=white)
+
+> [!WARNING]
+> **Official sources only.** Install ECC only from verified channels: the GitHub repository [github.com/affaan-m/ECC](https://github.com/affaan-m/ECC), the npm packages [`ecc-universal`](https://www.npmjs.com/package/ecc-universal) and [`ecc-agentshield`](https://www.npmjs.com/package/ecc-agentshield), the [GitHub App](https://github.com/apps/ecc-tools), the plugin slug `ecc@ecc`, and the project website [ecc.tools](https://ecc.tools). Third-party re-uploads and unofficial mirrors are not maintained or reviewed by the project and may contain malware.
+
+**211.9K+ stars** | **32.5K+ forks** | **230+ contributors** | **12+ language ecosystems** | **Cross-harness agent workflows**
+
+---
+
+<div align="center">
+
+**Language / 语言 / 語言 / Dil / Язык / Ngôn ngữ / Idioma**
+
+[**English**](README.md) | [Português (Brasil)](docs/pt-BR/README.md) | [简体中文](README.zh-CN.md) | [繁體中文](docs/zh-TW/README.md) | [日本語](docs/ja-JP/README.md) | [한국어](docs/ko-KR/README.md)
+ | [Türkçe](docs/tr/README.md) | [Русский](docs/ru/README.md) | [Tiếng Việt](docs/vi-VN/README.md) | [ไทย](docs/th/README.md) | [Deutsch](docs/de-DE/README.md) | [Español](docs/es/README.md)
+
+</div>
+
+---
+
+**The harness-native operator system for agentic work. Built from real-world multi-harness engineering workflows.**
+
+Not just configs. A complete system: skills, instincts, memory optimization, continuous learning, security scanning, and research-first development. Production-ready agents, skills, hooks, rules, MCP configurations, and legacy command shims evolved over 10+ months of intensive daily use building real products.
+
+Works across **Codex**, **Claude Code**, **Cursor**, **OpenCode**, **Gemini**, **Zed**, **GitHub Copilot**, and other AI agent harnesses.
+
+ECC v2.0.0 adds the public Hermes operator story on top of that reusable layer: start with the [Hermes setup guide](docs/HERMES-SETUP.md), then review the [2.0.0 release notes](docs/releases/2.0.0/release-notes.md) and [cross-harness architecture](docs/architecture/cross-harness.md).
+
+---
+
+<table>
+<tr>
+<td width="25%" align="center">
+  <a href="https://ecc.tools/pricing">
+    <strong> ECC Pro</strong><br />
+    <sub>Private repos · GitHub App · $19/seat/mo</sub>
+  </a>
+</td>
+<td width="25%" align="center">
+  <a href="https://github.com/sponsors/affaan-m">
+    <strong> Sponsor</strong><br />
+    <sub>Fund the OSS · From $5/mo</sub>
+  </a>
+</td>
+<td width="25%" align="center">
+  <a href="https://github.com/affaan-m/ECC/discussions">
+    <strong>Community</strong>
+    <br />
+    <sub>Discussions · Q&amp;A · Show & Tell</sub>
+  </a>
+</td>
+<td width="25%" align="center">
+  <a href="https://github.com/apps/ecc-tools">
+    <strong> GitHub App</strong><br />
+    <sub>Install · PR audits · Free tier</sub>
+  </a>
+</td>
+</tr>
+</table>
+
+<sub>**OSS stays free.** This repo is MIT-licensed forever. ECC Pro is the hosted GitHub App for private repos. <a href="https://github.com/sponsors/affaan-m">Sponsors</a> and <a href="https://ecc.tools/pricing">Pro subscribers</a> fund the work — that's why a single maintainer ships weekly across 7 harnesses.</sub>
+
+<div align="center">
+
+<sub><strong>Business sponsors</strong></sub>
+
+<table>
+<tr>
+<td align="center" width="220">
+  <a href="https://www.coderabbit.ai">
+    <img src="assets/images/sponsors/coderabbit.png" width="96" alt="CodeRabbit logo" /><br />
+    <strong>CodeRabbit</strong>
+  </a>
+</td>
+<td align="center" width="220">
+  <a href="https://www.greptile.com/go/ecc">
+    <img src="assets/images/sponsors/greptile.png" width="96" alt="Greptile logo" /><br />
+    <strong>Greptile</strong>
+  </a>
+</td>
+<td align="center" width="220">
+  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=ECC">
+    <img src="assets/images/sponsors/atlascloud.png" width="96" alt="Atlas Cloud logo" /><br />
+    <strong>Atlas Cloud</strong>
+  </a>
+</td>
+</tr>
+</table>
+
+<sub><strong>Community sponsors:</strong> <a href="https://github.com/mikejmorgan-ai">Mike Morgan</a> · <a href="https://github.com/jasonwu513">@jasonwu513</a> · <a href="https://github.com/1anter">@1anter</a> · <a href="https://github.com/massimotodaro">@massimotodaro</a> · <a href="https://github.com/meadmccabe">@meadmccabe</a></sub>
+
+<sub><a href="https://github.com/sponsors/affaan-m"><strong>Become a Sponsor</strong></a> · <a href="SPONSORS.md">Sponsor Tiers</a> · <a href="SPONSORING.md">Sponsorship Program</a></sub>
+
+</div>
+
+---
+
+## The Guides
+
+This repo is the raw code only. The guides explain everything.
+
+<table>
+<tr>
+<td width="50%" align="center">
+<a href="./the-shortform-guide.md">
+<img src="./assets/images/shortform/00-header.png" width="420" alt="The Shorthand Guide to ECC" /><br />
+<b>The Shorthand Guide</b>
+</a>
+<br /><sub>Setup, foundations, philosophy. <b>Read this first.</b> (<a href="https://x.com/affaan/status/2012378465664745795">thread</a>)</sub>
+</td>
+<td width="50%" align="center">
+<a href="./the-longform-guide.md">
+<img src="./assets/images/longform/01-header.png" width="420" alt="The Longform Guide to ECC" /><br />
+<b>The Longform Guide</b>
+</a>
+<br /><sub>Token optimization, memory persistence, evals, parallelization. (<a href="https://x.com/affaan/status/2014040193557471352">thread</a>)</sub>
+</td>
+</tr>
+</table>
+
+<div align="center">
+<a href="./the-security-guide.md">
+<img src="./assets/images/security/security-guide-header.png" width="420" alt="The Shorthand Guide to Everything Agentic Security" /><br />
+<b>The Security Guide</b>
+</a>
+<br /><sub>Attack vectors, sandboxing, sanitization, CVEs, AgentShield. (<a href="https://x.com/affaan/status/2033263813387223421">thread</a>)</sub>
+</div>
+
+| Topic | What You'll Learn |
+|-------|-------------------|
+| Token Optimization | Model selection, system prompt slimming, background processes |
+| Memory Persistence | Hooks that save/load context across sessions automatically |
+| Continuous Learning | Auto-extract patterns from sessions into reusable skills |
+| Verification Loops | Checkpoint vs continuous evals, grader types, pass@k metrics |
+| Parallelization | Git worktrees, cascade method, when to scale instances |
+| Subagent Orchestration | The context problem, iterative retrieval pattern |
+
+---
+
+## What's New
+
+### v2.0.0 — The Agent Harness Operating System (Jun 2026)
+
+Stable graduation of the 2.0 line: 261 skills, the control-pane substrate (session adapters + MCP inventory), the worktree-lifecycle service, the `orch-*` orchestrator family, and the launch of the [ECC Discord community](https://discord.gg/36yGMHGFbR). Full notes: [docs/releases/2.0.0/release-notes.md](docs/releases/2.0.0/release-notes.md).
+
+### v2.0.0-rc.1 — Surface Refresh, Operator Workflows, and ECC 2.0 Alpha (Apr 2026)
+
+- **Dashboard GUI** — New Tkinter-based desktop application (`ecc_dashboard.py` or `npm run dashboard`) with dark/light theme toggle, font customization, and project logo in header and taskbar.
+- **Public surface synced to the live repo** — metadata, catalog counts, plugin manifests, and install-facing docs now match the actual OSS surface: 66 agents, 268 skills, and 84 legacy command shims.
+- **Operator and outbound workflow expansion** — `brand-voice`, `social-graph-ranker`, `connections-optimizer`, `customer-billing-ops`, `ecc-tools-cost-audit`, `google-workspace-ops`, `project-flow-ops`, and `workspace-surface-audit` round out the operator lane.
+- **Media and launch tooling** — `manim-video`, `remotion-video-creation`, and upgraded social publishing surfaces make technical explainers and launch content part of the same system.
+- **Framework and product surface growth** — `nestjs-patterns`, richer Codex/OpenCode install surfaces, and expanded cross-harness packaging keep the repo usable beyond Claude Code alone.
+- **Itô prediction-market skill pack** — `ito-market-intelligence`, `ito-basket-compare`, `ito-trade-planner`, `ito-data-atlas-agent`, `prediction-market-oracle-research`, and `prediction-market-risk-review` add public, non-advisory market/basket workflows while keeping live Itô API access gated and separate from ECC Tools billing.
+- **Optimization skill pack** — `parallel-execution-optimizer`, `benchmark-optimization-loop`, `data-throughput-accelerator`, `latency-critical-systems`, and `recursive-decision-ledger` turn repeated speed/recursion prompts into bounded benchmark, throughput, and decision-ledger workflows.
+- **ECC 2.0 alpha is in-tree** — the Rust control-plane prototype in `ecc2/` now builds locally and exposes `dashboard`, `start`, `sessions`, `status`, `stop`, `resume`, and `daemon` commands. It is usable as an alpha, not yet a general release.
+- **Operator status snapshots** — `ecc status --markdown --write status.md` turns the local state store into a portable handoff covering readiness, active sessions, skill-run health, install health, pending governance events, and linked work items from Linear/GitHub/handoffs. Use `ecc work-items upsert ...` for manual entries, `ecc work-items sync-github --repo owner/repo` for PR/issue queue state, and `ecc status --exit-code` to fail automation when readiness needs attention.
+- **Ecosystem hardening** — AgentShield, ECC Tools cost controls, billing portal work, and website refreshes continue to ship around the core plugin instead of drifting into separate silos.
+
+### v1.9.0 — Selective Install & Language Expansion (Mar 2026)
+
+- **Selective install architecture** — Manifest-driven install pipeline with `install-plan.js` and `install-apply.js` for targeted component installation. State store tracks what's installed and enables incremental updates.
+- **6 new agents** — `typescript-reviewer`, `pytorch-build-resolver`, `java-build-resolver`, `java-reviewer`, `kotlin-reviewer`, `kotlin-build-resolver` expand language coverage to 10 languages.
+- **New skills** — `pytorch-patterns` for deep learning workflows, `documentation-lookup` for API reference research, `bun-runtime` and `nextjs-turbopack` for modern JS toolchains, plus 8 operational domain skills and `mcp-server-patterns`.
+- **Session & state infrastructure** — SQLite state store with query CLI, session adapters for structured recording, skill evolution foundation for self-improving skills.
+- **Orchestration overhaul** — Harness audit scoring made deterministic, orchestration status and launcher compatibility hardened, observer loop prevention with 5-layer guard.
+- **Observer reliability** — Memory explosion fix with throttling and tail sampling, sandbox access fix, lazy-start logic, and re-entrancy guard.
+- **12 language ecosystems** — New rules for Java, PHP, Perl, Kotlin/Android/KMP, C++, and Rust join existing TypeScript, Python, Go, and common rules.
+- **Community contributions** — Korean and Chinese translations, biome hook optimization, video processing skills, operational skills, PowerShell installer, Antigravity IDE support.
+- **CI hardening** — 19 test failure fixes, catalog count enforcement, install manifest validation, and full test suite green.
+
+### v1.8.0 — Harness Performance System (Mar 2026)
+
+- **Harness-first release** — ECC is now explicitly framed as an agent harness performance system, not just a config pack.
+- **Hook reliability overhaul** — SessionStart root fallback, Stop-phase session summaries, and script-based hooks replacing fragile inline one-liners.
+- **Hook runtime controls** — `ECC_HOOK_PROFILE=minimal|standard|strict` and `ECC_DISABLED_HOOKS=...` for runtime gating without editing hook files.
+- **New harness commands** — `/harness-audit`, `/loop-start`, `/loop-status`, `/quality-gate`, `/model-route`.
+- **NanoClaw v2** — model routing, skill hot-load, session branch/search/export/compact/metrics.
+- **Cross-harness parity** — behavior tightened across Claude Code, Cursor, OpenCode, and Codex app/CLI.
+- **997 internal tests passing** — full suite green after hook/runtime refactor and compatibility updates.
+
+### v1.7.0 — Cross-Platform Expansion & Presentation Builder (Feb 2026)
+
+- **Codex app + CLI support** — Direct `AGENTS.md`-based Codex support, installer targeting, and Codex docs
+- **`frontend-slides` skill** — Zero-dependency HTML presentation builder with PPTX conversion guidance and strict viewport-fit rules
+- **5 new generic business/content skills** — `article-writing`, `content-engine`, `market-research`, `investor-materials`, `investor-outreach`
+- **Broader tool coverage** — Cursor, Codex, and OpenCode support tightened so the same repo ships cleanly across all major harnesses
+- **992 internal tests** — Expanded validation and regression coverage across plugin, hooks, skills, and packaging
+
+### v1.6.0 — Codex CLI, AgentShield & Marketplace (Feb 2026)
+
+- **Codex CLI support** — New `/codex-setup` command generates `codex.md` for OpenAI Codex CLI compatibility
+- **7 new skills** — `search-first`, `swift-actor-persistence`, `swift-protocol-di-testing`, `regex-vs-llm-structured-text`, `content-hash-cache-pattern`, `cost-aware-llm-pipeline`, `skill-stocktake`
+- **AgentShield integration** — `/security-scan` skill runs AgentShield directly from Claude Code; 1282 tests, 102 rules
+- **GitHub Marketplace** — ECC Tools GitHub App live at [github.com/marketplace/ecc-tools](https://github.com/marketplace/ecc-tools) with free/pro/enterprise tiers
+- **30+ community PRs merged** — Contributions from 30 contributors across 6 languages
+- **978 internal tests** — Expanded validation suite across agents, skills, commands, hooks, and rules
+
+### v1.4.1 — Bug Fix (Feb 2026)
+
+- **Fixed instinct import content loss** — `parse_instinct_file()` was silently dropping all content after frontmatter (Action, Evidence, Examples sections) during `/instinct-import`. ([#148](https://github.com/affaan-m/ECC/issues/148), [#161](https://github.com/affaan-m/ECC/pull/161))
+
+### v1.4.0 — Multi-Language Rules, Installation Wizard & PM2 (Feb 2026)
+
+- **Interactive installation wizard** — New `configure-ecc` skill provides guided setup with merge/overwrite detection
+- **PM2 & multi-agent orchestration** — 6 new commands (`/pm2`, `/multi-plan`, `/multi-execute`, `/multi-backend`, `/multi-frontend`, `/multi-workflow`) for managing complex multi-service workflows
+- **Multi-language rules architecture** — Rules restructured from flat files into `common/` + `typescript/` + `python/` + `golang/` directories. Install only the languages you need
+- **Chinese (zh-CN) translations** — Complete translation of all agents, commands, skills, and rules (80+ files)
+- **GitHub Sponsors support** — Sponsor the project via GitHub Sponsors
+- **Enhanced CONTRIBUTING.md** — Detailed PR templates for each contribution type
+
+### v1.3.0 — OpenCode Plugin Support (Feb 2026)
+
+- **Full OpenCode integration** — 12 agents, 24 commands, 16 skills with hook support via OpenCode's plugin system (20+ event types)
+- **3 native custom tools** — run-tests, check-coverage, security-audit
+- **LLM documentation** — `llms.txt` for comprehensive OpenCode docs
+
+### v1.2.0 — Unified Commands & Skills (Feb 2026)
+
+- **Python/Django support** — Django patterns, security, TDD, and verification skills
+- **Java Spring Boot skills** — Patterns, security, TDD, and verification for Spring Boot
+- **Session management** — `/sessions` command for session history
+- **Continuous learning v2** — Instinct-based learning with confidence scoring, import/export, evolution
+
+See the full changelog in [Releases](https://github.com/affaan-m/ECC/releases).
+
+---
+
+## Quick Start
+
+Get up and running in under 2 minutes:
+
+### 
+...[truncated]...
+
+=== FILE: package.json ===
+{
+  "name": "ecc-universal",
+  "version": "2.0.0",
+  "description": "Harness-native agent operating system for Codex, OpenCode, Cursor, Gemini, Claude Code, and terminal workflows - skills, hooks, rules, MCP conventions, and operator control-plane patterns",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "skills",
+    "hooks",
+    "mcp",
+    "rules",
+    "harness",
+    "agent-harness",
+    "tdd",
+    "code-review",
+    "security",
+    "automation",
+    "best-practices",
+    "cursor",
+    "cursor-ide",
+    "opencode",
+    "codex",
+    "presentations",
+    "slides"
+  ],
+  "author": {
+    "name": "Affaan Mustafa",
+    "url": "https://x.com/affaan"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/affaan-m/ECC.git"
+  },
+  "homepage": "https://github.com/affaan-m/ECC#readme",
+  "bugs": {
+    "url": "https://github.com/affaan-m/ECC/issues"
+  },
+  "files": [
+    ".agents/",
+    ".claude-plugin/",
+    ".codex/",
+    ".codex-plugin/",
+    ".cursor/",
+    ".gemini/",
+    ".opencode/",
+    ".qwen/",
+    ".zed/",
+    ".mcp.json",
+    "AGENTS.md",
+    "VERSION",
+    "agent.yaml",
+    "assets/ecc-icon.svg",
+    "assets/hero.png",
+    "agents/",
+    "commands/",
+    "docs/de-DE/",
+    "docs/ja-JP/",
+    "docs/ko-KR/",
+    "docs/pt-BR/",
+    "docs/ru/",
+    "docs/tr/",
+    "docs/vi-VN/",
+    "docs/zh-CN/",
+    "docs/zh-TW/",
+    "hooks/",
+    "install.ps1",
+    "install.sh",
+    "manifests/",
+    "mcp-configs/",
+    "plugins/ecc/",
+    "rules/",
+    "schemas/",
+    "scripts/catalog.js",
+    "scripts/ci/scan-supply-chain-iocs.js",
+    "scripts/ci/supply-chain-advisory-sources.js",
+    "scripts/consult.js",
+    "scripts/auto-update.js",
+    "scripts/claw.js",
+    "scripts/control-pane.js",
+    "scripts/codex/check-plugin-cache.js",
+    "scripts/codex/merge-codex-config.js",
+    "scripts/codex/merge-mcp-config.js",
+    "scripts/discussion-audit.js",
+    "scripts/doctor.js",
+    "scripts/ecc.js",
+    "scripts/gemini-adapt-agents.js",
+    "scripts/harness-adapter-compliance.js",
+    "scripts/harness-audit.js",
+    "scripts/observability-readiness.js",
+    "scripts/operator-readiness-dashboard.js",
+    "scripts/platform-audit.js",
+    "scripts/preview-pack-smoke.js",
+    "scripts/release-approval-gate.js",
+    "scripts/release-video-suite.js",
+    "scripts/dashboard-web.js",
+    "scripts/skills-health.js",
+    "scripts/hooks/",
+    "scripts/install-apply.js",
+    "scripts/install-plan.js",
+    "scripts/lib/",
+    "scripts/list-installed.js",
+    "scripts/loop-status.js",
+    "scripts/orchestration-status.js",
+    "scripts/orchestrate-codex-worker.sh",
+    "scripts/orchestrate-worktrees.js",
+    "scripts/repair.js",
+    "scripts/session-inspect.js",
+    "scripts/sessions-cli.js",
+    "scripts/setup-package-manager.js",
+    "scripts/skill-create-output.js",
+    "scripts/status.js",
+    "scripts/work-items.js",
+    "scripts/uninstall.js",
+    "skills/agent-architecture-audit/",
+    "skills/agent-harness-construction/",
+    "skills/agent-introspection-debugging/",
+    "skills/agent-sort/",
+    "skills/agentic-engineering/",
+    "skills/agentic-os/",
+    "skills/ai-first-engineering/",
+    "skills/ai-regression-testing/",
+    "skills/android-clean-architecture/",
+    "skills/angular-developer/",
+    "skills/api-connector-builder/",
+    "skills/api-design/",
+    "skills/article-writing/",
+    "skills/automation-audit-ops/",
+    "skills/autonomous-loops/",
+    "skills/backend-patterns/",
+    "skills/blender-motion-state-inspection/",
+    "skills/blueprint/",
+    "skills/brand-voice/",
+    "skills/carrier-relationship-management/",
+    "skills/claude-devfleet/",
+    "skills/cisco-ios-patterns/",
+    "skills/clickhouse-io/",
+    "skills/code-tour/",
+    "skills/coding-standards/",
+    "skills/compose-multiplatform-patterns/",
+    "skills/configure-ecc/",
+    "skills/connections-optimizer/",
+    "skills/content-engine/",
+    "skills/content-hash-cache-pattern/",
+    
+...[truncated]...
+
+=== FILE: AGENTS.md ===
+# Everything Claude Code (ECC) — Agent Instructions
+
+This is a **production-ready AI coding plugin** providing 67 specialized agents, 271 skills, 92 commands, and automated hook workflows for software development.
+
+**Version:** 2.0.0
+
+## Core Principles
+
+1. **Agent-First** — Delegate to specialized agents for domain tasks
+2. **Test-Driven** — Write tests before implementation, 80%+ coverage required
+3. **Security-First** — Never compromise on security; validate all inputs
+4. **Immutability** — Always create new objects, never mutate existing ones
+5. **Plan Before Execute** — Plan complex features before writing code
+
+## Available Agents
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| planner | Implementation planning | Complex features, refactoring |
+| architect | System design and scalability | Architectural decisions |
+| tdd-guide | Test-driven development | New features, bug fixes |
+| code-reviewer | Code quality and maintainability | After writing/modifying code |
+| security-reviewer | Vulnerability detection | Before commits, sensitive code |
+| spec-miner | Brownfield spec extraction | Onboarding brownfield projects to spec-driven development |
+| build-error-resolver | Fix build/type errors | When build fails |
+| e2e-runner | End-to-end Playwright testing | Critical user flows |
+| refactor-cleaner | Dead code cleanup | Code maintenance |
+| doc-updater | Documentation and codemaps | Updating docs |
+| cpp-reviewer | C/C++ code review | C and C++ projects |
+| cpp-build-resolver | C/C++ build errors | C and C++ build failures |
+| fsharp-reviewer | F# functional code review | F# projects |
+| docs-lookup | Documentation lookup via Context7 | API/docs questions |
+| go-reviewer | Go code review | Go projects |
+| go-build-resolver | Go build errors | Go build failures |
+| kotlin-reviewer | Kotlin code review | Kotlin/Android/KMP projects |
+| kotlin-build-resolver | Kotlin/Gradle build errors | Kotlin build failures |
+| database-reviewer | PostgreSQL/Supabase specialist | Schema design, query optimization |
+| python-reviewer | Python code review | Python projects |
+| django-reviewer | Django code review | Django apps, DRF APIs, ORM, migrations |
+| django-build-resolver | Django build, migration, and setup errors | Django startup, dependency, migration, collectstatic failures |
+| java-reviewer | Java and Spring Boot code review | Java/Spring Boot projects |
+| java-build-resolver | Java/Maven/Gradle build errors | Java build failures |
+| loop-operator | Autonomous loop execution | Run loops safely, monitor stalls, intervene |
+| harness-optimizer | Harness config tuning | Reliability, cost, throughput |
+| rust-reviewer | Rust code review | Rust projects |
+| rust-build-resolver | Rust build errors | Rust build failures |
+| pytorch-build-resolver | PyTorch runtime/CUDA/training errors | PyTorch build/training failures |
+| mle-reviewer | Production ML pipeline review | ML pipelines, evals, serving, monitoring, rollback |
+| typescript-reviewer | TypeScript/JavaScript code review | TypeScript/JavaScript projects |
+
+## Agent Orchestration
+
+Use agents proactively without user prompt:
+- Complex feature requests → **planner**
+- Code just written/modified → **code-reviewer**
+- Bug fix or new feature → **tdd-guide**
+- Architectural decision → **architect**
+- Security-sensitive code → **security-reviewer**
+- Brownfield project onboarding → **spec-miner**
+- Autonomous loops / loop monitoring → **loop-operator**
+- Harness config reliability and cost → **harness-optimizer**
+
+Use parallel execution for independent operations — launch multiple agents simultaneously.
+
+## Security Guidelines
+
+**Before ANY commit:**
+- No hardcoded secrets (API keys, passwords, tokens)
+- All user inputs validated
+- SQL injection prevention (parameterized queries)
+- XSS prevention (sanitized HTML)
+- CSRF protection enabled
+- Authentication/authorization verified
+- Rate limiting on all endpoints
+- Error messages don't leak sensitive data
+
+**Secret management:** NEVER hardcode secrets. Use environment variables or a secret manager. Validate required secrets at startup. Rotate any exposed secrets immediately.
+
+**If security issue found:** STOP → use security-reviewer agent → fix CRITICAL issues → rotate exposed secrets → review codebase for similar issues.
+
+## Coding Style
+
+**Immutability (CRITICAL):** Always create new objects, never mutate. Return new copies with changes applied.
+
+**File organization:** Many small files over few large ones. 200-400 lines typical, 800 max. Organize by feature/domain, not by type. High cohesion, low coupling.
+
+**Error handling:** Handle errors at every level. Provide user-friendly messages in UI code. Log detailed context server-side. Never silently swallow errors.
+
+**Input validation:** Validate all user input at system boundaries. Use schema-based validation. Fail fast with clear messages. Never trust external data.
+
+**Code quality checklist:**
+- Functions small (<50 lines), files focused (<800 lines)
+- No deep nesting (>4 levels)
+- Proper error handling, no hardcoded values
+- Readable, well-named identifiers
+
+## Testing Requirements
+
+**Minimum coverage: 80%**
+
+Test types (all required):
+1. **Unit tests** — Individual functions, utilities, components
+2. **Integration tests** — API endpoints, database operations
+3. **E2E tests** — Critical user flows
+
+**TDD workflow (mandatory):**
+1. Write test first (RED) — test should FAIL
+2. Write minimal implementation (GREEN) — test should PASS
+3. Refactor (IMPROVE) — verify coverage 80%+
+
+Troubleshoot failures: check test isolation → verify mocks → fix implementation (not tests, unless tests are wrong).
+
+## Development Workflow
+
+1. **Plan** — Use planner agent, identify dependencies and risks, break into phases
+2. **TDD** — Use tdd-guide agent, write tests first, implement, refactor
+3. **Review** — Use code-reviewer agent immediately, address CRITICAL/HIGH issues
+4. **Capture knowledge in the right place**
+   - Personal debugging notes, preferences, and temporary context → auto memory
+   - Team/project knowledge (architecture decisions, API changes, runbooks) → the project's existing docs structure
+   - If the current task already produces the relevant docs or code comments, do not duplicate the same information elsewhere
+   - If there is no obvious project doc location, ask before creating a new top-level file
+5. **Commit** — Conventional commits format, comprehensive PR summaries
+
+## Workflow Surface Policy
+
+- `skills/` is the canonical workflow surface.
+- New workflow contributions should land in `skills/` first.
+- `commands/` is a legacy slash-entry compatibility surface and should only be added or updated when a shim is still required for migration or cross-harness parity.
+
+## Git Workflow
+
+**Commit format:** `<type>: <description>` — Types: feat, fix, refactor, docs, test, chore, perf, ci
+
+**PR workflow:** Analyze full commit history → draft comprehensive summary → include test plan → push with `-u` flag.
+
+## Architecture Patterns
+
+**API response format:** Consistent envelope with success indicator, data payload, error message, and pagination metadata.
+
+**Repository pattern:** Encapsulate data access behind standard interface (findAll, findById, create, update, delete). Business logic depends on abstract interface, not storage mechanism.
+
+**Skeleton projects:** Search for battle-tested templates, evaluate with parallel agents (security, extensibility, relevance), clone best match, iterate within proven structure.
+
+## Performance
+
+**Context management:** Avoid last 20% of context window for large refactoring and multi-file features. Lower-sensitivity tasks (single edits, docs, simple fixes) tolerate higher utilization.
+
+**Build troubleshooting:** Use build-error-resolver agent → analyze errors → fix incrementally → verify after each fix.
+
+## Project Structure
+
+```
+agents/          — 67 specialized subagents
+skills/          — 271 workflow skills and domain knowledge
+commands/        — 92 slash commands
+hooks/           — Trigger-based automations
+rules/           — Always-follow guidelines (common + per-language)
+scripts/         — Cross-platform Node.js utilities
+mcp-configs/     — 14 MCP server configurations
+tests/           — Test suite
+```
+
+`commands/` remains in the repo for compatibility, but the long-term direction is skills-first.
+
+## Success Metrics
+
+- All tests pass with 80%+ coverage
+- No security vulnerabilities
+- Code is readable and maintainable
+- Performance is acceptable
+- User requirements are met
+
+
+=== FILE: SOUL.md ===
+# Soul
+
+## Core Identity
+Everything Claude Code (ECC) is a production-ready AI coding plugin with 30 specialized agents, 135 skills, 60 commands, and automated hook workflows for software development.
+
+## Core Principles
+1. **Agent-First** — route work to the right specialist as early as possible.
+2. **Test-Driven** — write or refresh tests before trusting implementation changes.
+3. **Security-First** — validate inputs, protect secrets, and keep safe defaults.
+4. **Immutability** — prefer explicit state transitions over mutation.
+5. **Plan Before Execute** — complex changes should be broken into deliberate phases.
+
+## Agent Orchestration Philosophy
+ECC is designed so specialists are invoked proactively: planners for implementation strategy, reviewers for code quality, security reviewers for sensitive code, and build resolvers when the toolchain breaks.
+
+## Cross-Harness Vision
+This gitagent surface is an initial portability layer for ECC's shared identity, governance, and skill catalog. Native agents, commands, and hooks remain authoritative in the repository until full manifest coverage is added.
+
+
+=== FILE: agent.yaml ===
+spec_version: "0.1.0"
+name: ecc
+version: 2.0.0
+description: "Initial gitagent export surface for ECC's shared skill catalog, governance, and identity. Native agents, commands, and hooks remain authoritative in the repository while manifest coverage expands."
+author: affaan-m
+license: MIT
+model:
+  preferred: claude-opus-4-6
+  fallback:
+    - claude-sonnet-4-6
+skills:
+  - agent-architecture-audit
+  - agent-eval
+  - agent-harness-construction
+  - agent-payment-x402
+  - agentic-engineering
+  - agentic-os
+  - ai-first-engineering
+  - ai-regression-testing
+  - android-clean-architecture
+  - api-design
+  - architecture-decision-records
+  - article-writing
+  - autonomous-loops
+  - backend-patterns
+  - benchmark
+  - blueprint
+  - browser-qa
+  - bun-runtime
+  - canary-watch
+  - carrier-relationship-management
+  - ck
+  - claude-devfleet
+  - click-path-audit
+  - clickhouse-io
+  - codebase-onboarding
+  - coding-standards
+  - compose-multiplatform-patterns
+  - configure-ecc
+  - content-engine
+  - content-hash-cache-pattern
+  - context-budget
+  - continuous-agent-loop
+  - continuous-learning
+  - continuous-learning-v2
+  - cost-aware-llm-pipeline
+  - cpp-coding-standards
+  - cpp-testing
+  - crosspost
+  - customs-trade-compliance
+  - data-scraper-agent
+  - database-migrations
+  - deep-research
+  - deployment-patterns
+  - design-system
+  - django-patterns
+  - django-security
+  - django-tdd
+  - django-verification
+  - dmux-workflows
+  - docker-patterns
+  - documentation-lookup
+  - e2e-testing
+  - energy-procurement
+  - enterprise-agent-ops
+  - error-handling
+  - eval-harness
+  - exa-search
+  - fal-ai-media
+  - flutter-dart-code-review
+  - foundation-models-on-device
+  - frontend-patterns
+  - frontend-slides
+  - fsharp-testing
+  - git-workflow
+  - golang-patterns
+  - golang-testing
+  - healthcare-cdss-patterns
+  - healthcare-emr-patterns
+  - healthcare-eval-harness
+  - healthcare-phi-compliance
+  - inventory-demand-planning
+  - investor-materials
+  - investor-outreach
+  - iterative-retrieval
+  - java-coding-standards
+  - jpa-patterns
+  - kotlin-coroutines-flows
+  - kotlin-exposed-patterns
+  - kotlin-ktor-patterns
+  - kotlin-patterns
+  - kotlin-testing
+  - laravel-patterns
+  - laravel-plugin-discovery
+  - laravel-security
+  - laravel-tdd
+  - laravel-verification
+  - liquid-glass-design
+  - logistics-exception-management
+  - market-research
+  - mcp-server-patterns
+  - motion-ui
+  - nanoclaw-repl
+  - nextjs-turbopack
+  - nutrient-document-processing
+  - nuxt4-patterns
+  - perl-patterns
+  - perl-security
+  - perl-testing
+  - plankton-code-quality
+  - plan-orchestrate
+  - postgres-patterns
+  - product-lens
+  - production-scheduling
+  - prompt-optimizer
+  - python-patterns
+  - python-testing
+  - pytorch-patterns
+  - quality-nonconformance
+  - quarkus-patterns
+  - quarkus-security
+  - quarkus-tdd
+  - quarkus-verification
+  - ralphinho-rfc-pipeline
+  - react-patterns
+  - react-performance
+  - react-testing
+  - regex-vs-llm-structured-text
+  - repo-scan
+  - returns-reverse-logistics
+  - rules-distill
+  - rust-patterns
+  - rust-testing
+  - safety-guard
+  - santa-method
+  - search-first
+  - security-review
+  - security-scan
+  - skill-comply
+  - skill-stocktake
+  - springboot-patterns
+  - springboot-security
+  - springboot-tdd
+  - springboot-verification
+  - strategic-compact
+  - swift-actor-persistence
+  - swift-concurrency-6-2
+  - swift-protocol-di-testing
+  - swiftui-patterns
+  - tdd-workflow
+  - team-builder
+  - token-budget-advisor
+  - verification-loop
+  - video-editing
+  - videodb
+  - visa-doc-translate
+  - x-api
+commands:
+  - aside
+  - auto-update
+  - build-fix
+  - checkpoint
+  - code-review
+  - cost-report
+  - cpp-build
+  - cpp-review
+  - cpp-test
+  - ecc-guide
+  - epic-claim
+  - epic-decompose
+  - epic-publish
+  - epic-review
+  - epic-sync
+  - epic-unblock
+  - epic-validate
+  - evolve
+  - fastapi-review
+  - feature-dev
+  - flutter-build
+  - flutter-review
+  - flutter-test
+  - gan-build
+  - gan-design
+  - go-build
+  - go-review
+  - go-test
+  - gradle-build
+  - harness-audit
+  - hookify
+  - hookify-configure
+  - hookify-help
+  - hookify-list
+  - instinct-export
+  - instinct-import
+  - instinct-status
+  - jira
+  - kotlin-build
+  - kotlin-review
+  - kotlin-test
+  - learn
+  - learn-eval
+  - loop-start
+  - loop-status
+  - marketing-campaign
+  - model-route
+  - multi-backend
+  - multi-execute
+  - multi-frontend
+  - multi-plan
+  - multi-workflow
+  - orch-add-feature
+  - orch-build-mvp
+  - orch-change-feature
+  - orch-fix-defect
+  - orch-refine-code
+  - plan
+  - plan-prd
+  - pm2
+  - projects
+  - promote
+  - project-init
+  - pr
+  - prp-commit
+  - prp-implement
+  - prp-plan
+  - prp-pr
+  - prp-prd
+  - prune
+  - python-review
+  - quality-gate
+  - react-build
+  - react-review
+  - react-test
+  - refactor-clean
+  - resume-session
+  - review-pr
+  - rust-build
+  - rust-review
+  - rust-test
+  - santa-loop
+  - save-session
+  - security-scan
+  - sessions
+  - setup-pm
+  - skill-create
+  - skill-health
+  - test-coverage
+  - update-codemaps
+  - update-docs
+  - vue-review
+tags:
+  - agent-harness
+  - developer-tools
+  - code-review
+  - testing
+  - security
+  - cross-platform
+  - gitagent
+
+
+=== FILE: src/llm/__init__.py ===
+"""
+LLM Abstraction Layer
+
+Provider-agnostic interface for multiple LLM backends.
+"""
+
+from llm.core.interface import LLMProvider
+from llm.core.types import LLMInput, LLMOutput, Message, ToolCall, ToolDefinition, ToolResult
+from llm.providers import get_provider
+from llm.tools import ToolExecutor, ToolRegistry
+from llm.cli.selector import interactive_select
+
+__version__ = "0.1.0"
+
+__all__ = (
+    "LLMInput",
+    "LLMOutput",
+    "LLMProvider",
+    "Message",
+    "ToolCall",
+    "ToolDefinition",
+    "ToolResult",
+    "ToolExecutor",
+    "ToolRegistry",
+    "get_provider",
+    "interactive_select",
+)
+
+
+def gui() -> None:
+    from llm.cli.selector import main
+    main()
+
+
+
+=== FILE: src/llm/__main__.py ===
+#!/usr/bin/env python3
+"""Entry point for llm CLI."""
+
+from llm.cli.selector import main
+
+if __name__ == "__main__":
+    main()
+
+
+=== FILE: src/llm/cli/__init__.py ===
+
+
+=== FILE: src/llm/cli/selector.py ===
+
+
+from __future__ import annotations
+
+import os
+import sys
+from enum import Enum
+
+
+class Color(str, Enum):
+    RESET = "\033[0m"
+    BOLD = "\033[1m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    BLUE = "\033[94m"
+    CYAN = "\033[96m"
+
+
+def print_banner() -> None:
+    banner = f"""{Color.CYAN}
+╔═══════════════════════════════════════════╗
+║   LLM Provider Selector                   ║
+║   Provider-agnostic AI interactions       ║
+╚═══════════════════════════════════════════╝{Color.RESET}"""
+    print(banner)
+
+
+def print_providers(providers: list[tuple[str, str]]) -> None:
+    print(f"\n{Color.BOLD}Available Providers:{Color.RESET}\n")
+    for i, (name, desc) in enumerate(providers, 1):
+        print(f"  {Color.GREEN}{i}{Color.RESET}. {Color.BOLD}{name}{Color.RESET} - {desc}")
+
+
+def select_provider(providers: list[tuple[str, str]]) -> str | None:
+    if not providers:
+        print("No providers available.")
+        return None
+
+    print_providers(providers)
+
+    while True:
+        try:
+            choice = input(f"\n{Color.YELLOW}Select provider (1-{len(providers)}): {Color.RESET}").strip()
+            if not choice:
+                return None
+            idx = int(choice) - 1
+            if 0 <= idx < len(providers):
+                return providers[idx][0]
+            print(f"{Color.YELLOW}Invalid selection. Try again.{Color.RESET}")
+        except ValueError:
+            print(f"{Color.YELLOW}Please enter a number.{Color.RESET}")
+
+
+def select_model(models: list[tuple[str, str]]) -> str | None:
+    if not models:
+        print("No models available.")
+        return None
+
+    print(f"\n{Color.BOLD}Available Models:{Color.RESET}\n")
+    for i, (name, desc) in enumerate(models, 1):
+        print(f"  {Color.GREEN}{i}{Color.RESET}. {Color.BOLD}{name}{Color.RESET} - {desc}")
+
+    while True:
+        try:
+            choice = input(f"\n{Color.YELLOW}Select model (1-{len(models)}): {Color.RESET}").strip()
+            if not choice:
+                return None
+            idx = int(choice) - 1
+            if 0 <= idx < len(models):
+                return models[idx][0]
+            print(f"{Color.YELLOW}Invalid selection. Try again.{Color.RESET}")
+        except ValueError:
+            print(f"{Color.YELLOW}Please enter a number.{Color.RESET}")
+
+
+def save_config(provider: str, model: str, persist: bool = False) -> None:
+    config = f"LLM_PROVIDER={provider}\nLLM_MODEL={model}\n"
+    env_file = ".llm.env"
+
+    with open(env_file, "w") as f:
+        f.write(config)
+
+    print(f"\n{Color.GREEN}✓{Color.RESET} Config saved to {Color.CYAN}{env_file}{Color.RESET}")
+
+    if persist:
+        os.environ["LLM_PROVIDER"] = provider
+        os.environ["LLM_MODEL"] = model
+        print(f"{Color.GREEN}✓{Color.RESET} Config loaded to current session")
+
+
+def interactive_select(
+    providers: list[tuple[str, str]] | None = None,
+    models_per_provider: dict[str, list[tuple[str, str]]] | None = None,
+    persist: bool = False,
+) -> tuple[str, str] | None:
+    print_banner()
+
+    if providers is None:
+        providers = [
+            ("claude", "Anthropic Claude ( Sonnet, Opus, Haiku)"),
+            ("openai", "OpenAI GPT (4o, 4o-mini, 3.5-turbo)"),
+            ("ollama", "Local Ollama models"),
+        ]
+
+    if models_per_provider is None:
+        models_per_provider = {
+            "claude": [
+                ("claude-opus-4-5", "Claude Opus 4.5 - Most capable"),
+                ("claude-sonnet-4-7", "Claude Sonnet 4.7 - Balanced"),
+                ("claude-haiku-4-7", "Claude Haiku 4.7 - Fast"),
+            ],
+            "openai": [
+                ("gpt-4o", "GPT-4o - Most capable"),
+                ("gpt-4o-mini", "GPT-4o-mini - Fast & affordable"),
+                ("gpt-4-turbo", "GPT-4 Turbo - Legacy powerful"),
+                ("gpt-3.5-turbo", "GPT-3.5 - Legacy fast"),
+            ],
+            "ollama": [
+                ("llama3.2", "Llama 3.2 - General purpose"),
+                ("mistral", "Mistral - Fast & efficient"),
+     
+...[truncated]...
+
+=== FILE: src/llm/core/__init__.py ===
+"""Core module for LLM abstraction layer."""
+
+
+=== FILE: src/llm/core/interface.py ===
+"""LLM Provider interface definition."""
+
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
+from typing import Any
+
+from llm.core.types import LLMInput, LLMOutput, ModelInfo, ProviderType
+
+
+class LLMProvider(ABC):
+    provider_type: ProviderType
+
+    @abstractmethod
+    def generate(self, input: LLMInput) -> LLMOutput: ...
+
+    @abstractmethod
+    def list_models(self) -> list[ModelInfo]: ...
+
+    @abstractmethod
+    def validate_config(self) -> bool: ...
+
+    def supports_tools(self) -> bool:
+        return True
+
+    def supports_vision(self) -> bool:
+        return False
+
+    def get_default_model(self) -> str:
+        raise NotImplementedError(f"{self.__class__.__name__} must implement get_default_model")
+
+
+class LLMError(Exception):
+    def __init__(
+        self,
+        message: str,
+        provider: ProviderType | None = None,
+        code: str | None = None,
+        details: dict[str, Any] | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.message = message
+        self.provider = provider
+        self.code = code
+        self.details = details or {}
+
+
+class AuthenticationError(LLMError): ...
+
+
+class RateLimitError(LLMError): ...
+
+
+class ContextLengthError(LLMError): ...
+
+
+class ModelNotFoundError(LLMError): ...
+
+
+class ToolExecutionError(LLMError): ...
+
+
+=== FILE: src/llm/core/types.py ===
+"""Core type definitions for LLM abstraction layer."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any
+
+
+class Role(str, Enum):
+    SYSTEM = "system"
+    USER = "user"
+    ASSISTANT = "assistant"
+    TOOL = "tool"
+
+
+class ProviderType(str, Enum):
+    CLAUDE = "claude"
+    OPENAI = "openai"
+    OLLAMA = "ollama"
+    ASTRAFLOW = "astraflow"
+    ASTRAFLOW_CN = "astraflow_cn"
+    ATLAS = "atlas"
+
+
+@dataclass(frozen=True)
+class Message:
+    role: Role
+    content: str
+    name: str | None = None
+    tool_call_id: str | None = None
+    tool_calls: list[ToolCall] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        result: dict[str, Any] = {"role": self.role.value, "content": self.content}
+        if self.name:
+            result["name"] = self.name
+        if self.tool_call_id:
+            result["tool_call_id"] = self.tool_call_id
+        if self.tool_calls:
+            result["tool_calls"] = [
+                {"id": tc.id, "function": {"name": tc.name, "arguments": tc.arguments}}
+                for tc in self.tool_calls
+            ]
+        return result
+
+
+@dataclass(frozen=True)
+class ToolDefinition:
+    name: str
+    description: str
+    parameters: dict[str, Any]
+    strict: bool = True
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "description": self.description,
+            "parameters": self.parameters,
+            "strict": self.strict,
+        }
+
+    def to_openai_tool(self) -> dict[str, Any]:
+        return {
+            "type": "function",
+            "function": {
+                "name": self.name,
+                "description": self.description,
+                "parameters": self.parameters,
+                "strict": self.strict,
+            },
+        }
+
+    def to_anthropic_tool(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "description": self.description,
+            "input_schema": self.parameters,
+        }
+
+
+@dataclass(frozen=True)
+class ToolCall:
+    id: str
+    name: str
+    arguments: dict[str, Any]
+
+
+@dataclass(frozen=True)
+class ToolResult:
+    tool_call_id: str
+    content: str
+    is_error: bool = False
+
+
+@dataclass(frozen=True)
+class LLMInput:
+    messages: list[Message]
+    model: str | None = None
+    temperature: float = 1.0
+    max_tokens: int | None = None
+    tools: list[ToolDefinition] | None = None
+    stream: bool = False
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        result: dict[str, Any] = {
+            "messages": [msg.to_dict() for msg in self.messages],
+            "temperature": self.temperature,
+            "stream": self.stream,
+        }
+        if self.model:
+            result["model"] = self.model
+        if self.max_tokens is not None:
+            result["max_tokens"] = self.max_tokens
+        if self.tools:
+            result["tools"] = [tool.to_dict() for tool in self.tools]
+        return result | self.metadata
+
+
+@dataclass(frozen=True)
+class LLMOutput:
+    content: str
+    tool_calls: list[ToolCall] | None = None
+    model: str | None = None
+    usage: dict[str, int] | None = None
+    stop_reason: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def has_tool_calls(self) -> bool:
+        return bool(self.tool_calls)
+
+    def to_dict(self) -> dict[str, Any]:
+        result: dict[str, Any] = {"content": self.content}
+        if self.tool_calls:
+            result["tool_calls"] = [
+                {"id": tc.id, "name": tc.name, "arguments": tc.arguments}
+                for tc in self.tool_calls
+            ]
+        if self.model:
+            result["model"] = self.model
+        if self.usage:
+            result["usage"] = self.usage
+        if self.stop_reason:
+            result["stop_reason"] = self.stop_reason
+        return result | self.metadata
+
+
+@dataclass(frozen=True)
+class ModelInfo:
+ 
+...[truncated]...
+
+=== FILE: src/llm/prompt/__init__.py ===
+"""Prompt module for prompt building and normalization."""
+
+from llm.prompt.builder import PromptBuilder, adapt_messages_for_provider, get_provider_builder
+from llm.prompt.templates import (
+    TEMPLATES,
+    clear_templates,
+    deregister_template,
+    get_template,
+    get_template_or_default,
+    register_template,
+)
+
+__all__ = (
+    "PromptBuilder",
+    "TEMPLATES",
+    "clear_templates",
+    "deregister_template",
+    "adapt_messages_for_provider",
+    "get_provider_builder",
+    "get_template",
+    "get_template_or_default",
+    "register_template",
+)
+
+
+=== FILE: src/llm/prompt/builder.py ===
+"""Prompt builder for normalizing prompts across providers."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any
+
+from llm.core.types import LLMInput, Message, Role, ToolDefinition
+from llm.providers.claude import ClaudeProvider
+from llm.providers.openai import OpenAIProvider
+from llm.providers.ollama import OllamaProvider
+
+
+@dataclass
+class PromptConfig:
+    system_template: str | None = None
+    user_template: str | None = None
+    include_tools_in_system: bool = True
+    tool_format: str = "native"
+
+
+class PromptBuilder:
+    def __init__(
+        self,
+        config: PromptConfig | None = None,
+        *,
+        system_template: str | None = None,
+        user_template: str | None = None,
+        include_tools_in_system: bool | None = None,
+        tool_format: str | None = None,
+    ) -> None:
+        if config is not None and any(
+            value is not None
+            for value in (system_template, user_template, include_tools_in_system, tool_format)
+        ):
+            raise ValueError("Pass either config or PromptBuilder keyword options, not both")
+
+        if config is None:
+            overrides = {
+                "system_template": system_template,
+                "user_template": user_template,
+                "include_tools_in_system": include_tools_in_system,
+                "tool_format": tool_format,
+            }
+            config = PromptConfig(**{key: value for key, value in overrides.items() if value is not None})
+
+        self.config = config
+
+    def build(self, messages: list[Message], tools: list[ToolDefinition] | None = None) -> list[Message]:
+        if not messages:
+            return []
+
+        result: list[Message] = []
+        system_parts: list[str] = []
+
+        if self.config.system_template:
+            system_parts.append(self.config.system_template)
+
+        if tools and self.config.include_tools_in_system:
+            tools_desc = self._format_tools(tools)
+            system_parts.append(f"\n\n## Available Tools\n{tools_desc}")
+
+        if messages[0].role == Role.SYSTEM:
+            system_parts.insert(0, messages[0].content)
+            result.insert(0, Message(role=Role.SYSTEM, content="\n\n".join(system_parts)))
+            result.extend(messages[1:])
+        else:
+            if system_parts:
+                result.insert(0, Message(role=Role.SYSTEM, content="\n\n".join(system_parts)))
+            result.extend(messages)
+
+        return result
+
+    def _format_tools(self, tools: list[ToolDefinition]) -> str:
+        lines = []
+        for tool in tools:
+            lines.append(f"### {tool.name}")
+            lines.append(tool.description)
+            if tool.parameters:
+                lines.append("Parameters:")
+                lines.append(self._format_parameters(tool.parameters))
+        return "\n".join(lines)
+
+    def _format_parameters(self, params: dict[str, Any]) -> str:
+        if "properties" not in params:
+            return str(params)
+        lines = []
+        required = params.get("required", [])
+        for name, spec in params["properties"].items():
+            prop_type = spec.get("type", "any")
+            desc = spec.get("description", "")
+            required_mark = "(required)" if name in required else "(optional)"
+            lines.append(f"  - {name}: {prop_type} {required_mark} - {desc}")
+        return "\n".join(lines) if lines else str(params)
+
+
+_PROVIDER_TEMPLATE_MAP: dict[str, dict[str, Any]] = {
+    "claude": {
+        "include_tools_in_system": False,
+        "tool_format": "anthropic",
+    },
+    "openai": {
+        "include_tools_in_system": False,
+        "tool_format": "openai",
+    },
+    "ollama": {
+        "include_tools_in_system": True,
+        "tool_format": "text",
+    },
+}
+
+
+def get_provider_builder(provider_name: str) -> PromptBuilder:
+    config_dict = _PROVIDER_TEMPLATE_MAP.get(provider_name.lower(), {})
+    config = PromptConfig(**config_dict)
+    return PromptBuilder(config)
+
+
+def ad
+...[truncated]...
+
+=== FILE: src/llm/prompt/templates/__init__.py ===
+"""Provider-specific prompt template helpers."""
+
+from __future__ import annotations
+
+_TEMPLATE_REGISTRY: dict[str, str] = {}
+TEMPLATES = _TEMPLATE_REGISTRY
+
+
+def _validate_template_input(name: str, template: str | None = None) -> None:
+    """Validate template registry inputs before mutating the registry."""
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError("Template name must be a non-empty string")
+    if template is not None and (not isinstance(template, str) or not template.strip()):
+        raise ValueError("Template content must be a non-empty string")
+
+
+def register_template(name: str, template: str) -> None:
+    """Register or replace a named prompt template."""
+    _validate_template_input(name, template)
+    _TEMPLATE_REGISTRY[name] = template
+
+
+def deregister_template(name: str) -> None:
+    """Remove a named prompt template if it is registered."""
+    _validate_template_input(name)
+    _TEMPLATE_REGISTRY.pop(name, None)
+
+
+def clear_templates() -> None:
+    """Remove all registered prompt templates."""
+    _TEMPLATE_REGISTRY.clear()
+
+
+def get_template(name: str) -> str | None:
+    """Return a named prompt template when one is registered."""
+    return _TEMPLATE_REGISTRY.get(name)
+
+
+def get_template_or_default(name: str, default: str = "") -> str:
+    """Return a named prompt template or a caller-provided default."""
+    return _TEMPLATE_REGISTRY.get(name, default)
+
+
+=== FILE: src/llm/providers/__init__.py ===
+"""Provider adapters for multiple LLM backends."""
+
+from llm.providers.astraflow import AstraflowCNProvider, AstraflowProvider
+from llm.providers.atlas import AtlasProvider
+from llm.providers.claude import ClaudeProvider
+from llm.providers.openai import OpenAIProvider
+from llm.providers.ollama import OllamaProvider
+from llm.providers.resolver import get_provider, register_provider
+
+__all__ = (
+    "AstraflowCNProvider",
+    "AstraflowProvider",
+    "AtlasProvider",
+    "ClaudeProvider",
+    "OpenAIProvider",
+    "OllamaProvider",
+    "get_provider",
+    "register_provider",
+)
+
+
+=== FILE: src/llm/providers/astraflow.py ===
+"""Astraflow/UModelVerse OpenAI-compatible provider adapters."""
+
+from __future__ import annotations
+
+import json
+import os
+from typing import Any
+
+from openai import OpenAI
+
+from llm.core.interface import (
+    AuthenticationError,
+    ContextLengthError,
+    LLMProvider,
+    RateLimitError,
+)
+from llm.core.types import LLMInput, LLMOutput, ModelInfo, ProviderType, ToolCall
+from llm.providers.constants import EMPTY_FILTERED_RESPONSE_ERROR
+
+ASTRAFLOW_BASE_URL = "https://api.umodelverse.ai/v1"
+ASTRAFLOW_CN_BASE_URL = "https://api.modelverse.cn/v1"
+DEFAULT_ASTRAFLOW_MODEL = "gpt-4o-mini"
+
+
+def _parse_tool_arguments(raw_arguments: str | None) -> dict[str, Any]:
+    if not raw_arguments:
+        return {}
+
+    try:
+        arguments = json.loads(raw_arguments)
+    except json.JSONDecodeError:
+        return {"raw": raw_arguments}
+
+    if isinstance(arguments, dict):
+        return arguments
+    return {"value": arguments}
+
+
+class _AstraflowBaseProvider(LLMProvider):
+    provider_type: ProviderType
+    api_key_env: str
+    base_url_env: str
+    model_env: str
+    fallback_model_env: str | None = None
+    default_base_url: str
+    default_model = DEFAULT_ASTRAFLOW_MODEL
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        base_url: str | None = None,
+        default_model: str | None = None,
+    ) -> None:
+        self.api_key = api_key or os.environ.get(self.api_key_env) or ""
+        self.base_url = base_url or os.environ.get(self.base_url_env, self.default_base_url)
+        env_model = os.environ.get(self.model_env)
+        fallback_model = os.environ.get(self.fallback_model_env) if self.fallback_model_env else None
+        self.default_model = default_model or env_model or fallback_model or DEFAULT_ASTRAFLOW_MODEL
+        self.client = OpenAI(api_key=self.api_key, base_url=self.base_url, _enforce_credentials=False)
+        self._models = [
+            ModelInfo(
+                name=self.default_model,
+                provider=self.provider_type,
+                supports_tools=True,
+                supports_vision=False,
+            )
+        ]
+
+    def generate(self, llm_input: LLMInput) -> LLMOutput:
+        try:
+            params: dict[str, Any] = {
+                "model": llm_input.model or self.default_model,
+                "messages": [msg.to_dict() for msg in llm_input.messages],
+            }
+            if llm_input.temperature != 1.0:
+                params["temperature"] = llm_input.temperature
+            if llm_input.max_tokens is not None:
+                params["max_tokens"] = llm_input.max_tokens
+            if llm_input.tools:
+                params["tools"] = [tool.to_openai_tool() for tool in llm_input.tools]
+
+            response = self.client.chat.completions.create(**params)
+            if not response.choices or response.choices[0].message is None:
+                raise ValueError(EMPTY_FILTERED_RESPONSE_ERROR)
+            choice = response.choices[0]
+
+            tool_calls = None
+            if choice.message.tool_calls:
+                tool_calls = [
+                    ToolCall(
+                        id=tc.id or "",
+                        name=tc.function.name,
+                        arguments=_parse_tool_arguments(tc.function.arguments),
+                    )
+                    for tc in choice.message.tool_calls
+                ]
+
+            usage = None
+            if response.usage:
+                usage = {
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens,
+                }
+
+            return LLMOutput(
+                content=choice.message.content or "",
+                tool_calls=tool_calls,
+                model=response.model,
+                usage=usage,
+                stop_reason=choice.finish_reason,
+            )
+        except Exception as e:
+            msg = str(e)
+            if "401" in msg or "
+...[truncated]...
+
+=== FILE: src/llm/providers/atlas.py ===
+"""Atlas Cloud OpenAI-compatible provider adapter."""
+
+from __future__ import annotations
+
+import json
+import os
+from typing import Any
+
+from openai import OpenAI
+
+from llm.core.interface import (
+    AuthenticationError,
+    ContextLengthError,
+    LLMProvider,
+    RateLimitError,
+)
+from llm.core.types import LLMInput, LLMOutput, ModelInfo, ProviderType, ToolCall
+from llm.providers.constants import EMPTY_FILTERED_RESPONSE_ERROR
+
+ATLAS_BASE_URL = "https://api.atlascloud.ai/v1"
+DEFAULT_ATLAS_MODEL = "deepseek-ai/deepseek-v4-pro"
+# Reasoning models need enough headroom for their thinking budget plus the answer.
+DEFAULT_ATLAS_MAX_TOKENS = 512
+
+
+def _parse_tool_arguments(raw_arguments: str | None) -> dict[str, Any]:
+    if not raw_arguments:
+        return {}
+
+    try:
+        arguments = json.loads(raw_arguments)
+    except json.JSONDecodeError:
+        return {"raw": raw_arguments}
+
+    if isinstance(arguments, dict):
+        return arguments
+    return {"value": arguments}
+
+
+class AtlasProvider(LLMProvider):
+    """Atlas Cloud endpoint using OpenAI-compatible chat completions.
+
+    Atlas Cloud (https://atlascloud.ai) exposes 300+ hosted models behind a
+    single OpenAI-compatible API, so it reuses the same chat-completions flow as
+    the other OpenAI-compatible adapters in this package.
+    """
+
+    provider_type = ProviderType.ATLAS
+    # ``.env.example`` documents ATLAS_API_KEY; ATLASCLOUD_API_KEY is the name used
+    # by the Atlas Cloud SDK/skill, so accept either for convenience.
+    api_key_env = "ATLAS_API_KEY"
+    fallback_api_key_env = "ATLASCLOUD_API_KEY"
+    base_url_env = "ATLAS_BASE_URL"
+    model_env = "ATLAS_MODEL"
+    default_base_url = ATLAS_BASE_URL
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        base_url: str | None = None,
+        default_model: str | None = None,
+    ) -> None:
+        self.api_key = (
+            api_key
+            or os.environ.get(self.api_key_env)
+            or os.environ.get(self.fallback_api_key_env)
+            or ""
+        )
+        self.base_url = base_url or os.environ.get(self.base_url_env, self.default_base_url)
+        env_model = os.environ.get(self.model_env)
+        self.default_model = default_model or env_model or DEFAULT_ATLAS_MODEL
+        self.client = OpenAI(api_key=self.api_key, base_url=self.base_url, _enforce_credentials=False)
+        self._models = [
+            ModelInfo(
+                name=self.default_model,
+                provider=self.provider_type,
+                supports_tools=True,
+                supports_vision=False,
+            )
+        ]
+
+    def generate(self, llm_input: LLMInput) -> LLMOutput:
+        try:
+            params: dict[str, Any] = {
+                "model": llm_input.model or self.default_model,
+                "messages": [msg.to_dict() for msg in llm_input.messages],
+            }
+            if llm_input.temperature != 1.0:
+                params["temperature"] = llm_input.temperature
+            # Atlas reasoning models spend tokens on a thinking budget before the
+            # answer, so floor max_tokens to avoid truncated/empty completions.
+            max_tokens = llm_input.max_tokens
+            if max_tokens is None or max_tokens < DEFAULT_ATLAS_MAX_TOKENS:
+                max_tokens = DEFAULT_ATLAS_MAX_TOKENS
+            params["max_tokens"] = max_tokens
+            if llm_input.tools:
+                params["tools"] = [tool.to_openai_tool() for tool in llm_input.tools]
+
+            response = self.client.chat.completions.create(**params)
+            if not response.choices or response.choices[0].message is None:
+                raise ValueError(EMPTY_FILTERED_RESPONSE_ERROR)
+            choice = response.choices[0]
+
+            tool_calls = None
+            if choice.message.tool_calls:
+                tool_calls = [
+                    ToolCall(
+                        id=tc.id or "",
+                        name=tc.function.name,
+                        arguments=_parse_tool_arguments(t
+...[truncated]...
+
+=== FILE: src/llm/providers/claude.py ===
+"""Claude provider adapter."""
+
+from __future__ import annotations
+
+import os
+from typing import Any
+
+from anthropic import Anthropic
+
+from llm.core.interface import (
+    AuthenticationError,
+    ContextLengthError,
+    LLMProvider,
+    RateLimitError,
+)
+from llm.core.types import LLMInput, LLMOutput, Message, ModelInfo, ProviderType, ToolCall
+
+
+class ClaudeProvider(LLMProvider):
+    provider_type = ProviderType.CLAUDE
+
+    def __init__(self, api_key: str | None = None, base_url: str | None = None) -> None:
+        self.client = Anthropic(api_key=api_key or os.environ.get("ANTHROPIC_API_KEY"), base_url=base_url)
+        self._models = [
+            ModelInfo(
+                name="claude-opus-4-5",
+                provider=ProviderType.CLAUDE,
+                supports_tools=True,
+                supports_vision=True,
+                max_tokens=8192,
+                context_window=200000,
+            ),
+            ModelInfo(
+                name="claude-sonnet-4-7",
+                provider=ProviderType.CLAUDE,
+                supports_tools=True,
+                supports_vision=True,
+                max_tokens=8192,
+                context_window=200000,
+            ),
+            ModelInfo(
+                name="claude-haiku-4-7",
+                provider=ProviderType.CLAUDE,
+                supports_tools=True,
+                supports_vision=False,
+                max_tokens=4096,
+                context_window=200000,
+            ),
+        ]
+
+    def generate(self, input: LLMInput) -> LLMOutput:
+        try:
+            params: dict[str, Any] = {
+                "model": input.model or "claude-sonnet-4-7",
+                "messages": [msg.to_dict() for msg in input.messages],
+                "temperature": input.temperature,
+            }
+            if input.max_tokens:
+                params["max_tokens"] = input.max_tokens
+            else:
+                params["max_tokens"] = 8192  # required by Anthropic API
+            if input.tools:
+                params["tools"] = [tool.to_anthropic_tool() for tool in input.tools]
+
+            response = self.client.messages.create(**params)
+
+            text_parts: list[str] = []
+            tool_calls: list[ToolCall] = []
+            for block in response.content or []:
+                block_type = getattr(block, "type", None)
+                if block_type == "text":
+                    text = getattr(block, "text", "")
+                    if text:
+                        text_parts.append(text)
+                elif block_type == "tool_use":
+                    raw_arguments = getattr(block, "input", {})
+                    arguments = (
+                        raw_arguments.copy()
+                        if isinstance(raw_arguments, dict)
+                        else getattr(raw_arguments, "__dict__", {}).copy()
+                    )
+                    tool_calls.append(
+                        ToolCall(
+                            id=getattr(block, "id", ""),
+                            name=getattr(block, "name", ""),
+                            arguments=arguments,
+                        )
+                    )
+
+            return LLMOutput(
+                content="".join(text_parts),
+                tool_calls=tool_calls or None,
+                model=response.model,
+                usage={
+                    "input_tokens": response.usage.input_tokens,
+                    "output_tokens": response.usage.output_tokens,
+                },
+                stop_reason=response.stop_reason,
+            )
+        except Exception as e:
+            msg = str(e)
+            if "401" in msg or "authentication" in msg.lower():
+                raise AuthenticationError(msg, provider=ProviderType.CLAUDE) from e
+            if "429" in msg or "rate_limit" in msg.lower():
+                raise RateLimitError(msg, provider=ProviderType.CLAUDE) from e
+            if "context" in msg.lower() and "length" in msg.lower():
+                raise ContextLengthError(msg, provider=Provi
+...[truncated]...
+
+=== FILE: src/llm/providers/constants.py ===
+"""Shared provider constants."""
+
+EMPTY_FILTERED_RESPONSE_ERROR = "LLM returned empty or filtered response"
+
+
+=== FILE: src/llm/providers/ollama.py ===
+"""Ollama provider adapter for local models."""
+
+from __future__ import annotations
+
+import os
+from typing import Any
+
+from llm.core.interface import (
+    AuthenticationError,
+    ContextLengthError,
+    LLMProvider,
+    RateLimitError,
+)
+from llm.core.types import LLMInput, LLMOutput, Message, ModelInfo, ProviderType, ToolCall
+
+
+class OllamaProvider(LLMProvider):
+    provider_type = ProviderType.OLLAMA
+
+    def __init__(
+        self,
+        base_url: str | None = None,
+        default_model: str | None = None,
+    ) -> None:
+        self.base_url = base_url or os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+        self.default_model = default_model or os.environ.get("OLLAMA_MODEL", "llama3.2")
+        self._models = [
+            ModelInfo(
+                name="llama3.2",
+                provider=ProviderType.OLLAMA,
+                supports_tools=False,
+                supports_vision=False,
+                max_tokens=4096,
+                context_window=128000,
+            ),
+            ModelInfo(
+                name="mistral",
+                provider=ProviderType.OLLAMA,
+                supports_tools=False,
+                supports_vision=False,
+                max_tokens=4096,
+                context_window=8192,
+            ),
+            ModelInfo(
+                name="codellama",
+                provider=ProviderType.OLLAMA,
+                supports_tools=False,
+                supports_vision=False,
+                max_tokens=4096,
+                context_window=16384,
+            ),
+        ]
+
+    def generate(self, input: LLMInput) -> LLMOutput:
+        import urllib.request
+        import json
+
+        try:
+            url = f"{self.base_url}/api/chat"
+            model = input.model or self.default_model
+
+            payload: dict[str, Any] = {
+                "model": model,
+                "messages": [msg.to_dict() for msg in input.messages],
+                "stream": False,
+            }
+            if input.temperature != 1.0:
+                payload["options"] = {"temperature": input.temperature}
+
+            data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+
+            with urllib.request.urlopen(req, timeout=60) as response:
+                result = json.loads(response.read().decode("utf-8"))
+
+            content = result.get("message", {}).get("content", "")
+
+            tool_calls = None
+            if result.get("message", {}).get("tool_calls"):
+                tool_calls = [
+                    ToolCall(
+                        id=tc.get("id", ""),
+                        name=tc.get("function", {}).get("name", ""),
+                        arguments=tc.get("function", {}).get("arguments", {}),
+                    )
+                    for tc in result["message"]["tool_calls"]
+                ]
+
+            return LLMOutput(
+                content=content,
+                tool_calls=tool_calls,
+                model=model,
+                stop_reason=result.get("done_reason"),
+            )
+        except Exception as e:
+            msg = str(e)
+            if "401" in msg or "connection" in msg.lower():
+                raise AuthenticationError(f"Ollama connection failed: {msg}", provider=ProviderType.OLLAMA) from e
+            if "429" in msg or "rate_limit" in msg.lower():
+                raise RateLimitError(msg, provider=ProviderType.OLLAMA) from e
+            if "context" in msg.lower() and "length" in msg.lower():
+                raise ContextLengthError(msg, provider=ProviderType.OLLAMA) from e
+            raise
+
+    def list_models(self) -> list[ModelInfo]:
+        return self._models.copy()
+
+    def validate_config(self) -> bool:
+        return bool(self.base_url)
+
+    def get_default_model(self) -> str:
+        return self.default_model
+
+
+=== FILE: src/llm/providers/openai.py ===
+"""OpenAI provider adapter."""
+
+from __future__ import annotations
+
+import json
+import os
+from typing import Any
+
+from openai import OpenAI
+
+from llm.core.interface import (
+    AuthenticationError,
+    ContextLengthError,
+    LLMProvider,
+    RateLimitError,
+)
+from llm.core.types import LLMInput, LLMOutput, Message, ModelInfo, ProviderType, ToolCall
+from llm.providers.constants import EMPTY_FILTERED_RESPONSE_ERROR
+
+
+class OpenAIProvider(LLMProvider):
+    provider_type = ProviderType.OPENAI
+
+    def __init__(self, api_key: str | None = None, base_url: str | None = None) -> None:
+        self.client = OpenAI(
+            api_key=api_key or os.environ.get("OPENAI_API_KEY"),
+            base_url=base_url,
+            _enforce_credentials=False,
+        )
+        self._models = [
+            ModelInfo(
+                name="gpt-4o",
+                provider=ProviderType.OPENAI,
+                supports_tools=True,
+                supports_vision=True,
+                max_tokens=4096,
+                context_window=128000,
+            ),
+            ModelInfo(
+                name="gpt-4o-mini",
+                provider=ProviderType.OPENAI,
+                supports_tools=True,
+                supports_vision=True,
+                max_tokens=4096,
+                context_window=128000,
+            ),
+            ModelInfo(
+                name="gpt-4-turbo",
+                provider=ProviderType.OPENAI,
+                supports_tools=True,
+                supports_vision=True,
+                max_tokens=4096,
+                context_window=128000,
+            ),
+            ModelInfo(
+                name="gpt-3.5-turbo",
+                provider=ProviderType.OPENAI,
+                supports_tools=True,
+                supports_vision=False,
+                max_tokens=4096,
+                context_window=16385,
+            ),
+        ]
+
+    def generate(self, input: LLMInput) -> LLMOutput:
+        try:
+            params: dict[str, Any] = {
+                "model": input.model or "gpt-4o-mini",
+                "messages": [msg.to_dict() for msg in input.messages],
+                "temperature": input.temperature,
+            }
+            if input.max_tokens:
+                params["max_tokens"] = input.max_tokens
+            if input.tools:
+                params["tools"] = [tool.to_openai_tool() for tool in input.tools]
+
+            response = self.client.chat.completions.create(**params)
+            if not response.choices or response.choices[0].message is None:
+                raise ValueError(EMPTY_FILTERED_RESPONSE_ERROR)
+            choice = response.choices[0]
+
+            tool_calls = None
+            if choice.message.tool_calls:
+                tool_calls = [
+                    ToolCall(
+                        id=tc.id or "",
+                        name=tc.function.name,
+                        arguments={} if not tc.function.arguments else json.loads(tc.function.arguments),
+                    )
+                    for tc in choice.message.tool_calls
+                ]
+
+            usage = None
+            if response.usage:
+                usage = {
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens,
+                }
+
+            return LLMOutput(
+                content=choice.message.content or "",
+                tool_calls=tool_calls,
+                model=response.model,
+                usage=usage,
+                stop_reason=choice.finish_reason,
+            )
+        except Exception as e:
+            msg = str(e)
+            if "401" in msg or "authentication" in msg.lower():
+                raise AuthenticationError(msg, provider=ProviderType.OPENAI) from e
+            if "429" in msg or "rate_limit" in msg.lower():
+                raise RateLimitError(msg, provider=ProviderType.OPENAI) from e
+            if "context" in msg.lower() and "length" in msg.lo
+...[truncated]...
+
+=== FILE: src/llm/providers/resolver.py ===
+"""Provider factory and resolver."""
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+
+from llm.core.interface import LLMProvider
+from llm.core.types import ProviderType
+from llm.providers.astraflow import AstraflowCNProvider, AstraflowProvider
+from llm.providers.atlas import AtlasProvider
+from llm.providers.claude import ClaudeProvider
+from llm.providers.openai import OpenAIProvider
+from llm.providers.ollama import OllamaProvider
+
+
+_PROVIDER_MAP: dict[ProviderType, type[LLMProvider]] = {
+    ProviderType.ASTRAFLOW: AstraflowProvider,
+    ProviderType.ASTRAFLOW_CN: AstraflowCNProvider,
+    ProviderType.ATLAS: AtlasProvider,
+    ProviderType.CLAUDE: ClaudeProvider,
+    ProviderType.OPENAI: OpenAIProvider,
+    ProviderType.OLLAMA: OllamaProvider,
+}
+
+LLM_ENV_FILE = ".llm.env"
+
+
+def _strip_env_value(value: str) -> str:
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+        return value[1:-1]
+    return value
+
+
+def _read_saved_llm_config(env_path: str | Path = LLM_ENV_FILE) -> dict[str, str]:
+    path = Path(env_path)
+    if not path.is_file():
+        return {}
+
+    config: dict[str, str] = {}
+    for line in path.read_text().splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        key, value = stripped.split("=", 1)
+        config[key.strip()] = _strip_env_value(value)
+    return config
+
+
+def _resolve_provider_type(provider_type: ProviderType | str | None) -> ProviderType | str:
+    if provider_type is not None:
+        return provider_type
+
+    env_provider = os.environ.get("LLM_PROVIDER")
+    if env_provider:
+        return _strip_env_value(env_provider).lower()
+
+    saved_config = _read_saved_llm_config()
+    return saved_config.get("LLM_PROVIDER", "claude").lower()
+
+
+def get_provider(provider_type: ProviderType | str | None = None, **kwargs: str) -> LLMProvider:
+    provider_type = _resolve_provider_type(provider_type)
+
+    if isinstance(provider_type, str):
+        try:
+            provider_type = ProviderType(provider_type)
+        except ValueError:
+            raise ValueError(f"Unknown provider type: {provider_type}. Valid types: {[p.value for p in ProviderType]}")
+
+    provider_cls = _PROVIDER_MAP.get(provider_type)
+    if not prov
+...[prompt truncated at 78k]...

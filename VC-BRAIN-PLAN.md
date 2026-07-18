@@ -1,13 +1,30 @@
 # VC Brain — Hackathon Product Spec & Architecture Plan
 
 **Hackathon:** Hack Nation 6th Global AI Hackathon  
-**Challenge:** 02 — The VC Brain (Maschmeyer Group)  
+**Final submission challenge:** **02 — The VC Brain (Maschmeyer Group)** ← we stick to this  
+**Not submitting as:** 01 — The Negotiator (ElevenLabs)  
+**ElevenLabs role:** Voice layer *on top of* VC Brain (sponsor tool), not a second challenge entry  
+**Venture / VC track:** Eligible as upside after a strong Challenge 02 build (startup-shaped product); do not dilute the Maschmeyer brief  
 **Submission platform:** https://projects.hack-nation.ai/#/  
 **Event:** https://luma.com/8rfryv5k  
 **Deadline:** Sunday, July 19, 2026 — 9:00 AM ET  
 
 **Product working name:** FounderGraph (TBD — pick before demo)  
-**One-liner:** An AI operating system that sources founders, builds a living technical + claim graph from GitHub and decks, scores them on three axes with Trust Scores, and produces a 24-hour investment decision memo.
+**One-liner:** An AI operating system that sources founders, builds a living technical + claim graph from GitHub and decks, scores them on three axes with Trust Scores, produces a 24-hour investment decision memo — and can brief the investor by voice (ElevenLabs).
+
+---
+
+## 0. Final track decision (locked)
+
+| Question | Answer |
+|----------|--------|
+| Which challenge do we submit under? | **Challenge 02 — The VC Brain** |
+| Can we also “do” Challenge 01? | **No as a second submission.** One product, one challenge. |
+| Can we still use ElevenLabs? | **Yes** — as a voice feature inside VC Brain (brief / intake / graph Q&A). |
+| Is that “using track 2”? | Challenge **02** is our corporate challenge. Separate from post-event **Venture / VC Big Bets** selection. |
+| Pitch line | “Built for Maschmeyer’s VC Brain brief; ElevenLabs powers the investor voice brief.” |
+
+**Rule:** If voice work starts stealing time from Memory / Trust / 3-axis / memo, cut voice to TTS brief only. Challenge 02 judging weights win over sponsor polish.
 
 ---
 
@@ -33,6 +50,61 @@ We are **not** submitting a rebranded plugin. The product surface, scoring, Memo
 - Keep LICENSE/NOTICE for any copied or adapted code
 - README: “Technical graph pipeline inspired by / adapted from Understand-Anything (see LICENSE)”
 - Pitch focus: VC Brain problem + Founder Score + Trust-scored memos
+- Mention ElevenLabs as the voice brief / intake layer (sponsor visibility), not as the core thesis
+
+---
+
+## 1b. ElevenLabs voice layer (on Challenge 02)
+
+ElevenLabs is a **feature**, not a track switch. We do **not** build phone haggling / quote negotiation (that is Challenge 01).
+
+### Priority order (ship top-down)
+
+| Priority | Feature | What the user does | Demo value | Effort |
+|----------|---------|-------------------|------------|--------|
+| **P0 (must)** | **Investment voice brief** | On diligence page: “Play brief” → TTS of Founder Score, 3 axes, recommendation, top Trust flags | 10s wow; zero risk to core loop | ~2h |
+| **P1 (should)** | **Voice founder intake** | `/apply`: talk through company / problem / ask → structured fields; still confirm + upload deck + GitHub | Strong inbound story | ~3–4h |
+| **P2 (nice)** | **Voice chat over graph** | “What’s proprietary?” → graph-grounded answer + TTS with citation | Ties UA graph + ElevenLabs | ~3h |
+| **P3 (cut first)** | Activation voice note / outbound call | Draft spoken outreach to sourced founders | Cool but Negotiator-adjacent; skip unless ahead | — |
+
+### P0 — Investment voice brief (spec)
+
+```
+Trigger:  POST /api/brief  { opportunityId }
+Input:    memo.snapshot + axes[] + founderScore + recommendation + top 3 claims (low trust / contradicted)
+Script:   45–75 seconds, investor tone, no hype, cite uncertainty (“two claims unsupported”)
+Output:   audio URL or streamed audio (ElevenLabs TTS)
+UI:       Diligence header button “Play investment brief” + waveform / pause
+```
+
+Script template (fill from Memory, never invent numbers):
+
+> “Opportunity {company}. Founder Score {n}, trend {trend}.  
+> Founder axis {score}, Market {score}, Idea-versus-market {score}.  
+> Recommendation: {invest|pass|more_info}.  
+> Thesis fit {pct}%.  
+> Trust watch-outs: {claim1}; {claim2}.  
+> Cap table and financials: flagged unavailable where missing.”
+
+### P1 — Voice intake (if time)
+
+- ElevenLabs **Agent** (or STT + our LLM) interviews the founder
+- Tools write into the same JSON job/application schema as the form
+- User **confirms** fields before analyze runs (same as Challenge 02 inbound: deck + company name minimum)
+- Does **not** replace document upload
+
+### Integration notes
+
+- Env: `ELEVENLABS_API_KEY`, optional `ELEVENLABS_VOICE_ID`, `ELEVENLABS_AGENT_ID` (intake)
+- Keep a **text fallback** if the key is missing (show script + “voice unavailable”) so demo never hard-fails
+- Demo mode: pre-render one brief MP3 for the hero opportunity so the stage path is reliable
+- Docs: [ElevenLabs](https://elevenlabs.io/docs) TTS + Agents
+
+### What we explicitly will not build with ElevenLabs
+
+- Parallel outbound sales calls to haggle prices (Challenge 01)
+- Fake competing bids or invented inventory
+- Voice as the only intake path (always keep form + deck + GitHub)
 
 ---
 
@@ -335,9 +407,15 @@ Monorepo optional; for 24h a single Next.js app with `src/lib/{ingest,graph,scor
 - “Activate” → draft outreach email (no need for real send)
 - NL search over Memory
 
+### M5b — ElevenLabs voice (fit in Hour 16–20 if scoring/memo green)
+- P0: `/api/brief` + “Play investment brief” on diligence page
+- Optional P1: voice intake on `/apply` writing the same schema
+- Pre-render one demo brief audio for the hero opportunity
+
 ### M6 — Polish + Demo (Hour 20–24)
 - Demo script, video (MP4 H.264), README, submit on platform
 - Attribution NOTICE for UA
+- In pitch: one line on ElevenLabs voice brief (sponsor visibility)
 
 ---
 
@@ -367,6 +445,14 @@ POST /api/chat
 POST /api/decide
   body: { opportunityId, decision: 'invest'|'pass'|'more_info', note? }
   → { ok }
+
+POST /api/brief
+  body: { opportunityId }
+  → { script, audioUrl }   // ElevenLabs TTS; text-only fallback if no key
+
+POST /api/intake/voice  (optional P1)
+  body: { audio | agentSessionId }
+  → { draftApplication fields for user confirm }
 
 GET /api/pipeline?thesisId=
   → { inbound[], outbound[] }
@@ -469,12 +555,15 @@ Store under `data/demo/` with decks, repo mirrors or git submodules, and precomp
 ```
 OPENAI_API_KEY=
 # or ANTHROPIC_API_KEY=
+ELEVENLABS_API_KEY=        # voice brief (P0) + optional intake agent (P1)
+ELEVENLABS_VOICE_ID=       # optional
+ELEVENLABS_AGENT_ID=       # optional — voice intake
 DATABASE_URL=file:./data/vcbrain.db
 GITHUB_TOKEN=          # optional, rate limits
 NEXT_PUBLIC_APP_URL=
 ```
 
-Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtures if keys missing.
+Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtures + pre-rendered brief audio if keys missing.
 
 ---
 
@@ -482,9 +571,9 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 
 1. **Problem (20s):** Great founders invisible; diligence weeks; capital = networks  
 2. **Insight (20s):** Code + claims can be a living graph — structure beats vibes  
-3. **Product (60s):** Live demo — source → graph → trust → memo → decision  
-4. **Differentiation (30s):** Persistent Founder Score + per-claim Trust + technical graph  
-5. **Ask (20s):** Why this wins Challenge 02 / venture track  
+3. **Product (60s):** Live demo — source → graph → trust → memo → decision → **Play investment brief** (ElevenLabs)  
+4. **Differentiation (30s):** Persistent Founder Score + per-claim Trust + technical graph + voice brief for the investor  
+5. **Ask (20s):** Built for Challenge 02 (VC Brain); shaped for Venture Track upside  
 
 ---
 
@@ -496,6 +585,8 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 | Looks like UA clone | Own UX + VC workflow; attribution only in README |
 | Hallucinated diligence | Trust status `unavailable`; never invent ARR |
 | Scope creep | Cut channel ML, real email send, fund ops |
+| Voice steals Challenge 02 time | Ship P0 TTS brief only; cut P1/P2 |
+| Looks like Negotiator entry | No price haggling; voice = diligence brief/intake only |
 | License | Read UA LICENSE; NOTICE for adapted files |
 
 ---
@@ -506,10 +597,11 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 - [ ] 3-axis + Founder Score + Trust claims visible  
 - [ ] Graph explorer + at least one cited chat answer  
 - [ ] Cold-start founder in demo set  
+- [ ] ElevenLabs P0: Play investment brief (or pre-rendered demo audio)  
 - [ ] README + PLAN + DEMO_SCRIPT  
 - [ ] Attribution for Understand-Anything if code adapted  
 - [ ] Demo video MP4 H.264  
-- [ ] Project submitted on Hack-Nation platform before deadline  
+- [ ] Project submitted under **Challenge 02 — The VC Brain** before deadline  
 
 ---
 
@@ -526,7 +618,9 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 
 ## 19. References
 
-- Challenge brief: `Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf`
+- Challenge brief (submit under this): `Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf`
+- ElevenLabs challenge (do **not** submit under; voice ideas only): `Topics/1784382172163-01-ElevenLabs-The-Negotiator.docx.pdf`
 - Understand-Anything: https://github.com/Egonex-AI/Understand-Anything  
 - Product site (inspiration only): https://understand-anything.com/  
+- ElevenLabs docs: https://elevenlabs.io/docs  
 - Hack-Nation showcase: https://projects.hack-nation.ai/#/

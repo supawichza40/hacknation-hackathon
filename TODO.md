@@ -7,7 +7,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 | Field | Value |
 |---|---|
 | **Event clock** | start: 2026-07-18 12:15 ET · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET |
-| **Challenge** | 02 — The VC Brain (Maschmeyer Group) |
+| **Challenge (locked)** | **02 — The VC Brain** · ElevenLabs = voice brief layer only (not Challenge 01) |
 | **Phase** | Spec locked → scaffold app ([docs/ops/PLAYBOOK.md](docs/ops/PLAYBOOK.md)) |
 | **Product plan** | [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md) |
 | **Golden path status** | not started |
@@ -37,6 +37,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 | Time | Decision | Reasoning | Needs human review? |
 |---|---|---|---|
 | 2026-07-18 | Build Challenge 02 VC Brain; use Understand-Anything as reference, not a clone | Best fit for knowledge-graph stack | No |
+| 2026-07-18 | Add ElevenLabs as voice brief/intake on VC Brain; do **not** submit as Challenge 01 | Sponsor visibility without abandoning Maschmeyer brief | No |
 
 ## Blocked / waiting on human
 

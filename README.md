@@ -1,10 +1,11 @@
 # Hack Nation — 6th Global AI Hackathon
 
 **Event:** 18–19 July 2026 · **Deadline:** Sun 19 Jul, 9:00 AM ET  
-**Challenge:** [02 — The VC Brain](Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf) (Maschmeyer Group)  
+**Challenge (locked):** [02 — The VC Brain](Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf) (Maschmeyer Group)  
+**Not submitting as:** 01 Negotiator — ElevenLabs is a **voice layer** on VC Brain only  
 **Product plan:** [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md)
 
-AI OS for deploying $100K checks in 24 hours — founder sourcing, technical knowledge graphs (Understand-Anything–inspired), Founder Score, Trust Scores, and investment memos.
+AI OS for deploying $100K checks in 24 hours — founder sourcing, technical knowledge graphs (Understand-Anything–inspired), Founder Score, Trust Scores, investment memos, and an ElevenLabs investor voice brief.
 
 ---
 

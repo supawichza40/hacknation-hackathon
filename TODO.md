@@ -41,6 +41,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 | 2026-07-18 | Add ElevenLabs as voice brief/intake on VC Brain; do **not** submit as Challenge 01 | Sponsor visibility without abandoning Maschmeyer brief | No |
 | 2026-07-18 20:20 BST | Scope tension resolved (human): Challenge 02 stays; repo-understanding ("Understand any repo", [team discussion](docs/product/TEAM-DISCUSSION-2026-07-18.md)) integrated as selling point inside diligence Graph/Chat tabs, not a track switch | Team debate was unresolved; human chose hybrid — keeps scope lock, reuses team's agreed features | No |
 | 2026-07-18 20:20 BST | Requirements suite design approved: JTBD framing, investor-primary personas, inbound golden path, demo-lite auth, checkpoint smoke tests, 3-layer Definition of Done → [design doc](docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md) | Answers "how customer gains most" before scaffold; feeds dispatch fan-out for 8 docs | Review design doc |
+| 2026-07-18 20:25 BST | Understand-Anything role upgraded (human): **core functionality** of VC Brain — its graph pipeline + grounded chat ARE the diligence engine (founder repos/materials in, knowledge graph + Q&A out), not just a reference implementation | Human clarification after [team discussion](docs/product/TEAM-DISCUSSION-2026-07-18.md); supersedes "reference, not a clone" wording above | No |
 
 ## Blocked / waiting on human
 

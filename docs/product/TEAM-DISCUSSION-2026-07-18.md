@@ -51,6 +51,6 @@ Team judged the day-1 scope buildable: (1) chatbot with full-file reference inte
 - **OpenAI:** mixed — one member still has credit from last time; new redemption attempts mostly failed ("invalid").
 - Reminder raised in the room: cancel any subscription attached to a card after the event.
 
-## ⚠️ Scope tension — resolve before building
+## ✅ Scope resolution (2026-07-18 20:25 BST, human)
 
-The locked board (`TODO.md`) says **Challenge 02 — The VC Brain**, with Understand-Anything as *reference only* and ElevenLabs as a voice-brief layer. This discussion instead scopes a full **repo-understanding product** (the Understand-Anything direction) with ElevenLabs voice on top, and the track debate in the room was unresolved ("AI recommends VC Brain" vs. "I prefer the AI-gen one"). Per the Three Laws, scope is frozen at spec lock — if the team now wants the repo-understanding product as the submission, that is an explicit human override to record in `TODO.md`; otherwise this doc's build items go to `docs/ops/BACKLOG.md`.
+Track stays **Challenge 02 — The VC Brain**. Understand-Anything is upgraded from reference to **core functionality**: its graph pipeline and grounded chat ARE the diligence engine — founder repos/materials go in, a knowledge graph plus Q&A comes out. The features in this discussion (guided overview, repo-grounded chat, per-file chat, ElevenLabs voice) map onto VC Brain's Graph/Chat surfaces applied to founder submissions, rather than shipping as a standalone repo-understanding product. Recorded in `TODO.md` decisions (20:20 + 20:25 BST rows).

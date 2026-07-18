@@ -2,11 +2,14 @@
 
 Photograph every slide that mentions judging, prizes, or submission. Fill this before ideation. Re-read it before every scope decision.
 
-## 0. Event facts (pre-event research, 2026-07-10 — sources: hack-nation.ai, luma, Devpost 5th ed.)
+## 0. Event facts (pre-event research 2026-07-10, corrected 2026-07-14 from official participant PDF)
 
-- **Event:** Hack-Nation 6th Global AI Hackathon · hybrid, 14 hubs + online · MIT-ecosystem (MIT Club N. California + MIT Club of Germany)
-- **Clock (all ET):** Sat Jul 18 12:00 kickoff · 12:50 challenge reveal · 13:00 hacking begins · **Sun Jul 19 09:00 SUBMISSION DEADLINE** (20h window) · Sat Jul 25 12:00 finalist pitches (3 min, top-3 per challenge) · 14:15 awards
-- **ICT conversion:** kickoff Sat 23:00 · hacking Sun 00:00 · submission Sun 20:00 · finals Sat Jul 25 23:00
+> **Full record: [docs/research/EVENT-DOSSIER.md](docs/research/EVENT-DOSSIER.md)** · official deck: `HackathonMaterials/…Participants.PDF`
+
+- **Event:** Hack-Nation 6th Global AI Hackathon · hybrid, 12+ hubs + online · MIT-ecosystem (MIT Club N. California + MIT Club of Germany)
+- **Clock (all ET, PDF p.2 — overrides earlier website times):** Sat Jul 18 11:15 kickoff · **12:05–12:15 challenge reveal** · 12:15 hacking begins · **Sun Jul 19 09:00 SUBMISSION DEADLINE** (~21h window) · Sat Jul 25 12:00 finalist pitches (3 min, top-3 per challenge) · 14:15 awards
+- **ICT conversion:** kickoff Sat 22:15 · reveal Sat 23:05 · hacking Sat 23:15 · submission Sun 20:00 · finals Sat Jul 25 23:00
+- **Competition math:** 200+ judges, 400+ submissions, ~5 challenges → ~15 finalist slots ≈ 3.75% finalist rate
 - **Prizes:** $35k+ cash & credits, per-challenge 1st/2nd/3rd; Venture Track (3-month program) for top teams
 - **Challenges revealed AT kickoff** — no pre-published tracks; ideation constraint: prepare per-domain, lock at reveal
 - **Application:** batch-gated via Google Form; Batch 6 (final) deadline **Jul 10** — walk-ins impossible, hub admission separate approval (London hub = luma kr0cbgnv)

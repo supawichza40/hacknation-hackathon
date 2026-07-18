@@ -18,6 +18,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 ## Now / Next / Done
 
 ### Now
+- [ ] Requirements suite (8 docs: use cases, journeys, FR, NFR, screen map, external services, smoke tests, DoD) — design approved, awaiting human review of [design doc](docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md), then dispatch plan gate
 - [ ] Scaffold FounderGraph app per VC-BRAIN-PLAN (Next.js + Memory + graph shell)
 
 ### Next
@@ -38,6 +39,8 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 |---|---|---|---|
 | 2026-07-18 | Build Challenge 02 VC Brain; use Understand-Anything as reference, not a clone | Best fit for knowledge-graph stack | No |
 | 2026-07-18 | Add ElevenLabs as voice brief/intake on VC Brain; do **not** submit as Challenge 01 | Sponsor visibility without abandoning Maschmeyer brief | No |
+| 2026-07-18 20:20 BST | Scope tension resolved (human): Challenge 02 stays; repo-understanding ("Understand any repo", [team discussion](docs/product/TEAM-DISCUSSION-2026-07-18.md)) integrated as selling point inside diligence Graph/Chat tabs, not a track switch | Team debate was unresolved; human chose hybrid — keeps scope lock, reuses team's agreed features | No |
+| 2026-07-18 20:20 BST | Requirements suite design approved: JTBD framing, investor-primary personas, inbound golden path, demo-lite auth, checkpoint smoke tests, 3-layer Definition of Done → [design doc](docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md) | Answers "how customer gains most" before scaffold; feeds dispatch fan-out for 8 docs | Review design doc |
 
 ## Blocked / waiting on human
 

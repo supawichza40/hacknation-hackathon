@@ -1,0 +1,53 @@
+{
+  "purpose": "R7 sourcing-scan capture for deterministic demo replay (VC-BRAIN-PLAN.md §0.5 d12 R7). The demo replays this capture; no live GitHub call on stage.",
+  "generatedAt": "2026-07-18T23:37:12Z",
+  "referenceTime": "2026-07-18T23:37:12Z",
+  "referenceTimeNote": "Fixed 'now' anchor. scan-score.mjs computes days-since-created and days-since-push against this timestamp (NOT Date.now()) so reruns reproduce an identical ranking.",
+  "tooling": {
+    "gh": "gh version 2.96.0 (2026-07-02)",
+    "node": "v26.3.1",
+    "host": "darwin"
+  },
+  "thesis": "AI infra, developer tools, agents — surface pre-fundraise open-source projects with early traction.",
+  "queries": [
+    {
+      "id": "q1",
+      "label": "ai-agents",
+      "file": "raw/q1_ai-agents.json",
+      "command": "gh search repos --topic ai-agents --created \">2026-01-01\" --sort stars --order desc --limit 30 --json fullName,name,owner,stargazersCount,forksCount,createdAt,pushedAt,updatedAt,url,description,language,license,isArchived,openIssuesCount,hasIssues,watchersCount",
+      "resultCount": 30
+    },
+    {
+      "id": "q2",
+      "label": "ai-infrastructure",
+      "file": "raw/q2_ai-infrastructure.json",
+      "command": "gh search repos --topic ai-infrastructure --created \">2026-01-01\" --sort stars --order desc --limit 30 --json fullName,name,owner,stargazersCount,forksCount,createdAt,pushedAt,updatedAt,url,description,language,license,isArchived,openIssuesCount,hasIssues,watchersCount",
+      "resultCount": 30
+    },
+    {
+      "id": "q3",
+      "label": "developer-tools + llm",
+      "file": "raw/q3_devtools-llm.json",
+      "command": "gh search repos --topic developer-tools --topic llm --created \">2026-01-01\" --sort stars --order desc --limit 30 --json fullName,name,owner,stargazersCount,forksCount,createdAt,pushedAt,updatedAt,url,description,language,license,isArchived,openIssuesCount,hasIssues,watchersCount",
+      "resultCount": 30
+    },
+    {
+      "id": "q4",
+      "label": "autonomous-agents",
+      "file": "raw/q4_autonomous-agents.json",
+      "command": "gh search repos --topic autonomous-agents --created \">2026-01-01\" --sort stars --order desc --limit 30 --json fullName,name,owner,stargazersCount,forksCount,createdAt,pushedAt,updatedAt,url,description,language,license,isArchived,openIssuesCount,hasIssues,watchersCount",
+      "resultCount": 30
+    }
+  ],
+  "scoring": {
+    "script": "scripts/scan-score.mjs",
+    "output": "data/replay/scan/ranking.json",
+    "signals": {
+      "starVelocity": "stargazersCount / max(1, daysSinceCreated) — traction rate, normalized to pool max",
+      "commitRecency": "1 / (1 + daysSincePush) — fresher pushedAt scores higher",
+      "noOrgOwner": "owner.type === 'User' → 1 (pre-fundraise/pre-org signal), Organization → 0"
+    },
+    "weights": { "starVelocity": 0.6, "commitRecency": 0.25, "noOrgOwner": 0.15 },
+    "tiebreak": "score desc, then fullName asc — fully deterministic"
+  }
+}

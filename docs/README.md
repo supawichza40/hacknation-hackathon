@@ -5,6 +5,7 @@
 | File | Purpose |
 |------|---------|
 | [`../VC-BRAIN-PLAN.md`](../VC-BRAIN-PLAN.md) | Full Challenge 02 spec, architecture, data model, build order (repo root) |
+| [product/TEAM-DISCUSSION-2026-07-18.md](product/TEAM-DISCUSSION-2026-07-18.md) | Distilled team discussion: repo-understanding product, user journey, credits — flags scope tension vs locked Challenge 02 |
 
 ## Ops — how we run the weekend
 

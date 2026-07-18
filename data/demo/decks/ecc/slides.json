@@ -1,0 +1,90 @@
+[
+  {
+    "slideNo": 1,
+    "title": "ECC — Every Agent, Faster",
+    "bullets": [
+      "The performance layer for agent harnesses.",
+      "Cut agent latency and token spend without touching your prompts.",
+      "github.com/supawichza40/ECC",
+      "Supawich · solo founder · pre-seed"
+    ],
+    "speakerNote": "One line: I make agent systems fast and cheap. Open on the name, then straight into the pain."
+  },
+  {
+    "slideNo": 2,
+    "title": "Agents are slow and expensive by default",
+    "bullets": [
+      "Every added tool, subagent, and retry compounds latency the harness never measures.",
+      "Teams ship agents that work in a demo, then stall under real traffic.",
+      "Routing, model choice, and context are hand-tuned once and left to rot.",
+      "Nobody owns the p50/p95 of an agent call the way they own an API endpoint."
+    ],
+    "speakerNote": "The gap: web teams profile every endpoint; agent teams profile nothing. That is the wedge."
+  },
+  {
+    "slideNo": 3,
+    "title": "ECC: a profiler and optimizer that sits under the harness",
+    "bullets": [
+      "Instruments every agent hop — tool calls, model routes, token cost — with zero prompt changes.",
+      "Auto-routes each step to the cheapest model that still passes its eval.",
+      "Regression gate blocks any change that makes an agent slower or more expensive.",
+      "Drops in beside existing harnesses; no rewrite, no lock-in."
+    ],
+    "speakerNote": "This is the product. Emphasize zero-rewrite adoption — that is what makes it land."
+  },
+  {
+    "slideNo": 4,
+    "title": "The wow moment: live latency board",
+    "bullets": [
+      "ECC delivers sub-100ms agent routing in production.",
+      "Every hop traced, ranked, and attributed to a cost in real time.",
+      "One dashboard replaces a week of manual print-statement debugging.",
+      "Live demo: watch the router pick the cheap model and the p50 drop on screen."
+    ],
+    "speakerNote": "Say the sub-100ms line with full confidence, then pull up the board. The board shows 340ms median — that mismatch is the point. Let the judges catch it. Do not pre-empt or explain it away."
+  },
+  {
+    "slideNo": 5,
+    "title": "Market: AI infrastructure tooling",
+    "bullets": [
+      "Every team building agents is a buyer — the fastest-growing segment in dev tooling.",
+      "Observability and cost control are already line items for LLM apps; agents just made them harder.",
+      "Wedge in on latency, expand into eval, routing, and spend governance.",
+      "Sits next to the tracing tools teams already pay for, priced per traced agent-run."
+    ],
+    "speakerNote": "Frame as adjacent to observability spend teams already approve — not a new budget line."
+  },
+  {
+    "slideNo": 6,
+    "title": "Traction",
+    "bullets": [
+      "Working harness instrumentation shipped and open-sourced.",
+      "9 design partners running ECC against their own agent stacks.",
+      "Median 38% token-cost reduction observed across partner workloads.",
+      "410 GitHub stars, 27 external contributors in the first 8 weeks."
+    ],
+    "speakerNote": "Numbers are early and honest. Lead with the 38% cost cut — it is the buying trigger."
+  },
+  {
+    "slideNo": 7,
+    "title": "Team",
+    "bullets": [
+      "Supawich — solo founder, builder, sole author of the ECC harness.",
+      "Shipped the first working version as a hackathon build, then hardened it in the open.",
+      "Deep in the agent-tooling weeds daily; ECC is dogfooded on my own agent workflows.",
+      "Hiring a founding engineer with the raise."
+    ],
+    "speakerNote": "Own the solo story as a strength: fast, opinionated, already shipping. The founding-engineer hire is what the money unlocks."
+  },
+  {
+    "slideNo": 8,
+    "title": "The ask",
+    "bullets": [
+      "Raising $100K pre-seed.",
+      "Buys 12 months of runway to convert design partners into paying teams.",
+      "Milestones: 3 paying customers, hosted version live, first founding-engineer hire.",
+      "Let's make every agent faster. Talk after the demo."
+    ],
+    "speakerNote": "Close on the ask and the milestone that de-risks it — first paying customers. Invite the follow-up."
+  }
+]

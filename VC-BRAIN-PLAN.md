@@ -64,7 +64,7 @@ ElevenLabs is a **feature**, not a track switch. We do **not** build phone haggl
 |----------|---------|-------------------|------------|--------|
 | **P0 (must)** | **Investment voice brief** | On diligence page: “Play brief” → TTS of Founder Score, 3 axes, recommendation, top Trust flags | 10s wow; zero risk to core loop | ~2h |
 | **P1 (should)** | **Voice founder intake** | `/apply`: talk through company / problem / ask → structured fields; still confirm + upload deck + GitHub | Strong inbound story | ~3–4h |
-| **P2 (nice)** | **Voice chat over graph** | “What’s proprietary?” → graph-grounded answer + TTS with citation | Ties UA graph + ElevenLabs | ~3h |
+| **P2 (committed 2026-07-18)** | **Realtime voice chat over graph** | Mic button in Diligence chat: speak ↔ ElevenLabs Conversational AI agent wired to `/api/chat`; graph-grounded answer spoken back with citation | Ties UA graph + ElevenLabs; realtime wow | ~4h |
 | **P3 (cut first)** | Activation voice note / outbound call | Draft spoken outreach to sourced founders | Cool but Negotiator-adjacent; skip unless ahead | — |
 
 ### P0 — Investment voice brief (spec)
@@ -387,7 +387,9 @@ Monorepo optional; for 24h a single Next.js app with `src/lib/{ingest,graph,scor
 ### M2 — Graph Engine (Hour 5–10)
 - Adapt UA patterns: scan files → nodes/edges → summaries → `knowledge-graph.json`
 - Deck path: extract sections/claims as document nodes
-- Graph UI: pan/zoom, click node → summary + source ref
+- Graph UI: pan/zoom, click node → summary + source ref + “Ask about this” (opens chat pre-scoped to that node)
+- Highlight-to-ask: select text in summary / claim / deck panel → “Ask about selection” opens chat with the selection + owning node as context
+- Chat responses stream token-by-token in the dashboard (real-time), with citations
 - Precompute demo graphs; one “Analyze” button for live path
 
 ### M3 — Scoring + Trust (Hour 10–15)
@@ -521,6 +523,7 @@ Store under `data/demo/` with decks, repo mirrors or git submodules, and precomp
 - [ ] Per-claim Trust Scores with evidence
 - [ ] Contradictions flagged
 - [ ] Graph-grounded chat citations
+- [ ] Chat streams in real time; node-click and text-highlight pre-scope the question
 - [ ] Gaps marked, not fabricated
 
 ### Investment Utility & Execution — 30%
@@ -596,8 +599,10 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 - [ ] End-to-end demo: apply/source → analyze → score → memo → decide  
 - [ ] 3-axis + Founder Score + Trust claims visible  
 - [ ] Graph explorer + at least one cited chat answer  
+- [ ] Chat UX: streaming responses; “Ask about this” from node click; highlight-to-ask from selected text  
 - [ ] Cold-start founder in demo set  
 - [ ] ElevenLabs P0: Play investment brief (or pre-rendered demo audio)  
+- [ ] ElevenLabs P2: realtime voice chat over graph (fallback: cut to P0 brief per §0 rule if core loop at risk)  
 - [ ] README + PLAN + DEMO_SCRIPT  
 - [ ] Attribution for Understand-Anything if code adapted  
 - [ ] Demo video MP4 H.264  

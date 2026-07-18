@@ -39,32 +39,45 @@ Photograph every slide that mentions judging, prizes, or submission. Fill this b
 
 **Playbook confirmations:** winners = sponsor-track sentence instantiated near-verbatim · killer economic stat in first line · deployed URL · staged/pre-computed demo data behind a live-looking flow · sponsor API visibly load-bearing. Matches §5 unwritten layer.
 
-## 1. Stated mark scheme (copy from slides, verbatim)
+## 1. Stated mark scheme (from Challenge 02 brief §6, "Evaluation Criteria" — VERBATIM, weights official)
 
-_Not published pre-event. 5th-edition Devpost listed only "Energy" as a criterion (placeholder-grade). Real criteria expected at challenge reveal — capture VERBATIM at kickoff, Sat Jul 18 12:05–12:15 ET._
+Source: `Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf` (Maschmeyer Group brief, p.6). Weights sum to 100% — this IS the published Challenge 02 rubric, not a placeholder.
 
 | Weight | Criterion | Their exact wording |
 |---|---|---|
-| _%_ | | |
-| _%_ | | |
-| _%_ | | |
+| **30%** | Data Architecture and Intelligence | "How well does the system collect, structure, and manage founder data? We look for smart ingestion, deduplication, enrichment, and a reasoning layer that is honest about what it knows and what it does not. **Note: generic ingestion / enrichment quality alone will not score highly here if it doesn't address the cold-start, pre-track-record case.**" |
+| **25%** | Intelligent Analysis and Trust | "How effectively does the solution synthesise fragmented signals into decision-ready insights? Do the memo's Trust Scores surface evidence and uncertainty transparently?" |
+| **30%** | Investment Utility & Execution | "Does the tool produce a recommendation a human investor could genuinely act on within 24 hours? This includes any progress on instrumenting how fast and reliably an opportunity moves from first signal to decision. Could it transform the speed and quality of capital allocation?" |
+| **15%** | User Experience and Design | "Is the interface intuitive, clear, and beautifully designed? Does it make complex AI reasoning feel effortless and trustworthy for a non-technical investor?" |
+
+> **Implication for our build (read before every scope decision):** the two 30% axes (Data Architecture + Investment Utility = 60%) plus the 25% Trust axis = 85% live in the data+reasoning+memo path. The cold-start caveat on the first 30% axis is a tiebreaker we must NOT silently drop — it maps directly to VC-BRAIN-PLAN §0.5 decision 5 (hero = builder's own sparse-network repo) and the "Explicit cold-start" section of §2. If we trade anything to time pressure, UX (15%) is the first thing to fall — never the 30%+30% pair.
 
 ## 2. Tracks / prizes (VERBATIM one-line definitions)
 
-_Challenges revealed 12:05–12:15 ET Jul 18. Known structure: Corporate Track (partner problem statements) + Venture Track (startup potential). Fill verbatim at reveal._
+Challenge 02 brief is already in-repo (`Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf`). Our track sentence is locked below — Challenge 01 (ElevenLabs Negotiator) is listed only as the "do NOT submit under" counterpoint, so we never second-guess the decision mid-event.
 
 | Track | Exact sentence from organizers | Prize |
 |---|---|---|
-| | | |
-| | | |
+| **02 — The VC Brain (Maschmeyer Group) ← OUR TRACK** | **"The VC Brain: Deploying $100K Checks in 24 Hours."** (brief p.1, title block) · Sponsor: **Maschmeyer Group — Investing in Exceptional Founders** | $35K+ pool (OpenAI API + Google Cloud credits + cash); per-challenge 1st/2nd/3rd; Venture Track (3-month program) upside for top teams |
+| 01 — The Negotiator (ElevenLabs) — DO NOT SUBMIT | (not our track — voice layer on top of VC Brain only, per VC-BRAIN-PLAN §0) | — |
 
 > **Rule: build the track sentence.** The July 2026 recordings show every winner was a near-verbatim instantiation of its track's one-line definition. Pick the track FIRST, quote its sentence at the top of the spec, and map every feature to it.
+>
+> **Our track sentence instantiated (paste at top of VC-BRAIN-PLAN and PITCH.md hook):** *"FounderGraph — The VC Brain that deploys $100K checks in 24 hours: sources founders, builds a living technical + claim graph, scores them on three axes with Trust Scores, and writes a 24-hour investment memo."* Every feature must trace back to this sentence; anything that doesn't is `docs/ops/BACKLOG.md` material.
 
 ## 3. Judges (names, roles, employers)
 
-| Judge | Role | What they'll probe |
+Specific Challenge 02 judges are not named pre-event; the jury composition below is from the 6th-ed. MIT Alumni jury call (§0.5) and maps each judge archetype to the §1 criterion they will probe hardest. Fill real names VERBATIM at kickoff into the "Name" column.
+
+| Judge archetype | Role | What they'll probe (maps to §1 weight) |
 |---|---|---|
-| | | |
+| Maschmeyer Group VC partner (track sponsor) | Challenge 02 sponsor; signs the check the brief is named after | **Investment Utility & Execution (30%)** — "Would I actually act on this memo in 24h? Is the Invest/Pass/More-info call defensible? Speed from first signal → decision." |
+| Greylock / general VC panelist | Past-ed. panel; venture framing scores | **Investment Utility + Trust (30%+25%)** — "Is the Trust Score honest about what it DOESN'T know? Does cold-start case actually work, or did you rebuild network-gated diligence?" |
+| OpenAI / Google / Microsoft AI leader | MIT alumni jury call names these orgs | **Data Architecture and Intelligence (30%)** — "Ingestion/dedup/enrichment quality; reasoning layer honesty about uncertainty; agentic traceability — does each conclusion cite its evidence?" |
+| MIT alum (Sloan AI Club / CNC) | Organizer-side; breadth of Hack-Nation | **All four — looking for the track sentence instantiated near-verbatim + sponsor-tool visibility + 3-min comprehension** (§5 unwritten layer) |
+| Fridolin Haugg (Harvard) — signaled on 5th-ed. panel | Academic / research credibility | **Areas of Research §4** — "Did you take a real stab at confidence scoring, cold-start prediction, or founder-trait modeling? Documented approach, not just a working demo." |
+
+> **Pitch prep implication:** Q&A answers in `docs/ops/PITCH.md` must pre-address the cold-start question (Maschmeyer + Greylock probes both hit it) and the Trust-honesty question (every VC archetype probes it). Both map to existing locked decisions (§0.5 #4 epistemic integrity, #5 real anchor) — lead with those, not with feature breadth.
 
 ## 4. Submission requirements (from slides/portal — exact list)
 

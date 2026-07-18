@@ -18,6 +18,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 ## Now / Next / Done
 
 ### Now
+- [ ] Apply debate-v3 adds R1–R7 (+4.5h) per VC-BRAIN-PLAN §0.5 decision 12 — slots: Wave-0/M1/M2/M4
 - [ ] Requirements suite FIRST (8 docs per [design doc](docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md): use cases, journeys, FR, NFR, screen map, external services, smoke tests, DoD) — docs-first sequencing confirmed by human 20:55 BST; this suite REPLACES the old docs/specs/01–08 plan
 - [ ] Then scaffold FounderGraph app per VC-BRAIN-PLAN §0.5 — in THIS repo (human ruling 20:55 BST)
 - [ ] Fill [docs/ops/RUBRIC.md](docs/ops/RUBRIC.md) §1–2 (Challenge 02 weights + track sentence verbatim) — overdue vs CLAUDE.md "before ideation" rule
@@ -48,6 +49,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 | 2026-07-18 20:50 BST | **FINAL scope ruling (human):** streaming graph-grounded chat + node-click "Ask about this" + text-highlight-to-ask = COMMITTED (built in M4, bottom of cut ladder, not gated on 01:00 ET); ElevenLabs realtime conversational voice = OPTIONAL stretch only if time remains; pre-rendered MP3 "Play investment brief" stays committed/never-cut | Human: "we include the streaming chat, contextual ask and make realtime voice optional only when enough time" — resolves 20:30-additions vs debate-§0.5 conflict | No |
 | 2026-07-18 20:55 BST | Three reconciliation rulings (human): (1) requirements suite REPLACES docs/specs/01–08 as the spec system; (2) app scaffolds in THIS repo, no separate `foundergraph` repo; (3) docs-first sequencing — requirements suite before scaffold | Audit surfaced competing spec systems, repo ambiguity (§18), and sequencing tension; human picked at reconciliation gate | No |
 | 2026-07-18 21:00 BST | Doc reconciliation applied: dual-model audit (Fable 5 + GPT-5.6 sol, independent, Delphi-merged; 37+ findings) → all living docs rewritten to one consistent story per the rulings above; conflict banners removed | Human: "reconcile and update every doc so everything is inline" | No |
+| 2026-07-18 22:35 BST | Second dual-model debate (Fable vs Sol) judged: R1–R7 added (+4.5h), A26 dropped to pitch line, pre-emptive cuts rejected, chat trio untouched | 34/34 brief coverage within 5h cap | No (human approved in chat) |
 
 ## Blocked / waiting on human
 

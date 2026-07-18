@@ -14,6 +14,10 @@ Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Tim
 
 **Named wow moment:** click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible evidence (must be visible in ≤10 seconds; rehearsed live twice; has a recorded fallback)
 
+**Timer-chip line (debate v3, say it during the demo):** point at the diligence header chip — _"first signal → decision: N minutes"_ — the brief's own speed-of-capital metric, computed from real timestamps, never invented.
+
+**Research sentence (debate v3, one sentence, spoken in the close or Q&A):** _"Our research bet is public-footprint prediction — a founder's repos, launches, and papers predict quality before any track record exists — which is exactly how we handle the cold-start case."_ (brief FAQ11)
+
 **Fallback rule (observed working):** if the live demo dies, switch to the recorded video without apologizing — a winner did exactly this.
 
 ## Judge Q&A bank (the 6 questions asked of EVERY team on record — write answers early)
@@ -31,6 +35,8 @@ Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Tim
    → _answer: your real business + any external stat/source_
 6. **"What about [adjacent scope, e.g. bills not just invoices]?"**
    → _answer: acknowledge + place it on the roadmap in one sentence_
+7. **"Is the outbound sourcing real, or seeded?"** (THIS EVENT — expect it; sourcing is the brief's "most important" area)
+   → _answer: both, honestly — we ran one REAL GitHub scan tonight (thesis→topic query; signals: star velocity, commit recency, no-org = pre-fundraise), captured it provenance-style, and the demo replays that captured run deterministically so the stage path can't die on venue Wi-Fi; the seeded cards carry evidence-backed "why surfaced" records, and no live network call happens on stage by design_
 
 ## The stage deck (slides the judges see · speaker notes only YOU see)
 

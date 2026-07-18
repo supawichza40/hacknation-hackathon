@@ -22,9 +22,10 @@ If any answer is "no" or "unclear" → it stays here until after the event.
 | 6 | Local-LLM mode | 2026-07-18 | Data Architecture (30%) marginally | Displaces the locked 2-structured-LLM-call architecture — fails the test by definition (requirements-design §0) | parked |
 | 7 | NL search over Memory | 2026-07-18 | Investment Utility (30%) | **PROMOTED → committed R1** (pipeline NL query box, M4) by debate v3 verdict 2026-07-18 22:35 BST (VC-BRAIN-PLAN §0.5 decision 12) — no longer backlog | promoted |
 | 8 | Thesis editing UI | 2026-07-18 | UX (15%) | Debate cut: read-only `thesis.json` + thesis drawer covers the demo; editing is invisible work | parked |
-| 9 | Demo founders 4–5 (beyond the locked 3) | 2026-07-18 | None — more data, same features | Debate cut: 3-founder set (hero, rich-GitHub card, off-thesis grey card) covers every beat | parked |
+| 9 | Demo founders 4–5 (beyond the locked 3) | 2026-07-18 | None — more data, same features | Debate cut: 3-founder set covers every beat. NOTE: human ruling 2026-07-18 23:50 BST set demo set to 3 pre-seeded + 1 live inbound via `/apply` (VC-BRAIN-PLAN §0.5 d5) — that 4th is the live-demo beat, not this row's "more static founders" | parked |
 | 10 | `/intake/voice` route | 2026-07-18 | UX (15%) | Debate cut with P1 voice intake (row 1) — same displacement answer | parked |
 | 11 | Research-areas write-up | 2026-07-18 | Data Architecture (30%) marginally | Reduced by debate v3 verdict (2026-07-18 22:35 BST) to one pitch sentence (see PITCH.md); no build | parked |
+| 12 | Portfolio-wide chat (deep Q&A across ALL founders' repos at once) | 2026-07-19 | Investment Utility (30%) | Human ruling 2026-07-19 00:05 BST: "leave for now" — R1 NL query box already covers the demo-able cross-founder story; deep multi-repo chat displaces nothing it's worth | parked |
 
 *(Realtime ElevenLabs conversational voice (P2) is deliberately NOT here — it is recorded in VC-BRAIN-PLAN §0.5 as an optional stretch if time remains after committed scope, not a parked idea.)*
 

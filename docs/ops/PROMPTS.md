@@ -134,29 +134,41 @@ Then to Claude: `Extract the CONSENSUS across these critiques (agreements only) 
 
 ## P2b — Spec burst (T+5, after the gate passes)
 
+**THIS EVENT: the spec burst generates the approved requirements suite, NOT docs/specs/01–08.**
+
 ```
-Gate passed. Generate docs/specs/01–08 per docs/ops/SPECS.md skeletons, from MASTERPLAN.md, in two waves
-(WHAT 01–04 as one batch, then HOW 05–06 with independent tracks, then VERIFY 07–08).
-Header on every spec: track sentence verbatim · real persona <name> · wow moment <name it>.
-The masterplan kill list marks what specs must NOT contain. Then: SCOPE IS FROZEN — new ideas go to docs/ops/BACKLOG.md.
+Gate passed. Generate the requirements suite per docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md §5
+— 8 docs (docs/product/USE-CASES.md … docs/product/DEFINITION-OF-DONE.md, plus docs/ops/SMOKE-TESTS.md) —
+written FIRST, before scaffold, compressed to the §0.5 clock.
+Header on every doc: track sentence verbatim · real anchor (builder-as-hero, own repo) · wow moment
+(red CONTRADICTED claim → exact deck slide + graph node).
+Then: SCOPE IS FROZEN — new ideas go to docs/ops/BACKLOG.md.
 Fill docs/ops/DESIGN.md §2 with me now, then commit and push everything.
 ```
+
+*(Generic template — other events: generate docs/specs/01–08 per docs/ops/SPECS.md skeletons from MASTERPLAN.md, in two waves: WHAT 01–04, HOW 05–06, VERIFY 07–08.)*
 
 ## P3 — Walking skeleton (T+6)
 
 ```
-Phase 3, single session. Build the thinnest end-to-end golden path against the REAL integration
-(spec 01 §3): <upload → propose → approve → verify shape>. No mocks on the spine. No feature work.
-Done = one real transaction completes and the wow moment happens once, for real. Commit at every green step.
+Phase 3, single session. Build the thinnest end-to-end golden path against the REAL integration.
+THIS EVENT (FounderGraph): Pipeline card → precomputed graph → claims/contradiction → axes →
+memo/decision → pre-rendered MP3 brief. (Streaming graph-grounded chat with citations + node-click
+"Ask about this" + highlight-to-ask is committed M4 work, not part of the skeleton.)
+No mocks on the spine — fallback is captured provenance replay, never fixtures. No feature work.
+Done = the golden path completes once for real and the wow moment (red CONTRADICTED claim → exact
+deck slide + graph node) happens once, for real. Commit at every green step.
 ```
 
 ## P4 — Lane openings (T+12, one prompt per new session)
 
 Every lane opens as a `/dispatch` run: the router matches skill loadouts from the live inventory and routes models per subtask — one plan table + one approve per lane, then it runs autonomously in its tab. The territory fence and standing rules are part of the dispatch goal, so they propagate into every worker the lane spawns.
 
-Lane A (backend): `/dispatch You are lane A of a hackathon build. GOAL: implement 05-BACKEND-IMPLEMENTATION-PLAN.md (all tracks) against the contract in 03-API-SPEC.md. HARD FENCE: all work inside src/backend/ ONLY — no worker may touch frontend or docs. Standing rules for every subtask: tests in the same commit as code; no mocked-green claims — live smoke per 07-BACKEND-TEST-PLAN.md tier 3; update the lane-A row in TODO.md + commit at every subtask completion. Match skills and models per subtask from the live inventory.`
+**THIS EVENT: one Next.js app — there is no src/backend/ / src/frontend/ split and no mock.ts. Lanes fence on directories inside the single app.**
 
-Lane B (frontend): `/dispatch You are lane B of a hackathon build. GOAL: first build mock.ts implementing every 03-API-SPEC.md endpoint with the seeded data from spec 01 §2, then implement 06-FRONTEND-IMPLEMENTATION-PLAN.md (all tracks) against the mock. HARD FENCE: src/frontend/ ONLY. Standing rules: docs/ops/DESIGN.md §2 tokens + §3 register bind every worker; screen order = spec 01 §4 journey; every screen ships loading/empty/error before the next starts; update the lane-B row in TODO.md + commit each completion. Match skills and models per subtask (design/react/build skills from the live inventory).`
+Lane A (engine): `/dispatch You are lane A of a hackathon build. GOAL: implement the FounderGraph engine per docs/product/REQUIREMENTS-FUNCTIONAL.md against the §0.5 architecture. HARD FENCE: src/lib/{memory,ingest,graph,scoring,memo} + src/app/api/ ONLY — no worker may touch UI components or docs. Standing rules for every subtask: tests in the same commit as code; the 2 structured LLM calls run real first and every real run's provenance is captured for replay — captured provenance replay is the runtime/demo fallback, mocks live only in tests; update the lane-A row in TODO.md + commit at every subtask completion. Match skills and models per subtask from the live inventory.`
+
+Lane B (UI): `/dispatch You are lane B of a hackathon build. GOAL: implement the 4 surfaces (Pipeline, Diligence, Graph, Apply) per docs/product/SCREEN-MAP.md, running against the API routes with captured provenance replay data (no mock layer). HARD FENCE: src/app/ pages + src/components/ ONLY — never src/lib/ or API route logic. Standing rules: docs/ops/DESIGN.md §2 tokens + §3 register bind every worker; screen order = docs/product/USER-JOURNEYS.md J1; every screen ships loading/empty/error before the next starts; update the lane-B row in TODO.md + commit each completion. Match skills and models per subtask (design/react/build skills from the live inventory).`
 
 Lane C (QA): `/dispatch You are lane C, QA. GOAL: drive the running app end-to-end (mock mode now, real mode + deployed URL after the next checkpoint) and try to break it — malformed inputs, double submissions, empty states, viewport extremes. HARD FENCE: NO worker edits source files, ever — findings land exclusively as TODO.md issues with exact repro steps + severity. Re-test issues marked fixed. Match QA/browser-automation skills from the live inventory.`
 
@@ -173,11 +185,11 @@ real write with its ID captured. Contract mismatch = fix 03-API-SPEC.md first, t
 Hygiene sweep: git status junk-free, demo artifacts regenerated (no placeholder zeros). Push. Update TODO.md.
 ```
 
-## P6 — Freeze + demo day (T+30)
+## P6 — Freeze + demo day (THIS EVENT: feature freeze 03:00 ET Jul 19; video block 04:00–05:30 ET)
 
 ```
-FEATURE FREEZE. Regenerate all demo data via the reset script. Full rehearsal on the DEPLOYED url,
-fresh browser. Then the demo video, two tracks in parallel (target ≤ T+36):
+FEATURE FREEZE (03:00 ET). Regenerate all demo data via the reset script. Full rehearsal on the DEPLOYED url,
+fresh browser. Then the demo video, two tracks in parallel (this event: recorded 04:00–05:30 ET):
 1) MACHINE DRAFT (Claude, zero human time): scripted golden-path run on the deployed URL,
    recorded via browser automation + TTS narration from DEMO-SCRIPT.md + FFmpeg assembly →
    a complete fallback video EXISTS from this moment, whatever else happens.
@@ -187,10 +199,10 @@ fresh browser. Then the demo video, two tracks in parallel (target ≤ T+36):
 Commit screenshots. Time me through the docs/ops/PITCH.md script twice, out loud.
 ```
 
-## P7 — Submission runway (T+42)
+## P7 — Submission runway (THIS EVENT: code froze at 03:00 ET; submit by 06:30 ET, deadline 09:00 ET Jul 19)
 
 ```
-CODE FREEZE. Submission only. After EVERY doc edit: commit AND push.
+CODE FREEZE (03:00 ET this event). Submission only. After EVERY doc edit: commit AND push.
 Run the docs/ops/SUBMISSION.md final verification ritual with me (incognito link checks, pushed HEAD == claims).
-We submit by <deadline − 2h>, not at the deadline.
+We submit by 06:30 ET (deadline 09:00 ET), not at the deadline.
 ```

@@ -11,6 +11,9 @@ These rules bind every Claude Code session in this repo for the duration of the 
 | Path | What it is | Read it when |
 |---|---|---|
 | `VC-BRAIN-PLAN.md` | Challenge 02 product spec, architecture, build plan | Before any build / scope work on the app |
+| `docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md` | Requirements-suite design (the 8 `docs/product/` docs) | Before generating requirement docs |
+| `docs/product/TEAM-DISCUSSION-2026-07-18.md` | Team product discussion | Before product scope debates |
+| `docs/dispatch/plan-dialogue/` | Dispatch debate/dialogue logs | When auditing plan decisions |
 | `docs/ops/RUBRIC.md` | Judging reverse-engineering. §0 = event facts, §0.5 = past winners, §1–6 = filled at challenge reveal | Before any scope/idea decision |
 | `docs/research/EVENT-DOSSIER.md` | Full pre-event research record | Before re-researching the event |
 | `docs/research/WINNERS.md` | Past Hack-Nation winners & patterns | Before ideation, specs, or pitch |

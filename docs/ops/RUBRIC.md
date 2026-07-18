@@ -41,7 +41,7 @@ Photograph every slide that mentions judging, prizes, or submission. Fill this b
 
 ## 1. Stated mark scheme (copy from slides, verbatim)
 
-_Not published pre-event. 5th-edition Devpost listed only "Energy" as a criterion (placeholder-grade). Real criteria expected at challenge reveal — capture VERBATIM at kickoff, Sat Jul 18 12:50 ET._
+_Not published pre-event. 5th-edition Devpost listed only "Energy" as a criterion (placeholder-grade). Real criteria expected at challenge reveal — capture VERBATIM at kickoff, Sat Jul 18 12:05–12:15 ET._
 
 | Weight | Criterion | Their exact wording |
 |---|---|---|
@@ -51,7 +51,7 @@ _Not published pre-event. 5th-edition Devpost listed only "Energy" as a criterio
 
 ## 2. Tracks / prizes (VERBATIM one-line definitions)
 
-_Challenges revealed 12:50 PM ET Jul 18. Known structure: Corporate Track (partner problem statements) + Venture Track (startup potential). Fill verbatim at reveal._
+_Challenges revealed 12:05–12:15 ET Jul 18. Known structure: Corporate Track (partner problem statements) + Venture Track (startup potential). Fill verbatim at reveal._
 
 | Track | Exact sentence from organizers | Prize |
 |---|---|---|

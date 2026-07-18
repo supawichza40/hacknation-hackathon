@@ -4,6 +4,9 @@ The submission is a deliverable with its own schedule, not a last-hour chore. La
 
 ## Time gates
 
+> **THIS EVENT (2026-07-18/19, ~21h — the T+ times below are the generic 48h template, NOT live gates):**
+> G1 → M0, ≈16:00 ET Jul 18 (portal draft exists) · G2 (README + screenshots) → 05:30 ET Jul 19 · G3 (demo video) → 05:30 ET Jul 19 (recorded in the 04:00–05:30 ET block) · G4 (code freeze) → 03:00 ET Jul 19 · G5 (SUBMIT) → 06:30 ET Jul 19. Hard deadline 09:00 ET Jul 19. Source: VC-BRAIN-PLAN §0.5 build order.
+
 | Gate | Deadline | Action |
 |---|---|---|
 | G1 | **Day 1 (T+6)** | Submission draft exists in the real portal (placeholder text is fine) + this file filled with the requirements list from `docs/ops/RUBRIC.md` §4 |

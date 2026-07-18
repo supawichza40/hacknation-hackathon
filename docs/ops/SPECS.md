@@ -1,5 +1,7 @@
 # SPECS.md — The 8-Document Spec Architecture (filled at Phase 2, in one burst)
 
+> **THIS EVENT: superseded by the approved requirements suite** (`docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md` §5) — 8 docs under `docs/product/` (USE-CASES … DEFINITION-OF-DONE), written BEFORE scaffold. `docs/specs/01–08` below is the generic template and is NOT generated this event.
+
 This is the exact structure that locked team distribution at the July 2026 event (8 specs in 20 minutes → zero day-1 collisions). At spec lock, Claude generates `docs/specs/01…08` following these skeletons — in TWO waves, matching how they were actually produced:
 
 - **Wave 1 — WHAT (01–04, generated as one batch):** overview, backend, API, frontend

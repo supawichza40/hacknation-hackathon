@@ -4,7 +4,7 @@ How one person replicates the 5-person pipeline using N parallel Claude Code ses
 
 ## The core insight
 
-**The spec is the teammate.** Two sessions never talk to each other — they both talk to the spec. If `03-API-SPEC.md` defines every endpoint's request/response and the frontend runs on a mock layer that implements that spec, the two lanes cannot block each other. That is exactly how the 5-person team avoided collisions, and it works identically for one person running two terminals.
+**The spec is the teammate.** Two sessions never talk to each other — they both talk to the spec. If `03-API-SPEC.md` defines every endpoint's request/response and the frontend runs on a mock layer that implements that spec, the two lanes cannot block each other. *(This event: the "mock layer" role is played by captured provenance replay — real captured responses, not invented fixtures; mocks live only in tests.)* That is exactly how the 5-person team avoided collisions, and it works identically for one person running two terminals.
 
 ## Session count by phase (the honest answer to "can I run 4?")
 
@@ -24,8 +24,8 @@ How one person replicates the 5-person pipeline using N parallel Claude Code ses
 
 | Lane | Owns (directories) | Contract it builds against | Never touches |
 |---|---|---|---|
-| **A — Backend** | `src/backend/` | API spec + PREFLIGHT capability table; mocked platform client + the day-1 live smoke | frontend, docs |
-| **B — Frontend** | `src/frontend/` | API spec via a **mock layer** (build `mock.ts` from the spec FIRST — the frontend then never waits for the backend) | backend, docs |
+| **A — Backend** | `src/backend/` | API spec + PREFLIGHT capability table; real external calls with **captured provenance replay** as the runtime/demo fallback (mocks stay only in tests) + the day-1 live smoke | frontend, docs |
+| **B — Frontend** | `src/frontend/` | API spec via **captured provenance replay** (capture real responses FIRST, replay them — the frontend then never waits for the backend and the demo fallback is real data, not fixtures) | backend, docs |
 | **C — Verify/QA** | `TODO.md` issues only | The deployed/running app — drives real flows, files findings as TODO entries with repro steps | **any source file** (a QA lane that edits code collides with A/B) |
 | **D — Pitch/Content** | `docs/`, deck, README, screenshots, video script | `docs/ops/PITCH.md` + `docs/ops/SUBMISSION.md` gates | `src/` entirely |
 

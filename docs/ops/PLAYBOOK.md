@@ -1,5 +1,7 @@
 # PLAYBOOK.md — The Phase Sequence (T+0 → T+48)
 
+**THIS EVENT: gate times = VC-BRAIN-PLAN §0.5 build order (feature freeze 03:00 ET, video by 05:30, submit 06:30, deadline 09:00 ET Jul 19); the phases below are the generic 48h template — scale accordingly.**
+
 Scale proportionally for shorter events. Gates are HARD: when a gate time arrives, its overrun rule beats whatever is in progress. Claude checks the current phase before every work block.
 
 ## Phase 0 — Hour-0 Setup (T+0 → T+0.5 · 30 min cap)

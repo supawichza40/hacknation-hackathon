@@ -30,9 +30,9 @@ Remaining team-discussion items (personal workspace, idea-to-scaffold, Chrome ex
 | Personas | Investor primary, founder secondary (short apply journey only) |
 | Golden path | Inbound: apply → graph → scores → memo → decide → voice brief |
 | Auth | Demo-lite: one investor login, public founder `/apply`, session cookie separates roles (~1h build) |
-| Smoke tests | CLAUDE.md checkpoint cadence: one real read + one real write per external service at every module M0–M6, plus one-command golden-path smoke |
+| Smoke tests | CLAUDE.md checkpoint cadence: one real read + one real write per external service at each of the §0.5 build blocks (M0–M5b), plus one-command golden-path smoke |
 | Definition of Done | Dedicated checklist doc, 3 layers (judge / FR traceability / automated gate) |
-| Wow moment (named) | Trust contradiction catch: "deck says $120K ARR — nothing supports it" |
+| Wow moment (named) | Trust contradiction catch: click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible cited evidence. (Per §0.5 epistemic rules, "nothing supports it" renders `unsupported`, not contradicted.) |
 | Selling point | Repo-understanding (UA-derived) inside diligence: investor *understands the founder's code* without being technical |
 
 ## 2. Customer value model
@@ -55,7 +55,7 @@ One-liner reused across docs and pitch: **"Turns 3 weeks of vibes into 24 hours 
 ## 3. Use-case inventory (~14, actor-goal)
 
 - **Investor UC1–UC11:** configure thesis; review pipeline; run analysis on inbound; explore knowledge graph (guided overview + per-file chat); audit claims/Trust Scores; ask diligence question (cited chat); generate memo; record decision; activate outbound founder; play voice brief; re-evaluate returning founder (Founder Score persistence).
-- **Founder UC12–UC13:** apply with deck + repo URL; optional voice intake (ElevenLabs P1).
+- **Founder UC12:** apply with deck + repo URL. *(Voice intake (ElevenLabs P1) is backlogged — see `docs/ops/BACKLOG.md`; not part of the current use-case suite.)*
 - **System UC14:** outbound scan of seeded GitHub-like signals.
 
 ## 4. Journeys
@@ -71,11 +71,11 @@ One-liner reused across docs and pitch: **"Turns 3 weeks of vibes into 24 hours 
 |---|---|---|
 | `docs/product/USE-CASES.md` | UC1–UC14 actor-goal use cases, each tagged with rubric row + module | this design |
 | `docs/product/USER-JOURNEYS.md` | J1–J4 per-screen journeys with value-gained column (J1 = §2 table expanded) | USE-CASES |
-| `docs/product/REQUIREMENTS-FUNCTIONAL.md` | Numbered FRs mapped to rubric % rows + modules M0–M6; includes demo-lite auth FRs | USE-CASES |
+| `docs/product/REQUIREMENTS-FUNCTIONAL.md` | Numbered FRs mapped to rubric % rows + the §0.5 build blocks (M0–M5b); includes demo-lite auth FRs | USE-CASES |
 | `docs/product/REQUIREMENTS-NFR.md` | Demo reliability (precomputed graphs, prerendered audio, text fallbacks), perf budgets, honesty rules (no invented numbers, `unavailable` states), security (upload sanitization + traversal test red-first per CLAUDE.md), auth, cost | FR doc |
 | `docs/product/SCREEN-MAP.md` | Page-by-page wireflow: URL, sees/clicks/gains, loading/empty/error states | JOURNEYS |
 | `docs/product/EXTERNAL-SERVICES.md` | LLM, ElevenLabs, GitHub, PDF parse — each with preflight spike requirement (real call proof → docs/ops/PREFLIGHT.md) + fallback | — |
-| `docs/ops/SMOKE-TESTS.md` | Checkpoint cadence M0–M6: real read + real write per service; one-command golden-path smoke spec | EXTERNAL-SERVICES |
+| `docs/ops/SMOKE-TESTS.md` | Checkpoint cadence per §0.5 build block (M0–M5b): real read + real write per service; one-command golden-path smoke spec | EXTERNAL-SERVICES |
 | `docs/product/DEFINITION-OF-DONE.md` | See §6 | all above |
 
 Key availability is UNVERIFIED (secrets registry read blocked in session). External-services doc must mark every key "assumed — prove at preflight"; no module may depend on a service before its PREFLIGHT.md entry shows a real call. Team-discussion note: ElevenLabs credits redeemed via dashboard questionnaire (worked for some accounts) — preflight must confirm which account's key is live.
@@ -94,7 +94,7 @@ Key availability is UNVERIFIED (secrets registry read blocked in session). Exter
 
 ## 8. Out of scope for this suite
 
-- Any application code (scaffold comes after docs per TODO board — docs must not block it long; suite is a half-day of agent work max).
+- Any application code (scaffold comes after docs per TODO board — docs must not block it long; suite is written first, compressed to the real clock — scaffold follows per the §0.5 build order).
 - Portfolio monitoring / fund ops (challenge scope excludes).
-- ElevenLabs P2/P3 features beyond documenting their cut-line.
+- ElevenLabs P3 outbound voice (backlogged — `docs/ops/BACKLOG.md`). P2 realtime conversational voice is an optional stretch only after committed scope is green (not fully out of scope, not committed — human ruling 2026-07-18 evening).
 - Team-discussion ambition layer (workspace, idea-to-scaffold, extension, local LLM) — BACKLOG.

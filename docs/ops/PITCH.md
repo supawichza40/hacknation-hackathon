@@ -7,12 +7,12 @@ Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Tim
 | Clock | Beat | Content |
 |---|---|---|
 | 0:00–0:20 | **Hook — the problem, with numbers** | 2–3 sourced statistics. _"£X billion… Y businesses close every day…"_ Spoken, not on a slide the judge must read. |
-| 0:20–0:45 | **The face** | YOUR real business/persona and their exact pain. First person beats hypothetical: "my spa loses N hours every month to…" |
+| 0:20–0:45 | **The face** | YOUR real business/persona and their exact pain. First person beats hypothetical. **THIS EVENT (real anchor, VC-BRAIN-PLAN §0.5 decision 5): builder-as-hero — the builder's own repo is the founder being diligenced. "I'm the technical founder a VC can't evaluate: this is my actual repo, and here's what an investor sees in minutes instead of weeks."** |
 | 0:45–2:15 | **Live demo — the golden path** | One flow, rehearsed camera path. The **named wow moment** lands by 1:45. Narrate what the judge is seeing, not what the code does. |
 | 2:15–2:40 | **How it works** | One breath: agentic loop + policy-bounded autonomy + sponsor tools used. Name the real API writes. |
 | 2:40–3:00 | **Close** | Track sentence, said back to them: "This is [track definition] for [niche]." Then stop talking. |
 
-**Named wow moment:** _______________ (must be visible in ≤10 seconds; rehearsed live twice; has a recorded fallback)
+**Named wow moment:** click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible evidence (must be visible in ≤10 seconds; rehearsed live twice; has a recorded fallback)
 
 **Fallback rule (observed working):** if the live demo dies, switch to the recorded video without apologizing — a winner did exactly this.
 
@@ -23,7 +23,8 @@ Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Tim
 2. **"Did you use real webhooks, or did [automation tool] hide that from you?"**
    → _answer: be honest; admitted gap + roadmap was forgiven on record, bluffing was not_
 3. **"How is your AI trained / how are these scores derived?"**
-   → _answer: never leave a number unexplained — a vague "trust score" answer was the weakest moment on record_
+   → _answer (THIS EVENT): scores come from a deterministic TypeScript rubric — no model invents a number. Exactly 2 schema-validated LLM calls exist: a claim extractor and an axes/memo writer; every claim they touch is provenance-linked to its exact deck slide or graph node, so any score can be walked back to evidence on screen._
+   → _(generic rule: never leave a number unexplained — a vague "trust score" answer was the weakest moment on record)_
 4. **"How is this different from what [platform] already does?"**
    → _answer: know the platform's native features cold; the team that couldn't answer this conceded on stage_
 5. **"How did you validate the problem?"**

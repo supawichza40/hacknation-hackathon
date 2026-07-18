@@ -1,0 +1,12 @@
+{
+  "id": "thesis-default",
+  "name": "AI Infra — pre-seed / seed",
+  "sectors": ["AI infra"],
+  "stages": ["pre-seed", "seed"],
+  "geos": ["US", "EU"],
+  "checkSizeMinCents": 2500000,
+  "checkSizeMaxCents": 10000000,
+  "ownershipTarget": 0.08,
+  "riskAppetite": "high",
+  "technicalBar": 80
+}

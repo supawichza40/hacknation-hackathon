@@ -58,7 +58,7 @@ Challenge 02 brief is already in-repo (`Topics/1784381921507-02-Maschmeyer-Group
 
 | Track | Exact sentence from organizers | Prize |
 |---|---|---|
-| **02 — The VC Brain (Maschmeyer Group) ← OUR TRACK** | **"The VC Brain: Deploying $100K Checks in 24 Hours."** (brief p.1, title block) · Sponsor: **Maschmeyer Group — Investing in Exceptional Founders** | $35K+ pool (OpenAI API + Google Cloud credits + cash); per-challenge 1st/2nd/3rd; Venture Track (3-month program) upside for top teams |
+| **02 — The VC Brain (Maschmeyer Group) ← OUR TRACK** | **"The VC Brain: Deploying $100K Checks in 24 Hours."** (brief p.1, title block) · Sponsor: **Maschmeyer Group — Investing in Exceptional Founders** | ~$30K prize pool (per `docs/research/EVENT-DOSSIER.md` sources); top-3 per challenge → 3-min global pitch Jul 25; Venture Lab upside (top 30 teams, 3-month incubation — dossier). Exact per-challenge prizes: capture VERBATIM at kickoff |
 | 01 — The Negotiator (ElevenLabs) — DO NOT SUBMIT | (not our track — voice layer on top of VC Brain only, per VC-BRAIN-PLAN §0) | — |
 
 > **Rule: build the track sentence.** The July 2026 recordings show every winner was a near-verbatim instantiation of its track's one-line definition. Pick the track FIRST, quote its sentence at the top of the spec, and map every feature to it.
@@ -75,7 +75,7 @@ Specific Challenge 02 judges are not named pre-event; the jury composition below
 | Greylock / general VC panelist | Past-ed. panel; venture framing scores | **Investment Utility + Trust (30%+25%)** — "Is the Trust Score honest about what it DOESN'T know? Does cold-start case actually work, or did you rebuild network-gated diligence?" |
 | OpenAI / Google / Microsoft AI leader | MIT alumni jury call names these orgs | **Data Architecture and Intelligence (30%)** — "Ingestion/dedup/enrichment quality; reasoning layer honesty about uncertainty; agentic traceability — does each conclusion cite its evidence?" |
 | MIT alum (Sloan AI Club / CNC) | Organizer-side; breadth of Hack-Nation | **All four — looking for the track sentence instantiated near-verbatim + sponsor-tool visibility + 3-min comprehension** (§5 unwritten layer) |
-| Fridolin Haugg (Harvard) — signaled on 5th-ed. panel | Academic / research credibility | **Areas of Research §4** — "Did you take a real stab at confidence scoring, cold-start prediction, or founder-trait modeling? Documented approach, not just a working demo." |
+| Academic juror (Stanford / Oxford / Imperial named in jury pool — `docs/research/EVENT-DOSSIER.md`) | Academic / research credibility | **Areas of Research §4** — "Did you take a real stab at confidence scoring, cold-start prediction, or founder-trait modeling? Documented approach, not just a working demo." |
 
 > **Pitch prep implication:** Q&A answers in `docs/ops/PITCH.md` must pre-address the cold-start question (Maschmeyer + Greylock probes both hit it) and the Trust-honesty question (every VC archetype probes it). Both map to existing locked decisions (§0.5 #4 epistemic integrity, #5 real anchor) — lead with those, not with feature breadth.
 

@@ -6,13 +6,13 @@ The submission is a deliverable with its own schedule, not a last-hour chore. La
 
 | Gate | Deadline | Action |
 |---|---|---|
-| G1 | **Day 1 (T+6)** | Submission draft exists in the real portal (placeholder text is fine) + this file filled with the requirements list from `RUBRIC.md` §4 |
+| G1 | **Day 1 (T+6)** | Submission draft exists in the real portal (placeholder text is fine) + this file filled with the requirements list from `docs/ops/RUBRIC.md` §4 |
 | G2 | **T+30** | README tells the current true story; screenshots of the working golden path committed and pushed |
 | G3 | **T+36** | Demo video recorded, uploaded, linked from README and the portal draft |
 | G4 | **T+42** | Code freeze. Submission copy finalized. Push after EVERY edit from here on |
 | G5 | **T+46 (= 2h early)** | Final submission SUBMITTED. Never race the cutoff |
 
-## The package (fill from RUBRIC.md §4 — typical items)
+## The package (fill from docs/ops/RUBRIC.md §4 — typical items)
 
 - [ ] Project details / description (portal)
 - [ ] Dev platform(s) used — name the sponsor tools explicitly
@@ -33,7 +33,7 @@ The submission is a deliverable with its own schedule, not a last-hour chore. La
 
 The video is produced from a **shot list**: one card per shot, each carrying the real screenshot of the target state, the on-screen ACTION, and the exact SAY line. Record per shot (any flub redoes one shot, never the take), dub voice separately, assemble with straight cuts. Claude generates the document with embedded verified screenshots; the human performs it.
 
-**Length rule:** the submission video has NO fixed duration — its length is set by feature coverage: every built feature appears, none is rushed, and there is zero filler. (Check the event's rules for a hard cap; absent one, coverage decides. The 3-minute limit applies to the STAGE pitch, which is a separate, tighter artifact — see PITCH.md.)
+**Length rule:** the submission video has NO fixed duration — its length is set by feature coverage: every built feature appears, none is rushed, and there is zero filler. (Check the event's rules for a hard cap; absent one, coverage decides. The 3-minute limit applies to the STAGE pitch, which is a separate, tighter artifact — see docs/ops/PITCH.md.)
 
 **The three-act structure:**
 1. **ACT 1 — The problem (slide shots):** 2–4 deck slides as full-frame shots — the real-world pain, the impact numbers (sourced stats), the REAL anchor (your business/person/event). No app on screen yet; make them feel the wound.

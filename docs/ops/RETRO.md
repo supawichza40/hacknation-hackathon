@@ -5,8 +5,8 @@ The files in this kit are a snapshot. The actual strategy is this loop: **every 
 ## The post-event ritual (~2 hours, mostly Claude)
 
 1. **Forensics (Claude, parallel agents):** mine the event's git history (timeline, rework commits, gaps), the Claude session transcripts (your prompts, re-asks, friction), and — if pitches were recorded or observable — what the winners actually did. Every claim evidence-stamped (commit hash / timestamp / quote).
-2. **Actual-vs-playbook diff:** one table — each PLAYBOOK.md phase/gate vs what actually happened, with the hours each deviation cost. Adversarially verify the material claims (the critic pass) before trusting any number.
-3. **Patch the template:** every confirmed lesson lands as an edit to the relevant file — a new rule in CLAUDE.md (with its evidence tag), a changed gate time in PLAYBOOK.md, a new judge question in PITCH.md, a new spike in PREFLIGHT.md. A lesson that isn't a file edit will be forgotten by the next event.
+2. **Actual-vs-playbook diff:** one table — each docs/ops/PLAYBOOK.md phase/gate vs what actually happened, with the hours each deviation cost. Adversarially verify the material claims (the critic pass) before trusting any number.
+3. **Patch the template:** every confirmed lesson lands as an edit to the relevant file — a new rule in CLAUDE.md (with its evidence tag), a changed gate time in docs/ops/PLAYBOOK.md, a new judge question in docs/ops/PITCH.md, a new spike in docs/ops/PREFLIGHT.md. A lesson that isn't a file edit will be forgotten by the next event.
 4. **Version-tag:** commit as `retro: <event name> → vN+1` with a 5-line changelog at the bottom of this file. The version number is the score that matters: v1 beat ~2/3 of the field; each retro should retire at least one losing pattern.
 5. **Prune:** delete any rule that didn't earn its place this event (never fired, or fired wrongly). A template that only grows becomes advice nobody reads — every line must survive "would removing this cause a loss?"
 

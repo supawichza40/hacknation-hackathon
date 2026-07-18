@@ -6,35 +6,37 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 
 | Field | Value |
 |---|---|
-| **Event clock** | start: 2026-07-18 12:15 ET (hacking; kickoff 11:15, reveal 12:05 — official PDF) · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET · ICT: hacking Sat 23:15 / deadline Sun 20:00 |
-| **Phase (see PLAYBOOK.md)** | 0 — Hour-0 Setup |
-| **Current gate & deadline** | T+0.5 — setup complete |
-| **Golden path status** | not started / mocked / REAL end-to-end ✅ |
-| **Last push** | _commit · time_ |
-| **Demo video** | not recorded / recorded @ _link_ |
-| **Submission** | no draft / draft @ G1 / SUBMITTED ✅ |
+| **Event clock** | start: 2026-07-18 12:15 ET · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET |
+| **Challenge** | 02 — The VC Brain (Maschmeyer Group) |
+| **Phase** | Spec locked → scaffold app ([docs/ops/PLAYBOOK.md](docs/ops/PLAYBOOK.md)) |
+| **Product plan** | [docs/product/VC-BRAIN-PLAN.md](docs/product/VC-BRAIN-PLAN.md) |
+| **Golden path status** | not started |
+| **Last push** | _pending_ |
+| **Demo video** | not recorded |
+| **Submission** | no draft |
 
 ## Now / Next / Done
 
-### Now (in progress — one owner each)
-- [ ] ⚠️ HUMAN: confirm application submitted before Batch 6 deadline (Jul 10, ~5h countdown showing on site at 18:00 ICT) + which hub (London luma vs online)
+### Now
+- [ ] Scaffold FounderGraph app per VC-BRAIN-PLAN (Next.js + Memory + graph shell)
 
-### Next (unblocked, ordered)
-- [ ] Pre-event prep plan (challenges unknown until reveal): real-anchor inventory, PREFLIGHT spikes on likely sponsor tools (OpenAI/Lovable/Supabase/Vercel/ElevenLabs/Databricks), team status
-- [ ] At kickoff Jul 18: fill RUBRIC.md §1–2 verbatim from challenge reveal → run P0.5 research dispatch
-- [ ] Commit + push research updates (RUBRIC.md §0, TODO.md)
+### Next
+- [ ] Fill [docs/ops/RUBRIC.md](docs/ops/RUBRIC.md) §1–2 for Challenge 02 weights / track sentence
+- [ ] Seed demo founders + precompute 3 knowledge graphs
+- [ ] Scoring → Trust → Memo → Decision golden path
+- [ ] Submission draft on projects.hack-nation.ai (G1)
 
-### Done (newest first, with commit)
-- [x] Research consolidated → docs/research/EVENT-DOSSIER.md; official participant PDF read (21 slides) + tracked in HackathonMaterials/; schedule corrected to PDF times (2026-07-14 00:30 ICT)
-- [x] Deep research: past editions 3rd–5th, winners (Spine/OmniCall), dual-track model, jury process, PT agenda → RUBRIC.md §0.5 (2026-07-10 ~23:55 ICT)
-- [x] Hour-0 env checks: repo outside sync folders, .gitignore complete, clean tree pushed (`1454ce5`, 2026-07-10 18:50 ICT)
-- [x] Repo created from hackathon-template → supawichza40/hacknation-hackathon (2026-07-10 18:45 ICT)
+### Done (newest first)
+- [x] Repo reorganized: ops/product/research under `docs/`; root cleaned (2026-07-18)
+- [x] VC Brain product plan → docs/product/VC-BRAIN-PLAN.md
+- [x] Challenge briefs in Topics/ (01–06)
+- [x] Research → docs/research/; participant PDF in HackathonMaterials/
 
-## Decisions made during autonomy windows
+## Decisions
 
 | Time | Decision | Reasoning | Needs human review? |
 |---|---|---|---|
-| | | | |
+| 2026-07-18 | Build Challenge 02 VC Brain; use Understand-Anything as reference, not a clone | Best fit for knowledge-graph stack | No |
 
 ## Blocked / waiting on human
 

@@ -76,7 +76,7 @@ Confidence tags: ✅ verified (primary source) · ⚠️ candidate (name-match, 
 
 ## TODO (pre-event analysis queue)
 
-- [ ] Watch 2–3 winner videos (links above) → pitch structure notes → PITCH.md
+- [ ] Watch 2–3 winner videos (links above) → pitch structure notes → docs/ops/PITCH.md
 - [ ] Read both challenge-brief Google Docs (EVENT-DOSSIER §social) → brief format expectations
 - [ ] Clone + skim kvrancic/spine → repo/README-as-pitch conventions
 - [ ] Verify OmniCall candidate repo via Arslan Toor profile

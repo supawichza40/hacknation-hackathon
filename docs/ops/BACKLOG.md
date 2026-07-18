@@ -6,7 +6,7 @@ After spec lock, every new idea lands here — never directly into a build sessi
 
 1. What committed golden-path item does this displace?
 2. Does it fit before the T+42 code freeze, including its tests and its demo appearance?
-3. Does it score on a `RUBRIC.md` axis the current build doesn't already max?
+3. Does it score on a `docs/ops/RUBRIC.md` axis the current build doesn't already max?
 
 If any answer is "no" or "unclear" → it stays here until after the event.
 

@@ -81,7 +81,7 @@ The written rubric above decides who reaches the final. These decide who WINS:
 - [ ] **Human-in-the-loop as a trust feature** — approval gates presented as a strength, never an apology
 - [ ] **Sponsor-tool visibility** — at least one flow through the tools the event is promoting
 - [ ] **3-minute comprehension** — a judge who missed the first 90 seconds can still explain the product
-- [ ] **Honest Q&A** — admitted gap + roadmap beat bluffing on record; prepare answers in `PITCH.md`
+- [ ] **Honest Q&A** — admitted gap + roadmap beat bluffing on record; prepare answers in `docs/ops/PITCH.md`
 
 ## 6. Anti-checklist (verified UNDER-rewarded on record — cap effort here)
 

@@ -4,26 +4,26 @@ Scale proportionally for shorter events. Gates are HARD: when a gate time arrive
 
 ## Phase 0 — Hour-0 Setup (T+0 → T+0.5 · 30 min cap)
 - Clone template outside sync folders · `.gitignore` verified · first push · remote reachable.
-- Fill `RUBRIC.md` (track sentences verbatim, weights, judges, submission requirements).
+- Fill `docs/ops/RUBRIC.md` (track sentences verbatim, weights, judges, submission requirements).
 - Open the submission portal draft if it exists.
 - **Exit:** clean `git status`, pushed, rubric filled. **Overrun:** you're over-engineering setup — push and move.
 
 ## Phase 1 — Front-Loaded Exploration (T+0.5 → T+5 · 4.5h box)
-Run in parallel; each spike produces a written artifact in `PREFLIGHT.md`:
+Run in parallel; each spike produces a written artifact in `docs/ops/PREFLIGHT.md`:
 1. **Idea scoring (45 min):** weighted rubric scoring of candidates (the 6-factor method worked — keep it). Score → pick → STOP scoring forever. *(Last time scoring re-ran into day 2.)*
 2. **Tool viability spikes (90 min):** for every external tool/API, prove the exact write you depend on with a real call; document the can't-do list.
 3. **Deploy smoke (45 min):** hello-world on the real host; hit it from the real frontend origin; verify CORS, favicon, env vars.
 4. **Data fixture + invariant (30 min):** write the core invariant test, then the fixture, then run it.
 5. **Auth spike (30 min):** prove the token/scope path with one live call.
 
-**The human's Phase-1 job — the mentor circuit:** the spikes run without you. Spend that time on the floor: sponsor workshops and mentors leak what the judges reward (they often ARE the judges). Ask sponsors "what do you wish existed on your platform?" and log every quote into RUBRIC.md §5 — it's free rubric intel no repo can give you, and judge warmth at Q&A time is built here, not on stage.
+**The human's Phase-1 job — the mentor circuit:** the spikes run without you. Spend that time on the floor: sponsor workshops and mentors leak what the judges reward (they often ARE the judges). Ask sponsors "what do you wish existed on your platform?" and log every quote into docs/ops/RUBRIC.md §5 — it's free rubric intel no repo can give you, and judge warmth at Q&A time is built here, not on stage.
 
 **⛔ GATE at T+5 (non-negotiable):** real write ✓ · live page reachable ✓ · fixture invariant ✓ · idea picked ✓. Any red → pick the simpler idea whose unknowns you DID close. Exploration buys certainty, not more options.
 
 ## Phase 2 — Spec Lock (T+5 → T+6 · 1h burst)
 - Write all specs in one burst with explicit parallel-track role division. *(This produced 8 specs in 20 minutes last time — the single best sequence of the event. Keep it.)*
 - Spec header: track sentence verbatim · REAL persona · named wow moment.
-- **Exit:** specs pushed · SCOPE FROZEN · submission draft pushed · `DESIGN.md` §2 filled.
+- **Exit:** specs pushed · SCOPE FROZEN · submission draft pushed · `docs/ops/DESIGN.md` §2 filled.
 - **Overrun:** cut spec detail, never the invariant or the wow moment.
 
 ### The spec pipeline that locked team distribution last time (reverse-engineered — reuse it)
@@ -47,7 +47,7 @@ Five transformations, each making the previous layer more executable. Different 
 ## Phase 5 — Feature Freeze + Demo (T+30 → T+42 · 12h)
 - Full rehearsal on the DEPLOYED url with a fresh browser.
 - **RECORD THE DEMO VIDEO NOW (by T+36 at the latest).** A rough recorded demo beats a perfect unrecorded one. Re-record only if it improves. *(Last time: 1 hour left → rushed video.)*
-- Regenerate all demo artifacts via the reset script. Commit screenshots. Rehearse the 3-minute pitch out loud twice against `PITCH.md`.
+- Regenerate all demo artifacts via the reset script. Commit screenshots. Rehearse the 3-minute pitch out loud twice against `docs/ops/PITCH.md`.
 - **Exit:** video uploaded + linked · screenshots pushed · pitch rehearsed · deployed URL exercised end-to-end.
 
 ## Phase 6 — Frozen Submission Runway (T+42 → T+48 · code-frozen)
@@ -58,6 +58,6 @@ Five transformations, each making the previous layer more executable. Different 
 ## Standing rules (every phase)
 - Commit before risk (parallel agents, network windows, refactors).
 - Push == done.
-- One golden path; ideas post-lock → `BACKLOG.md` + displacement test.
+- One golden path; ideas post-lock → `docs/ops/BACKLOG.md` + displacement test.
 - Multi-agent only for genuinely separable work; solo on the golden-path spine.
 - Human reads `TODO.md`; agent updates it at every boundary.

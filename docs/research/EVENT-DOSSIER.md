@@ -2,7 +2,7 @@
 
 Consolidated pre-event research. Compiled 2026-07-10/14 from web sweep + official participant deck.
 **Primary source:** [`HackathonMaterials/6th Hack-Nation Global AI Hackathon - Participants.PDF`](../../HackathonMaterials/) (21 slides, official).
-Referenced by RUBRIC.md §0/§0.5 (condensed). This file is the full record.
+Referenced by docs/ops/RUBRIC.md §0/§0.5 (condensed). This file is the full record.
 
 ## 1. Official schedule (participant PDF p.2 — OVERRIDES website times)
 

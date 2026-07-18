@@ -27,7 +27,7 @@ How one person replicates the 5-person pipeline using N parallel Claude Code ses
 | **A — Backend** | `src/backend/` | API spec + PREFLIGHT capability table; mocked platform client + the day-1 live smoke | frontend, docs |
 | **B — Frontend** | `src/frontend/` | API spec via a **mock layer** (build `mock.ts` from the spec FIRST — the frontend then never waits for the backend) | backend, docs |
 | **C — Verify/QA** | `TODO.md` issues only | The deployed/running app — drives real flows, files findings as TODO entries with repro steps | **any source file** (a QA lane that edits code collides with A/B) |
-| **D — Pitch/Content** | `docs/`, deck, README, screenshots, video script | `PITCH.md` + `SUBMISSION.md` gates | `src/` entirely |
+| **D — Pitch/Content** | `docs/`, deck, README, screenshots, video script | `docs/ops/PITCH.md` + `docs/ops/SUBMISSION.md` gates | `src/` entirely |
 
 Lane D is the secret weapon for solo runs: at the last event the pitch layer (deck, video, submission copy) was crushed into the final hour because it always lost the attention fight against code. A dedicated session that ONLY does content means the submission package matures all day with zero collision risk.
 

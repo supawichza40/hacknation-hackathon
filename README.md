@@ -1,79 +1,43 @@
-# Hackathon Template
+# Hack Nation — 6th Global AI Hackathon
 
-A battle-tested starter kit distilled from a measured retrospective of the Xero App & Agent Hackathon (4–5 July 2026): 101 commits, 32 Claude sessions, and the recorded finalist pitches were forensically analyzed. Result there: ~top 20 of 61, not top 10. Every rule in this kit exists because skipping it demonstrably cost points.
+**Event:** 18–19 July 2026 · **Deadline:** Sun 19 Jul, 9:00 AM ET  
+**Challenge:** [02 — The VC Brain](Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf) (Maschmeyer Group)  
+**Product plan:** [docs/product/VC-BRAIN-PLAN.md](docs/product/VC-BRAIN-PLAN.md)
 
-## How to use it — three words run everything
+AI OS for deploying $100K checks in 24 hours — founder sourcing, technical knowledge graphs (Understand-Anything–inspired), Founder Score, Trust Scores, and investment memos.
 
-The whole system is driven from a Claude Code chat by three trigger words. You never navigate these files yourself — Claude reads them and instructs you, one micro-step at a time (what to gather, what to paste, where, and what to expect back). Your job is deciding, approving, and pasting.
+---
 
-### 1. New hackathon → `start`
-
-```
-1. Create a fresh PRIVATE repo for the event and copy this template's files into
-   it (everything, including .claude/ and .gitignore).
-   IMPORTANT: clone/work OUTSIDE iCloud/Dropbox/OneDrive sync folders.
-2. cd into it, run `claude`, and type:  start
-3. Follow the steps. Each one arrives in a fixed format:
-      STEP n — name (~time)
-      YOU:   what only you can do (gather docs, decide, log in)
-      PASTE: a ready-to-fire prompt (never fill blanks yourself)
-      WHERE: this chat / a named terminal tab / Lovable / the portal
-      THEN:  what to expect + what to check
-      FILES: where every produced document lives
-4. Hands-on load across a 48h event: ~4–6 focused hours. Everything else is
-   machine time you supervise by rotating tabs (~15 min per stop in Phase 4).
-```
-
-### 2. Week before any event → `dryrun`
-
-One kitchen-table hour: rehearses kickoff → spec lock against a fictional event and fires a test prompt through every model arm — so expired keys, churned model IDs, and broken tools die at home, not at the venue.
-
-### 3. Within 48h after the event → `retro`
-
-The compounding loop: Claude mines the event's git history + session transcripts + winner intel you paste, shows you the actual-vs-playbook diff with evidence, proposes template patches file-by-file for your approval, and version-tags the result. Each event makes the template stronger — the version number is the score that matters.
-
-**First time here?** Read `WALKTHROUGH.md` (10 minutes) — a simulated event showing exactly what your screen looks like at every phase.
-
-## What's in the box
-
-| File | What it enforces | When it's used |
-|---|---|---|
-| `CLAUDE.md` | Operating rules every Claude Code session follows | Loaded automatically, all weekend |
-| `DESIGN.md` | Frontend design rules Claude follows | Referenced by every UI task |
-| `PLAYBOOK.md` | The T+0 → T+48 phase sequence with hard gates | Read at each phase boundary |
-| `RUBRIC.md` | Judging reverse-engineering (fill in hour 0) | Hour 0, then every scope decision |
-| `SPECS.md` | The 8-document spec architecture Claude fills at spec lock | Phase 2, one burst |
-| `PITCH.md` | 3-minute pitch skeleton + judge Q&A bank | Started day 1, rehearsed day 2 |
-| `SUBMISSION.md` | Submission checklist with time gates | Draft pushed day 1 |
-| `PREFLIGHT.md` | External tool/API viability spikes | Hour 0–5, before idea lock |
-| `SOLO-OPS.md` | Solo multi-session operating model (lanes, rotation, session count per phase) | When running the event alone |
-| `PROMPTS.md` | Copy-paste prompt per phase — the steering wheel for the whole process | P0 at kickoff, then per phase |
-| `WALKTHROUGH.md` | Simulated run: what each phase looks like on screen + the three parallelism modes | Read before your first event |
-| `RETRO.md` | The compounding loop: post-event forensics → patch the template → version-tag · plus the pre-event dry run | Within 48h after every event |
-| `TODO.md` | Status board (agent updates, human reads) | Continuous |
-| `BACKLOG.md` | Parking lot for post-lock ideas | After spec lock |
-| `.gitignore` | Clean tree from minute 1 | Hour 0 |
-| `.claude/settings.json` | Session-start hook that surfaces the status board | Automatic |
-
-## Hour-0 ritual (30 minutes, hard cap)
+## Repo layout
 
 ```
-1. Clone this template OUTSIDE any sync folder (NOT iCloud/Dropbox/OneDrive —
-   iCloud produced 0-byte conflict-duplicate files mid-event last time).
-2. git init (or push to the new private repo) · verify `git status` is clean.
-   If you ever add a .gitignore entry for already-tracked files:
-   git rm -r --cached <path> in the SAME commit (22 .pyc files stayed dirty
-   for an entire event because this step was skipped).
-3. Fill RUBRIC.md: stated weights, track sentences VERBATIM, judge names/roles,
-   submission requirements. Photograph every slide that mentions judging.
-4. Create the real submission-portal draft NOW if the portal is open.
-5. First commit + push. Remote URL confirmed reachable.
+├── README.md                 ← you are here
+├── CLAUDE.md                 ← agent operating rules
+├── TODO.md                   ← live status board
+├── Topics/                   ← official challenge briefs (PDFs)
+├── HackathonMaterials/       ← official event PDFs / assets
+└── docs/
+    ├── README.md             ← full document map
+    ├── product/              ← what we’re building (VC Brain)
+    ├── ops/                  ← how we run the weekend
+    └── research/             ← event intel & past winners
 ```
 
-Then open `PLAYBOOK.md` and follow the gates. Do not skip the exploration phase; do not extend it either.
+## Quick links
 
-## The three lessons this template exists to enforce
+| Need | Go here |
+|------|---------|
+| Product spec & architecture | [docs/product/VC-BRAIN-PLAN.md](docs/product/VC-BRAIN-PLAN.md) |
+| Challenge briefs | [Topics/](Topics/) |
+| Status / phase board | [TODO.md](TODO.md) |
+| Judging & schedule | [docs/ops/RUBRIC.md](docs/ops/RUBRIC.md) |
+| Weekend playbook | [docs/ops/PLAYBOOK.md](docs/ops/PLAYBOOK.md) |
+| All docs index | [docs/README.md](docs/README.md) |
 
-1. **Push == done.** The strongest work of the last event (199-test narrative, screenshots) never left the laptop — judges saw the stale version.
-2. **Real before mocked.** 100% of Xero calls were mocked until 5 hours before the deadline; the live connection instantly exposed two structural bugs green tests could never catch.
-3. **The pitch layer decides.** The recorded winners led on: real niche with a face, track-sentence fit, one live wow moment, and a clean 3 minutes — not on architecture or test counts.
+## Agent triggers (Claude Code)
+
+Type in chat: `start` · `dryrun` · `retro` — see [CLAUDE.md](CLAUDE.md) and [docs/ops/PROMPTS.md](docs/ops/PROMPTS.md).
+
+## Attribution
+
+Technical graph pipeline will be inspired by / adapted from [Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) under its license. The VC Brain product surface (thesis, scoring, Memory, memo) is original to this challenge.

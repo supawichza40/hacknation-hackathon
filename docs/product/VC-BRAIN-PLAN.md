@@ -250,7 +250,7 @@ foundergraph/                          # or vc-brain/
 ├── LICENSE
 ├── NOTICE                             # Understand-Anything attribution if adapted
 ├── docs/
-│   ├── VC-BRAIN-PLAN.md               # THIS FILE
+│   ├── product/VC-BRAIN-PLAN.md       # THIS FILE
 │   ├── DEMO_SCRIPT.md
 │   └── JUDGING_CHECKLIST.md
 ├── apps/

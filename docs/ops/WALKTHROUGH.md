@@ -4,13 +4,13 @@ A simulated 48h event (fictional: "FinTech Build Weekend", starts Saturday 10:00
 
 ## T+0 · Sat 10:00 — ONE terminal
 
-Paste `PROMPTS.md` **P0** (filled in). Claude replies like:
+Paste `docs/ops/PROMPTS.md` **P0** (filled in). Claude replies like:
 
 ```
 Event clock set in TODO.md: T+0 = Sat 10:00 · gate T+5 = Sat 15:00 ·
 video ≤ T+36 = Sun 22:00 · freeze T+42 = Mon 04:00
 Repo outside sync folders ✓ · .gitignore verified clean ✓ · pushed ✓
-Now paste the judging slides — I'll fill RUBRIC.md verbatim.
+Now paste the judging slides — I'll fill docs/ops/RUBRIC.md verbatim.
 ```
 
 From now on, EVERY session you open auto-prints the status board (SessionStart hook):
@@ -29,7 +29,7 @@ That board replaces every "is it done? / is this still running?" question.
 Paste **P1** once. Claude runs the five spikes as parallel background agents and reports as they land:
 
 ```
-Spike 2 (tool viability): ✗ update-transaction endpoint broken — workaround logged in PREFLIGHT.md
+Spike 2 (tool viability): ✗ update-transaction endpoint broken — workaround logged in docs/ops/PREFLIGHT.md
 Spike 3 (deploy smoke):  ✓ live page up — CORS needs the real origin added; favicon needs base path
 Spike 5 (auth):          ✓ token works with scopes [a, b] — umbrella scope REJECTED, noted
 ```
@@ -50,7 +50,7 @@ Unanimous kill list: OCR · multi-platform UI · live-LLM-on-stage
 ## T+5 → T+12 · Gate → spec burst → walking skeleton — deliberately SINGLE session
 
 - **T+5 gate:** all four checks green or you pick the simpler idea. No extensions.
-- **P2b:** 8 specs per SPECS.md, one burst (~30–60 min), scope freezes, DESIGN.md §2 locked, push.
+- **P2b:** 8 specs per docs/ops/SPECS.md, one burst (~30–60 min), scope freezes, docs/ops/DESIGN.md §2 locked, push.
 - **P3:** thinnest golden path against the REAL integration. No parallelism here on purpose — this is where parallel work corrupts (proven at the July 2026 event: rebuild churn, dead workers).
 
 ## T+12 · Thickening — parallelism kind 3: MULTI-SESSION LANES (you rotate)
@@ -71,7 +71,7 @@ All four run concurrently; you are the rotation, not the bottleneck. Every ~4h p
 ## T+30 → T+48 · Contract back to 1–2 sessions
 
 - **P6 (T+30):** feature freeze · regenerate demo data · rehearse on the DEPLOYED url · **record the video Sunday evening (≤ T+36), never the final morning** · commit screenshots.
-- **P7 (T+42):** code freeze · push after every doc edit · SUBMISSION.md verification ritual (incognito link checks, pushed HEAD == submitted claims) · **submit 2h early.**
+- **P7 (T+42):** code freeze · push after every doc edit · docs/ops/SUBMISSION.md verification ritual (incognito link checks, pushed HEAD == submitted claims) · **submit 2h early.**
 
 ## Parallelism summary
 

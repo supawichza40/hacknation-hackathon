@@ -17,7 +17,7 @@ Claude reads this file before any UI work. Fill §2 at spec lock; §1 and §3 ar
 Humans can't describe the design they want, but they can always pick. Claude asks these as either/or choices, then renders options:
 
 1. **Mood in 3 adjectives** — offered as pairs to pick from: calm/professional ↔ bold/energetic · minimal ↔ rich · serious ↔ playful.
-2. **One reference product you trust the look of** — **default: derived from RUBRIC.md — a product native to whatever the rubric says the event is for** (SMB-user event → the owner's banking app or Xero itself; art-platform event → the tools artists love; integration/dev-platform event → the best developer dashboards, e.g. Stripe's). Judges wrote the rubric: the safest look is the one their own documents imply. "Make it feel like X's cousin" beats any adjective list.
+2. **One reference product you trust the look of** — **default: derived from docs/ops/RUBRIC.md — a product native to whatever the rubric says the event is for** (SMB-user event → the owner's banking app or Xero itself; art-platform event → the tools artists love; integration/dev-platform event → the best developer dashboards, e.g. Stripe's). Judges wrote the rubric: the safest look is the one their own documents imply. "Make it feel like X's cousin" beats any adjective list.
 3. **Light or dark for the demo?** (one, final — the stage projector decides winners here: light usually survives bad projectors better).
 4. **One accent color** — or "derive it from the persona's world" and Claude proposes two.
 5. **Density:** data-dense operator dashboard ↔ airy consumer app.
@@ -38,9 +38,9 @@ Then Claude generates **2–3 quick direction boards** (the same golden-path scr
 ## 3. Hard rules (anti-slop, demo-first)
 
 - **The 3-second projector rule.** Every screen and every chart must communicate its one message in 3 seconds from the back of a room. If a judge must squint, it fails.
-- **The wow moment gets the best design.** The named wow moment (see `PITCH.md`) is the most polished screen in the app — visible state change, satisfying confirmation (e.g. a balance flipping to £0.00 with a green check).
+- **The wow moment gets the best design.** The named wow moment (see `docs/ops/PITCH.md`) is the most polished screen in the app — visible state change, satisfying confirmation (e.g. a balance flipping to £0.00 with a green check).
 - **No generic AI look.** No default purple-gradient hero, no emoji-bullet feature grids, no stock illustration sets. Derive the look from the persona's world.
-- **Match the event's register — derived from RUBRIC.md + the event documentation, never guessed.** At spec lock, read what the rubric and event docs say this hackathon is FOR, and design to that. Heuristics: sponsor-sells-to-end-users event (Xero→SMB owners) → minimal, professional, numbers-first · creative/art platform → bold color, expressive type, wild motion — *there* restraint is the mistake · **integration/dev-platform event → developer register: docs-grade clarity, the integration itself made visible in the UI** · healthcare → calm, clinical. Flourishes (3D, heavy animation) are banned only when they sit OUTSIDE the register — inside it, they're mandatory. *(Evidence, July 2026: rubric said "50% Xero Connection, real SMB problem" — the register was SMB accounting; our frontend carried pro animations + a 3D toggle and read "technology demo," while every recorded finalist's UI matched the register the rubric implied.)*
+- **Match the event's register — derived from docs/ops/RUBRIC.md + the event documentation, never guessed.** At spec lock, read what the rubric and event docs say this hackathon is FOR, and design to that. Heuristics: sponsor-sells-to-end-users event (Xero→SMB owners) → minimal, professional, numbers-first · creative/art platform → bold color, expressive type, wild motion — *there* restraint is the mistake · **integration/dev-platform event → developer register: docs-grade clarity, the integration itself made visible in the UI** · healthcare → calm, clinical. Flourishes (3D, heavy animation) are banned only when they sit OUTSIDE the register — inside it, they're mandatory. *(Evidence, July 2026: rubric said "50% Xero Connection, real SMB problem" — the register was SMB accounting; our frontend carried pro animations + a 3D toggle and read "technology demo," while every recorded finalist's UI matched the register the rubric implied.)*
 - **(For money/data products) Numbers are the product.** Financial figures in tabular/mono font, right-aligned, consistent decimals, explicit currency. Never let a number wrap or truncate. For non-data domains, substitute the equivalent: the artwork/content is the product — it gets the space and fidelity.
 - **Trust surfaces are first-class.** Approval dialogs, audit trails, and human-in-the-loop confirmations are designed as hero features, not afterthoughts — recorded judges rewarded visible policy-bounded autonomy.
 - **Demo camera path.** Design the golden-path screens for the exact order the 3-minute pitch walks through them; transitions between those screens must be instant (pre-load, no cold spinners on stage).
@@ -56,7 +56,7 @@ Build a <product type> web app frontend: <one-sentence product summary + tagline
 USER & TONE
 The user is <REAL persona: name, business, the pain in one sentence>. The app must feel
 <3 locked adjectives from §2> — like a cousin of <reference product>. Register line for this
-event: <derived from RUBRIC.md + event docs — e.g. finance: "trust and clarity beat flair" ·
+event: <derived from docs/ops/RUBRIC.md + event docs — e.g. finance: "trust and clarity beat flair" ·
 art: "expressiveness and delight beat restraint" · integration/dev-platform: "make the
 integration visible; docs-grade clarity beats decoration">.
 

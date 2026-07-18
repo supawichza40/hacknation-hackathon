@@ -9,8 +9,8 @@
 **Event:** https://luma.com/8rfryv5k  
 **Deadline:** Sunday, July 19, 2026 — 9:00 AM ET  
 
-**Product working name:** FounderGraph (TBD — pick before demo)  
-**One-liner:** An AI operating system that sources founders, builds a living technical + claim graph from GitHub and decks, scores them on three axes with Trust Scores, produces a 24-hour investment decision memo — and can brief the investor by voice (ElevenLabs).
+**Product name:** FounderGraph (locked)  
+**One-liner:** An AI operating system that sources founders, builds a living technical + claim graph from GitHub and decks, scores them on three axes with Trust Scores, answers investor questions in cited graph-grounded chat, produces a 24-hour investment decision memo — and closes with a voiced investment brief (ElevenLabs).
 
 ---
 
@@ -20,22 +20,20 @@
 |----------|--------|
 | Which challenge do we submit under? | **Challenge 02 — The VC Brain** |
 | Can we also “do” Challenge 01? | **No as a second submission.** One product, one challenge. |
-| Can we still use ElevenLabs? | **Yes** — as a voice feature inside VC Brain (brief / intake / graph Q&A). |
+| Can we still use ElevenLabs? | **Yes** — committed pre-rendered investment brief; realtime graph voice only as a stretch. |
 | Is that “using track 2”? | Challenge **02** is our corporate challenge. Separate from post-event **Venture / VC Big Bets** selection. |
 | Pitch line | “Built for Maschmeyer’s VC Brain brief; ElevenLabs powers the investor voice brief.” |
 
-**Rule:** If voice work starts stealing time from Memory / Trust / 3-axis / memo, cut voice to TTS brief only. Challenge 02 judging weights win over sponsor polish.
+**Rule:** The pre-rendered MP3 brief is committed and never cut. Realtime conversational voice is a stretch — it gets time only after committed Challenge 02 scope (Memory / Trust / 3-axis / chat / memo) is green. Challenge 02 judging weights win over sponsor polish.
 
 ---
 
-## 0.5 LOCKED EXECUTION PLAN v2 (post-debate, 2026-07-18 15:00 ET) — THIS SECTION WINS
+## 0.5 Locked execution plan v2 (post-debate, 2026-07-18 15:40 ET / 20:40 BST)
 
-Product of a two-model adversarial debate (Claude Fable council vs GPT-5.6 sol council, Delphi cross-rebuttal, judged synthesis). Full objection log: `docs/dispatch/plan-dialogue/2026-07-18-vc-brain-debate.md`. Where this section conflicts with §§1b, 4–11, 13, 15, 17–18, **this section wins**. ~18h remain; ~13 effective build hours.
-
-> **✅ CONFLICT RESOLVED (human ruling, 2026-07-18 20:45 BST):** "voice optional; text and chat must work — hard rule." Graph-grounded chat (streaming responses, node-click "Ask about this", text-highlight-to-ask) is a **hard requirement, never cut**. ALL voice work — including P2 realtime and the P0 pre-rendered brief — is **optional garnish**, first on the cut ladder. Decisions 7–8 and the cut ladder below reflect this ruling.
+Product of a two-model adversarial debate (Claude Fable council vs GPT-5.6 sol council, Delphi cross-rebuttal, judged synthesis); the dated objection log lives at `docs/dispatch/plan-dialogue/2026-07-18-vc-brain-debate.md` (note: its chat/voice outcomes were later superseded). Scope finalized by human ruling 2026-07-18 20:50 BST: the graph-grounded chat trio is committed M4 work at the bottom of the cut ladder; the pre-rendered MP3 brief is committed and never cut; realtime conversational voice is an optional stretch. The rest of this document is written to this plan. ~18h remain; ~13 effective build hours.
 
 ### Verdict
-Winnable — but only with the ~40% surface cut below. The 24h M0–M6 map is dead; scoring/trust/memo (55% of judged weight) move forward; every demo artifact is precomputed; live paths are garnish on a demo that works with the network cable pulled.
+Winnable — but only with the ~40% surface cut below. Scoring/trust/memo (55% of judged weight) move forward; every demo artifact is precomputed; live paths are garnish on a demo that works with the network cable pulled.
 
 ### Locked decisions
 1. **Single Next.js app** (`src/lib/{memory,ingest,graph,scoring,memo}`). No monorepo, no packages/, no vendor/. better-sqlite3, no ORM, no Postgres branch.
@@ -44,11 +42,11 @@ Winnable — but only with the ~40% surface cut below. The 24h M0–M6 map is de
 4. **Epistemic integrity rules** (sol C1–C8): Opportunity carries `ScreeningFacts` (evidence-backed company facts + explicit unknowns) so thesis fit is computed, never invented. `contradicted` = two incompatible cited facts; absence of evidence = `unsupported`. Axis trend = "baseline" unless two dated observations exist (returning-founder demo has history rows). Evidence records = {artifactId, locator, excerpt}; claims/scores/memo cite those. Person dedup = normalized GitHub URL/email.
 5. **Real anchor:** the hero founder is the builder's own real GitHub repo + persona (real story; demo numbers synthetic but derived). Demo set = 3: hero (analyzed live), rich-GitHub showcase card (precomputed graph only), off-thesis greyed card with "fails thesis: check size" chip. Cold-start beat = hero's own sparse-network story; Founder-Score-persists beat = one seeded prior-application history row.
 6. **Wow moment (named, rehearsed):** click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible evidence. Voice brief is the closing beat, not the climax.
-7. **Chat = constrained Q&A box** in the graph node drawer: 2–3 rehearsed questions, answers must carry citations or the box refuses. First item on the T-8h cut ladder. No free-form chat page.
-8. **Voice = P0 only.** Pre-rendered MP3 (one real ElevenLabs call during the spike) is the stage path; "Play investment brief" button sits inside the rehearsed demo. P1/P2 → BACKLOG.md. Budget ~1h; if M3/M4 slip past 01:00 ET, cap drops to 30 min post-freeze.
-9. **API:** keep separate routes (/apply, /analyze, /score, /memo, /decide, /brief) but ONE UI action orchestrates staged, cacheable calls with progressive status. /chat constrained per (7); /intake/voice cut.
+7. **Chat = streaming graph-grounded chat** (SSE): every answer must carry citations or the assistant refuses. Node-click "Ask about this" pre-scopes the question to that node; text-highlight-to-ask pre-scopes to the selection. **Committed, built in M4** — not gated on any checkpoint; sits at the **bottom** of the cut ladder (last-resort cut only).
+8. **Voice:** the pre-rendered MP3 investment brief (one real ElevenLabs call during the spike; "Play investment brief" button in the rehearsed demo) is **committed, never cut**. ElevenLabs realtime conversational voice over the graph = **optional stretch, only if time remains after committed scope is green**. P1 voice intake / P3 outbound → BACKLOG.md.
+9. **API:** keep separate routes (/apply, /analyze, /score, /memo, /decide, /brief) but ONE UI action orchestrates staged, cacheable calls with progressive status. /chat = streaming, graph-grounded, cited (SSE) with node/selection context; /intake/voice cut (backlog).
 10. **UA integration stays Mode B** — hour-0 task: read UA LICENSE (5 min) + NOTICE for adapted files. If license blocks or adaptation exceeds 45 min → drop to slim self-written pipeline.
-11. **UI = 4 surfaces:** Pipeline (thesis as a settings drawer), Diligence (Overview+Claims+Memo one scrolling page + decision CTA), Graph (node drawer + Q&A box), Apply.
+11. **UI = 4 surfaces:** Pipeline (thesis as a settings drawer), Diligence (Overview+Claims+Memo one scrolling page + decision CTA), Graph (node drawer + streaming cited chat), Apply.
 
 ### Build order (ET, push at every block boundary — push == done)
 - **15:15–16:00 M0:** scaffold single app, .gitignore, env template, better-sqlite3, empty pages. UA license check. **Platform submission draft + stub README pushed** (verify whether form requires a live URL — this decides the deploy question). Push.
@@ -56,16 +54,17 @@ Winnable — but only with the ~40% surface cut below. The 24h M0–M6 map is de
 - **17:30–19:00 M1:** trimmed Memory schema (+ScreeningFacts, Evidence, dedup rule), seed 3 opportunities + outbound cards with sourceChannel + founder history row. Pipeline page renders from DB. Push.
 - **19:00–21:30 M2 (hard timebox):** generalize spike into pipeline; precompute all demo graphs + deck-claims JSON; graph UI + node drawer + sourceRef. Domain grouping only if time remains inside the box. **Timebox breach ⇒ precomputed-only, live Analyze becomes stretch.** Push.
 - **21:30–00:30 M3:** claims table + Trust statuses (per locked rules) + contradiction wow moment + 3 axis scores (deterministic, rubric-based; trends per history rule) + thesis-fit chips. Push.
-- **00:30–02:30 M4:** memo (call 2) with gaps flagged "not disclosed", Invest/Pass/More-info write, Founder-Score-persists beat. Constrained Q&A box only if green. Push. **T-8h cut-ladder checkpoint at 01:00.**
-- **02:30–03:00 M5b:** wire Play-brief to MP3; live TTS only if trivially green.
+- **00:30–02:30 M4:** memo (call 2) with gaps flagged "not disclosed", Invest/Pass/More-info write, Founder-Score-persists beat, **+ streaming graph-grounded chat + node-click "Ask about this" + highlight-to-ask (committed)**. Push. **T-8h cut-ladder checkpoint at 01:00.**
+- **02:30–03:00 M5b:** wire Play-brief to MP3; live TTS only if trivially green. Realtime conversational voice only if everything committed is already green.
 - **03:00 FEATURE FREEZE.** 03:00–04:00 rehearse golden path 3× offline; fix only path-breakers.
 - **04:00–05:30:** record demo video (MP4 H.264) on the green build; README + NOTICE; push everything. **T-4h checkpoint 05:00 = must be packaging.**
 - **05:30–06:30:** finalize submission under Challenge 02; verify the remote repo shows everything.
 - **06:30–09:00:** buffer/rest. Re-record only if something material improves. No new scope.
 
 ### Cut ladder
-- **T-8h (01:00 ET), in order:** Q&A box → live TTS → live Analyze button (narrate precomputed) → live Apply path (seeded inbound) → thesis editing (read-only thesis.json).
-- **T-4h (05:00 ET), in order:** axis trends (static scores) → showcase card #2 → graph filters/domains → outreach draft → Founder-Score sparkline. Then STOP building: video, README, push, submit.
+- **T-8h (01:00 ET), in order:** live TTS → live Analyze button (narrate precomputed) → live Apply path (seeded inbound) → thesis editing (read-only thesis.json).
+- **T-4h (05:00 ET), in order:** axis trends (static scores) → showcase card #2 → graph filters/domains → outreach draft → Founder-Score sparkline → **(absolute last resort) the graph-grounded chat trio**. Then STOP building: video, README, push, submit.
+- Realtime conversational voice never appears on this ladder: it is stretch-only, built only if time remains, so it can never need cutting.
 - **Never cut:** hero diligence path (Pipeline card → precomputed graph → claims with ONE red contradicted claim click-jumping to evidence → 3 separate axes → memo with decision + flagged gaps) + provenance-backed real analysis + pre-rendered MP3 + video + pushed repo + submitted entry.
 
 ### Open items (verify, don't assume)
@@ -74,29 +73,29 @@ Winnable — but only with the ~40% surface cut below. The 24h M0–M6 map is de
 
 ---
 
-## 1. Positioning (our idea, not a clone)
+## 1. Positioning
 
 ### What we are building
 A **venture diligence product** for deploying $100K checks in 24 hours:
 - Sourcing (inbound apply + outbound GitHub/hackathon signals)
 - Memory (persistent founder profiles + Founder Score)
 - Intelligence (thesis-filtered, multi-axis scoring + evidence)
-- Experience (investor dashboard: graph, chat, memo, decision)
+- Experience (investor dashboard: graph, cited chat, memo, decision)
 
 ### What Understand-Anything is to us
-[Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) is an **open-source reference and implementation aid** for turning code/docs into interactive knowledge graphs. We use its ideas (and selectively its code under its LICENSE) to accelerate:
-- Multi-agent / pipeline analysis → `knowledge-graph.json`
-- Graph schema (nodes, edges, domains, tours)
-- Interactive graph visualization patterns (e.g. React Flow)
-- Graph-grounded Q&A
+[Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) is **core functionality**: its knowledge-graph pipeline and graph-grounded chat, adapted under its LICENSE, ARE the diligence engine — applied to founder repos and pitch decks instead of arbitrary codebases. Specifically we adapt:
+- Analysis pipeline → `knowledge-graph.json`
+- Graph schema (nodes, edges, domains)
+- Interactive graph visualization patterns (React Flow)
+- Graph-grounded, citation-carrying chat
 
-We are **not** submitting a rebranded plugin. The product surface, scoring, Memory, thesis engine, and memo workflow are original to this challenge.
+Everything VC-specific is ours: the thesis engine, 3-axis scoring, persistent Founder Score, per-claim Trust Scores, Memory, and the memo/decision workflow. Full attribution per the UA LICENSE and a NOTICE file for adapted code.
 
 ### Attribution policy
 - Keep LICENSE/NOTICE for any copied or adapted code
-- README: “Technical graph pipeline inspired by / adapted from Understand-Anything (see LICENSE)”
-- Pitch focus: VC Brain problem + Founder Score + Trust-scored memos
-- Mention ElevenLabs as the voice brief / intake layer (sponsor visibility), not as the core thesis
+- README: “Core graph pipeline + grounded chat derived from Understand-Anything (see LICENSE/NOTICE), applied to founder repos and decks; VC surface original”
+- Pitch focus: VC Brain problem + Founder Score + Trust-scored memos, powered by the UA-derived graph engine
+- Mention ElevenLabs as the voice-brief layer (sponsor visibility), not as the core thesis
 
 ---
 
@@ -104,14 +103,14 @@ We are **not** submitting a rebranded plugin. The product surface, scoring, Memo
 
 ElevenLabs is a **feature**, not a track switch. We do **not** build phone haggling / quote negotiation (that is Challenge 01).
 
-### Priority order (ship top-down)
+### Priority order
 
 | Priority | Feature | What the user does | Demo value | Effort |
 |----------|---------|-------------------|------------|--------|
-| **P0 (must)** | **Investment voice brief** | On diligence page: “Play brief” → TTS of Founder Score, 3 axes, recommendation, top Trust flags | 10s wow; zero risk to core loop | ~2h |
-| **P1 (should)** | **Voice founder intake** | `/apply`: talk through company / problem / ask → structured fields; still confirm + upload deck + GitHub | Strong inbound story | ~3–4h |
-| **P2 (committed 2026-07-18)** | **Realtime voice chat over graph** | Mic button in Diligence chat: speak ↔ ElevenLabs Conversational AI agent wired to `/api/chat`; graph-grounded answer spoken back with citation | Ties UA graph + ElevenLabs; realtime wow | ~4h |
-| **P3 (cut first)** | Activation voice note / outbound call | Draft spoken outreach to sourced founders | Cool but Negotiator-adjacent; skip unless ahead | — |
+| **P0 (committed, never cut)** | **Investment voice brief (pre-rendered MP3)** | On diligence page: “Play investment brief” → pre-rendered ElevenLabs TTS of Founder Score, 3 axes, recommendation, top Trust flags | Closing beat of the rehearsed demo; zero risk to core loop | ~1h (spike renders the MP3) |
+| **P2 (optional stretch — only if time remains after committed scope is green, per 20:50 BST ruling)** | **Realtime voice chat over graph** | Mic button in the graph chat: speak ↔ ElevenLabs Conversational AI agent wired to `/api/chat`; graph-grounded answer spoken back with citation | Ties UA graph + ElevenLabs; realtime wow | ~4h |
+| **P1 (backlog — BACKLOG.md)** | **Voice founder intake** | `/apply`: talk through company / problem / ask → structured fields; still confirm + upload deck + GitHub | Strong inbound story | ~3–4h |
+| **P3 (backlog — BACKLOG.md)** | Activation voice note / outbound call | Draft spoken outreach to sourced founders | Cool but Negotiator-adjacent | — |
 
 ### P0 — Investment voice brief (spec)
 
@@ -132,7 +131,7 @@ Script template (fill from Memory, never invent numbers):
 > Trust watch-outs: {claim1}; {claim2}.  
 > Cap table and financials: flagged unavailable where missing.”
 
-### P1 — Voice intake (if time)
+### P1 — Voice intake (backlog — not in this build)
 
 - ElevenLabs **Agent** (or STT + our LLM) interviews the founder
 - Tools write into the same JSON job/application schema as the form
@@ -168,13 +167,15 @@ From Challenge 02 brief — MVP must demonstrate:
 | 3-axis screening | Founder / Market / Idea-vs-Market — NOT averaged; each with trend | Separate scores + trends in UI + memo |
 | Founder Score | Persists across applications, never resets | Stored on person entity in Memory |
 | Trust Score | Per claim, evidence + confidence, flag contradictions | Claim objects linked to graph nodes / deck slides |
-| Investor UX | Notion-simple, Bloomberg-depth | Dashboard: Pipeline / Diligence / Memo / Decision |
+| Investor UX | Notion-simple, Bloomberg-depth | 4 surfaces: Pipeline / Diligence (memo + decision) / Graph (cited chat) / Apply |
 | Scope | Sourcing → Screening → Diligence → Decision only | No portfolio monitoring / fund ops |
 
+### Committed beyond the table
+- **Agentic Traceability** — every conclusion cites the exact node/slide. The contradiction click-jump to evidence is the named wow moment (§0.5 decision 6) and is on the never-cut list.
+
 ### Stretch (if time)
-1. **Agentic Traceability** — every conclusion cites exact node/slide (highest leverage)
-2. Validator agent for claim cross-checks
-3. Sourcing channel graph (which channels produce quality)
+1. Validator agent for claim cross-checks
+2. Sourcing channel graph (which channels produce quality)
 
 ### Explicit cold-start
 Handle first-time founders with weak network but strong public artifacts (repo graph, demo, posts). Generic enrichment alone fails judging.
@@ -198,47 +199,44 @@ Handle first-time founders with weak network but strong public artifacts (repo g
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     INVESTOR WEB APP (Next.js)                   │
-│  Thesis · Pipeline · Diligence (Graph+Chat) · Memo · Decision   │
+│                SINGLE Next.js APP (FounderGraph)                 │
+│  Pipeline · Diligence (one page) · Graph (+ chat) · Apply       │
 └────────────────────────────┬────────────────────────────────────┘
-                             │ REST / Server Actions
+                             │ API routes (one UI action orchestrates)
 ┌────────────────────────────▼────────────────────────────────────┐
-│                        API LAYER                                 │
-│  /apply  /source  /analyze  /score  /memo  /chat  /decide       │
-└───┬──────────────┬──────────────┬──────────────┬────────────────┘
-    │              │              │              │
-┌───▼───┐   ┌──────▼──────┐  ┌───▼────┐   ┌────▼─────┐
-│Ingest │   │ Graph Engine│  │Scoring │   │  Memo    │
-│GitHub │   │ (UA-inspired│  │Agents  │   │  Agent   │
-│PDF/OCR│   │  pipeline)  │  │3-axis  │   │+ Trust   │
-│Signals│   │ → graph.json│  │+Founder│   │          │
-└───┬───┘   └──────┬──────┘  └───┬────┘   └────┬─────┘
-    │              │             │             │
-    └──────────────┴─────────────┴─────────────┘
+│   /apply  /analyze  /score  /memo  /chat (SSE)  /decide  /brief │
+└───┬──────────────┬───────────────────┬──────────────────────────┘
+    │              │                   │
+┌───▼───┐   ┌──────▼──────┐   ┌────────▼─────────────────────┐
+│Ingest │   │ Graph Engine│   │ TWO structured LLM calls:     │
+│GitHub │   │ (UA-derived │   │  1. claim/evidence extractor  │
+│PDF    │   │  pipeline)  │   │  2. axes + memo writer        │
+│Signals│   │ → graph.json│   │ + deterministic TS: thesis fit│
+└───┬───┘   └──────┬──────┘   │   score math, Founder Score,  │
+    │              │          │   trust status, dedup         │
+    │              │          └────────┬──────────────────────┘
+    └──────────────┴───────────────────┘
                              │
                     ┌────────▼────────┐
                     │     MEMORY      │
-                    │ Postgres/SQLite │
+                    │  SQLite         │
+                    │ (better-sqlite3)│
                     │ founders, claims│
                     │ graphs, scores  │
                     │ thesis, memos   │
                     └─────────────────┘
 ```
 
+Every LLM response is schema-validated (zod), one repair attempt, then falls back to the **captured provenance replay** (§0.5 decision 3). Graph-grounded chat is a runtime LLM call over the graph that streams (SSE) and must cite or refuse.
+
 ### External services
-- **LLM API** (OpenAI / Anthropic) — summarization, scoring, memo, chat
+- **LLM API** (OpenAI / Anthropic) — extractor call, axes+memo call, chat
 - **GitHub** — clone or API for repos (demo: pre-cloned + one live small repo)
-- **Optional:** PDF parse (pdf-parse / Unstructured), embeddings (pgvector / local)
+- **PDF parse** (pdf-parse; fallback: pre-extracted slides JSON)
+- **ElevenLabs** — pre-rendered brief MP3 (spike); realtime voice only as stretch
 
-### Understand-Anything integration modes (choose one for hackathon)
-
-| Mode | Description | Recommendation |
-|------|-------------|----------------|
-| A. Reference-only | Reimplement slim pipeline from their design | Best for “built from scratch” story |
-| B. Adapted modules | Port graph schema + layout utils + viz patterns | Best speed/quality balance |
-| C. Subprocess | Call their CLI/pipeline on a repo path | Fastest, more “wrapper” risk |
-
-**Hackathon default: Mode B** — own app + adapted graph schema/viz; our agents for VC scoring/memo. Precompute graphs for demo reliability; support one live analyze path.
+### Understand-Anything integration (locked: Mode B — adapted modules)
+Port the UA graph schema, analysis pipeline shape, and viz patterns into `src/lib/graph`; our deterministic TS + two LLM calls handle VC scoring/memo. Precompute graphs for demo reliability; one live analyze path (on the cut ladder). Hour-0 task: read UA LICENSE + write NOTICE for adapted files; if the license blocks or adaptation exceeds 45 min, drop to a slim self-written pipeline (§0.5 decision 10).
 
 ---
 
@@ -260,6 +258,7 @@ Thesis {
 }
 
 // Person (Memory — never discard)
+// Dedup rule: normalized GitHub URL / email is the identity key across applications
 Person {
   id
   name, emails?, links: { github?, linkedin?, twitter? }
@@ -278,7 +277,21 @@ Opportunity {
   source: 'inbound' | 'outbound'
   sourceChannel?: string    // github, hackathon, hn, etc.
   status: 'sourced' | 'screening' | 'diligence' | 'decision'
+  screeningFacts: ScreeningFacts   // evidence-backed facts + explicit unknowns — thesis fit is computed, never invented
   createdAt, updatedAt
+}
+
+// Evidence (everything cites one of these)
+Evidence {
+  id
+  artifactId                // repo file, deck, etc.
+  locator                   // path+lines | slide number | url
+  excerpt
+}
+
+ScreeningFacts {
+  facts: Record<string, { value, evidenceIds }>   // sector, stage, geo, ask, ...
+  unknowns: string[]                              // explicitly listed, never guessed
 }
 
 // Knowledge graph (UA-inspired)
@@ -319,7 +332,8 @@ AxisScore {
   opportunityId
   axis: 'founder' | 'market' | 'idea_vs_market'
   score: number             // 0-100
-  trend: 'improving' | 'stable' | 'declining'
+  trend: 'improving' | 'stable' | 'declining' | 'baseline'
+                            // 'baseline' unless two dated observations exist (returning-founder demo has history rows)
   rationale: string
   evidenceIds: string[]
 }
@@ -362,108 +376,68 @@ Store at: `data/graphs/{opportunityId}/knowledge-graph.json`
 
 ## 6. Repository structure
 
-```
-foundergraph/                          # or vc-brain/
-├── README.md                          # product pitch + setup + attribution
-├── VC-BRAIN-PLAN.md                   # THIS FILE (repo root)
-├── LICENSE
-├── NOTICE                             # Understand-Anything attribution if adapted
-├── docs/
-│   ├── DEMO_SCRIPT.md
-│   └── JUDGING_CHECKLIST.md
-├── apps/
-│   └── web/                           # Next.js investor app
-│       ├── app/
-│       │   ├── page.tsx               # landing / thesis picker
-│       │   ├── pipeline/page.tsx      # inbound + outbound board
-│       │   ├── opportunities/[id]/
-│       │   │   ├── page.tsx           # diligence overview
-│       │   │   ├── graph/page.tsx     # knowledge graph explorer
-│       │   │   ├── chat/page.tsx      # graph-grounded chat
-│       │   │   └── memo/page.tsx      # investment memo + decision
-│       │   ├── apply/page.tsx         # inbound founder apply
-│       │   └── api/
-│       │       ├── apply/route.ts
-│       │       ├── analyze/route.ts
-│       │       ├── score/route.ts
-│       │       ├── memo/route.ts
-│       │       ├── chat/route.ts
-│       │       └── decide/route.ts
-│       ├── components/
-│       │   ├── graph/                 # React Flow graph (UA-inspired)
-│       │   ├── scores/                # 3-axis + Founder Score
-│       │   ├── claims/                # Trust Score list
-│       │   ├── memo/                  # Memo sections
-│       │   └── thesis/                # Thesis editor
-│       └── lib/
-├── packages/
-│   ├── memory/                        # DB schema + repos
-│   ├── ingest/                        # GitHub + PDF ingest
-│   ├── graph-engine/                  # UA-adapted analysis → graph.json
-│   ├── scoring/                       # Founder Score + 3-axis + Trust
-│   └── memo/                          # Memo generation + citations
-├── data/
-│   ├── thesis.default.json
-│   ├── demo/                          # seeded founders, decks, prebuilt graphs
-│   └── graphs/                        # runtime graphs
-├── scripts/
-│   ├── seed-demo.ts
-│   ├── analyze-repo.ts                # CLI: repo → graph
-│   └── precompute-demo-graphs.ts
-└── vendor/                            # OPTIONAL: vendored UA snippets (with LICENSE)
-    └── understand-anything/
-```
+The app is a **single Next.js app scaffolded inside THIS repo** (no separate app repo, no packages/, no vendor/ — adapted UA code lives in `src/lib/graph` with NOTICE attribution).
 
-Monorepo optional; for 24h a single Next.js app with `src/lib/{ingest,graph,scoring,memo,memory}` is fine. Structure above is the target mental model.
+```
+Hacknation Hackathon/                  # this repo (the submitted remote)
+├── README.md                          # product pitch + setup + attribution
+├── VC-BRAIN-PLAN.md                   # THIS FILE
+├── LICENSE
+├── NOTICE                             # Understand-Anything attribution for adapted code
+├── docs/                              # ops + research + specs (see docs/README.md)
+├── src/
+│   ├── app/
+│   │   ├── page.tsx                   # Pipeline board (thesis as a settings drawer)
+│   │   ├── opportunities/[id]/
+│   │   │   ├── page.tsx               # Diligence: Overview + Claims + Memo, one scrolling page + decision CTA
+│   │   │   └── graph/page.tsx         # Graph explorer: node drawer + streaming cited chat
+│   │   ├── apply/page.tsx             # inbound founder apply
+│   │   └── api/
+│   │       ├── apply/route.ts
+│   │       ├── analyze/route.ts
+│   │       ├── score/route.ts
+│   │       ├── memo/route.ts
+│   │       ├── chat/route.ts          # SSE streaming, cited
+│   │       ├── decide/route.ts
+│   │       └── brief/route.ts         # serves pre-rendered MP3
+│   ├── components/
+│   │   ├── graph/                     # React Flow graph (UA-derived)
+│   │   ├── scores/                    # 3-axis + Founder Score
+│   │   ├── claims/                    # Trust Score list + contradiction jump
+│   │   └── memo/                      # Memo sections
+│   └── lib/
+│       ├── memory/                    # better-sqlite3 schema + queries
+│       ├── ingest/                    # GitHub + PDF ingest
+│       ├── graph/                     # UA-adapted analysis → graph.json
+│       ├── scoring/                   # deterministic Founder Score + 3-axis + trust status (+ prompts)
+│       └── memo/                      # memo call + citations (+ prompts)
+├── data/
+│   ├── thesis.default.json            # read-only thesis (editing is on the cut ladder)
+│   ├── demo/                          # 3 seeded founders, decks, prebuilt graphs
+│   ├── replay/                        # captured provenance replay (Wave-0 spike)
+│   └── graphs/                        # runtime graphs
+└── scripts/
+    ├── seed-demo.ts
+    ├── analyze-repo.ts                # CLI: repo → graph
+    └── precompute-demo-graphs.ts
+```
 
 ---
 
-## 7. Feature modules (build order)
+## 7. Feature modules (what each §0.5 block builds)
 
-### M0 — Skeleton (Hour 0–2)
-- Next.js app, env template, thesis default JSON
-- Seed 3–5 demo opportunities (mix inbound/outbound + one cold-start)
-- Empty pages wired for demo navigation
+The schedule — times, gates, pushes — lives in **§0.5 Build order**. This section only details block scope; if it ever seems to disagree with §0.5, §0.5's times govern.
 
-### M1 — Memory + Apply (Hour 2–5)
-- SQLite/Postgres schema for Person, Opportunity, Claim, AxisScore, Memo
-- Inbound: company name + deck upload + repo URL
-- Persist Founder Score history
+- **M0 — Skeleton:** scaffold single app in this repo, .gitignore, env template, better-sqlite3, thesis.default.json, empty pages for demo navigation. UA LICENSE check. Platform submission draft + stub README pushed (live-URL check).
+- **Wave-0 spike (gate):** builder's real repo → real LLM structured call → `knowledge-graph.json` → rendered in React Flow. Capture provenance replay. Hero deck through PDF parser (fallback: pre-extracted slides JSON). One real ElevenLabs call → pre-render hero MP3.
+- **M1 — Memory:** trimmed schema (Person, Opportunity + ScreeningFacts, Evidence, Claim, AxisScore, Memo; dedup rule). Seed 3 opportunities + outbound cards with sourceChannel + founder history row. Pipeline page renders from DB.
+- **M2 — Graph engine (hard timebox):** generalize the spike into the pipeline; precompute all demo graphs + deck-claims JSON; graph UI with pan/zoom, node drawer + sourceRef. Domain grouping only if time remains in the box. Timebox breach ⇒ precomputed-only, live Analyze becomes stretch.
+- **M3 — Scoring + Trust:** claims table + Trust statuses (per §0.5 epistemic rules) + the red CONTRADICTED claim click-jump wow moment + 3 deterministic axis scores (trends per history rule) + thesis-fit chips + Founder Score update.
+- **M4 — Memo + Decision + Chat (committed):** memo (call 2) with gaps flagged "not disclosed"; Invest / Pass / More-info write; Founder-Score-persists beat; **streaming graph-grounded chat with citations-or-refuse, node-click "Ask about this", and text-highlight-to-ask**.
+- **M5b — Voice:** wire "Play investment brief" to the pre-rendered MP3. Live TTS only if trivially green; realtime conversational voice only if everything committed is green (stretch).
+- **Freeze → submit:** per §0.5 — rehearse 3× offline, record video on the green build, README + NOTICE, push, submit under Challenge 02.
 
-### M2 — Graph Engine (Hour 5–10)
-- Adapt UA patterns: scan files → nodes/edges → summaries → `knowledge-graph.json`
-- Deck path: extract sections/claims as document nodes
-- Graph UI: pan/zoom, click node → summary + source ref + “Ask about this” (opens chat pre-scoped to that node)
-- Highlight-to-ask: select text in summary / claim / deck panel → “Ask about selection” opens chat with the selection + owning node as context
-- Chat responses stream token-by-token in the dashboard (real-time), with citations
-- Precompute demo graphs; one “Analyze” button for live path
-
-### M3 — Scoring + Trust (Hour 10–15)
-- Claim extraction from deck + repo summaries
-- Trust Score per claim + contradiction flags
-- 3-axis scores with trends + evidenceIds
-- Update Founder Score on Person
-- Thesis filter: hide/downrank off-thesis
-
-### M4 — Memo + Decision (Hour 15–18)
-- Generate required memo sections; flag missing data (“Cap table: not disclosed”)
-- Recommendation: Invest / Pass / More info
-- Agentic Traceability: click claim → jump to graph node / slide text
-
-### M5 — Outbound + NL query (Hour 18–20)
-- Outbound board from seeded GitHub-like signals
-- “Activate” → draft outreach email (no need for real send)
-- NL search over Memory
-
-### M5b — ElevenLabs voice (fit in Hour 16–20 if scoring/memo green)
-- P0: `/api/brief` + “Play investment brief” on diligence page
-- Optional P1: voice intake on `/apply` writing the same schema
-- Pre-render one demo brief audio for the hero opportunity
-
-### M6 — Polish + Demo (Hour 20–24)
-- Demo script, video (MP4 H.264), README, submit on platform
-- Attribution NOTICE for UA
-- In pitch: one line on ElevenLabs voice brief (sponsor visibility)
+Cut in planning (→ `docs/ops/BACKLOG.md`): NL search over Memory, voice intake (P1), outbound voice notes (P3).
 
 ---
 
@@ -486,9 +460,11 @@ POST /api/memo
   body: { opportunityId }
   → { memo }
 
-POST /api/chat
-  body: { opportunityId, message }
-  → { answer, citations: [{ nodeId, quote }] }
+POST /api/chat   (SSE — streams token-by-token)
+  body: { opportunityId, message, context?: { nodeId?, selection?: { text, nodeId } } }
+       // context set by node-click "Ask about this" or text-highlight-to-ask
+  → streamed answer chunks + citations: [{ nodeId, quote }]
+       // no citable evidence ⇒ the assistant refuses instead of answering
 
 POST /api/decide
   body: { opportunityId, decision: 'invest'|'pass'|'more_info', note? }
@@ -496,11 +472,7 @@ POST /api/decide
 
 POST /api/brief
   body: { opportunityId }
-  → { script, audioUrl }   // ElevenLabs TTS; text-only fallback if no key
-
-POST /api/intake/voice  (optional P1)
-  body: { audio | agentSessionId }
-  → { draftApplication fields for user confirm }
+  → { script, audioUrl }   // pre-rendered MP3 for the hero; live TTS only if trivially green; text-only fallback if no key
 
 GET /api/pipeline?thesisId=
   → { inbound[], outbound[] }
@@ -511,34 +483,29 @@ GET /api/opportunities/:id
 
 ---
 
-## 9. Agent / LLM prompts (roles)
+## 9. LLM architecture (two structured calls, not eight agents)
 
-| Agent | Job | Inputs | Outputs |
-|-------|-----|--------|---------|
-| Ingest Normalizer | Structure deck + repo meta | files, urls | Opportunity + raw artifacts |
-| Graph Summarizer | Plain-English node/domain summaries | graph skeleton | enriched graph |
-| Claim Extractor | Extract verifiable claims | deck text, graph | Claim[] |
-| Trust Validator | Attach evidence / contradictions | Claim[], graph, web? | trustScore, status |
-| Axis Scorer | Score 3 axes + trends | Memory, thesis, claims | AxisScore[] |
-| Founder Score Updater | Update persistent person score | history + new evidence | founderScore |
-| Memo Writer | Investor memo with gaps flagged | all above | Memo |
-| Chat Retriever | Answer with citations | question + graph | answer + evidenceIds |
+| Call | Job | Inputs | Outputs |
+|------|-----|--------|---------|
+| **Call 1 — Claim/Evidence Extractor** | Node/domain summaries + verifiable claims with evidence pointers | repo scan, deck text | enriched graph + Claim[] + Evidence[] |
+| **Call 2 — Axes + Memo Writer** | Axis rationales + investor memo with gaps flagged | Memory, thesis, claims, scores | AxisScore rationales + Memo |
 
-Keep prompts in `packages/scoring/prompts/` and `packages/memo/prompts/` for iteration.
+Both calls are schema-validated (zod), one repair attempt, then fall back to the captured provenance replay.
+
+**Deterministic TypeScript (no LLM):** thesis fit from ScreeningFacts, axis score math + trend rule, Founder Score updates, trust status derivation (supported / unsupported / contradicted / unavailable per §0.5 rules), person dedup.
+
+**Chat (runtime, M4):** a graph-grounded call behind `/api/chat` — retrieves from the graph, streams via SSE, and must return citations or refuse. Node-click and highlight-to-ask only pre-scope its context; same call path.
+
+Prompts live in `src/lib/scoring/prompts.ts` and `src/lib/memo/prompts.ts` for iteration.
 
 ---
 
-## 10. UI map
+## 10. UI map (4 surfaces — §0.5 decision 11)
 
-1. **Home / Thesis** — set fund lens; CTA “Open Pipeline”
-2. **Pipeline** — two columns: Outbound | Inbound; cards show Founder Score + thesis fit
-3. **Opportunity Diligence**
-   - Header: company, source, status, Founder Score sparkline
-   - Tabs: Overview | Graph | Claims | Chat | Memo
-4. **Graph** — React Flow; filters by type/domain; node detail drawer
-5. **Claims** — table: claim · trust · evidence · status
-6. **Memo** — required sections + recommendation CTA
-7. **Apply (public-lite)** — minimal founder form for inbound demo
+1. **Pipeline** — two columns: Outbound | Inbound; cards show Founder Score + thesis-fit chips; thesis lives in a settings drawer (read-only thesis.json)
+2. **Diligence** — ONE scrolling page: Overview → Claims (claim · trust · evidence · status, red contradicted claim click-jumps to evidence) → Memo → decision CTA; header has company, source, status, Founder Score, and the “Play investment brief” button
+3. **Graph** — React Flow; node drawer with summary + sourceRef + streaming cited chat (“Ask about this” from node click, highlight-to-ask from selected text); filters/domains only if time remains
+4. **Apply (public-lite)** — minimal founder form for inbound demo
 
 Design notes for hackathon: clear hierarchy, evidence click-through, no vanity dashboards. Avoid looking like a generic purple AI SaaS clone; brand for “investor OS.”
 
@@ -546,14 +513,12 @@ Design notes for hackathon: clear hierarchy, evidence click-through, no vanity d
 
 ## 11. Demo dataset
 
-Prepare offline:
-1. Strong technical founder — rich public GitHub (prebuilt graph)
-2. Cold-start founder — little social, solid small repo + deck
-3. Contradiction case — deck claims traction unsupported by evidence
-4. Off-thesis company — should fail thesis filter
-5. Optional: second application by same person → Founder Score trend
+Prepare offline — exactly **3 opportunities** (§0.5 decision 5):
+1. **Hero** — the builder's own real GitHub repo + persona (real story; demo numbers synthetic but derived). Analyzed live (with provenance replay fallback). Carries the ONE red contradicted claim (two incompatible cited facts), the cold-start sparse-network beat, and a seeded prior-application history row for the Founder-Score-persists beat.
+2. **Rich-GitHub showcase card** — precomputed graph only.
+3. **Off-thesis greyed card** — “fails thesis: check size” chip.
 
-Store under `data/demo/` with decks, repo mirrors or git submodules, and precomputed `knowledge-graph.json`.
+Store under `data/demo/` with decks, repo mirrors, and precomputed `knowledge-graph.json`; the Wave-0 provenance replay lives under `data/replay/`.
 
 ---
 
@@ -591,10 +556,10 @@ Store under `data/demo/` with decks, repo mirrors or git submodules, and precomp
 | App | Next.js 15 (App Router) + TypeScript |
 | UI | Tailwind + shadcn/ui |
 | Graph viz | React Flow (+ dagre/elk layout) |
-| DB | SQLite (better-sqlite3 / Prisma) for speed; Postgres if hosted |
+| DB | SQLite via better-sqlite3 — no ORM, no Postgres branch |
 | LLM | OpenAI or Anthropic |
-| PDF | pdf-parse or LlamaParse |
-| Deploy | Vercel + local analyze scripts; or Railway |
+| PDF | pdf-parse (fallback: pre-extracted slides JSON) |
+| Deploy | Pending the M0 submission-form live-URL check; Vercel if a live URL is required, otherwise local demo + recorded video |
 | Package mgr | pnpm |
 
 ---
@@ -604,24 +569,24 @@ Store under `data/demo/` with decks, repo mirrors or git submodules, and precomp
 ```
 OPENAI_API_KEY=
 # or ANTHROPIC_API_KEY=
-ELEVENLABS_API_KEY=        # voice brief (P0) + optional intake agent (P1)
+ELEVENLABS_API_KEY=        # spike renders the committed brief MP3
 ELEVENLABS_VOICE_ID=       # optional
-ELEVENLABS_AGENT_ID=       # optional — voice intake
+ELEVENLABS_AGENT_ID=       # optional — realtime conversational voice (stretch only)
 DATABASE_URL=file:./data/vcbrain.db
 GITHUB_TOKEN=          # optional, rate limits
 NEXT_PUBLIC_APP_URL=
 ```
 
-Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtures + pre-rendered brief audio if keys missing.
+Never commit secrets. Demo mode works with precomputed graphs + the captured provenance replay + pre-rendered brief audio if keys are missing.
 
 ---
 
 ## 15. Pitch (3 minutes)
 
-1. **Problem (20s):** Great founders invisible; diligence weeks; capital = networks  
+1. **Problem (20s):** Real anchor — the builder's own repo and sparse-network story. Great founders invisible; diligence takes weeks; capital = networks  
 2. **Insight (20s):** Code + claims can be a living graph — structure beats vibes  
-3. **Product (60s):** Live demo — source → graph → trust → memo → decision → **Play investment brief** (ElevenLabs)  
-4. **Differentiation (30s):** Persistent Founder Score + per-claim Trust + technical graph + voice brief for the investor  
+3. **Product (60s):** Live demo on the hero — Pipeline card → graph → **click the red CONTRADICTED claim, jump to the exact deck slide + graph node (the wow)** → cited streaming chat answer → 3 axes → memo → decision → **Play investment brief** (ElevenLabs closer)  
+4. **Differentiation (30s):** Persistent Founder Score + per-claim Trust + UA-derived technical graph with cited chat + voice brief for the investor  
 5. **Ask (20s):** Built for Challenge 02 (VC Brain); shaped for Venture Track upside  
 
 ---
@@ -631,10 +596,10 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 | Risk | Mitigation |
 |------|------------|
 | Live analyze too slow | Precompute demo graphs; live on one tiny repo |
-| Looks like UA clone | Own UX + VC workflow; attribution only in README |
+| UA-derived engine read as a wrapper | Say it plainly: UA pipeline + grounded chat are the core engine, applied to founder repos/decks; the VC surface (thesis, scoring, Memory, memo) is ours; attribution in README + LICENSE/NOTICE |
 | Hallucinated diligence | Trust status `unavailable`; never invent ARR |
 | Scope creep | Cut channel ML, real email send, fund ops |
-| Voice steals Challenge 02 time | Ship P0 TTS brief only; cut P1/P2 |
+| Voice steals Challenge 02 time | Ship the committed MP3 brief; realtime stays stretch-only; P1/P3 in backlog |
 | Looks like Negotiator entry | No price haggling; voice = diligence brief/intake only |
 | License | Read UA LICENSE; NOTICE for adapted files |
 
@@ -647,23 +612,25 @@ Never commit secrets. Demo mode works with precomputed graphs + mocked LLM fixtu
 - [ ] Graph explorer + at least one cited chat answer  
 - [ ] Chat UX: streaming responses; “Ask about this” from node click; highlight-to-ask from selected text  
 - [ ] Cold-start founder in demo set  
-- [ ] ElevenLabs P0: Play investment brief (or pre-rendered demo audio)  
-- [ ] ElevenLabs P2: realtime voice chat over graph (fallback: cut to P0 brief per §0 rule if core loop at risk)  
+- [ ] ElevenLabs: “Play investment brief” wired to the pre-rendered MP3 (live TTS optional)  
 - [ ] README + PLAN + DEMO_SCRIPT  
 - [ ] Attribution for Understand-Anything if code adapted  
 - [ ] Demo video MP4 H.264  
 - [ ] Project submitted under **Challenge 02 — The VC Brain** before deadline  
 
+Stretch, non-blocking (not required to submit): ElevenLabs realtime voice chat over the graph — only if all boxes above are green with time remaining.
+
 ---
 
 ## 18. Immediate next actions
 
-1. Create repo `foundergraph` (or team name) from this plan  
-2. Scaffold Next.js + Memory schema  
-3. Vendor/adapt graph schema + React Flow shell from Understand-Anything patterns  
-4. Seed demo data + precompute 3 graphs  
-5. Implement score → memo → decision  
-6. Film demo + submit  
+The app lives in **this repo** — no new repo is created; judges browse this remote.
+
+1. Write the requirements suite first (docs-first sequencing): `docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md` defines the approved 8-doc suite, which **replaces** the old `docs/specs/01–08` plan  
+2. **M0 in this repo:** scaffold the single Next.js app, .gitignore, env template, better-sqlite3; UA LICENSE check; platform submission draft + stub README pushed (live-URL check)  
+3. **Wave-0 spike (gate):** builder's real repo → real LLM call → graph rendered; capture provenance replay; author hero deck; pre-render hero MP3 (one real ElevenLabs call)  
+4. **M1–M5b** per the §0.5 build order (Memory → graph engine → scoring/trust → memo + decision + committed chat trio → MP3 brief), pushing at every block boundary  
+5. Feature freeze 03:00 ET → rehearse 3× offline → record video 04:00–05:30 → submit by 06:30  
 
 ---
 

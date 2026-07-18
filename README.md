@@ -5,7 +5,7 @@
 **Not submitting as:** 01 Negotiator — ElevenLabs is a **voice layer** on VC Brain only  
 **Product plan:** [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md)
 
-AI OS for deploying $100K checks in 24 hours — founder sourcing, technical knowledge graphs (Understand-Anything–inspired), Founder Score, Trust Scores, investment memos, and an ElevenLabs investor voice brief.
+AI OS for deploying $100K checks in 24 hours — founder sourcing, technical knowledge graphs powered by the Understand-Anything engine (core diligence pipeline), Founder Score, Trust Scores, investment memos, graph-grounded streaming chat, and an ElevenLabs investor voice brief.
 
 ---
 
@@ -41,4 +41,4 @@ Type in chat: `start` · `dryrun` · `retro` — see [CLAUDE.md](CLAUDE.md) and 
 
 ## Attribution
 
-Technical graph pipeline will be inspired by / adapted from [Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) under its license. The VC Brain product surface (thesis, scoring, Memory, memo) is original to this challenge.
+The core diligence engine (knowledge-graph pipeline + grounded chat) is derived from [Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) under its license, applied to founder repos and decks — attribution per LICENSE/NOTICE. The VC Brain product surface (thesis, scoring, Memory, memo, decision flow) is original to this challenge.

@@ -6,6 +6,8 @@
 |------|---------|
 | [`../VC-BRAIN-PLAN.md`](../VC-BRAIN-PLAN.md) | Full Challenge 02 spec, architecture, data model, build order (repo root) |
 | [product/TEAM-DISCUSSION-2026-07-18.md](product/TEAM-DISCUSSION-2026-07-18.md) | Distilled team discussion: repo-understanding features (now core of VC Brain diligence engine), user journey, credits |
+| [superpowers/specs/2026-07-18-vc-brain-requirements-design.md](superpowers/specs/2026-07-18-vc-brain-requirements-design.md) | Approved requirements-suite design (8 docs; replaces the old docs/specs/01–08 plan) |
+| [dispatch/plan-dialogue/2026-07-18-vc-brain-debate.md](dispatch/plan-dialogue/2026-07-18-vc-brain-debate.md) | Dual-model debate log behind VC-BRAIN-PLAN §0.5 (historical record; scope since updated by 20:50 BST ruling) |
 
 ## Ops — how we run the weekend
 

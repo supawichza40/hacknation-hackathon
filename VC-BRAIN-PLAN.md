@@ -28,6 +28,52 @@
 
 ---
 
+## 0.5 LOCKED EXECUTION PLAN v2 (post-debate, 2026-07-18 15:00 ET) — THIS SECTION WINS
+
+Product of a two-model adversarial debate (Claude Fable council vs GPT-5.6 sol council, Delphi cross-rebuttal, judged synthesis). Full objection log: `docs/dispatch/plan-dialogue/2026-07-18-vc-brain-debate.md`. Where this section conflicts with §§1b, 4–11, 13, 15, 17–18, **this section wins**. ~18h remain; ~13 effective build hours.
+
+> **⚠️ OPEN CONFLICT (human must resolve — see TODO.md):** a parallel session at 20:20–20:30 BST recorded explicit human scope ADDITIONS (streaming chat, node-click "Ask about this", text-highlight-to-ask, ElevenLabs P2 realtime voice → committed). This debate independently concluded the opposite direction (chat constrained to a rehearsed Q&A box, P2 → backlog) because both councils judged the 13h window can't absorb them without forfeiting higher-weighted scoring/memo work. Neither ruling silently overrides the other. Until the human picks, treat the additions as **post-freeze stretch**: they slot in ONLY if M3+M4 are green before 01:00 ET.
+
+### Verdict
+Winnable — but only with the ~40% surface cut below. The 24h M0–M6 map is dead; scoring/trust/memo (55% of judged weight) move forward; every demo artifact is precomputed; live paths are garnish on a demo that works with the network cable pulled.
+
+### Locked decisions
+1. **Single Next.js app** (`src/lib/{memory,ingest,graph,scoring,memo}`). No monorepo, no packages/, no vendor/. better-sqlite3, no ORM, no Postgres branch.
+2. **Two structured LLM calls, not eight agents:** (1) claim/evidence extractor, (2) axes+memo writer. Thesis fit, founder-history updates, and score math are deterministic TypeScript. Every LLM response schema-validated (zod), one repair attempt, then fall back to the captured real replay.
+3. **Provenance replay replaces mocked fixtures:** the Wave-0 spike's real run is captured (repo commit SHA, prompt version, raw model JSON, timestamp) and becomes the offline fallback for every later stage.
+4. **Epistemic integrity rules** (sol C1–C8): Opportunity carries `ScreeningFacts` (evidence-backed company facts + explicit unknowns) so thesis fit is computed, never invented. `contradicted` = two incompatible cited facts; absence of evidence = `unsupported`. Axis trend = "baseline" unless two dated observations exist (returning-founder demo has history rows). Evidence records = {artifactId, locator, excerpt}; claims/scores/memo cite those. Person dedup = normalized GitHub URL/email.
+5. **Real anchor:** the hero founder is the builder's own real GitHub repo + persona (real story; demo numbers synthetic but derived). Demo set = 3: hero (analyzed live), rich-GitHub showcase card (precomputed graph only), off-thesis greyed card with "fails thesis: check size" chip. Cold-start beat = hero's own sparse-network story; Founder-Score-persists beat = one seeded prior-application history row.
+6. **Wow moment (named, rehearsed):** click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible evidence. Voice brief is the closing beat, not the climax.
+7. **Chat = constrained Q&A box** in the graph node drawer: 2–3 rehearsed questions, answers must carry citations or the box refuses. First item on the T-8h cut ladder. No free-form chat page.
+8. **Voice = P0 only.** Pre-rendered MP3 (one real ElevenLabs call during the spike) is the stage path; "Play investment brief" button sits inside the rehearsed demo. P1/P2 → BACKLOG.md. Budget ~1h; if M3/M4 slip past 01:00 ET, cap drops to 30 min post-freeze.
+9. **API:** keep separate routes (/apply, /analyze, /score, /memo, /decide, /brief) but ONE UI action orchestrates staged, cacheable calls with progressive status. /chat constrained per (7); /intake/voice cut.
+10. **UA integration stays Mode B** — hour-0 task: read UA LICENSE (5 min) + NOTICE for adapted files. If license blocks or adaptation exceeds 45 min → drop to slim self-written pipeline.
+11. **UI = 4 surfaces:** Pipeline (thesis as a settings drawer), Diligence (Overview+Claims+Memo one scrolling page + decision CTA), Graph (node drawer + Q&A box), Apply.
+
+### Build order (ET, push at every block boundary — push == done)
+- **15:15–16:00 M0:** scaffold single app, .gitignore, env template, better-sqlite3, empty pages. UA license check. **Platform submission draft + stub README pushed** (verify whether form requires a live URL — this decides the deploy question). Push.
+- **16:00–17:30 WAVE-0 SPIKE (gate — nothing proceeds until green):** builder's real repo → real LLM structured call → knowledge-graph.json → rendered in React Flow. Capture provenance replay. Author hero deck + run it through the PDF parser (fails → pre-extracted slides JSON, no ceremony). One real ElevenLabs call → pre-render hero MP3 tonight. Push.
+- **17:30–19:00 M1:** trimmed Memory schema (+ScreeningFacts, Evidence, dedup rule), seed 3 opportunities + outbound cards with sourceChannel + founder history row. Pipeline page renders from DB. Push.
+- **19:00–21:30 M2 (hard timebox):** generalize spike into pipeline; precompute all demo graphs + deck-claims JSON; graph UI + node drawer + sourceRef. Domain grouping only if time remains inside the box. **Timebox breach ⇒ precomputed-only, live Analyze becomes stretch.** Push.
+- **21:30–00:30 M3:** claims table + Trust statuses (per locked rules) + contradiction wow moment + 3 axis scores (deterministic, rubric-based; trends per history rule) + thesis-fit chips. Push.
+- **00:30–02:30 M4:** memo (call 2) with gaps flagged "not disclosed", Invest/Pass/More-info write, Founder-Score-persists beat. Constrained Q&A box only if green. Push. **T-8h cut-ladder checkpoint at 01:00.**
+- **02:30–03:00 M5b:** wire Play-brief to MP3; live TTS only if trivially green.
+- **03:00 FEATURE FREEZE.** 03:00–04:00 rehearse golden path 3× offline; fix only path-breakers.
+- **04:00–05:30:** record demo video (MP4 H.264) on the green build; README + NOTICE; push everything. **T-4h checkpoint 05:00 = must be packaging.**
+- **05:30–06:30:** finalize submission under Challenge 02; verify the remote repo shows everything.
+- **06:30–09:00:** buffer/rest. Re-record only if something material improves. No new scope.
+
+### Cut ladder
+- **T-8h (01:00 ET), in order:** Q&A box → live TTS → live Analyze button (narrate precomputed) → live Apply path (seeded inbound) → thesis editing (read-only thesis.json).
+- **T-4h (05:00 ET), in order:** axis trends (static scores) → showcase card #2 → graph filters/domains → outreach draft → Founder-Score sparkline. Then STOP building: video, README, push, submit.
+- **Never cut:** hero diligence path (Pipeline card → precomputed graph → claims with ONE red contradicted claim click-jumping to evidence → 3 separate axes → memo with decision + flagged gaps) + provenance-backed real analysis + pre-rendered MP3 + video + pushed repo + submitted entry.
+
+### Open items (verify, don't assume)
+- Submission form live-URL requirement → checked at M0 platform draft.
+- ElevenLabs key/quota → proven or killed in the spike.
+
+---
+
 ## 1. Positioning (our idea, not a clone)
 
 ### What we are building

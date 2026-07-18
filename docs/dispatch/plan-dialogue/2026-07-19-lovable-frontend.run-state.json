@@ -1,0 +1,26 @@
+{
+  "run": "lovable-frontend",
+  "date": "2026-07-19",
+  "project_id": "a7405de7-87c8-48fc-803a-8a8f89f404ed",
+  "preview_url": "https://id-preview--a7405de7-87c8-48fc-803a-8a8f89f404ed.lovable.app",
+  "editor_url": "https://lovable.dev/projects/a7405de7-87c8-48fc-803a-8a8f89f404ed",
+  "workspace": "Supavich's Lovable (mvPqC5cG5cH6KIwSSrDN, pro)",
+  "budget": { "cap_tokens": 300000, "spent_est": 95000 },
+  "stages": {
+    "0_preflight": "done — Lovable MCP live",
+    "1_foundation": "done — 6 data files, 5 routes, login on-spec; DELTA stack=TanStack Start",
+    "2_pipeline": "in_progress — Lovable task k8146jn4x (Pipeline + dev state switcher)",
+    "3_diligence_wow": "pending",
+    "4_graph": "pending",
+    "5_apply": "pending",
+    "6_qa_browser": "pending",
+    "7_sol_final_audit": "pending",
+    "8_writeback_push": "pending"
+  },
+  "sol_audit": "done — 45 objections folded into DoD Sol-hardened QA script; DoD #10 fixed (frozen-contract).",
+  "open_unknowns": [
+    "upload MIME/size limits — TBD in docs, needs human approve",
+    "timer-chip computation/rounding — TBD in docs",
+    "React Flow + audio MP3 availability in Lovable sandbox — unproven until those stages"
+  ]
+}

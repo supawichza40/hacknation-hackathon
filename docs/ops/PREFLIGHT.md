@@ -6,6 +6,7 @@ Every external dependency gets a row BEFORE the idea is locked. The point: conve
 
 | Tool / API | Capability we need | Proven with a REAL call? | Result / ID captured | Can't-do list & workaround |
 |---|---|---|---|---|
+| Lovable MCP | auth + workspace roundtrip (get_me → list_workspaces → create/message/read_file/get_diff) | ☑ (2026-07-19 00:18 BST) | user `supawichza@gmail.com`; workspace `Supavich's Lovable` (id mvPqC5cG5cH6KIwSSrDN, **pro** plan, 2 existing projects); `project_variants: false` | Build loop = one conversational external agent → no parallel writers; React Flow / audio MP3 unproven until first build turn (brief fallbacks apply) |
 | _e.g. platform MCP server_ | _create invoice_ | ☐ | | |
 | _e.g. platform REST API_ | _authorise / approve_ | ☐ | | |
 | _e.g. auth (client credentials)_ | _token with correct scopes_ | ☐ | | |

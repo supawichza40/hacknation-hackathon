@@ -107,6 +107,7 @@ Dark mode · settings/profile/multi-user · portfolio-wide chat · additional da
 ## 8. Engineering constraints (so the prototype ports into the real app)
 
 - Vite + React + Tailwind + shadcn is fine (Lovable default). Keep ALL mock data in `src/data/*.json` — never inline in components.
+  - **DELTA 2026-07-19 (build):** Lovable's current default stack is **TanStack Start (TS)** with file-based routing (`src/routes/*.tsx`), not plain Vite. Kept — it *strengthens* portability to Next.js App Router (both are file-based routers) and satisfies the "no Vite-specific magic in components" rule. Components still stay per-section and data-driven from `src/data/*.json`.
 - Component per screen section; screens must not import each other's internals. The real app is Next.js App Router — keep components framework-portable (no Vite-specific magic in components).
 - Every state listed above must be reachable via a small dev-only "state switcher" control (bottom-right, collapsible) so the human can review every state without a backend.
 - Honest states everywhere: replay/simulated things are LABELED as replay ("replaying captured run"), never presented as live.

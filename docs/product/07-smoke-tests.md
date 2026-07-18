@@ -107,10 +107,10 @@ The demo-lite login gate (FR-AUTH) must not block automated smoke runs — the r
 
 ## One-command golden-path smoke
 
-Required future command (invoked by `pnpm check:done` — see 08-definition-of-done.md):
+Required future command (invoked by `npm run check:done` — see 08-definition-of-done.md):
 
 ```sh
-pnpm smoke:golden
+npm run smoke:golden
 ```
 
 ### Preconditions

@@ -10,7 +10,7 @@ These rules bind every Claude Code session in this repo for the duration of the 
 
 | Path | What it is | Read it when |
 |---|---|---|
-| `docs/product/VC-BRAIN-PLAN.md` | Challenge 02 product spec, architecture, build plan | Before any build / scope work on the app |
+| `VC-BRAIN-PLAN.md` | Challenge 02 product spec, architecture, build plan | Before any build / scope work on the app |
 | `docs/ops/RUBRIC.md` | Judging reverse-engineering. §0 = event facts, §0.5 = past winners, §1–6 = filled at challenge reveal | Before any scope/idea decision |
 | `docs/research/EVENT-DOSSIER.md` | Full pre-event research record | Before re-researching the event |
 | `docs/research/WINNERS.md` | Past Hack-Nation winners & patterns | Before ideation, specs, or pitch |

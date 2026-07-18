@@ -2,7 +2,7 @@
 
 **Event:** 18–19 July 2026 · **Deadline:** Sun 19 Jul, 9:00 AM ET  
 **Challenge:** [02 — The VC Brain](Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf) (Maschmeyer Group)  
-**Product plan:** [docs/product/VC-BRAIN-PLAN.md](docs/product/VC-BRAIN-PLAN.md)
+**Product plan:** [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md)
 
 AI OS for deploying $100K checks in 24 hours — founder sourcing, technical knowledge graphs (Understand-Anything–inspired), Founder Score, Trust Scores, and investment memos.
 
@@ -12,13 +12,13 @@ AI OS for deploying $100K checks in 24 hours — founder sourcing, technical kno
 
 ```
 ├── README.md                 ← you are here
+├── VC-BRAIN-PLAN.md          ← product spec & architecture
 ├── CLAUDE.md                 ← agent operating rules
 ├── TODO.md                   ← live status board
 ├── Topics/                   ← official challenge briefs (PDFs)
 ├── HackathonMaterials/       ← official event PDFs / assets
 └── docs/
     ├── README.md             ← full document map
-    ├── product/              ← what we’re building (VC Brain)
     ├── ops/                  ← how we run the weekend
     └── research/             ← event intel & past winners
 ```
@@ -27,7 +27,7 @@ AI OS for deploying $100K checks in 24 hours — founder sourcing, technical kno
 
 | Need | Go here |
 |------|---------|
-| Product spec & architecture | [docs/product/VC-BRAIN-PLAN.md](docs/product/VC-BRAIN-PLAN.md) |
+| Product spec & architecture | [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md) |
 | Challenge briefs | [Topics/](Topics/) |
 | Status / phase board | [TODO.md](TODO.md) |
 | Judging & schedule | [docs/ops/RUBRIC.md](docs/ops/RUBRIC.md) |

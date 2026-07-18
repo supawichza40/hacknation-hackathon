@@ -4,7 +4,7 @@
 
 | File | Purpose |
 |------|---------|
-| [product/VC-BRAIN-PLAN.md](product/VC-BRAIN-PLAN.md) | Full Challenge 02 spec, architecture, data model, build order |
+| [`../VC-BRAIN-PLAN.md`](../VC-BRAIN-PLAN.md) | Full Challenge 02 spec, architecture, data model, build order (repo root) |
 
 ## Ops — how we run the weekend
 

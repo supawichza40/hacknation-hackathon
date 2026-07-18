@@ -40,7 +40,7 @@ Winnable — but only with the ~40% surface cut below. Scoring/trust/memo (55% o
 2. **Two structured LLM calls, not eight agents:** (1) claim/evidence extractor, (2) axes+memo writer. Thesis fit, founder-history updates, and score math are deterministic TypeScript. Every LLM response schema-validated (zod), one repair attempt, then fall back to the captured real replay.
 3. **Provenance replay replaces mocked fixtures:** the Wave-0 spike's real run is captured (repo commit SHA, prompt version, raw model JSON, timestamp) and becomes the offline fallback for every later stage.
 4. **Epistemic integrity rules** (sol C1–C8): Opportunity carries `ScreeningFacts` (evidence-backed company facts + explicit unknowns) so thesis fit is computed, never invented. `contradicted` = two incompatible cited facts; absence of evidence = `unsupported`. Axis trend = "baseline" unless two dated observations exist (returning-founder demo has history rows). Evidence records = {artifactId, locator, excerpt}; claims/scores/memo cite those. Person dedup = normalized GitHub URL/email.
-5. **Real anchor:** the hero founder is the builder's own real GitHub repo + persona (real story; demo numbers synthetic but derived). Demo set = 3: hero (analyzed live), rich-GitHub showcase card (precomputed graph only), off-thesis greyed card with "fails thesis: check size" chip. Cold-start beat = hero's own sparse-network story; Founder-Score-persists beat = one seeded prior-application history row.
+5. **Real anchor:** the hero founder is the builder's own real GitHub repo + persona (real story; demo numbers synthetic but derived). Demo set = 3 pre-seeded + 1 live inbound (human ruling 2026-07-18 23:50 BST): hero (analyzed live), rich-GitHub showcase card (precomputed graph only), off-thesis greyed card with "fails thesis: check size" chip — plus a 4th opportunity arriving live through `/apply` during the demo. Cold-start beat = hero's own sparse-network story; Founder-Score-persists beat = one seeded prior-application history row.
 6. **Wow moment (named, rehearsed):** click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible evidence. Voice brief is the closing beat, not the climax.
 7. **Chat = streaming graph-grounded chat** (SSE): every answer must carry citations or the assistant refuses. Node-click "Ask about this" pre-scopes the question to that node; text-highlight-to-ask pre-scopes to the selection. **Committed, built in M4** — not gated on any checkpoint; sits at the **bottom** of the cut ladder (last-resort cut only).
 8. **Voice:** the pre-rendered MP3 investment brief (one real ElevenLabs call during the spike; "Play investment brief" button in the rehearsed demo) is **committed, never cut**. ElevenLabs realtime conversational voice over the graph = **optional stretch, only if time remains after committed scope is green**. P1 voice intake / P3 outbound → BACKLOG.md.
@@ -48,6 +48,7 @@ Winnable — but only with the ~40% surface cut below. Scoring/trust/memo (55% o
 10. **UA integration stays Mode B** — hour-0 task: read UA LICENSE (5 min) + NOTICE for adapted files. If license blocks or adaptation exceeds 45 min → drop to slim self-written pipeline.
 11. **UI = 4 surfaces:** Pipeline (thesis as a settings drawer), Diligence (Overview+Claims+Memo one scrolling page + decision CTA), Graph (node drawer + streaming cited chat), Apply.
 12. **Scope additions v3** (second dual-model debate, judged 2026-07-18 17:35 ET / 22:35 BST — log: `docs/dispatch/plan-dialogue/2026-07-18-scope-debate-v3.md`): R1 pipeline NL query box (+1.0h, M4) · R2 signal→decision timer chip (+0.5h, M4) · R3 evidence-backed sourcing stories (+0.75h, M1) · R4 one live thesis toggle (+0.5h, M1) · R5 reasoning step timeline from provenance metadata, never raw JSON (+0.5h, M2/M3) · R6 memo auto-"not disclosed" gaps (+0.25h, M4) · R7 GitHub sourcing scan captured at Wave-0, replayed deterministically — no live network call on stage (+1.0h). Total +4.5h; ladder placements below. Closes brief items 6, 23, 33 → 34/34 coverage.
+13. **Demo-lite auth (human ruling 2026-07-18 23:50 BST, backfills requirements-design locked decision):** one hard-coded investor login + public founder `/apply`; session cookie separates the two roles; ~1h build. No real user management.
 
 ### Build order (ET, push at every block boundary — push == done)
 - **15:15–16:00 M0:** scaffold single app, .gitignore, env template, better-sqlite3, empty pages. UA license check. **Platform submission draft + stub README pushed** (verify whether form requires a live URL — this decides the deploy question). Push.
@@ -58,8 +59,8 @@ Winnable — but only with the ~40% surface cut below. Scoring/trust/memo (55% o
 - **00:30–02:30 M4:** memo (call 2) with gaps flagged "not disclosed", Invest/Pass/More-info write, Founder-Score-persists beat, **+ streaming graph-grounded chat + node-click "Ask about this" + highlight-to-ask (committed)**. R1: pipeline NL query box (one compound sentence → one LLM call over all founders' ScreeningFacts → ranked, cited list). R2: "First signal → decision: N min" timer chip in the diligence header. R6: memo gaps[] auto-lists financials / cap table / DD log / exit as "not disclosed" when absent. Push. **T-8h cut-ladder checkpoint at 01:00.**
 - **02:30–03:00 M5b:** wire Play-brief to MP3; live TTS only if trivially green. Realtime conversational voice only if everything committed is already green.
 - **03:00 FEATURE FREEZE.** 03:00–04:00 rehearse golden path 3× offline; fix only path-breakers.
-- **04:00–05:30:** record demo video (MP4 H.264) on the green build; README + NOTICE; push everything. **T-4h checkpoint 05:00 = must be packaging.**
-- **05:30–06:30:** finalize submission under Challenge 02; verify the remote repo shows everything.
+- **04:00–05:30:** record demo video (**≤60 SEC** — hard cap, kickoff deck p38) + tech video (**≤60 sec**, stack/highlights/limitations) (MP4 H.264) on the green build; README + NOTICE; push everything. **T-4h checkpoint 05:00 = must be packaging.**
+- **05:30–06:30:** finalize submission under Challenge 02 on projects.hack-nation.ai — 150–300-word summary, both ≤60s videos (+ team video), 1-page PDF report, zipped code, dataset field (link or "N/A") — per docs/ops/SUBMISSION.md; verify the remote repo shows everything.
 - **06:30–09:00:** buffer/rest. Re-record only if something material improves. No new scope.
 
 ### Cut ladder
@@ -163,7 +164,7 @@ From Challenge 02 brief — MVP must demonstrate:
 | Thesis Engine | Configurable sectors, stage, geo, check size, ownership, risk | `thesis.json` + filter every recommendation |
 | Smart Data Collection | Heterogeneous ingest, validate, structure | GitHub clone + deck PDF + optional web signals → Memory |
 | Multi-Attribute Reasoning | NL queries beyond keywords | Pipeline NL query box (one-pass compound query over all ScreeningFacts, cited — R1) + per-opportunity graph chat |
-| Inbound | Deck + company name → screen | `/apply` flow |
+| Inbound | Company name + repo link → screen; deck optional (human ruling 2026-07-18 23:50 BST — no-deck cold start is a scored story) | `/apply` flow |
 | Outbound | Scan GitHub/hackathons → activate | Seeded outbound shortlist + “draft outreach” |
 | 3-axis screening | Founder / Market / Idea-vs-Market — NOT averaged; each with trend | Separate scores + trends in UI + memo |
 | Founder Score | Persists across applications, never resets | Stored on person entity in Memory |
@@ -439,7 +440,7 @@ The schedule — times, gates, pushes — lives in **§0.5 Build order**. This s
 - **M3 — Scoring + Trust:** claims table + Trust statuses (per §0.5 epistemic rules) + the red CONTRADICTED claim click-jump wow moment + 3 deterministic axis scores (trends per history rule) + thesis-fit chips + Founder Score update.
 - **M4 — Memo + Decision + Chat (committed):** memo (call 2) with gaps flagged "not disclosed"; Invest / Pass / More-info write; Founder-Score-persists beat; **streaming graph-grounded chat with citations-or-refuse, node-click "Ask about this", and text-highlight-to-ask**. R1: pipeline NL query box (one-pass compound query, ranked + cited). R2: signal→decision timer chip. R6: memo gaps[] auto-"not disclosed" for financials / cap table / DD log / exit.
 - **M5b — Voice:** wire "Play investment brief" to the pre-rendered MP3. Live TTS only if trivially green; realtime conversational voice only if everything committed is green (stretch).
-- **Freeze → submit:** per §0.5 — rehearse 3× offline, record video on the green build, README + NOTICE, push, submit under Challenge 02.
+- **Freeze → submit:** per §0.5 — rehearse 3× offline, record the two ≤60-sec videos (demo + tech) on the green build, README + NOTICE + 1-page PDF report + zipped code + 150–300-word summary, push, submit under Challenge 02.
 
 Cut in planning (→ `docs/ops/BACKLOG.md`): voice intake (P1), outbound voice notes (P3). (NL search over Memory was promoted to committed R1 by §0.5 decision 12.)
 
@@ -640,7 +641,9 @@ Never commit secrets. Demo mode works with precomputed graphs + the captured pro
 - [ ] ElevenLabs: “Play investment brief” wired to the pre-rendered MP3 (live TTS optional)  
 - [ ] README + PLAN + DEMO_SCRIPT  
 - [ ] Attribution for Understand-Anything if code adapted  
-- [ ] Demo video MP4 H.264  
+- [ ] Demo video **≤60 sec** (MP4 H.264) — hard cap per kickoff deck p38 / discord-info.md  
+- [ ] Tech video **≤60 sec** (stack, implementation highlights, limitations)  
+- [ ] 1-page PDF report + zipped code (.zip) + 150–300-word summary + dataset field ("N/A" or link) — full list in docs/ops/SUBMISSION.md  
 - [ ] Project submitted under **Challenge 02 — The VC Brain** before deadline  
 
 Stretch, non-blocking (not required to submit): ElevenLabs realtime voice chat over the graph — only if all boxes above are green with time remaining.
@@ -655,7 +658,7 @@ The app lives in **this repo** — no new repo is created; judges browse this re
 2. **M0 in this repo:** scaffold the single Next.js app, .gitignore, env template, better-sqlite3; UA LICENSE check; platform submission draft + stub README pushed (live-URL check)  
 3. **Wave-0 spike (gate):** builder's real repo → real LLM call → graph rendered; capture provenance replay; author hero deck; pre-render hero MP3 (one real ElevenLabs call)  
 4. **M1–M5b** per the §0.5 build order (Memory → graph engine → scoring/trust → memo + decision + committed chat trio → MP3 brief), pushing at every block boundary  
-5. Feature freeze 03:00 ET → rehearse 3× offline → record video 04:00–05:30 → submit by 06:30  
+5. Feature freeze 03:00 ET → rehearse 3× offline → record both ≤60s videos 04:00–05:30 → submit by 06:30  
 
 ---
 

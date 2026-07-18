@@ -32,7 +32,7 @@
 
 Product of a two-model adversarial debate (Claude Fable council vs GPT-5.6 sol council, Delphi cross-rebuttal, judged synthesis). Full objection log: `docs/dispatch/plan-dialogue/2026-07-18-vc-brain-debate.md`. Where this section conflicts with §§1b, 4–11, 13, 15, 17–18, **this section wins**. ~18h remain; ~13 effective build hours.
 
-> **⚠️ OPEN CONFLICT (human must resolve — see TODO.md):** a parallel session at 20:20–20:30 BST recorded explicit human scope ADDITIONS (streaming chat, node-click "Ask about this", text-highlight-to-ask, ElevenLabs P2 realtime voice → committed). This debate independently concluded the opposite direction (chat constrained to a rehearsed Q&A box, P2 → backlog) because both councils judged the 13h window can't absorb them without forfeiting higher-weighted scoring/memo work. Neither ruling silently overrides the other. Until the human picks, treat the additions as **post-freeze stretch**: they slot in ONLY if M3+M4 are green before 01:00 ET.
+> **✅ CONFLICT RESOLVED (human ruling, 2026-07-18 20:45 BST):** "voice optional; text and chat must work — hard rule." Graph-grounded chat (streaming responses, node-click "Ask about this", text-highlight-to-ask) is a **hard requirement, never cut**. ALL voice work — including P2 realtime and the P0 pre-rendered brief — is **optional garnish**, first on the cut ladder. Decisions 7–8 and the cut ladder below reflect this ruling.
 
 ### Verdict
 Winnable — but only with the ~40% surface cut below. The 24h M0–M6 map is dead; scoring/trust/memo (55% of judged weight) move forward; every demo artifact is precomputed; live paths are garnish on a demo that works with the network cable pulled.

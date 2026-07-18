@@ -1,0 +1,45 @@
+{
+  "name": "hacknation-hackathon",
+  "version": "1.0.0",
+  "description": "**Event:** 18–19 July 2026 · **Deadline:** Sun 19 Jul, 9:00 AM ET   **Challenge (locked):** [02 — The VC Brain](Topics/1784381921507-02-Maschmeyer-Group-The-VC-Brain.docx.pdf) (Maschmeyer Group)   **Not submitting as:** 01 Negotiator — ElevenLabs is a **voice layer** on VC Brain only   **Product plan:** [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supawichza40/hacknation-hackathon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/supawichza40/hacknation-hackathon/issues"
+  },
+  "homepage": "https://github.com/supawichza40/hacknation-hackathon#readme",
+  "dependencies": {
+    "@xyflow/react": "^12.11.2",
+    "better-sqlite3": "^12.11.1",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "7.0.2"
+  },
+  "allowScripts": {
+    "better-sqlite3@12.11.1": true,
+    "sharp@0.34.5": true
+  }
+}

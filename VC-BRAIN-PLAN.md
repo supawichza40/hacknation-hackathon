@@ -247,10 +247,9 @@ Store at: `data/graphs/{opportunityId}/knowledge-graph.json`
 ```
 foundergraph/                          # or vc-brain/
 ├── README.md                          # product pitch + setup + attribution
+├── VC-BRAIN-PLAN.md                   # THIS FILE (repo root)
 ├── LICENSE
 ├── NOTICE                             # Understand-Anything attribution if adapted
-├── docs/
-├── VC-BRAIN-PLAN.md                   # THIS FILE (repo root)
 ├── docs/
 │   ├── DEMO_SCRIPT.md
 │   └── JUDGING_CHECKLIST.md

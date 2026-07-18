@@ -6,7 +6,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 
 | Field | Value |
 |---|---|
-| **Event clock** | start: 2026-07-18 13:00 ET (hacking begins; kickoff 12:00 ET) · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET · ICT: start Sun 00:00 / deadline Sun 20:00 |
+| **Event clock** | start: 2026-07-18 12:15 ET (hacking; kickoff 11:15, reveal 12:05 — official PDF) · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET · ICT: hacking Sat 23:15 / deadline Sun 20:00 |
 | **Phase (see PLAYBOOK.md)** | 0 — Hour-0 Setup |
 | **Current gate & deadline** | T+0.5 — setup complete |
 | **Golden path status** | not started / mocked / REAL end-to-end ✅ |
@@ -25,6 +25,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 - [ ] Commit + push research updates (RUBRIC.md §0, TODO.md)
 
 ### Done (newest first, with commit)
+- [x] Research consolidated → docs/research/EVENT-DOSSIER.md; official participant PDF read (21 slides) + tracked in HackathonMaterials/; schedule corrected to PDF times (2026-07-14 00:30 ICT)
 - [x] Deep research: past editions 3rd–5th, winners (Spine/OmniCall), dual-track model, jury process, PT agenda → RUBRIC.md §0.5 (2026-07-10 ~23:55 ICT)
 - [x] Hour-0 env checks: repo outside sync folders, .gitignore complete, clean tree pushed (`1454ce5`, 2026-07-10 18:50 ICT)
 - [x] Repo created from hackathon-template → supawichza40/hacknation-hackathon (2026-07-10 18:45 ICT)

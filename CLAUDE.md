@@ -6,6 +6,27 @@ These rules bind every Claude Code session in this repo for the duration of the 
 
 **⚡ TRIGGER: when the human types `retro` (after an event), run the RETRO.md ritual — instructor-style, one step at a time: (1) ask for the winner announcements + anything observed about winning pitches; (2) fan out forensics agents over this repo's git history and the Claude session transcripts; (3) present the actual-vs-playbook diff with evidence; (4) propose the template patches one file at a time for approval; (5) commit as `retro: <event> → vN+1` and append the changelog line. When the human types `dryrun` (pre-event week), run RETRO.md's between-events checks: P0→P2 against a fictional event + one test prompt through every model arm.**
 
+## Document map (read the relevant row before re-deriving anything)
+
+| Path | What it is | Read it when |
+|---|---|---|
+| `RUBRIC.md` | Judging reverse-engineering. §0 = event facts (schedule, prizes, sponsors), §0.5 = past-edition winners/judging summary, §1–6 = filled at/after challenge reveal | Before any scope/idea decision |
+| `docs/research/EVENT-DOSSIER.md` | Full pre-event research record: official schedule (ET+ICT), competition math, tracks, sponsors, editions timeline, open gaps, full source URL list | Before re-researching anything about the event — check here first |
+| `docs/research/WINNERS.md` | Past Hack-Nation winners: index table (GitHub/live-demo/video/LinkedIn per winner), deep profiles (Spine, SynthShape, etc.), the 8-point cross-winner pattern, analysis TODO queue | Before ideation, spec-writing, or pitch-writing — steal the pattern, don't reinvent it |
+| `HackathonMaterials/` | Official source documents (event PDFs etc.) as received — ground truth, cited by RUBRIC.md/EVENT-DOSSIER.md | When verifying a claim the docs above cite back to it |
+| `PLAYBOOK.md` | Phase gates + timing (what to do at T+0, T+6, T+12...) | Every work block, per Session-conduct rule below |
+| `PROMPTS.md` | Compiled-prompt skeletons P0–P7 for instructor mode | When compiling the next step in `start`/`retro`/`dryrun` flow |
+| `PREFLIGHT.md` | Tool/API viability spikes — proven-with-a-real-call log | Hour 0–5, before depending on any external tool |
+| `SPECS.md`, `DESIGN.md` | Feature specs (post scope-freeze) and design tokens/register | After MASTERPLAN gate passes (P2b) |
+| `PITCH.md` | Pitch narrative + judge Q&A bank, maintained from day 1 | Continuously from kickoff |
+| `SUBMISSION.md` | Submission checklist/gates | Day 1 draft, then continuously |
+| `BACKLOG.md` | Ideas cut at scope freeze (with displacement test) | When tempted to add scope mid-event |
+| `WALKTHROUGH.md`, `SOLO-OPS.md` | Template usage guide / solo-operator variant of the process | Onboarding to the template itself, not the event |
+| `RETRO.md` | Post-event retro ritual + changelog of template versions | On `retro`/`dryrun` trigger only |
+| `TODO.md` | Live status board — current phase, now/next/done, decisions log | Start of every session, update at every phase boundary |
+| `README.md` | Repo-facing description | Rarely touched during the event |
+| `README.proposed.md` | ⚠️ Untracked draft README rewrite, not yet reviewed/merged — do not treat as current until a human decides keep/replace/discard | N/A until resolved |
+
 ## The Three Laws (override everything else)
 
 1. **Push == done.** Work that is not committed AND pushed does not exist — judges browse the remote, not your laptop. Commit at every green test; push at every phase boundary and after EVERY doc/screenshot edit in the submission window. *(Evidence: final submission docs + all 6 screenshots were never pushed; judges saw a version claiming half the real test count.)*

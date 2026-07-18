@@ -71,7 +71,7 @@ Every FR from 03-functional-requirements.md appears exactly once. No FR without 
 |---|---|---|
 | FR-THESIS-01 | Automated thesis fixture test + Pipeline inspection | Stored thesis fields load and deterministically change fit without inventing missing facts |
 | FR-THESIS-02 | SMK-M1-05 + screenshot if retained | R4 greys the check-size card, or read-only fallback formally recorded |
-| FR-PIPE-01 | `pnpm smoke:golden` Pipeline step | Exactly three planned cards in correct columns with required fields |
+| FR-PIPE-01 | `npm run smoke:golden` Pipeline step | Exactly three planned cards in correct columns with required fields |
 | FR-PIPE-02 | SMK-M1-04 + evidence-integrity test | R3 reason resolves to Evidence, or badge-only fallback recorded |
 | FR-PIPE-03 | SMK-M4-07 | Retained R1 returns ranked cited results; else cut status recorded |
 | FR-PIPE-04 | SMK-M2-05 with network disabled | Retained R7 deterministically pops the captured candidate; else seeded fallback passes |
@@ -102,7 +102,7 @@ Every FR from 03-functional-requirements.md appears exactly once. No FR without 
 | FR-DECIDE-01 | SMK-M4-03 | Each decision persists after reload; distinct from generated recommendation |
 | FR-DECIDE-02 | SMK-M4-08 | R2 renders from persisted timestamps per the human-approved formula |
 | FR-VOICE-01 | SMK-M5B-01 through SMK-M5B-03 | Local MP3 plays/pauses; script matches Memory; missing audio shows text fallback |
-| FR-DEMO-01 | Full `pnpm smoke:golden` with network disabled | Exactly three demo opportunities complete the retained golden path offline |
+| FR-DEMO-01 | Full `npm run smoke:golden` with network disabled | Exactly three demo opportunities complete the retained golden path offline |
 | FR-ATTR-01 | Manual LICENSE/NOTICE/README audit + adapted-file inventory | License decision recorded; all adapted code attributed, or self-written path used |
 
 ## Layer 3: automated gate
@@ -110,13 +110,13 @@ Every FR from 03-functional-requirements.md appears exactly once. No FR without 
 Required future command (a specification, not evidence it exists):
 
 ```sh
-pnpm check:done
+npm run check:done
 ```
 
-`pnpm check:done` shall:
+`npm run check:done` shall:
 
 1. Run the project's test, typecheck, lint, and build commands. Exact script names TBD (owner: human).
-2. Invoke `pnpm smoke:golden` with outbound network disabled.
+2. Invoke `npm run smoke:golden` with outbound network disabled.
 3. Validate all graph, claim, Evidence, score, memo, replay, scan, slides, and brief artifacts used by the retained demo.
 4. Fail on any dangling Evidence ID, invalid schema, missing required fallback, uncited completed chat answer, or a demo set other than the planned three opportunities.
 5. Confirm each retained cuttable feature passes and each formally cut feature has a passing fallback. Machine-readable cut-status format TBD (owner: human).
@@ -132,7 +132,7 @@ pnpm check:done
 | Product README | Pitch, setup, track framing, conditional UA attribution | `README.md` |
 | Locked plan | Scope source included in submission | `VC-BRAIN-PLAN.md` |
 | Requirements suite | These eight docs | `docs/product/01…08` |
-| Demo script | Rehearsed flow (plan §17 DEMO_SCRIPT) | Path TBD (owner: human) |
+| Demo script | Rehearsed flow (plan §17 DEMO_SCRIPT) | `docs/ops/DEMO-SCRIPT.md` — created at feature freeze from PITCH.md + SUBMISSION.md shot list |
 | License | Repo license present | `LICENSE` (plan §6) |
 | NOTICE | Present when UA code adapted | `NOTICE`, conditional |
 | Hero graph + claims | Validated precomputed artifacts | `data/demo/`, `data/graphs/` — exact paths TBD (owner: human) |

@@ -6,22 +6,24 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 
 | Field | Value |
 |---|---|
-| **Event clock** | start: 2026-07-18 12:15 ET · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET |
+| **Event clock** | reveal 12:50–13:00 ET · hacking begins 2026-07-18 13:00 ET (kickoff-deck correction) · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET |
 | **Challenge (locked)** | **02 — The VC Brain** · ElevenLabs = voice brief layer only (not Challenge 01) |
 | **Phase** | Spec locked → scaffold app ([docs/ops/PLAYBOOK.md](docs/ops/PLAYBOOK.md)) |
 | **Product plan** | [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md) |
 | **Golden path status** | not started |
-| **Last push** | `337e93c` @ 2026-07-18 20:45 BST (checkpoint, pre-reconciliation) |
+| **Last push** | doc-consistency batch @ 2026-07-19 00:58 BST on `dispatch/lovable-frontend` (prev HEAD `d863714`: M0 scaffold + Wave-0 spike) |
 | **Demo video** | not recorded |
 | **Submission** | no draft |
 
 ## Now / Next / Done
 
 ### Now
+- [ ] **Lovable prototype build (dispatch job, branch `dispatch/lovable-frontend`)** — driving Lovable MCP per [brief](docs/product/09-lovable-frontend-brief.md) against [DoD](docs/product/10-lovable-dod.md). Project `a7405de7`, preview https://id-preview--a7405de7-87c8-48fc-803a-8a8f89f404ed.lovable.app. Stage 1 (foundation+data) done; Stage 2 (Pipeline) building. Sol audit folded. Log: [dialogue](docs/dispatch/plan-dialogue/2026-07-19-lovable-frontend.md)
+- [x] Submission deliverables updated per event-info: 2×60s videos + 1-page report + zip (see [SUBMISSION.md](docs/ops/SUBMISSION.md)) — applied 2026-07-18
 - [ ] Apply debate-v3 adds R1–R7 (+4.5h) per VC-BRAIN-PLAN §0.5 decision 12 — slots: Wave-0/M1/M2/M4
 - [ ] Requirements suite FIRST (8 docs per [design doc](docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md): use cases, journeys, FR, NFR, screen map, external services, smoke tests, DoD) — docs-first sequencing confirmed by human 20:55 BST; this suite REPLACES the old docs/specs/01–08 plan
 - [ ] Then scaffold FounderGraph app per VC-BRAIN-PLAN §0.5 — in THIS repo (human ruling 20:55 BST)
-- [ ] Fill [docs/ops/RUBRIC.md](docs/ops/RUBRIC.md) §1–2 (Challenge 02 weights + track sentence verbatim) — overdue vs CLAUDE.md "before ideation" rule
+- [x] Fill [docs/ops/RUBRIC.md](docs/ops/RUBRIC.md) §1–2 — DONE 2026-07-18 (§1–§4 all filled via event-info integration; cross-ref + agentic-framing fixes 2026-07-19 00:37 BST)
 
 ### Next
 - [ ] Seed demo founders + precompute 3 knowledge graphs

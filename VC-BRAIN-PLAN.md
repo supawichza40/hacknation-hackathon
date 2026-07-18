@@ -529,7 +529,7 @@ Design notes for hackathon: clear hierarchy, evidence click-through, no vanity d
 
 ## 11. Demo dataset
 
-Prepare offline — exactly **3 opportunities** (§0.5 decision 5):
+Prepare offline — **3 pre-seeded opportunities**, plus a 4th arriving live through `/apply` during the demo (§0.5 decision 5, human ruling 2026-07-18 23:50 BST):
 1. **Hero** — the builder's own real GitHub repo + persona (real story; demo numbers synthetic but derived). Analyzed live (with provenance replay fallback). Carries the ONE red contradicted claim (two incompatible cited facts), the cold-start sparse-network beat, and a seeded prior-application history row for the Founder-Score-persists beat.
 2. **Rich-GitHub showcase card** — precomputed graph only.
 3. **Off-thesis greyed card** — “fails thesis: check size” chip.
@@ -576,14 +576,14 @@ Store under `data/demo/` with decks, repo mirrors, and precomputed `knowledge-gr
 
 | Layer | Choice |
 |-------|--------|
-| App | Next.js 15 (App Router) + TypeScript |
+| App | Next.js 16 (App Router; scaffolded 16.2.10) + TypeScript |
 | UI | Tailwind + shadcn/ui |
 | Graph viz | React Flow (+ dagre/elk layout) |
 | DB | SQLite via better-sqlite3 — no ORM, no Postgres branch |
 | LLM | OpenAI or Anthropic |
 | PDF | pdf-parse (fallback: pre-extracted slides JSON) |
 | Deploy | Pending the M0 submission-form live-URL check; Vercel if a live URL is required, otherwise local demo + recorded video |
-| Package mgr | pnpm |
+| Package mgr | npm (`package-lock.json` committed — scaffold reality; use `npm run`, not pnpm) |
 
 ---
 

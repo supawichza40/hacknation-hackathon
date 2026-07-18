@@ -4,6 +4,8 @@ Consolidated pre-event research. Compiled 2026-07-10/14 from web sweep + officia
 **Primary source:** [`HackathonMaterials/6th Hack-Nation Global AI Hackathon - Participants.PDF`](../../HackathonMaterials/) (21 slides, official).
 Referenced by docs/ops/RUBRIC.md §0/§0.5 (condensed). This file is the full record.
 
+> **CORRECTED POST-KICKOFF (2026-07-18, kickoff deck overrides this record):** reveal 12:50–13:00 ET · hacking begins 13:00 ET · **>170 judges** · **top-2 per challenge** reach finals · $50K+ total pool. Authoritative facts live in `docs/ops/RUBRIC.md` §0 + `docs/event-info/`. Numbers below are the pre-event PDF record, kept for provenance — do not cite them for current claims.
+
 ## 1. Official schedule (participant PDF p.2 — OVERRIDES website times)
 
 | When (ET) | When (ICT, UTC+7) | What |

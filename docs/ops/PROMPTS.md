@@ -138,7 +138,7 @@ Then to Claude: `Extract the CONSENSUS across these critiques (agreements only) 
 
 ```
 Gate passed. Generate the requirements suite per docs/superpowers/specs/2026-07-18-vc-brain-requirements-design.md §5
-— 8 docs (docs/product/USE-CASES.md … docs/product/DEFINITION-OF-DONE.md, plus docs/ops/SMOKE-TESTS.md) —
+— 8 docs (docs/product/01-use-cases.md … docs/product/08-definition-of-done.md, incl. 07-smoke-tests.md) —
 written FIRST, before scaffold, compressed to the §0.5 clock.
 Header on every doc: track sentence verbatim · real anchor (builder-as-hero, own repo) · wow moment
 (red CONTRADICTED claim → exact deck slide + graph node).

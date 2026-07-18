@@ -24,16 +24,18 @@ Humans can't describe the design they want, but they can always pick. Claude ask
 
 Then Claude generates **2–3 quick direction boards** (the same golden-path screen rendered in each candidate direction, as throwaway HTML) — the human points at one, may say "that one but warmer," and §2 below is filled and FROZEN. Total cost: ~5 minutes + one render cycle. This interview exists because its absence cost ~5.5 hours of rebuild churn at the July 2026 event.
 
-| Decision | Value |
+| Decision | Value (FROZEN 2026-07-19 00:05 BST — human interview picks) |
 |---|---|
-| Product type | _e.g. dashboard / workflow app_ |
-| Persona (REAL person/business) | _name them_ |
-| Tone | _e.g. calm, trustworthy, accountant-grade_ |
-| Light or dark for the demo | _pick ONE; verify the deployed URL matches_ |
-| Color tokens | `--bg` · `--surface` · `--text` · `--muted` · `--accent` · `--positive` · `--negative` |
-| Type scale | _display / heading / body / mono-for-numbers_ |
-| Spacing unit | _e.g. 4px base_ |
-| Component library | _e.g. shadcn/ui — decide once_ |
+| Product type | Investor diligence dashboard ("investor OS"), 4 surfaces |
+| Persona (REAL person/business) | Supawich — solo builder-investor; hero founder = his real ECC repo |
+| Tone | Calm, professional, evidence-first — Linear register ("Linear's cousin for VC diligence") |
+| Light or dark for the demo | LIGHT (final; projector rule) |
+| Color tokens | `--bg #FAFAFA` · `--surface #FFFFFF` · `--text #17171C` · `--muted #6E6E7A` · `--accent #4F46E5` indigo · `--positive #0F7B4D` · `--negative #C92A2A` · `--warning #B7791F` |
+| Type scale | Inter UI: 24 title / 16 section / 14 body · JetBrains Mono 13 for ALL numbers/IDs · 11 uppercase labels |
+| Spacing unit | 4px base; radius 6px max; borders over shadows |
+| Component library | shadcn/ui + Tailwind |
+
+Full external-builder brief (self-contained, Lovable-ready): `docs/product/09-lovable-frontend-brief.md`.
 
 ## 3. Hard rules (anti-slop, demo-first)
 

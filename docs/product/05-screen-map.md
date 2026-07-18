@@ -105,7 +105,7 @@ The never-cut golden path starts at Pipeline with the seeded inbound hero. Sourc
 | Source target missing | Broken-locator error with evidence ID | Return to claim/node; no silent redirect |
 | Reasoning unavailable | R5 entry absent or marked cut | Continue through direct Evidence links |
 
-> Conflict (reported): the suite design's guided "start here" repo tour has no plan-v3 contract, so it is not mapped here — human ruling needed.
+> Resolved 2026-07-19 00:05 BST: R8 guided tour committed (plan §0.5 d14) — precomputed "Start here" tour overlay on this screen: 5–10 ordered steps from stored JSON, highlights current node, dims rest, prev/next. T-4h ladder placement. Adds a `tour active` state.
 
 ## Screen 4: Apply
 
@@ -142,7 +142,8 @@ The never-cut golden path starts at Pipeline with the seeded inbound hero. Sourc
 | Reasoning timeline | Diligence and/or Graph | Steps from provenance metadata, never raw model JSON | R5, cuttable |
 | Claims evidence target | Diligence → Graph/deck context | Exact slide + graph node for the hero contradiction | Never cut |
 | Audio control | Diligence | Play/pause local MP3; script fallback | Never cut |
-| Login gate | Investor surfaces | Single demo credential; session cookie | Demo-lite (design §1); plan backfill flagged |
+| Login gate | Investor surfaces | Single demo credential; session cookie | Demo-lite (plan §0.5 d13) |
+| Tour overlay | Graph | Precomputed ordered steps (node id + caption) from JSON; no live LLM | R8 (plan §0.5 d14), cuttable at T-4h |
 
 ## Design direction
 
@@ -152,5 +153,4 @@ Clear hierarchy, evidence click-through, no vanity dashboards; brand for "invest
 
 - Additional dashboard, workspace, onboarding, portfolio, fund-ops, outreach, voice-intake, and realtime-voice screens.
 - A mandatory Apply screen.
-- Guided graph-tour UI until the plan defines it.
 - Auth screens beyond the demo-lite login gate.

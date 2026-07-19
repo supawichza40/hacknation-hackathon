@@ -11,6 +11,20 @@ const nextConfig: NextConfig = {
   // Hide the dev-mode floating Next.js indicator so screen recordings and
   // screenshots stay clean (development-only UI; no production effect).
   devIndicators: false,
+  // diligence.ts's dynamic fs reads make Turbopack's file tracing pull the WHOLE
+  // repo (docs, PDFs, demo data) into the build trace — enough to blow the memory
+  // cap on Render's build container (build died silently right after compile).
+  // These dirs are never imported by route code; on Render's native Node runtime
+  // the full repo is on disk at runtime anyway, so excluding them from the trace
+  // changes nothing at runtime.
+  outputFileTracingExcludes: {
+    "*": ["./docs/**", "./HackathonMaterials/**", "./Topics/**", "./data/**", "./.ua/**"],
+  },
+  // One worker for page-data collection/static generation — N parallel Node
+  // workers each load route bundles (incl. the better-sqlite3 native addon) and
+  // together exceed small build containers. All routes are dynamic; build-time
+  // parallelism buys nothing here.
+  experimental: { cpus: 1 },
 };
 
 export default nextConfig;

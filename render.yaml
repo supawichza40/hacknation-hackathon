@@ -35,6 +35,12 @@ services:
       # it). Guards against Render's post-2026-04-21 default of Node 24.
       - key: NODE_VERSION
         value: 26.3.1
+      # Cap the V8 heap well under the container limit (starter = 512 MB) so Node
+      # GCs instead of ballooning into a silent cgroup OOM kill. Applies to build
+      # AND runtime (Render env vars are set for both); build verified locally
+      # under this cap on 2026-07-19.
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=400
       # Demo login credentials — Render prompts for these at Blueprint creation.
       - key: DEMO_INVESTOR_EMAIL
         sync: false

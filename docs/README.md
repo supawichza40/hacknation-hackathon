@@ -33,6 +33,14 @@
 | [research/EVENT-DOSSIER.md](research/EVENT-DOSSIER.md) | Schedule, tracks, sponsors, sources |
 | [research/WINNERS.md](research/WINNERS.md) | Past winners & patterns |
 
+## Event info — this edition's official facts (`event-info/`)
+
+| File | Purpose |
+|------|---------|
+| [event-info/discord-info.md](event-info/discord-info.md) | Discord-captured event ops: prizes, submission checklist + deadline, teams, API credits |
+| `event-info/Sat_Global_Kickoff.pdf` | Official kickoff deck — judging criteria (p16), schedule/finals (p9), prizes (p10–11), rules + checklist (p37–38) |
+| `event-info/Rules & Submission guide.docx.pdf` | REUSED Hackathon-4 template — format guidance only; its dates/links are stale |
+
 ## Official materials (repo root)
 
 | Path | Purpose |

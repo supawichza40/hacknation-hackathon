@@ -19,6 +19,7 @@ These rules bind every Claude Code session in this repo for the duration of the 
 | `docs/research/WINNERS.md` | Past Hack-Nation winners & patterns | Before ideation, specs, or pitch |
 | `Topics/` | Official challenge PDFs (01–06) | When reading a challenge brief |
 | `HackathonMaterials/` | Official event PDFs / assets | When verifying cited claims |
+| `docs/event-info/` | Official this-edition event ops: prizes, submission checklist, kickoff deck | Before submission work or prize/deadline claims |
 | `docs/ops/PLAYBOOK.md` | Phase gates + timing | Every work block |
 | `docs/ops/PROMPTS.md` | Prompt skeletons P0–P7 for instructor mode | When compiling the next `start`/`retro`/`dryrun` step |
 | `docs/ops/PREFLIGHT.md` | Tool/API viability spikes | Hour 0–5, before depending on external tools |

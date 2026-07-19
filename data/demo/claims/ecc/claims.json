@@ -1,19 +1,27 @@
 [
   {
-    "id": "c1",
-    "text": "ECC cuts agent latency and token spend without touching your prompts.",
-    "slideNo": 1,
+    "id": "product-identity",
+    "text": "ECC is a profiler and optimizer that sits under the agent harness.",
+    "slideNo": 3,
     "status": "unsupported",
     "evidence": [
       {
-        "locator": "deck://ecc/slide/1",
-        "excerpt": "Cut agent latency and token spend without touching your prompts."
+        "locator": "deck://ecc/slide/3",
+        "excerpt": "ECC: a profiler and optimizer that sits under the harness"
+      },
+      {
+        "locator": "kg://founder-repo/README.md",
+        "excerpt": "Marketing entry point for ECC, the harness-native agent operating system; lists stars, sponsors, guides, and version history across harnesses."
+      },
+      {
+        "locator": "kg://founder-repo/AGENTS.md",
+        "excerpt": "Agent instruction doc: 67 agents, 271 skills, 92 commands, core principles, orchestration, security, testing, and workflow policy."
       }
     ]
   },
   {
-    "id": "c2",
-    "text": "ECC is a profiler that instruments every agent hop (tool calls, model routes, token cost) with zero prompt changes.",
+    "id": "hop-instrumentation",
+    "text": "ECC instruments every agent hop — tool calls, model routes, token cost — with zero prompt changes.",
     "slideNo": 3,
     "status": "unsupported",
     "evidence": [
@@ -24,7 +32,7 @@
     ]
   },
   {
-    "id": "c3",
+    "id": "cheapest-model-auto-routing",
     "text": "ECC auto-routes each step to the cheapest model that still passes its eval.",
     "slideNo": 3,
     "status": "unsupported",
@@ -34,17 +42,13 @@
         "excerpt": "Auto-routes each step to the cheapest model that still passes its eval."
       },
       {
-        "locator": "kg://ecc/node/23",
-        "excerpt": "Layered provider config resolution: Provider/model chosen from explicit arg, then env vars, then saved .llm.env file, defaulting to claude."
-      },
-      {
-        "locator": "kg://ecc/node/17",
-        "excerpt": "Provider factory resolving type from arg, LLM_PROVIDER env, or saved .llm.env; maps ProviderType to class."
+        "locator": "kg://founder-repo/layered-provider-config-resolution",
+        "excerpt": "Provider/model chosen from explicit arg, then env vars, then saved .llm.env file, defaulting to claude."
       }
     ]
   },
   {
-    "id": "c4",
+    "id": "regression-gate",
     "text": "A regression gate blocks any change that makes an agent slower or more expensive.",
     "slideNo": 3,
     "status": "unsupported",
@@ -56,8 +60,8 @@
     ]
   },
   {
-    "id": "c5",
-    "text": "ECC drops in beside existing harnesses with no rewrite and no lock-in (cross-harness portability).",
+    "id": "cross-harness-drop-in",
+    "text": "ECC drops in beside existing harnesses with no rewrite and no lock-in.",
     "slideNo": 3,
     "status": "verified",
     "evidence": [
@@ -66,8 +70,8 @@
         "excerpt": "Drops in beside existing harnesses; no rewrite, no lock-in."
       },
       {
-        "locator": "kg://ecc/node/28",
-        "excerpt": "Cross-harness portability: Same repo ships across Codex, Claude Code, Cursor, OpenCode, Gemini, Zed, and Copilot harnesses."
+        "locator": "kg://founder-repo/cross-harness-portability",
+        "excerpt": "Same repo ships across Codex, Claude Code, Cursor, OpenCode, Gemini, Zed, and Copilot harnesses."
       }
     ]
   },
@@ -92,7 +96,19 @@
     ]
   },
   {
-    "id": "c7",
+    "id": "live-latency-dashboard",
+    "text": "A live dashboard traces, ranks, and cost-attributes every agent hop in real time.",
+    "slideNo": 4,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/4",
+        "excerpt": "Every hop traced, ranked, and attributed to a cost in real time."
+      }
+    ]
+  },
+  {
+    "id": "per-run-pricing",
     "text": "ECC is priced per traced agent-run.",
     "slideNo": 5,
     "status": "unsupported",
@@ -102,14 +118,14 @@
         "excerpt": "Sits next to the tracing tools teams already pay for, priced per traced agent-run."
       },
       {
-        "locator": "kg://ecc/node/41",
-        "excerpt": "OSS is MIT-licensed with paid Pro tier: Repo is MIT-licensed forever; ECC Pro GitHub App ($19/seat/mo) funds private-repo hosting."
+        "locator": "kg://founder-repo/oss-mit-with-paid-pro-tier",
+        "excerpt": "Repo is MIT-licensed forever; ECC Pro GitHub App ($19/seat/mo) funds private-repo hosting."
       }
     ]
   },
   {
-    "id": "c8",
-    "text": "ECC harness instrumentation is shipped and open-sourced.",
+    "id": "shipped-open-source",
+    "text": "A working version of ECC has shipped and is open-sourced.",
     "slideNo": 6,
     "status": "verified",
     "evidence": [
@@ -118,17 +134,17 @@
         "excerpt": "Working harness instrumentation shipped and open-sourced."
       },
       {
-        "locator": "kg://ecc/node/41",
-        "excerpt": "OSS is MIT-licensed with paid Pro tier: Repo is MIT-licensed forever."
+        "locator": "kg://founder-repo/oss-mit-with-paid-pro-tier",
+        "excerpt": "Repo is MIT-licensed forever; ECC Pro GitHub App ($19/seat/mo) funds private-repo hosting."
       },
       {
-        "locator": "kg://ecc/node/1",
-        "excerpt": "README.md: Marketing entry point for ECC, the harness-native agent operating system; lists stars, sponsors, guides, and version history across harnesses."
+        "locator": "kg://founder-repo/package.json",
+        "excerpt": "npm package manifest for ecc-universal v2.0.0; declares files shipped (agents, skills, hooks, rules, scripts, mcp-configs) and metadata."
       }
     ]
   },
   {
-    "id": "c9",
+    "id": "design-partners",
     "text": "9 design partners are running ECC against their own agent stacks.",
     "slideNo": 6,
     "status": "unsupported",
@@ -140,7 +156,7 @@
     ]
   },
   {
-    "id": "c10",
+    "id": "token-cost-reduction",
     "text": "A median 38% token-cost reduction was observed across partner workloads.",
     "slideNo": 6,
     "status": "unsupported",
@@ -152,7 +168,7 @@
     ]
   },
   {
-    "id": "c11",
+    "id": "stars-contributors",
     "text": "ECC has 410 GitHub stars and 27 external contributors in the first 8 weeks.",
     "slideNo": 6,
     "status": "unsupported",
@@ -160,18 +176,10 @@
       {
         "locator": "deck://ecc/slide/6",
         "excerpt": "410 GitHub stars, 27 external contributors in the first 8 weeks."
-      }
-    ]
-  },
-  {
-    "id": "c12",
-    "text": "Supawich is the solo founder and sole author of the ECC harness.",
-    "slideNo": 7,
-    "status": "unsupported",
-    "evidence": [
+      },
       {
-        "locator": "deck://ecc/slide/7",
-        "excerpt": "Supawich — solo founder, builder, sole author of the ECC harness."
+        "locator": "kg://founder-repo/README.md",
+        "excerpt": "lists stars, sponsors, guides, and version history across harnesses"
       }
     ]
   }

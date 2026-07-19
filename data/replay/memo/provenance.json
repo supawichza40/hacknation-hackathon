@@ -3,38 +3,38 @@
   "source": "ECC screening facts + deck claims + deterministic axis scores + knowledge graph",
   "promptVersion": "vc-memo-v1",
   "model": [
-    "claude-opus-4-8"
+    "claude-fable-5"
   ],
   "generator": "claude -p --output-format json (subscription auth, headless)",
-  "isoTimestamp": "2026-07-19T01:44:14.682Z",
-  "durationMs": 89534,
-  "totalCostUsd": 1.209019,
+  "isoTimestamp": "2026-07-19T03:31:57.624Z",
+  "durationMs": 123619,
+  "totalCostUsd": 2.63241,
   "steps": [
     {
       "stage": "assemble",
-      "startedAt": "2026-07-19T01:42:22.773Z",
+      "startedAt": "2026-07-19T03:29:27.951Z",
       "note": "12 claims, 3 axes, 7 gap rows"
     },
     {
       "stage": "llm-memo",
-      "startedAt": "2026-07-19T01:42:22.775Z",
+      "startedAt": "2026-07-19T03:29:27.962Z",
       "promptVersion": "vc-memo-v1",
       "note": "claude -p investment-memo writer"
     },
     {
       "stage": "validate-failed",
-      "startedAt": "2026-07-19T01:43:22.033Z",
+      "startedAt": "2026-07-19T03:31:05.974Z",
       "note": "section thesisFit cites unknown ref \"ev-ecc-why\""
     },
     {
       "stage": "repair",
-      "startedAt": "2026-07-19T01:43:22.033Z",
+      "startedAt": "2026-07-19T03:31:05.974Z",
       "promptVersion": "vc-memo-v1",
       "note": "re-prompt with validation error"
     },
     {
       "stage": "validate",
-      "startedAt": "2026-07-19T01:44:14.682Z",
+      "startedAt": "2026-07-19T03:31:57.624Z",
       "note": "zod + grounding passed after repair"
     }
   ]

@@ -1,4 +1,6 @@
 {
+  "artifact": "graph:ecc",
+  "source": "supawichza40/ECC (github.com/affaan-m/ECC)",
   "spike": "wave-0-ecc-knowledge-graph",
   "repo": "supawichza40/ECC (github.com/affaan-m/ECC)",
   "repoCommitSha": "2bc924faf2f8e893bfe0af86b1931283693c30ae",

@@ -24,6 +24,8 @@
 | **2:30–2:40** | **Voice-brief closer** | Click **▶ Play investment brief** | "And the investor brief, read out — voiced by ElevenLabs, with an honest text fallback when the audio isn't wired." | Click Play investment brief. If audio isn't live, the script panel is the honest fallback — read one line from it. |
 | **2:40–3:00** | **Close — track sentence** | Diligence memo on screen | "That's the VC Brain that deploys $100K checks in 24 hours: sources founders, builds the graph, scores on three axes, writes the memo. Then stop talking." | Stop clicking. Hold the memo. Stop talking. |
 
+> **Optional scan beat (if you swap one in): order matters.** The **GitHub** scan replay is what pops the hidden PipeWarden card ("threshold crossed" — the R7 reveal); the **Tavily** scan replay shows the sourcing ladder (sponsor beat, top hit Wrap 0.9006). Run GitHub for the reveal, Tavily for the sponsor visibility — a Tavily-first click does NOT reveal PipeWarden.
+
 ---
 
 ## The one breath (if a judge asks "how does it work") — 2:15 slot or Q&A

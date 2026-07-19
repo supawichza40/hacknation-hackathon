@@ -1,7 +1,7 @@
 {
   "question": "What does the routing layer actually do?",
   "slug": "ecc",
-  "answer": "The routing layer is the provider resolver: a factory that picks which LLM backend to use. It resolves the provider type from an explicit arg, then the LLM_PROVIDER env var, then the saved .llm.env file, defaulting to claude, and maps the chosen ProviderType to its adapter class. Its _PROVIDER_MAP wires six backends — Astraflow, Astraflow_CN, Atlas, Claude, OpenAI, and Ollama.",
+  "answer": "The closest thing to a routing layer in these nodes is the provider resolver: a factory that picks which LLM backend to use and returns the matching adapter class. It resolves the provider type in layers — explicit argument first, then the LLM_PROVIDER environment variable, then a saved .llm.env file — defaulting to claude. Its _PROVIDER_MAP wires six backends (Astraflow, Astraflow_CN, Atlas, Claude, OpenAI, Ollama), and the .llm.env file it reads is written by the CLI selector's save_config.",
   "citations": [
     {
       "nodeId": "provider-resolver",
@@ -9,11 +9,15 @@
     },
     {
       "nodeId": "c-config-resolution",
-      "quote": "chosen from explicit arg, then env vars, then saved .llm.env file, defaulting to claude"
+      "quote": "explicit arg, then env vars, then saved .llm.env file, defaulting to claude"
     },
     {
       "nodeId": "claim-six-providers",
-      "quote": "resolver's _PROVIDER_MAP wires Astraflow, Astraflow_CN, Atlas, Claude, OpenAI, and Ollama"
+      "quote": "_PROVIDER_MAP wires Astraflow, Astraflow_CN, Atlas, Claude, OpenAI, and Ollama"
+    },
+    {
+      "nodeId": "claim-env-persist",
+      "quote": "read back by resolver's _read_saved_llm_config"
     }
   ],
   "provenance": {
@@ -21,11 +25,11 @@
     "source": "ECC knowledge graph (nodes only) — rehearsed Q&A capture",
     "promptVersion": "graph-chat-v1",
     "model": [
-      "claude-opus-4-8"
+      "claude-fable-5"
     ],
     "generator": "claude -p --output-format json (subscription auth, headless)",
-    "isoTimestamp": "2026-07-19T01:43:04.970Z",
-    "durationMs": 17155,
-    "totalCostUsd": 0.550386
+    "isoTimestamp": "2026-07-19T03:40:12.984Z",
+    "durationMs": 17261,
+    "totalCostUsd": 1.19438
   }
 }

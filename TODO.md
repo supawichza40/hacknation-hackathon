@@ -8,7 +8,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 |---|---|
 | **Event clock** | reveal 12:50–13:00 ET · hacking begins 2026-07-18 13:00 ET (kickoff-deck correction) · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET |
 | **Challenge (locked)** | **02 — The VC Brain** · ElevenLabs = voice brief layer only (not Challenge 01) |
-| **Phase** | Build complete + gated — golden path green, check:done Layer-3 wired (see [verify report](docs/dispatch/plan-dialogue/2026-07-19-verify-report.md)) |
+| **Phase** | **Phase 6 — frozen submission runway** (2026-07-19 10:20 BST). Browser-verified golden path + card-click fix shipped; submission pack ready: [SUBMISSION-COPY.md](docs/ops/SUBMISSION-COPY.md) + `~/Desktop/foundergraph-submission.zip` + `~/Desktop/foundergraph-report.pdf`. HUMAN: flip repo public → draft submission → record 3 videos (hook stat = "118 hours", HBR) → upload → confirm submitted before 09:00 ET |
 | **Product plan** | [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md) |
 | **Golden path status** | GREEN — `smoke:golden` 13/13 beats offline on Node 26.3.1; DoD Layer-1 29/36 (7 open = human-eyeball UX / unbuilt MP3 / cold-start) |
 | **Last push** | verify + DoD-reconcile batch @ 2026-07-19 (this commit) on `dispatch/lovable-frontend` |

@@ -1,0 +1,37 @@
+{
+  "run": "overnight-build",
+  "date": "2026-07-19",
+  "approved": "2026-07-19 ~00:55 BST — user asleep; rulings delegated: npm-scripts YES, away ~7h, ElevenLabs SKIP (script fallback), Topics PDFs RESTORED, sol+ollama CONFIRMED",
+  "budget": {"cap_tokens": 1500000, "spent_est": 0, "wallclock_stop": "2026-07-19 08:30 BST"},
+  "acceptance": [
+    "golden path e2e on seeded data, driven not just tested",
+    "spike artifacts in data/replay/ with provenance",
+    "4 surfaces functional, DESIGN.md tokens, honest replay labels",
+    "smoke green; traversal test before upload handler; no float money; no silent success-defaults",
+    "pushed every wave; TODO.md + this file current; ladder cuts logged"
+  ],
+  "subtasks": {
+    "0-preflight+1-scaffold": {"status": "DONE", "commit": "90de61c on dispatch/lovable-frontend", "note": "BRANCH: tree sits on dispatch/lovable-frontend (Lovable session's branch) — all overnight commits land there; MERGE TO MAIN is a morning task", "tokens": 48000},
+    "0b-plan-attack": {"status": "running-parked", "agent": "plan-attack (2 codex runs in flight)", "model": "opus+sol"},
+    "2-spike+3-render": {"status": "DONE", "commit": "d863714", "note": "GATE GREEN: real opus call, 42n/49e zod-pass, rendered 200, provenance complete. UA=MIT, own slim schema used. fs-read note for deploy.", "tokens": 60000},
+    "6-M1-schema-seed-pipeline": {"status": "DONE", "commit": "b429eb7", "note": "4/4 tests, curl-proven; DB gitignored — README must say `npm run seed` first (morning)", "tokens": 62000},
+    "4-deck": {"status": "DONE", "commit": "eacc5b5", "note": "8 slides, contradiction planted verbatim slide 4, PDF skipped (T1)", "tokens": 12000},
+    "5-scan-capture": {"status": "DONE", "commit": "c5b00c7", "note": "115 repos, deterministic replay verified byte-identical", "tokens": 22000},
+    "7-M2-graph-engine-TIMEBOX-90m": {"status": "running", "agent": "eng-m2 coordinator", "model": "opus", "started": "2026-07-19 00:57 BST"},
+    "8-M3-scoring-claims-trust": {"status": "pending", "depends": ["7"]},
+    "9-M4-memo-decision-R1-chat": {"status": "pending", "depends": ["8"]},
+    "10-M5-auth-apply-polish": {"status": "pending", "depends": ["9"]},
+    "11-redteam-rolling": {"status": "pending", "depends": ["7"], "note": "sol+gpt-oss+nemotron diff panel each wave 2-of-3 gate"},
+    "12-verify-smoke-DoD": {"status": "pending", "depends": ["10"]},
+    "13-synth-report-push-notify": {"status": "pending", "depends": ["12"]}
+  },
+  "unknowns_ledger": [
+    "claude CLI headless structured-output reliability under load — verify at spike",
+    "UA license check (plan §5 hour-0 task) — scaffold worker or spike worker must confirm before porting UA code",
+    "parallel Lovable session may touch repo docs — workers must not touch docs/product/09 or Lovable outputs",
+    "MORNING: gh search star counts look synthetic (test-tenant index, e.g. 230930 stars on 2026 repo) — scan capture + determinism fine, but demo narrative may want believable display numbers; decide curate-vs-caption",
+    "MORNING: merge dispatch/lovable-frontend -> main before submission (judges browse main)",
+    "MORNING: contradiction evidence changed — real repo has NO routing benchmark (no 340ms); deck speakerNote fixed 83c204e; update pitch script + Lovable brief 09 mock data to match"
+  ],
+  "resume_instructions": "Fresh session: read this file + TODO.md, launch first pending subtask whose depends are all done. Spawn prompts follow the envelope pattern in the dispatch plan (chat log 2026-07-19 ~00:45 BST)."
+}

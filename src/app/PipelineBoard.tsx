@@ -1,7 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { evaluateThesisFit, formatUsd, type ThesisView } from "@/lib/thesis";
+
+type ScanStep = { rank: number; fullName: string; score: number; crossed: boolean };
+type ScanResult = {
+  capturedAt: string;
+  replaySource: string;
+  totalScanned: number;
+  threshold: number;
+  steps: ScanStep[];
+  surfaced: { id: string; companyName: string; founderScore: number; sourceChannel: string; score: number };
+};
 
 export type CardData = {
   id: string;
@@ -42,6 +53,37 @@ export default function PipelineBoard({
   const effectiveMax = wideCheck ? 200_000_000 : thesis.checkSizeMaxCents;
   const activeThesis: ThesisView = { ...thesis, checkSizeMaxCents: effectiveMax };
 
+  // R7 Scan button: replays a captured scan against /api/scan and reveals PipeWarden.
+  const router = useRouter();
+  const [scanning, setScanning] = useState(false);
+  const [scanSteps, setScanSteps] = useState<ScanStep[]>([]);
+  const [revealedCount, setRevealedCount] = useState(0);
+  const [scanError, setScanError] = useState<string | null>(null);
+  const [surfacedId, setSurfacedId] = useState<string | null>(null);
+
+  const runScan = async () => {
+    setScanning(true);
+    setScanError(null);
+    setScanSteps([]);
+    setRevealedCount(0);
+    try {
+      const res = await fetch("/api/scan", { method: "POST" });
+      if (!res.ok) throw new Error(`scan failed (${res.status})`);
+      const data: ScanResult = await res.json();
+      setScanSteps(data.steps);
+      for (let i = 0; i < data.steps.length; i++) {
+        setRevealedCount(i + 1);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      setSurfacedId(data.surfaced?.id ?? null);
+      router.refresh();
+    } catch (err) {
+      setScanError(err instanceof Error ? err.message : "scan failed");
+    } finally {
+      setScanning(false);
+    }
+  };
+
   const outbound = cards.filter((c) => c.source === "outbound");
   const inbound = cards.filter((c) => c.source === "inbound");
 
@@ -79,11 +121,72 @@ export default function PipelineBoard({
         </span>
       </button>
 
+      {/* R7 Scan control */}
+      <div
+        style={{
+          background: "var(--surface)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius)",
+          padding: "12px 16px",
+          marginBottom: "20px",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+          <button
+            type="button"
+            onClick={runScan}
+            disabled={scanning}
+            style={{
+              background: scanning ? "var(--bg)" : "var(--accent)",
+              color: scanning ? "var(--muted)" : "#fff",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius)",
+              padding: "8px 16px",
+              cursor: scanning ? "not-allowed" : "pointer",
+              fontWeight: 600,
+            }}
+          >
+            Scan
+          </button>
+          {scanning && (
+            <span style={{ color: "var(--muted)", fontSize: "var(--text-body)" }}>
+              replaying captured scan from 2026-07-18
+            </span>
+          )}
+          {scanError && !scanning && (
+            <span style={{ color: "var(--negative)", fontSize: "var(--text-body)" }}>{scanError}</span>
+          )}
+        </div>
+
+        {scanning && scanSteps.length > 0 && (
+          <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "4px" }}>
+            {scanSteps.slice(0, revealedCount).map((s) => (
+              <div
+                key={s.rank}
+                className="mono"
+                style={{
+                  fontSize: "var(--text-label)",
+                  color: s.crossed ? "var(--positive)" : "var(--muted)",
+                }}
+              >
+                #{s.rank} {s.fullName} · score {s.score}
+                {s.crossed ? " · threshold crossed" : ""}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       {/* Two columns */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
         <Column title="Outbound" subtitle="sourced by the fund">
           {outbound.map((c) => (
-            <OpportunityCard key={c.id} card={c} thesis={activeThesis} />
+            <OpportunityCard
+              key={c.id}
+              card={c}
+              thesis={activeThesis}
+              justSurfaced={c.id === surfacedId}
+            />
           ))}
         </Column>
         <Column title="Inbound" subtitle="founder applied">
@@ -126,7 +229,15 @@ function Column({
   );
 }
 
-function OpportunityCard({ card, thesis }: { card: CardData; thesis: ThesisView }) {
+function OpportunityCard({
+  card,
+  thesis,
+  justSurfaced = false,
+}: {
+  card: CardData;
+  thesis: ThesisView;
+  justSurfaced?: boolean;
+}) {
   const fit = evaluateThesisFit(
     { sector: card.sector, stage: card.stage, geo: card.geo, askAmountCents: card.askAmountCents },
     thesis,
@@ -137,13 +248,19 @@ function OpportunityCard({ card, thesis }: { card: CardData; thesis: ThesisView 
     <article
       style={{
         background: "var(--surface)",
-        border: "1px solid var(--border)",
+        border: justSurfaced ? "1px solid var(--accent)" : "1px solid var(--border)",
+        boxShadow: justSurfaced ? "0 0 0 3px rgba(79,70,229,0.18)" : "none",
         borderRadius: "var(--radius)",
         padding: "16px",
         opacity: offThesis ? 0.55 : 1,
         transition: "opacity 160ms ease",
       }}
     >
+      {justSurfaced && (
+        <div style={{ marginBottom: "8px" }}>
+          <Badge>threshold crossed</Badge>
+        </div>
+      )}
       <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 600, fontSize: "var(--text-section)" }}>{card.companyName}</div>

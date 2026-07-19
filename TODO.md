@@ -8,12 +8,12 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 |---|---|
 | **Event clock** | reveal 12:50–13:00 ET · hacking begins 2026-07-18 13:00 ET (kickoff-deck correction) · deadline: 2026-07-19 09:00 ET · finals: 2026-07-25 12:00 ET |
 | **Challenge (locked)** | **02 — The VC Brain** · ElevenLabs = voice brief layer only (not Challenge 01) |
-| **Phase** | Spec locked → scaffold app ([docs/ops/PLAYBOOK.md](docs/ops/PLAYBOOK.md)) |
+| **Phase** | Build complete + gated — golden path green, check:done Layer-3 wired (see [verify report](docs/dispatch/plan-dialogue/2026-07-19-verify-report.md)) |
 | **Product plan** | [VC-BRAIN-PLAN.md](VC-BRAIN-PLAN.md) |
-| **Golden path status** | not started |
-| **Last push** | doc-consistency batch @ 2026-07-19 00:58 BST on `dispatch/lovable-frontend` (prev HEAD `d863714`: M0 scaffold + Wave-0 spike) |
+| **Golden path status** | GREEN — `smoke:golden` 13/13 beats offline on Node 26.3.1; DoD Layer-1 29/36 (7 open = human-eyeball UX / unbuilt MP3 / cold-start) |
+| **Last push** | verify + DoD-reconcile batch @ 2026-07-19 (this commit) on `dispatch/lovable-frontend` |
 | **Demo video** | not recorded |
-| **Submission** | no draft |
+| **Submission** | not drafted (projects.hack-nation.ai — due Sun 2026-07-19 09:00 ET) |
 
 ## Now / Next / Done
 
@@ -54,6 +54,18 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 | 2026-07-18 21:00 BST | Doc reconciliation applied: dual-model audit (Fable 5 + GPT-5.6 sol, independent, Delphi-merged; 37+ findings) → all living docs rewritten to one consistent story per the rulings above; conflict banners removed | Human: "reconcile and update every doc so everything is inline" | No |
 | 2026-07-18 22:35 BST | Second dual-model debate (Fable vs Sol) judged: R1–R7 added (+4.5h), A26 dropped to pitch line, pre-emptive cuts rejected, chat trio untouched | 34/34 brief coverage within 5h cap | No (human approved in chat) |
 
+## HUMAN TODO (morning — before Sun 2026-07-19 09:00 ET)
+
+1. **Source 1 real pitch stat** — a sourced problem number for the hook; drop into [PITCH.md](docs/ops/PITCH.md) and the `[STAT]` placeholder in [DEMO-SCRIPT.md](docs/ops/DEMO-SCRIPT.md).
+2. **Record 2×60s videos** — demo (wow moment: contradiction → slide-4 + graph) and tech (stack, highlights, limitations). H.264 MP4.
+3. **ElevenLabs voice-brief MP3** (optional/never-cut) — needs live key/credits; text-script fallback already ships.
+4. **UX eyeball** at demo viewport — all four surfaces (Pipeline, Diligence/contradiction, Graph/chat, memo/decision) against rubric "intuitive, clear, beautifully designed."
+5. **Merge** `dispatch/lovable-frontend` → `main`.
+6. **Submit** on projects.hack-nation.ai under Challenge 02 before Sun 09:00 ET; save the receipt.
+
+**Demo-machine guard:** run `npm rebuild better-sqlite3` on Node 26.3.1 before demoing (the prebuilt binary is Node-22 ABI; a stray `npm install` re-breaks every DB path under Node 26 — see verify report risk #1).
+
 ## Blocked / waiting on human
 
-- None. (Scope conflict resolved by the 20:50 BST final ruling; reconciliation rulings 20:55 BST — see Decisions.)
+- **push-state gate (g) is red while the swarm is active** — non-mine files stay uncommitted (`data/**` memo/replay, `overnight-build.run-state.json`, `lovable/.../package-lock.json`). Clears on the final clean commit + push once workers quiesce (lead owns the freeze commit).
+- Scope conflicts resolved by the 20:50/20:55 BST rulings — see Decisions.

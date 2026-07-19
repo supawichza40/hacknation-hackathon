@@ -1,0 +1,178 @@
+[
+  {
+    "id": "c1",
+    "text": "ECC cuts agent latency and token spend without touching your prompts.",
+    "slideNo": 1,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/1",
+        "excerpt": "Cut agent latency and token spend without touching your prompts."
+      }
+    ]
+  },
+  {
+    "id": "c2",
+    "text": "ECC is a profiler that instruments every agent hop (tool calls, model routes, token cost) with zero prompt changes.",
+    "slideNo": 3,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/3",
+        "excerpt": "Instruments every agent hop — tool calls, model routes, token cost — with zero prompt changes."
+      }
+    ]
+  },
+  {
+    "id": "c3",
+    "text": "ECC auto-routes each step to the cheapest model that still passes its eval.",
+    "slideNo": 3,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/3",
+        "excerpt": "Auto-routes each step to the cheapest model that still passes its eval."
+      },
+      {
+        "locator": "kg://ecc/node/23",
+        "excerpt": "Layered provider config resolution: Provider/model chosen from explicit arg, then env vars, then saved .llm.env file, defaulting to claude."
+      },
+      {
+        "locator": "kg://ecc/node/17",
+        "excerpt": "Provider factory resolving type from arg, LLM_PROVIDER env, or saved .llm.env; maps ProviderType to class."
+      }
+    ]
+  },
+  {
+    "id": "c4",
+    "text": "A regression gate blocks any change that makes an agent slower or more expensive.",
+    "slideNo": 3,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/3",
+        "excerpt": "Regression gate blocks any change that makes an agent slower or more expensive."
+      }
+    ]
+  },
+  {
+    "id": "c5",
+    "text": "ECC drops in beside existing harnesses with no rewrite and no lock-in (cross-harness portability).",
+    "slideNo": 3,
+    "status": "verified",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/3",
+        "excerpt": "Drops in beside existing harnesses; no rewrite, no lock-in."
+      },
+      {
+        "locator": "kg://ecc/node/28",
+        "excerpt": "Cross-harness portability: Same repo ships across Codex, Claude Code, Cursor, OpenCode, Gemini, Zed, and Copilot harnesses."
+      }
+    ]
+  },
+  {
+    "id": "claim-slide4-sub100ms",
+    "text": "ECC delivers sub-100ms agent routing in production.",
+    "slideNo": 4,
+    "status": "contradicted",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/4",
+        "excerpt": "ECC delivers sub-100ms agent routing in production."
+      },
+      {
+        "locator": "data/demo/repos/ecc/the-longform-guide.md:99-101",
+        "excerpt": "UserPromptSubmit runs on every single message - adds latency to every prompt."
+      },
+      {
+        "locator": "data/demo/repos/ecc/the-longform-guide.md:138-139",
+        "excerpt": "In our 50-task benchmark, mgrep + Claude Code used ~2x fewer tokens than grep-based workflows — a token benchmark, not a sub-100ms routing-latency measurement."
+      }
+    ]
+  },
+  {
+    "id": "c7",
+    "text": "ECC is priced per traced agent-run.",
+    "slideNo": 5,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/5",
+        "excerpt": "Sits next to the tracing tools teams already pay for, priced per traced agent-run."
+      },
+      {
+        "locator": "kg://ecc/node/41",
+        "excerpt": "OSS is MIT-licensed with paid Pro tier: Repo is MIT-licensed forever; ECC Pro GitHub App ($19/seat/mo) funds private-repo hosting."
+      }
+    ]
+  },
+  {
+    "id": "c8",
+    "text": "ECC harness instrumentation is shipped and open-sourced.",
+    "slideNo": 6,
+    "status": "verified",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/6",
+        "excerpt": "Working harness instrumentation shipped and open-sourced."
+      },
+      {
+        "locator": "kg://ecc/node/41",
+        "excerpt": "OSS is MIT-licensed with paid Pro tier: Repo is MIT-licensed forever."
+      },
+      {
+        "locator": "kg://ecc/node/1",
+        "excerpt": "README.md: Marketing entry point for ECC, the harness-native agent operating system; lists stars, sponsors, guides, and version history across harnesses."
+      }
+    ]
+  },
+  {
+    "id": "c9",
+    "text": "9 design partners are running ECC against their own agent stacks.",
+    "slideNo": 6,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/6",
+        "excerpt": "9 design partners running ECC against their own agent stacks."
+      }
+    ]
+  },
+  {
+    "id": "c10",
+    "text": "A median 38% token-cost reduction was observed across partner workloads.",
+    "slideNo": 6,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/6",
+        "excerpt": "Median 38% token-cost reduction observed across partner workloads."
+      }
+    ]
+  },
+  {
+    "id": "c11",
+    "text": "ECC has 410 GitHub stars and 27 external contributors in the first 8 weeks.",
+    "slideNo": 6,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/6",
+        "excerpt": "410 GitHub stars, 27 external contributors in the first 8 weeks."
+      }
+    ]
+  },
+  {
+    "id": "c12",
+    "text": "Supawich is the solo founder and sole author of the ECC harness.",
+    "slideNo": 7,
+    "status": "unsupported",
+    "evidence": [
+      {
+        "locator": "deck://ecc/slide/7",
+        "excerpt": "Supawich — solo founder, builder, sole author of the ECC harness."
+      }
+    ]
+  }
+]

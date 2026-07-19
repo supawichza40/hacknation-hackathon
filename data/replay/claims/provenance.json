@@ -1,0 +1,33 @@
+{
+  "artifact": "claims:ecc",
+  "source": "deck: data/demo/decks/ecc/slides.json; evidence: data/demo/graphs/ecc/knowledge-graph.json + data/demo/repos/ecc",
+  "promptVersion": "ecc-claims-v1",
+  "model": [
+    "claude-opus-4-8"
+  ],
+  "generator": "claude -p --output-format json (subscription auth, headless)",
+  "isoTimestamp": "2026-07-19T00:19:03.514Z",
+  "durationMs": 130772,
+  "totalCostUsd": 0.7430479999999999,
+  "handFixed": true,
+  "contradicted": [
+    "claim-slide4-sub100ms"
+  ],
+  "steps": [
+    {
+      "stage": "llm-extract",
+      "startedAt": "2026-07-19T00:15:57.079Z",
+      "note": "slides + 42 node summaries -> claude -p"
+    },
+    {
+      "stage": "validate",
+      "startedAt": "2026-07-19T00:19:03.504Z",
+      "note": "12 claims, zod passed"
+    },
+    {
+      "stage": "enforce-invariant",
+      "startedAt": "2026-07-19T00:19:03.510Z",
+      "note": "hand-fixed to exactly one contradicted (slide 4), grounded in real repo evidence"
+    }
+  ]
+}

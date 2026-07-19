@@ -280,6 +280,11 @@ export function upsertApplicationHistory(db: DB, h: ApplicationHistorySeed): voi
   });
 }
 
+// R7 scan replay: flip an opportunity's visibility (PipeWarden pops into Outbound).
+export function setOpportunityVisible(db: DB, opportunityId: string, visible: boolean): void {
+  db.prepare("UPDATE opportunity SET visible = ? WHERE id = ?").run(visible ? 1 : 0, opportunityId);
+}
+
 // ---- read helpers (pipeline page) ----
 
 export function getThesis(db: DB, id = "thesis-default"): ThesisView & { id: string; name: string } {

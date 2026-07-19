@@ -1,6 +1,14 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // The webpack fallback build (scripts/render-build.sh) does not pick up
+  // tsconfig's "@/*" paths the way Turbopack does — teach it the alias
+  // directly. Turbopack ignores the `webpack` key.
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve(process.cwd(), "src");
+    return config;
+  },
   serverExternalPackages: ["better-sqlite3"],
   // Next 16.2.10's built-in `next build` type-check worker cannot drive the
   // installed native typescript@7 package (its `exports` omit the JS API and

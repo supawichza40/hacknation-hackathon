@@ -23,7 +23,9 @@ services:
     plan: starter
     # region: oregon   # default if omitted; also: ohio, virginia, frankfurt, singapore
     branch: main
-    buildCommand: npm ci && npm run build
+    # render-build.sh surfaces the silent Turbopack build death (exit code +
+    # node diagnostic report) and falls back to `next build --webpack`.
+    buildCommand: npm ci && bash scripts/render-build.sh
     # Seed writes the gitignored SQLite DB, then start the persistent server.
     # Runs on every boot, so each deploy/restart resets demo data to a known-good
     # state (intended for the demo — no persistent disk needed).

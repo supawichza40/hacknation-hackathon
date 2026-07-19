@@ -41,7 +41,7 @@
       "One dashboard replaces a week of manual print-statement debugging.",
       "Live demo: watch the router pick the cheap model and the p50 drop on screen."
     ],
-    "speakerNote": "Say the sub-100ms line with full confidence, then pull up the board. The board shows 340ms median — that mismatch is the point. Let the judges catch it. Do not pre-empt or explain it away."
+    "speakerNote": "Say the sub-100ms line with full confidence. The repo evidence tells another story: no routing-latency benchmark exists anywhere in the codebase — the only benchmark is a token-count study — and the docs themselves note hooks add latency to every prompt. FounderGraph flags exactly that mismatch. Let the judges catch it; do not pre-empt or explain it away."
   },
   {
     "slideNo": 5,

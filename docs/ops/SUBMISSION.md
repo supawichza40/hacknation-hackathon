@@ -11,18 +11,27 @@ The submission is a deliverable with its own schedule, not a last-hour chore. La
 |---|---|---|
 | G1 | **Day 1 (T+6)** | Submission draft exists in the real portal (placeholder text is fine) + this file filled with the requirements list from `docs/ops/RUBRIC.md` §4 |
 | G2 | **T+30** | README tells the current true story; screenshots of the working golden path committed and pushed |
-| G3 | **T+36** | Demo video recorded, uploaded, linked from README and the portal draft |
+| G3 | **T+36** | BOTH ≤60-sec videos (demo + tech) + team video recorded, uploaded, linked from README and the portal draft; 1-page PDF report drafted |
 | G4 | **T+42** | Code freeze. Submission copy finalized. Push after EVERY edit from here on |
 | G5 | **T+46 (= 2h early)** | Final submission SUBMITTED. Never race the cutoff |
 
-## The package (fill from docs/ops/RUBRIC.md §4 — typical items)
+## The package (REAL list, this edition — kickoff deck p38 + discord-info.md submission checklist; details in RUBRIC.md §4)
 
-- [ ] Project details / description (portal)
-- [ ] Dev platform(s) used — name the sponsor tools explicitly
-- [ ] Presentation / deck link (test in incognito)
-- [ ] Demo video link (test in incognito, check it's not private/unlisted-broken)
-- [ ] Repo link — pushed HEAD must match every claim made in the portal
-- [ ] Live/deployed URL (exercise end-to-end from a fresh browser first)
+All items upload to **projects.hack-nation.ai**; the submission is **editable any time until the deadline** (Sun Jul 19 09:00 ET, no late submissions — deck p37) — so draft early, refine continuously.
+
+- [ ] **Project summary** — 150–300 words: problem + relevance, what was built during the hackathon, who benefits, what works today. Name the sponsor tools explicitly — **Tavily** (live founder sourcing) and **ElevenLabs** (voiced investment brief). First thing the jury sees — clarity over depth (discord-info.md)
+- [ ] **Best Use of Tavily** (stackable sponsor prize, 10k/5k/3k credits): summary + demo must show Tavily as load-bearing sourcing — real `/search` + `/research` scan, captured + replayed. Redeem code `HackNationJuly`. (RUBRIC §2 sponsor prizes)
+- [ ] **Demo video — ≤60 sec** (~5–10s problem, ~45–50s real screen recording, optional impact close) — test link in incognito
+- [ ] **Tech video — ≤60 sec** (stack 10–15s, implementation highlights 15–20s, challenges/limitations 15–20s; "CTO giving a 1-minute investor update")
+- [ ] **Team video** — "explain who you are" (kickoff deck p38; not in the discord list — include it)
+- [ ] **1-page PDF report** — sections per HN-4 template: Problem, Target Audience, Solution & Core Features, USP, Implementation & Technology, Results & Impact (screenshot/diagram doesn't count toward the page limit)
+- [ ] **GitHub repo link (public)** — pushed HEAD must match every claim made in the portal
+- [ ] **Zipped code (.zip)** — full codebase backup incl. README + setup; NO large data files or model weights
+- [ ] **Dataset field** — link (Drive/HF, organized raw/ + processed/) or "N/A"
+- [ ] Live/deployed URL if the portal has a field (exercise end-to-end from a fresh browser first)
+- [ ] **Finals prep (after submitting):** 1–3 slides + live demo for the Jul 25 pitch (deck p9 says 1–2 slides — prep ≤2)
+
+> Every link set to "publicly accessible by everyone." **"No access? No prize."** (HN-4 Rules template.)
 
 ## Final verification ritual (do ALL, in order, before G5)
 
@@ -36,7 +45,7 @@ The submission is a deliverable with its own schedule, not a last-hour chore. La
 
 The video is produced from a **shot list**: one card per shot, each carrying the real screenshot of the target state, the on-screen ACTION, and the exact SAY line. Record per shot (any flub redoes one shot, never the take), dub voice separately, assemble with straight cuts. Claude generates the document with embedded verified screenshots; the human performs it.
 
-**Length rule:** the submission video has NO fixed duration — its length is set by feature coverage: every built feature appears, none is rushed, and there is zero filler. (Check the event's rules for a hard cap; absent one, coverage decides. The 3-minute limit applies to the STAGE pitch, which is a separate, tighter artifact — see docs/ops/PITCH.md.)
+**Length rule (THIS EVENT — hard cap):** the demo video is **max 60 seconds** and the tech video is **max 60 seconds** (kickoff deck p38; discord-info.md checklist). Suggested demo split: 5–10s problem intro → 45–50s real screen recording → optional impact close. 60 seconds cannot cover every feature — cover the golden path + the wow moment; everything else lives in the repo/report. (The 3-minute limit applies to the STAGE pitch, a separate artifact — see docs/ops/PITCH.md.)
 
 **The three-act structure:**
 1. **ACT 1 — The problem (slide shots):** 2–4 deck slides as full-frame shots — the real-world pain, the impact numbers (sourced stats), the REAL anchor (your business/person/event). No app on screen yet; make them feel the wound.

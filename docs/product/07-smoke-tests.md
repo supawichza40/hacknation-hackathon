@@ -20,12 +20,12 @@ The demo-lite login gate (FR-AUTH) must not block automated smoke runs — the r
 
 ## Build-block checkpoint matrix
 
-| Block | App smoke | LLM | ElevenLabs | GitHub | PDF parser | Pass condition |
+| Block | App smoke | LLM | ElevenLabs | GitHub (repo) / Tavily (sourcing) | PDF parser | Pass condition |
 |---|---|---|---|---|---|---|
 | M0 | Start the single app; load empty Pipeline, Diligence, Graph, optional Apply; load thesis config + SQLite | N/A | N/A | N/A | N/A | App starts without keys; config/DB initialize; routes show explicit empty states |
-| Wave 0 | Render the hero graph from the real spike output | Real structured request; persist raw response + provenance; read + schema-validate replay | Real TTS request; persist MP3; read it through the app | Real hero repo read + real sourcing scan; persist commit/scan provenance; read replay | Parse real hero deck; persist output or recorded failure; read slides-JSON fallback | All four dependencies have real proof or an explicit failed gate, and every required fallback runs |
+| Wave 0 | Render the hero graph from the real spike output | Real structured request; persist raw response + provenance; read + schema-validate replay | Real TTS request; persist MP3; read it through the app | Real hero repo read (GitHub) + real Tavily sourcing scan (`/search` + `/research`); persist commit + scan provenance; read replay | Parse real hero deck; persist output or recorded failure; read slides-JSON fallback | All dependencies have real proof or an explicit failed gate, and every required fallback runs |
 | M1 | Seed exactly three opportunities; read Pipeline from SQLite; test dedup, history, R3 evidence, R4 if retained | N/A | N/A | N/A | N/A | Restart preserves records; off-thesis + returning-founder fixtures behave as specified |
-| M2 | Produce/read hero graph + deck claims; open node sourceRef; R5/R7 only if retained | Live extraction if retained: real request then graph write/read; else read captured replay | N/A | Live Analyze if retained: real small-repo read then graph write/read; R7 reads captured scan | Parse hero deck then read claim/slide records, or use validated slides JSON | Base graph + node drawer pass from precomputed data with network disabled |
+| M2 | Produce/read hero graph + deck claims; open node sourceRef; R5/R7 only if retained | Live extraction if retained: real request then graph write/read; else read captured replay | N/A | Live Analyze if retained: real small-repo read (GitHub) then graph write/read; R7 reads captured Tavily scan | Parse hero deck then read claim/slide records, or use validated slides JSON | Base graph + node drawer pass from precomputed data with network disabled |
 | M3 | Derive Trust states, contradiction targets, separate axes, thesis fit, Founder Score, valid trend | N/A — deterministic | N/A | N/A | N/A | Repeated fixture run identical; all evidence IDs resolve; red contradiction opens both sources |
 | M4 | Generate/read memo; record/reload decision; stream cited chat; refuse unsupported chat; show R2; R1/R6 if retained | Real axes/memo + chat calls; persist/read outputs; real R1 if retained; then prove replay/refusal fallbacks | N/A | N/A | N/A | Memo, gaps, decision, chat, timer pass; no uncited completed answer |
 | M5b | Play/pause the saved hero brief; show script fallback | N/A | No live call required; read Wave-0 MP3; live TTS smoke only if intentionally retained | N/A | N/A | Audio works offline; missing file shows exact script + "voice unavailable" |
@@ -49,8 +49,9 @@ The demo-lite login gate (FR-AUTH) must not block automated smoke runs — the r
 | SMK-W0-LLM-FB | Force invalid structured output twice | One repair, then the captured replay loads |
 | SMK-W0-VOICE | Run one real TTS request | MP3 non-empty, persisted, readable through the brief path |
 | SMK-W0-VOICE-FB | Remove key/network after capture | Saved MP3 still plays; removing MP3 shows the exact script fallback |
-| SMK-W0-GH | Read the real hero/small repo + run the sourcing scan | Source identifier/commit (when available) + scan threshold provenance persisted |
-| SMK-W0-GH-FB | Disable network | Pre-cloned repo + captured scan replay produce the planned result |
+| SMK-W0-GH | Read the real hero/small repo (GitHub) | Source identifier/commit (when available) persisted |
+| SMK-W0-TV | Run the real Tavily sourcing scan (`/search` + `/research`) | Query + result URLs + scan threshold provenance persisted (non-secret) |
+| SMK-W0-SRC-FB | Disable network | Pre-cloned repo + captured Tavily scan replay produce the planned result |
 | SMK-W0-PDF | Parse the real hero deck | Usable text linked to slide locators, or failure recorded |
 | SMK-W0-PDF-FB | Force parser failure | Validated pre-extracted slides JSON feeds the same downstream schema |
 

@@ -63,6 +63,14 @@ Challenge 02 brief is already in-repo (`Topics/1784381921507-02-Maschmeyer-Group
 | **02 — The VC Brain (Maschmeyer Group) ← OUR TRACK** | **"The VC Brain: Deploying $100K Checks in 24 Hours."** (brief p.1, title block) · Sponsor: **Maschmeyer Group — Investing in Exceptional Founders** | **This edition (VERBATIM): $50K+ total pool** (">50k$ in prizes across all challenges" — kickoff deck p10; discord-info.md §Prizes). **Ch.2: 1st = $1k + $3k OpenAI API · 2nd = $450 + $1.5k OpenAI API · 3rd = $200** (discord-info.md prize table, cross-checked deck p10). **Grand prize: top 2 teams of EACH challenge pitch live (3 min, Sat Jul 25 12:00 ET); overall 1st = Venture Lab Fast Track + $5k OpenAI API** (deck p9–10; discord-info.md). Plus 5 community prizes @ $500 OpenAI credits each, incl. Go Viral (deck p11) |
 | 01 — The Negotiator (ElevenLabs) — DO NOT SUBMIT | (not our track — voice layer on top of VC Brain only, per VC-BRAIN-PLAN §0) | — |
 
+**Stackable sponsor prizes (win ON TOP of the challenge prize):**
+
+| Sponsor prize | Definition | Prize | Our eligibility |
+|---|---|---|---|
+| **Best Use of Tavily** | "Build a project that leverages Tavily's APIs in a creative and impactful way." (Tavily Hacker Guide, HackNation July 2026) | 1st = 10k / 2nd = 5k / 3rd = 3k Tavily API credits | **Eligible** — Tavily is our live founder-**sourcing** engine (R7): thesis→query `/search` + `/research`, captured Wave-0, replayed on stage. Redeem code `HackNationJuly` (Project plan, 8,000 credits). |
+
+> **Rule (sponsor-tool visibility):** judges probed every team on how the sponsor tool actually works (§5 unwritten layer; ElevenLabs OmniCall placed on this alone). Make Tavily *visibly load-bearing* — the outbound sourcing story IS Tavily. ElevenLabs (voice brief) is the second sponsor tool visible.
+
 > **Rule: build the track sentence.** The July 2026 recordings show every winner was a near-verbatim instantiation of its track's one-line definition. Pick the track FIRST, quote its sentence at the top of the spec, and map every feature to it.
 >
 > **Our track sentence instantiated (paste at top of VC-BRAIN-PLAN and PITCH.md hook):** *"FounderGraph — The VC Brain that deploys $100K checks in 24 hours: sources founders, builds a living technical + claim graph, scores them on three axes with Trust Scores, and writes a 24-hour investment memo."* Every feature must trace back to this sentence; anything that doesn't is `docs/ops/BACKLOG.md` material.

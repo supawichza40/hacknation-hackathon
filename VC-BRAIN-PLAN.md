@@ -10,7 +10,7 @@
 **Deadline:** Sunday, July 19, 2026 — 9:00 AM ET  
 
 **Product name:** FounderGraph (locked)  
-**One-liner:** An AI operating system that sources founders, builds a living technical + claim graph from GitHub and decks, scores them on three axes with Trust Scores, answers investor questions in cited graph-grounded chat, produces a 24-hour investment decision memo — and closes with a voiced investment brief (ElevenLabs).
+**One-liner:** An AI operating system that sources founders from the live web (Tavily), builds a living technical + claim graph from their GitHub and decks, scores them on three axes with Trust Scores, answers investor questions in cited graph-grounded chat, produces a 24-hour investment decision memo — and closes with a voiced investment brief (ElevenLabs).
 
 ---
 
@@ -47,13 +47,13 @@ Winnable — but only with the ~40% surface cut below. Scoring/trust/memo (55% o
 9. **API:** keep separate routes (/apply, /analyze, /score, /memo, /decide, /brief) but ONE UI action orchestrates staged, cacheable calls with progressive status. /chat = streaming, graph-grounded, cited (SSE) with node/selection context; /intake/voice cut (backlog).
 10. **UA integration stays Mode B** — hour-0 task: read UA LICENSE (5 min) + NOTICE for adapted files. If license blocks or adaptation exceeds 45 min → drop to slim self-written pipeline.
 11. **UI = 4 surfaces:** Pipeline (thesis as a settings drawer), Diligence (Overview+Claims+Memo one scrolling page + decision CTA), Graph (node drawer + streaming cited chat), Apply.
-12. **Scope additions v3** (second dual-model debate, judged 2026-07-18 17:35 ET / 22:35 BST — log: `docs/dispatch/plan-dialogue/2026-07-18-scope-debate-v3.md`): R1 pipeline NL query box (+1.0h, M4) · R2 signal→decision timer chip (+0.5h, M4) · R3 evidence-backed sourcing stories (+0.75h, M1) · R4 one live thesis toggle (+0.5h, M1) · R5 reasoning step timeline from provenance metadata, never raw JSON (+0.5h, M2/M3) · R6 memo auto-"not disclosed" gaps (+0.25h, M4) · R7 GitHub sourcing scan captured at Wave-0, replayed deterministically — no live network call on stage (+1.0h). Total +4.5h; ladder placements below. Closes brief items 6, 23, 33 → 34/34 coverage.
+12. **Scope additions v3** (second dual-model debate, judged 2026-07-18 17:35 ET / 22:35 BST — log: `docs/dispatch/plan-dialogue/2026-07-18-scope-debate-v3.md`): R1 pipeline NL query box (+1.0h, M4) · R2 signal→decision timer chip (+0.5h, M4) · R3 evidence-backed sourcing stories (+0.75h, M1) · R4 one live thesis toggle (+0.5h, M1) · R5 reasoning step timeline from provenance metadata, never raw JSON (+0.5h, M2/M3) · R6 memo auto-"not disclosed" gaps (+0.25h, M4) · R7 **Tavily** web sourcing scan captured at Wave-0, replayed deterministically — no live network call on stage (+1.0h). *(Sourcing engine = Tavily as of 2026-07-19 displacement ruling; displaces the GitHub sourcing scan. GitHub retained for repo analysis. "Best Use of Tavily" sponsor prize.)* Total +4.5h; ladder placements below. Closes brief items 6, 23, 33 → 34/34 coverage.
 13. **Demo-lite auth (human ruling 2026-07-18 23:50 BST, backfills requirements-design locked decision):** one hard-coded investor login + public founder `/apply`; session cookie separates the two roles; ~1h build. No real user management.
 14. **R8 guided tour (human ruling 2026-07-19 00:05 BST):** precomputed "Start here" guided tour of the hero graph (5–10 steps via the UA tour-builder, generated offline at M2, stored as JSON — no live LLM call). +0.75h, M2. T-4h ladder placement between axis trends and showcase card #2. Portfolio-wide deep chat explicitly parked (BACKLOG row 12); R1 query box remains the cross-founder story.
 
 ### Build order (ET, push at every block boundary — push == done)
 - **15:15–16:00 M0:** scaffold single app, .gitignore, env template, better-sqlite3, empty pages. UA license check. **Platform submission draft + stub README pushed** (verify whether form requires a live URL — this decides the deploy question). Push.
-- **16:00–17:30 WAVE-0 SPIKE (gate — nothing proceeds until green):** builder's real repo → real LLM structured call → knowledge-graph.json → rendered in React Flow. Capture provenance replay. Author hero deck + run it through the PDF parser (fails → pre-extracted slides JSON, no ceremony). One real ElevenLabs call → pre-render hero MP3 tonight. Capture real GitHub sourcing scan → `data/replay/scan/` (R7: thesis→topic query, signal scoring — star velocity, commit recency, no-org = pre-fundraise). Push.
+- **16:00–17:30 WAVE-0 SPIKE (gate — nothing proceeds until green):** builder's real repo → real LLM structured call → knowledge-graph.json → rendered in React Flow. Capture provenance replay. Author hero deck + run it through the PDF parser (fails → pre-extracted slides JSON, no ceremony). One real ElevenLabs call → pre-render hero MP3 tonight. Capture real Tavily web sourcing scan → `data/replay/scan/` (R7: thesis→query `/search` + `/research`, signal scoring — web presence, traction mentions, funding/round status = pre-fundraise). Push.
 - **17:30–19:00 M1:** trimmed Memory schema (+ScreeningFacts, Evidence, dedup rule), seed 3 opportunities + outbound cards with sourceChannel + founder history row. R3: multi-channel badges + "why surfaced" line, each backed by an Evidence record. R4: live check-size toggle in the thesis drawer → off-thesis card greys in real time. Pipeline page renders from DB. Push.
 - **19:00–21:30 M2 (hard timebox):** generalize spike into pipeline; precompute all demo graphs + deck-claims JSON; graph UI + node drawer + sourceRef. R5: "Show reasoning" step-timeline drawer from provenance metadata. R7: "Scan" button replays captured run → threshold-crossing card pops into Outbound. Domain grouping only if time remains inside the box. **Timebox breach ⇒ precomputed-only, live Analyze becomes stretch.** Push.
 - **21:30–00:30 M3:** claims table + Trust statuses (per locked rules) + contradiction wow moment + 3 axis scores (deterministic, rubric-based; trends per history rule) + thesis-fit chips. Push.
@@ -80,7 +80,7 @@ Winnable — but only with the ~40% surface cut below. Scoring/trust/memo (55% o
 
 ### What we are building
 A **venture diligence product** for deploying $100K checks in 24 hours:
-- Sourcing (inbound apply + outbound GitHub/hackathon signals)
+- Sourcing (inbound apply + outbound web signals via Tavily)
 - Memory (persistent founder profiles + Founder Score)
 - Intelligence (thesis-filtered, multi-axis scoring + evidence)
 - Experience (investor dashboard: graph, cited chat, memo, decision)
@@ -163,10 +163,10 @@ From Challenge 02 brief — MVP must demonstrate:
 | Pillar | Requirement | Our implementation |
 |--------|-------------|--------------------|
 | Thesis Engine | Configurable sectors, stage, geo, check size, ownership, risk | `thesis.json` + filter every recommendation |
-| Smart Data Collection | Heterogeneous ingest, validate, structure | GitHub clone + deck PDF + optional web signals → Memory |
+| Smart Data Collection | Heterogeneous ingest, validate, structure | GitHub clone + deck PDF + Tavily web signals → Memory |
 | Multi-Attribute Reasoning | NL queries beyond keywords | Pipeline NL query box (one-pass compound query over all ScreeningFacts, cited — R1) + per-opportunity graph chat |
 | Inbound | Company name + repo link → screen; deck optional (human ruling 2026-07-18 23:50 BST — no-deck cold start is a scored story) | `/apply` flow |
-| Outbound | Scan GitHub/hackathons → activate | Seeded outbound shortlist + “draft outreach” |
+| Outbound | Scan the web (Tavily) → activate | Seeded outbound shortlist + “draft outreach” |
 | 3-axis screening | Founder / Market / Idea-vs-Market — NOT averaged; each with trend | Separate scores + trends in UI + memo |
 | Founder Score | Persists across applications, never resets | Stored on person entity in Memory |
 | Trust Score | Per claim, evidence + confidence, flag contradictions | Claim objects linked to graph nodes / deck slides |
@@ -188,7 +188,7 @@ Handle first-time founders with weak network but strong public artifacts (repo g
 ## 3. Product narrative (demo story)
 
 1. Investor sets thesis (AI infra, seed, $100K, US/EU, high technical bar)
-2. **Outbound:** system surfaces 3 GitHub-sourced founders with Founder Scores
+2. **Outbound:** system surfaces 3 web-sourced (Tavily) founders with Founder Scores
 3. **Inbound:** one founder applies with deck + company name + repo URL
 4. Pipeline builds **technical knowledge graph** + extracts **claims** from deck
 5. 3-axis scores + Trust Scores; contradictions flagged
@@ -234,7 +234,8 @@ Every LLM response is schema-validated (zod), one repair attempt, then falls bac
 
 ### External services
 - **LLM API** (OpenAI / Anthropic) — extractor call, axes+memo call, chat
-- **GitHub** — clone or API for repos (demo: pre-cloned + one live small repo)
+- **Tavily** — live founder web sourcing (R7): `/search` + `/research` + `/extract` (demo: captured Wave-0 scan replay). Sponsor tool — "Best Use of Tavily" prize.
+- **GitHub** — clone or API for repos, analysis only (demo: pre-cloned + one live small repo). Sourcing moved to Tavily.
 - **PDF parse** (pdf-parse; fallback: pre-extracted slides JSON)
 - **ElevenLabs** — pre-rendered brief MP3 (spike); realtime voice only as stretch
 
@@ -420,7 +421,7 @@ Hacknation Hackathon/                  # this repo (the submitted remote)
 │   ├── thesis.default.json            # read-only thesis (editing is on the cut ladder)
 │   ├── demo/                          # 3 seeded founders, decks, prebuilt graphs
 │   ├── replay/                        # captured provenance replay (Wave-0 spike)
-│   │   └── scan/                      # captured GitHub sourcing scan (R7)
+│   │   └── scan/                      # captured Tavily sourcing scan (R7)
 │   └── graphs/                        # runtime graphs
 └── scripts/
     ├── seed-demo.ts
@@ -435,7 +436,7 @@ Hacknation Hackathon/                  # this repo (the submitted remote)
 The schedule — times, gates, pushes — lives in **§0.5 Build order**. This section only details block scope; if it ever seems to disagree with §0.5, §0.5's times govern.
 
 - **M0 — Skeleton:** scaffold single app in this repo, .gitignore, env template, better-sqlite3, thesis.default.json, empty pages for demo navigation. UA LICENSE check. Platform submission draft + stub README pushed (live-URL check).
-- **Wave-0 spike (gate):** builder's real repo → real LLM structured call → `knowledge-graph.json` → rendered in React Flow. Capture provenance replay. Hero deck through PDF parser (fallback: pre-extracted slides JSON). One real ElevenLabs call → pre-render hero MP3. R7 capture: one real GitHub sourcing scan (thesis→topic query + signal scoring) → `data/replay/scan/`.
+- **Wave-0 spike (gate):** builder's real repo → real LLM structured call → `knowledge-graph.json` → rendered in React Flow. Capture provenance replay. Hero deck through PDF parser (fallback: pre-extracted slides JSON). One real ElevenLabs call → pre-render hero MP3. R7 capture: one real Tavily web sourcing scan (thesis→query + signal scoring) → `data/replay/scan/`.
 - **M1 — Memory:** trimmed schema (Person, Opportunity + ScreeningFacts, Evidence, Claim, AxisScore, Memo; dedup rule). Seed 3 opportunities + outbound cards with sourceChannel + founder history row. R3: channel badges + "why surfaced" line, each backed by an Evidence record. R4: live check-size toggle → off-thesis card greys in real time. Pipeline page renders from DB.
 - **M2 — Graph engine (hard timebox):** generalize the spike into the pipeline; precompute all demo graphs + deck-claims JSON; graph UI with pan/zoom, node drawer + sourceRef. R5: "Show reasoning" step-timeline drawer (provenance metadata, never raw JSON). R7: "Scan" replay UI with threshold-crossing card pop. Domain grouping only if time remains in the box. Timebox breach ⇒ precomputed-only, live Analyze becomes stretch.
 - **M3 — Scoring + Trust:** claims table + Trust statuses (per §0.5 epistemic rules) + the red CONTRADICTED claim click-jump wow moment + 3 deterministic axis scores (trends per history rule) + thesis-fit chips + Founder Score update.
@@ -536,7 +537,7 @@ Prepare offline — **3 pre-seeded opportunities**, plus a 4th arriving live thr
 
 Outbound cards carry multi-channel badges (github/hn/arxiv/hackathon) + "why surfaced" lines, each backed by an Evidence record (URL+excerpt) in Memory — not cosmetic stickers (R3).
 
-Store under `data/demo/` with decks, repo mirrors, and precomputed `knowledge-graph.json`; the Wave-0 provenance replay lives under `data/replay/`, and the captured GitHub sourcing scan (R7) under `data/replay/scan/`.
+Store under `data/demo/` with decks, repo mirrors, and precomputed `knowledge-graph.json`; the Wave-0 provenance replay lives under `data/replay/`, and the captured Tavily sourcing scan (R7) under `data/replay/scan/`.
 
 ---
 
@@ -595,8 +596,9 @@ OPENAI_API_KEY=
 ELEVENLABS_API_KEY=        # spike renders the committed brief MP3
 ELEVENLABS_VOICE_ID=       # optional
 ELEVENLABS_AGENT_ID=       # optional — realtime conversational voice (stretch only)
+TAVILY_API_KEY=            # live founder web sourcing (R7); redeem code HackNationJuly
 DATABASE_URL=file:./data/vcbrain.db
-GITHUB_TOKEN=          # optional, rate limits
+GITHUB_TOKEN=          # optional, rate limits — repo analysis only (sourcing moved to Tavily)
 NEXT_PUBLIC_APP_URL=
 ```
 

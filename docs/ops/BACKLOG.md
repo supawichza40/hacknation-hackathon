@@ -26,6 +26,7 @@ If any answer is "no" or "unclear" → it stays here until after the event.
 | 10 | `/intake/voice` route | 2026-07-18 | UX (15%) | Debate cut with P1 voice intake (row 1) — same displacement answer | parked |
 | 11 | Research-areas write-up | 2026-07-18 | Data Architecture (30%) marginally | Reduced by debate v3 verdict (2026-07-18 22:35 BST) to one pitch sentence (see PITCH.md); no build | parked |
 | 12 | Portfolio-wide chat (deep Q&A across ALL founders' repos at once) | 2026-07-19 | Investment Utility (30%) | Human ruling 2026-07-19 00:05 BST: "leave for now" — R1 NL query box already covers the demo-able cross-founder story; deep multi-repo chat displaces nothing it's worth | parked |
+| 13 | Tavily as live founder-sourcing engine (sponsor tool) | 2026-07-19 | Data Architecture (30%) + sponsor-tool visibility (§5) | **PROMOTED → committed** (human ruling 2026-07-19): passes all three — (1) displaces the GitHub sourcing scan in R7 as a 1:1 swap, no net-new golden-path surface; (2) fits before freeze (reuses the R7 Wave-0 capture slot); (3) scores the same axis AND adds the stackable "Best Use of Tavily" prize + a stronger real-web anchor. GitHub retained for repo analysis only. | promoted |
 
 *(Realtime ElevenLabs conversational voice (P2) is deliberately NOT here — it is recorded in VC-BRAIN-PLAN §0.5 as an optional stretch if time remains after committed scope, not a parked idea.)*
 

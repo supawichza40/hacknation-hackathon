@@ -24,11 +24,11 @@ J1 is the rehearsed demo — every doc and screen optimizes for it. The public f
 
 Trace: plan §0.5 decisions 3–9, 12 + build order/cut ladder; §1b; §2; §3; §7; §8; §10; §12; §17. Rubric §1: all four criteria.
 
-## J2: outbound source → diligence
+## J2: outbound source → diligence (Tavily-powered)
 
 | Step | Screen | Investor action | FounderGraph behavior | Value gained | Failure / fallback |
 |---|---|---|---|---|---|
-| J2.1 | Pipeline `/` | Click Scan | Replays the captured Wave-0 GitHub sourcing run (R7) | Thesis-led discovery with zero stage-time network risk | R7 cut ⇒ seeded outbound cards |
+| J2.1 | Pipeline `/` | Click Scan | Replays the captured Wave-0 Tavily sourcing run (R7) | Thesis-led web discovery with zero stage-time network risk | R7 cut ⇒ seeded outbound cards |
 | J2.2 | Pipeline `/` | Inspect the threshold-crossing card | Channel badge + evidence-backed "why surfaced" line (R3) | Sourcing rationale inspectable — incl. cold-start public artifacts | R3 drill-down cuttable; badge remains |
 | J2.3 | Pipeline `/` | Open the candidate | Sourced card → its Diligence record | Signal becomes a screening task; no outreach implied | — |
 | J2.4 | Diligence + Graph | Same graph → trust → scores → memo → decision path as J1 | Precomputed evidence + replay as needed | Same evidence standard for inbound and outbound | Live analysis cuttable |

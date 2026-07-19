@@ -7,11 +7,9 @@ Every external dependency gets a row BEFORE the idea is locked. The point: conve
 | Tool / API | Capability we need | Proven with a REAL call? | Result / ID captured | Can't-do list & workaround |
 |---|---|---|---|---|
 | Lovable MCP | auth + workspace roundtrip (get_me → list_workspaces → create/message/read_file/get_diff) | ☑ (2026-07-19 00:18 BST) | user `supawichza@gmail.com`; workspace `Supavich's Lovable` (id mvPqC5cG5cH6KIwSSrDN, **pro** plan, 2 existing projects); `project_variants: false` | Build loop = one conversational external agent → no parallel writers; React Flow / audio MP3 unproven until first build turn (brief fallbacks apply) |
-| _e.g. platform MCP server_ | _create invoice_ | ☐ | | |
-| _e.g. platform REST API_ | _authorise / approve_ | ☐ | | |
-| _e.g. auth (client credentials)_ | _token with correct scopes_ | ☐ | | |
-| _e.g. Make / n8n_ | _webhook trigger → write_ | ☐ | | |
-| _e.g. deploy host_ | _serves app at real origin_ | ☐ | | |
+| Tavily API (sourcing) | thesis→founder sourcing: real `/search` + `/research` returning ranked results, `/extract` for Evidence page content | ☐ (blocked on key redemption) | key redeemed via code `HackNationJuly` (Project plan, 2mo, 8,000 credits); store as `TAVILY_API_KEY` in secrets registry; capture query + result URLs + timestamp | Read-only API (no writes); free tier 1,000/mo, keep demo <20% quota; live stage-time call forbidden → capture Wave-0 replay into `data/replay/scan/` |
+| Anthropic API (`claude -p`) | repo→knowledge-graph structured extraction + deck-claims extraction | ☑ (2026-07-19, commit a9df838) | real `claude -p` run: 42n/43e Lattice-DB graph (asg017/sqlite-vec) + 12 claims, 1 grounded contradiction | Non-deterministic → capture output to JSON, replay deterministically on stage; no live call during demo |
+| ElevenLabs TTS | one real call → pre-rendered hero MP3 brief | ☐ (Wave-0 spike) | pre-render tonight, never call live | Live stage call forbidden → ship pre-rendered MP3 |
 
 **Rule:** a capability is only "proven" by a real call whose response you saved (an ID, a status code, a screenshot). Documentation claims and SDK type signatures do not count — the broken tool last time was documented as working.
 

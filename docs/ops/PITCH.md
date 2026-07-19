@@ -2,6 +2,10 @@
 
 Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Timing discipline is scored implicitly — the winner who closed exactly on time won; a finalist who ran over mid-demo needed judge charity.
 
+**Finals format (this edition — kickoff deck p9; discord-info.md §Prizes):** the **top 2 teams per challenge** pitch live for the grand prize **Sat Jul 25, 12:00–13:00 PM ET (3 min)**; awards ceremony 13:15 ET. On stage: **1–2 slides + demo** (deck p9 "Needed: 1-2 Slides + Demo"; discord/HN-4 guide say 1–3 — prep ≤2 to satisfy both). But the jury's FIRST exposure is the submission itself — the 150–300-word summary and the two **≤60-sec videos** (demo + tech) are what gets a team INTO this room; they carry the "Communication" judging axis (deck p16).
+
+**Go Viral Award (optional free points — do it, costs 10 min):** post about the hackathon on LinkedIn tagging the official Hack-Nation account (linkedin.com/company/hack-nation); the post with the most reactions by **Sun Jul 19 09:00 ET** wins $500 OpenAI credits (deck p11; deadline per discord-info.md §Prizes — the deck's "Apr. 26" date is a stale template typo).
+
 ## The script (fill as you build — not the night before)
 
 | Clock | Beat | Content |
@@ -9,7 +13,7 @@ Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Tim
 | 0:00–0:20 | **Hook — the problem, with numbers** | 2–3 sourced statistics. _"£X billion… Y businesses close every day…"_ Spoken, not on a slide the judge must read. |
 | 0:20–0:45 | **The face** | YOUR real business/persona and their exact pain. First person beats hypothetical. **THIS EVENT (real anchor, VC-BRAIN-PLAN §0.5 decision 5): builder-as-hero — the builder's own repo is the founder being diligenced. "I'm the technical founder a VC can't evaluate: this is my actual repo, and here's what an investor sees in minutes instead of weeks."** |
 | 0:45–2:15 | **Live demo — the golden path** | One flow, rehearsed camera path. The **named wow moment** lands by 1:45. Narrate what the judge is seeing, not what the code does. |
-| 2:15–2:40 | **How it works** | One breath: agentic loop + policy-bounded autonomy + sponsor tools used. Name the real API writes. |
+| 2:15–2:40 | **How it works** | One breath: agentic loop + policy-bounded autonomy + sponsor tools used (**Tavily** = live founder sourcing; **ElevenLabs** = voiced brief). Name the real API calls. |
 | 2:40–3:00 | **Close** | Track sentence, said back to them: "This is [track definition] for [niche]." Then stop talking. |
 
 **Named wow moment:** click the red CONTRADICTED claim → jump to the exact deck slide + graph node showing the incompatible evidence (must be visible in ≤10 seconds; rehearsed live twice; has a recorded fallback)
@@ -36,7 +40,7 @@ Format observed at the last event: **3 minutes pitch + 1 minute judge Q&A.** Tim
 6. **"What about [adjacent scope, e.g. bills not just invoices]?"**
    → _answer: acknowledge + place it on the roadmap in one sentence_
 7. **"Is the outbound sourcing real, or seeded?"** (THIS EVENT — expect it; sourcing is the brief's "most important" area)
-   → _answer: both, honestly — we ran one REAL GitHub scan tonight (thesis→topic query; signals: star velocity, commit recency, no-org = pre-fundraise), captured it provenance-style, and the demo replays that captured run deterministically so the stage path can't die on venue Wi-Fi; the seeded cards carry evidence-backed "why surfaced" records, and no live network call happens on stage by design_
+   → _answer: both, honestly — we ran one REAL **Tavily** web scan tonight (thesis→query `/search` + `/research`; signals: web presence, traction mentions, funding/round status = pre-fundraise), captured it provenance-style, and the demo replays that captured run deterministically so the stage path can't die on venue Wi-Fi; the seeded cards carry evidence-backed "why surfaced" records, and no live network call happens on stage by design. Tavily is our sponsor tool for the "Best Use of Tavily" prize_
 
 ## The stage deck (slides the judges see · speaker notes only YOU see)
 

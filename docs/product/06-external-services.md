@@ -8,7 +8,7 @@ Each `docs/ops/PREFLIGHT.md` entry shall record:
 
 | Field | Required value |
 |---|---|
-| Service/dependency | LLM provider, ElevenLabs, GitHub access mode, or PDF parser |
+| Service/dependency | LLM provider, ElevenLabs, Tavily (sourcing), GitHub access mode, or PDF parser |
 | Date/time | Actual spike time |
 | Environment | Local demo environment |
 | Credential status | Proven, absent, not required, or quota failure — never the secret value |
@@ -71,28 +71,52 @@ A screenshot or fabricated sample is not a substitute for a real call. Replay ar
 4. A missing key does not break Diligence.
 5. Realtime voice remains absent unless all committed scope is green.
 
-## GitHub
+## Tavily (live sourcing) — displaces GitHub R7 scan (2026-07-19)
+
+Displacement decision (2026-07-19, human ruling): Tavily is the live founder-**sourcing** engine. It displaces the GitHub sourcing scan from R7. GitHub is retained for repo/code **analysis** only (see next section). Displacement test (Law 3): Tavily sourcing *replaces* the GitHub `/api/scan` sourcing signal — no net-new golden-path surface, one dependency swapped for a stronger one. Source: Tavily Hacker Guide (HackNation July 2026) — `/search`, `/extract`, `/research`, `/crawl`, `/map`; "Best Use of Tavily" sponsor prize.
 
 | Field | Requirement |
 |---|---|
-| Product uses | Repo clone or API read for analysis; one real sourcing scan captured at Wave 0 (thesis→topic query + signal scoring: star velocity, commit recency, no-org = pre-fundraise); one live small-repo path if retained |
-| Stage behavior | R7 Scan reads `data/replay/scan/` — never a network call on stage |
+| Product uses | Live founder sourcing: thesis→query via `/search` + deep `/research`; signal extraction (web presence, traction mentions, funding/round status, team) feeding graph nodes; `/extract` for clean page content into Evidence. One real sourcing scan captured at Wave 0 for R7 replay. |
+| Stage behavior | R7 Scan reads captured Tavily scan replay from `data/replay/scan/` — never a live Tavily call on stage |
+| Credential | `TAVILY_API_KEY` — assumed, prove at preflight. Redeemed via code `HackNationJuly` (Project plan, free 2 months, 8,000 credits); free tier = 1,000 credits/mo. Preflight confirms WHICH account's key is live and the stored key resolves. |
+| Preflight proof | One real `/search` (+ `/research` on the hero thesis) returning ranked results; persist non-secret scan provenance (query, result URLs/IDs, timestamp, commit SHA when available) + signal-threshold result; validate downstream schema |
+| Fallback | Captured Tavily scan replay in `data/replay/scan/`; precomputed graph. Golden path never calls live Tavily on stage. |
+| Blocks | Wave 0 capture; M2 sourcing → graph population + replay UI |
+| Failure state | Sourcing unavailable with captured replay identified; the app never invents founders |
+| Remote writes | None — Tavily is read-only search/extract. No mutation, issue, or outbound delivery. |
+| Cost | 8,000 credits (Project plan) / 1,000/mo free tier; design the demo to use <20% of quota; alert threshold TBD (owner: human) |
+| Source | Tavily Hacker Guide (HackNation July 2026); displacement ruling 2026-07-19; plan §0.5 d3/d5/d12 + Wave 0; §2; §4; §7; §8 `/api/scan`; §11 |
+
+### Tavily acceptance
+
+1. Preflight proves one real Tavily `/search` (+ `/research`) with captured, non-secret provenance.
+2. R7 replay is deterministic with outbound network disabled.
+3. The demo never labels replay as a live scan.
+4. No smoke test fabricates a Tavily write capability (read-only API).
+5. Sourcing failure surfaces a named unavailable state; no invented founders.
+
+## GitHub (repo/code analysis only)
+
+| Field | Requirement |
+|---|---|
+| Product uses | Repo clone or API read for **analysis** only; one live small-repo path if retained. Sourcing moved to Tavily (2026-07-19 displacement). |
+| Stage behavior | Repo analysis reads a pre-cloned repo — never a network call on stage. R7 sourcing replay is now owned by Tavily. |
 | Credential | `GITHUB_TOKEN` optional (rate limits) — assumed, prove at preflight |
-| Preflight proof | Read the hero/small repo, record source identifier + commit SHA when available; run the real sourcing scan; persist non-secret scan provenance + threshold result |
-| Fallback | Pre-cloned repo, precomputed graph, captured scan replay |
-| Blocks | Wave 0 capture; M2 analysis + replay UI |
-| Failure state | Repo/scan unavailable with precomputed/captured fallback identified |
+| Preflight proof | Read the hero/small repo, record source identifier + commit SHA when available |
+| Fallback | Pre-cloned repo, precomputed graph |
+| Blocks | Wave 0 capture; M2 repo analysis |
+| Failure state | Repo unavailable with precomputed/captured fallback identified |
 | Remote writes | None — the plan defines no GitHub write, issue, comment, or mutation |
 | Cost | No monetary budget asserted; rate-limit threshold TBD (owner: human) |
-| Source | Plan §0.5 d3/d5/d12 + Wave 0 + cut ladder; §2; §4; §7; §8 `/api/scan`; §11; §14 |
+| Source | Plan §0.5 d3/d5/d12 + Wave 0 + cut ladder; §2; §4; §7; §11; §14 |
 
 ### GitHub acceptance
 
 1. Preflight proves a real repo read + captured source provenance.
-2. Preflight proves the real sourcing scan before the replay is accepted.
-3. R7 replay is deterministic with outbound network disabled.
-4. The demo never labels replay as a live scan.
-5. No smoke test fabricates a GitHub write capability.
+2. Repo analysis is deterministic with outbound network disabled at stage time.
+3. The demo never labels a pre-cloned repo as a live clone.
+4. No smoke test fabricates a GitHub write capability.
 
 ## PDF parser
 
@@ -121,9 +145,9 @@ A screenshot or fabricated sample is not a substitute for a real call. Replay ar
 | Block | Live dependency permitted after preflight | Required fallback before block closes |
 |---|---|---|
 | M0 | None required | Empty pages + config load without any keys |
-| Wave 0 | Selected LLM, ElevenLabs, GitHub access, PDF parser | Captured LLM replay; hero MP3 + text script; pre-cloned repo + scan replay; pre-extracted slides JSON |
+| Wave 0 | Selected LLM, ElevenLabs, Tavily sourcing, GitHub access, PDF parser | Captured LLM replay; hero MP3 + text script; captured Tavily scan replay; pre-cloned repo; pre-extracted slides JSON |
 | M1 | None | Seeded SQLite pipeline |
-| M2 | LLM extraction + repo/PDF reads if retained | Precomputed graphs, deck claims, provenance replay |
+| M2 | LLM extraction + Tavily sourcing + repo/PDF reads if retained | Precomputed graphs, deck claims, provenance replay, captured Tavily scan replay |
 | M3 | None — score/Trust math is deterministic | Seeded claims/evidence + deterministic fixtures |
 | M4 | LLM axes/memo/chat + optional R1 | Captured memo/axes + one cited chat replay; R1 cuttable |
 | M5b | No live call required | Pre-rendered MP3 + text script |
@@ -135,6 +159,7 @@ The suite design asks for "one real read + one real write per external service a
 ## Out of scope
 
 - Any LLM provider capability not proved by preflight.
-- Live stage-time GitHub sourcing, GitHub remote writes, email, outreach delivery.
+- Live stage-time sourcing (Tavily or GitHub), any remote writes, email, outreach delivery.
+- Tavily `/crawl` and `/map` beyond captured sourcing, and any live stage-time Tavily call — replay only on stage.
 - Live TTS as a golden-path dependency; realtime voice; voice intake; outbound voice.
 - Understand-Anything as a hosted service — it is a conditional source-code adaptation governed by LICENSE/NOTICE (plan §0.5 d10), not a runtime external service.

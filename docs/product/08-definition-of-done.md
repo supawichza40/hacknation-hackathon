@@ -137,7 +137,7 @@ npm run check:done
 | NOTICE | Present when UA code adapted | `NOTICE`, conditional |
 | Hero graph + claims | Validated precomputed artifacts | `data/demo/`, `data/graphs/` — exact paths TBD (owner: human) |
 | Provenance replay | Real captured LLM run | `data/replay/` — exact path TBD (owner: human) |
-| Scan replay | Real captured GitHub sourcing scan | `data/replay/scan/` |
+| Scan replay | Real captured Tavily sourcing scan | `data/replay/scan/` |
 | Voice brief | Pre-rendered hero MP3 + text script | Path TBD (owner: human) |
 | Demo video | ≤60 sec, MP4 H.264 | Path TBD (owner: human) |
 | Tech video | ≤60 sec (stack, highlights, limitations) | Path TBD (owner: human) |

@@ -21,7 +21,7 @@ Scope source: `VC-BRAIN-PLAN.md` v3 (single source of truth). Rubric tags refer 
 | UC11 | Investor | Re-evaluate a returning founder without resetting history | M1, M3, M4 | Data Architecture; Investment Utility | Persistence core; trend UI cuttable |
 | UC12 | Founder | Apply with company, deck, and repository information | M0, M2 | Data Architecture; UX | On the cut ladder; seeded inbound fallback |
 | UC13 | — | *(reserved — voice founder intake, ElevenLabs P1, backlogged)* | — | — | BACKLOG.md; not part of this suite (design §3) |
-| UC14 | System | Replay a captured GitHub sourcing scan | Wave 0, M2 | Data Architecture | R7, cuttable |
+| UC14 | System | Replay a captured Tavily sourcing scan | Wave 0, M2 | Data Architecture | R7, cuttable |
 
 ## UC1: configure the investment thesis
 
@@ -188,8 +188,8 @@ Scope source: `VC-BRAIN-PLAN.md` v3 (single source of truth). Rubric tags refer 
 ## UC14: replay a captured sourcing scan
 
 - Actor: System, triggered by the investor.
-- Goal: Demonstrate outbound GitHub sourcing from a real captured scan with no stage-time network call.
-- Preconditions: Wave 0 captured a real thesis→topic scan (star velocity, commit recency, no-org = pre-fundraise) in `data/replay/scan/`.
+- Goal: Demonstrate outbound web sourcing (Tavily `/search` + `/research`) from a real captured scan with no stage-time network call.
+- Preconditions: Wave 0 captured a real thesis→query Tavily scan (web presence, traction mentions, funding/round status = pre-fundraise signal) in `data/replay/scan/`.
 - Main flow:
   1. The investor clicks Scan on Pipeline.
   2. FounderGraph replays the captured run deterministically.

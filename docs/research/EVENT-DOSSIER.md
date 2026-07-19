@@ -62,6 +62,7 @@ MIT Alumni jury page adds (PT): local pitches Sat ~4:00 PM PT · jury deliberate
 
 Databricks, DSV Gruppe, Fulcrum, Spiral, World Bank, yfood, Manage&More, **OpenAI**, LAP, Start2 Group, innocent, Boost Startup Factory, YETI, **Tavily**, TeamViewer, Factory 300, ESCP, Amundi/acba, **Vercel**, MIT Sloan AI Club, GYM COOK, **Lovable**, Red Bull, FOMO, TUMO, **HRT**, **Supabase**, Masters' Union, novu campus, HALKIN, Eleveight AI, **Cursor**, AgentPark. Venture-lab partners: EWOR, Databricks; investor day: a16z, Greylock, Antler, Creandum.
 → Sponsor-tool visibility rule: OpenAI API + Vercel/Supabase/Lovable/Cursor/Tavily are the likely challenge substrates. ElevenLabs appeared in past sample challenges.
+→ **CONFIRMED this edition (2026-07-19):** Tavily is a participant sponsor offering API credits (code `HackNationJuly` → 8,000 credits, Project plan 2mo) AND a stackable **"Best Use of Tavily" prize** (10k/5k/3k credits). We adopted Tavily as the live founder-sourcing engine (displaces GitHub R7) — see VC-BRAIN-PLAN, RUBRIC §2, 06-external-services.
 
 ## 7. Editions timeline
 

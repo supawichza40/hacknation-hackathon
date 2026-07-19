@@ -18,6 +18,7 @@ Claude updates this at every phase boundary and after every autonomy-window deci
 ## Now / Next / Done
 
 ### Now
+- [ ] **Tavily sourcing integration (NEW 2026-07-19)** — Tavily = live founder-sourcing engine, displaces GitHub R7 scan (decision: BACKLOG row 13; docs updated across suite). **Blocked on human:** redeem code `HackNationJuly` at tavily.com → Billing → Project plan (8,000 credits) → paste key so it lands in secrets registry + `.env`. Then Wave-0 spike: real `/search` + `/research` → capture to `data/replay/scan/` (PREFLIGHT row). Wins "Best Use of Tavily" prize (10k/5k/3k credits).
 - [ ] **Lovable prototype build (dispatch job, branch `dispatch/lovable-frontend`)** — driving Lovable MCP per [brief](docs/product/09-lovable-frontend-brief.md) against [DoD](docs/product/10-lovable-dod.md). Project `a7405de7`, preview https://id-preview--a7405de7-87c8-48fc-803a-8a8f89f404ed.lovable.app. Stage 1 (foundation+data) done; Stage 2 (Pipeline) building. Sol audit folded. Log: [dialogue](docs/dispatch/plan-dialogue/2026-07-19-lovable-frontend.md)
 - [x] Submission deliverables updated per event-info: 2×60s videos + 1-page report + zip (see [SUBMISSION.md](docs/ops/SUBMISSION.md)) — applied 2026-07-18
 - [ ] Apply debate-v3 adds R1–R7 (+4.5h) per VC-BRAIN-PLAN §0.5 decision 12 — slots: Wave-0/M1/M2/M4

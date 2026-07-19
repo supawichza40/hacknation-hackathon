@@ -6,8 +6,10 @@
 // file — so there is no filesystem write and zero path-traversal surface. repo
 // and deck are validated as http(s) URLs and stored as bound parameters only.
 import { createHash } from "node:crypto";
+import { spawn } from "node:child_process";
+import { join } from "node:path";
 import type { DB } from "./db.ts";
-import { upsertPerson, upsertOpportunityByRepo } from "./db.ts";
+import { upsertPerson, upsertOpportunityByRepo, setAnalysisStatus } from "./db.ts";
 import { normalizeRepoUrl } from "./thesis.ts";
 
 export const MAX_FIELD_LEN = 500;
@@ -51,6 +53,48 @@ function isHttpUrl(s: string): boolean {
   }
 }
 
+// SSRF / arbitrary-clone defense (PREFLIGHT risk, red-team gate): the submitted repo
+// URL is attacker-controlled and feeds `git clone`. Accept ONLY the exact shape
+// https://github.com/<owner>/<repo> — https scheme, exact github.com host, two clean
+// path segments — and reject every other host/scheme, embedded credentials, ports,
+// extra path, `..`, or shell metacharacters. The clone also uses an arg array (never a
+// shell string), so a metacharacter could not inject anyway — this is defense in depth.
+const GH_OWNER_RE = /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/;
+const GH_REPO_RE = /^[A-Za-z0-9._-]{1,100}$/;
+const SHELL_META_RE = /[\s`$;&|<>()\\'"*?!{}[\]~^]/;
+const GH_HINT = "Enter a public GitHub repo URL (https://github.com/owner/repo).";
+
+export type GithubRepoValidation =
+  | { ok: true; cloneUrl: string; owner: string; repo: string }
+  | { ok: false; error: string };
+
+export function validateGithubRepoUrl(raw: unknown): GithubRepoValidation {
+  const s = typeof raw === "string" ? raw.trim() : "";
+  if (!s) return { ok: false, error: "A public GitHub repo URL is required." };
+  if (s.length > MAX_FIELD_LEN) return { ok: false, error: "Repo URL is too long." };
+  if (s.includes("..") || SHELL_META_RE.test(s)) return { ok: false, error: GH_HINT };
+
+  let u: URL;
+  try {
+    u = new URL(s);
+  } catch {
+    return { ok: false, error: GH_HINT };
+  }
+  // Exact host + scheme; no credentials, no port. Rejects http, git@, IPs,
+  // 169.254.169.254, localhost, github.com.evil.com, and github.com:22.
+  if (u.protocol !== "https:" || u.hostname !== "github.com" || u.port || u.username || u.password) {
+    return { ok: false, error: "Only public GitHub repos are supported (https://github.com/owner/repo)." };
+  }
+  const parts = u.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+  if (parts.length !== 2) return { ok: false, error: GH_HINT };
+  const owner = parts[0];
+  const repo = parts[1].replace(/\.git$/i, "");
+  if (!GH_OWNER_RE.test(owner) || !GH_REPO_RE.test(repo) || repo === "." || repo === "..") {
+    return { ok: false, error: GH_HINT };
+  }
+  return { ok: true, cloneUrl: `https://github.com/${owner}/${repo}.git`, owner, repo };
+}
+
 // Field-level validation with entered values preserved by the caller. Company
 // name and repo URL are required; deck URL is optional but must be a URL if given.
 export function validateApplyInput(input: ApplyInput): ApplyValidation {
@@ -64,9 +108,11 @@ export function validateApplyInput(input: ApplyInput): ApplyValidation {
   if (!companyName) fields.companyName = "Company name is required.";
   else if (companyName.length > MAX_FIELD_LEN) fields.companyName = "Company name is too long.";
 
-  if (!repoUrl) fields.repoUrl = "A public repo URL is required.";
-  else if (repoUrl.length > MAX_FIELD_LEN) fields.repoUrl = "Repo URL is too long.";
-  else if (!isHttpUrl(repoUrl)) fields.repoUrl = "Enter a valid http(s) URL.";
+  // Repo must be a public GitHub repo (the only shape the analysis job can clone).
+  let repoCanonical = repoUrl;
+  const gh = validateGithubRepoUrl(repoUrl);
+  if (!gh.ok) fields.repoUrl = gh.error;
+  else repoCanonical = `https://github.com/${gh.owner}/${gh.repo}`;
 
   if (deckUrl && (deckUrl.length > MAX_FIELD_LEN || !isHttpUrl(deckUrl))) {
     fields.deckUrl = "Enter a valid http(s) deck URL, or leave it blank.";
@@ -77,7 +123,7 @@ export function validateApplyInput(input: ApplyInput): ApplyValidation {
     ok: true,
     value: {
       companyName,
-      repoUrl,
+      repoUrl: repoCanonical,
       deckUrl: deckUrl || undefined,
       founderName: founderName || undefined,
       links: links || undefined,
@@ -132,5 +178,34 @@ export function applyOpportunity(db: DB, value: ApplyValue): ApplyResult {
     updatedAt: now,
   });
 
+  // The submission is now queued for the async pipeline. The card/diligence page
+  // show "analyzing…" until the background job flips this to ready/unavailable.
+  setAnalysisStatus(db, opportunityId, "analyzing");
+
   return { opportunityId, deduped: existing !== undefined };
+}
+
+// Graph-slug for an apply opportunity — inverse of the diligence resolver's
+// `opp-<slug>` fallback, so the persisted graph/claims/memo key lines up with the
+// slug the diligence page loads from. (opp-apply-ab12 -> apply-ab12.)
+export function applySlug(opportunityId: string): string {
+  return opportunityId.replace(/^opp-/, "");
+}
+
+// Fire-and-forget the heavy analysis in a SEPARATE Node process. The pipeline touches
+// graph/io-write.ts, which must never enter a route's module graph (its dynamic fs makes
+// the bundler trace the whole project) — spawning a script by PATH (not import) keeps it
+// out entirely. Job state lives in the DB (analysis_status), so the child updating it
+// out-of-band is the whole point. Never awaited: /apply returns immediately (decision 3).
+export function spawnApplyAnalysis(opportunityId: string, cloneUrl: string, slug: string): void {
+  const script = join(process.cwd(), "scripts", "analyze-apply.ts");
+  const child = spawn(
+    process.execPath,
+    [script, "--opp", opportunityId, "--repo", cloneUrl, "--slug", slug],
+    { stdio: "ignore", env: process.env },
+  );
+  child.on("error", (err) => {
+    console.error(`[apply] could not spawn analysis job for ${opportunityId}: ${err.message}`);
+  });
+  child.unref();
 }

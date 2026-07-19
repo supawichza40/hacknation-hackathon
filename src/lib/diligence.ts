@@ -45,6 +45,8 @@ export type DiligenceView = {
   askAmountCents: number;
   whySurfaced: string | null;
   createdAt: string;
+  analysisStatus: string | null;
+  analysisReason: string | null;
   facts: FactRow[];
   unknowns: string[];
   axes: AxisScore[];
@@ -170,6 +172,8 @@ export function getDiligenceView(slug: string): DiligenceView | null {
       askAmountCents: row.ask_amount_cents as number,
       whySurfaced: (row.why_surfaced as string) ?? null,
       createdAt: row.created_at as string,
+      analysisStatus: (row.analysis_status as string) ?? null,
+      analysisReason: (row.analysis_reason as string) ?? null,
       facts,
       unknowns,
       axes,

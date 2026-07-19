@@ -57,6 +57,8 @@ export type CardData = {
   whySurfaced: string | null;
   whySurfacedEvidence: { locator: string; excerpt: string } | null;
   history: { appliedAt: string; founderScore: number; note: string | null }[];
+  analysisStatus: string | null;
+  analysisReason: string | null;
 };
 
 export type ThesisData = ThesisView & { id: string; name: string };
@@ -546,6 +548,12 @@ function OpportunityCard({
       <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginTop: "10px" }}>
         {card.sourceChannel && <Badge>{card.sourceChannel}</Badge>}
         <Badge tone="muted">{card.source}</Badge>
+        {/* Async /apply analysis status — absent for seeded/already-analyzed opps */}
+        {card.analysisStatus === "analyzing" && <Badge tone="accent">analyzing…</Badge>}
+        {card.analysisStatus === "ready" && <Badge tone="accent">analyzed</Badge>}
+        {card.analysisStatus === "analysis_unavailable" && (
+          <Badge tone="negative">analysis unavailable</Badge>
+        )}
         {offThesis && <Badge tone="negative">{fit.failReasons[0]}</Badge>}
       </div>
 

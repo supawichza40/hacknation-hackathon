@@ -4,7 +4,13 @@
 // Errors return generic messages (never a raw DB error — red-team N-1 discipline).
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
-import { validateApplyInput, applyOpportunity } from "@/lib/apply";
+import {
+  validateApplyInput,
+  applyOpportunity,
+  validateGithubRepoUrl,
+  spawnApplyAnalysis,
+  applySlug,
+} from "@/lib/apply";
 
 export const dynamic = "force-dynamic";
 
@@ -24,8 +30,20 @@ export async function POST(req: Request) {
   const db = getDb();
   try {
     const result = applyOpportunity(db, parsed.value);
+    // Kick off the REAL analysis pipeline out-of-process and return immediately — the
+    // clone + live LLM take minutes and must not block the request (PREFLIGHT decision
+    // 3). The opportunity is already persisted with analysis_status = "analyzing"; the
+    // job flips it to ready/analysis_unavailable and the UI polls /api/apply/status.
+    const gh = validateGithubRepoUrl(parsed.value.repoUrl);
+    if (gh.ok) spawnApplyAnalysis(result.opportunityId, gh.cloneUrl, applySlug(result.opportunityId));
     return NextResponse.json(
-      { ok: true, opportunityId: result.opportunityId, deduped: result.deduped },
+      {
+        ok: true,
+        opportunityId: result.opportunityId,
+        deduped: result.deduped,
+        analysisStatus: "analyzing",
+        slug: applySlug(result.opportunityId),
+      },
       { status: 201 },
     );
   } catch {

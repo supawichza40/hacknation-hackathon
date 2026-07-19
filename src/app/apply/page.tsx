@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
+import Link from "next/link";
 
 // Public founder application (VC-BRAIN-PLAN.md §0.5 d9, screen map §5.4). Minimal
 // inbound form → POST /api/apply → an inbound Opportunity the investor sees in
@@ -18,13 +19,18 @@ export default function ApplyPage() {
   const [status, setStatus] = useState<Status>("initial");
   const [fieldErrors, setFieldErrors] = useState<Fields>({});
   const [formError, setFormError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ opportunityId: string; deduped: boolean } | null>(null);
+  const [result, setResult] = useState<{
+    opportunityId: string;
+    deduped: boolean;
+    slug: string | null;
+  } | null>(null);
 
   function clientValidate(): Fields {
     const f: Fields = {};
     if (!companyName.trim()) f.companyName = "Company name is required.";
-    if (!repoUrl.trim()) f.repoUrl = "A public repo URL is required.";
-    else if (!/^https?:\/\//i.test(repoUrl.trim())) f.repoUrl = "Enter a valid http(s) URL.";
+    if (!repoUrl.trim()) f.repoUrl = "A public GitHub repo URL is required.";
+    else if (!/^https:\/\/github\.com\/[^/\s]+\/[^/\s]+/i.test(repoUrl.trim()))
+      f.repoUrl = "Enter a public GitHub repo URL (https://github.com/owner/repo).";
     if (deckUrl.trim() && !/^https?:\/\//i.test(deckUrl.trim()))
       f.deckUrl = "Enter a valid http(s) deck URL, or leave it blank.";
     return f;
@@ -58,7 +64,11 @@ export default function ApplyPage() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
-        setResult({ opportunityId: data.opportunityId, deduped: Boolean(data.deduped) });
+        setResult({
+          opportunityId: data.opportunityId,
+          deduped: Boolean(data.deduped),
+          slug: typeof data.slug === "string" ? data.slug : null,
+        });
         setStatus("success");
         return;
       }
@@ -96,8 +106,8 @@ export default function ApplyPage() {
           <h1 style={title}>You’re in the pipeline</h1>
           <p style={subtitle}>
             {result.deduped
-              ? "We already had this repo on file — we’ve refreshed your existing application."
-              : "Thanks — an investor will see your company as an inbound opportunity."}
+              ? "We already had this repo on file — we’ve refreshed it and re-run the analysis."
+              : "Thanks — we’re analyzing your repo now. It appears in the investor’s pipeline as an inbound opportunity."}
           </p>
           <div style={hintBox}>
             <span style={{ fontSize: "var(--text-label)", textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--muted)" }}>
@@ -107,7 +117,12 @@ export default function ApplyPage() {
               {result.opportunityId}
             </span>
           </div>
-          <button type="button" onClick={reset} style={secondaryButton}>
+          {result.slug && (
+            <Link href={`/opportunities/${result.slug}`} style={{ ...secondaryButton, display: "inline-block", textDecoration: "none" }}>
+              Follow the live analysis →
+            </Link>
+          )}
+          <button type="button" onClick={reset} style={{ ...secondaryButton, marginLeft: result.slug ? "10px" : 0 }}>
             Submit another
           </button>
         </div>

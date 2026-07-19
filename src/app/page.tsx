@@ -36,6 +36,8 @@ export default function PipelinePage() {
     whySurfaced: c.whySurfaced,
     whySurfacedEvidence: c.whySurfacedEvidence,
     history: c.history,
+    analysisStatus: c.analysisStatus,
+    analysisReason: c.analysisReason,
   }));
 
   return (

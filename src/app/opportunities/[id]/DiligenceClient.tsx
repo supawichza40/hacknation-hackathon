@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { DiligenceView, Slide } from "@/lib/diligence";
 import type { Claim } from "@/lib/claims";
@@ -65,6 +66,59 @@ const badge: React.CSSProperties = {
   padding: "2px 8px",
 };
 
+const banner: React.CSSProperties = {
+  borderRadius: "var(--radius)",
+  padding: "12px 16px",
+  fontSize: "var(--text-body)",
+  border: "1px solid var(--border)",
+};
+
+// Async-analysis status for an /apply submission. While "analyzing", it polls the
+// status endpoint and refreshes the server component when the job finishes; on
+// "analysis_unavailable" it shows the real reason (honest, never a fabricated score).
+// Nothing renders once the analysis is ready or for a normally-seeded opportunity.
+function AnalysisBanner({ view }: { view: DiligenceView }) {
+  const router = useRouter();
+  const status = view.analysisStatus;
+
+  useEffect(() => {
+    if (status !== "analyzing") return;
+    const t = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/apply/status?id=${encodeURIComponent(view.opportunityId)}`);
+        if (!res.ok) return;
+        const data = (await res.json()) as { analysisStatus?: string | null };
+        if (data.analysisStatus && data.analysisStatus !== "analyzing") router.refresh();
+      } catch {
+        // transient network error — keep polling
+      }
+    }, 4000);
+    return () => clearInterval(t);
+  }, [status, view.opportunityId, router]);
+
+  if (status === "analyzing") {
+    return (
+      <div
+        role="status"
+        style={{ ...banner, borderColor: "var(--accent)", color: "var(--text)" }}
+      >
+        <strong>Analyzing repository…</strong> Cloning the repo, extracting the knowledge graph,
+        scoring the axes, and drafting the memo. This can take a couple of minutes — the page
+        refreshes itself when the analysis is ready.
+      </div>
+    );
+  }
+  if (status === "analysis_unavailable") {
+    return (
+      <div role="alert" style={{ ...banner, borderColor: "var(--warning)", color: "var(--text)" }}>
+        <strong>Analysis unavailable.</strong>{" "}
+        {view.analysisReason ?? "The analysis pipeline could not complete for this repository."}
+      </div>
+    );
+  }
+  return null;
+}
+
 export default function DiligenceClient({ view }: { view: DiligenceView }) {
   const contradicted = useMemo(
     () => view.claims.find((c) => c.status === "contradicted") ?? null,
@@ -120,6 +174,9 @@ export default function DiligenceClient({ view }: { view: DiligenceView }) {
 
   return (
     <section style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      {/* Async /apply analysis status (analyzing / unavailable); nothing when ready */}
+      <AnalysisBanner view={view} />
+
       {/* Header */}
       <header style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "flex-start" }}>
         <div style={{ flex: "1 1 320px" }}>

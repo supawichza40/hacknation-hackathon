@@ -50,6 +50,11 @@ CREATE TABLE IF NOT EXISTS opportunity (
   ask_amount_cents INTEGER NOT NULL,
   why_surfaced TEXT,
   visible INTEGER NOT NULL DEFAULT 1,
+  -- Async analysis lifecycle for /apply submissions (NULL for seeded/never-analyzed
+  -- opps): 'analyzing' | 'ready' | 'analysis_unavailable'. State lives here, not in
+  -- memory, so it survives a request timeout / process restart (PREFLIGHT decision 3).
+  analysis_status TEXT,
+  analysis_reason TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
@@ -116,6 +121,16 @@ export function getDb(dbPath: string = DEFAULT_DB_PATH): DB {
   const db = new Database(dbPath);
   db.pragma("foreign_keys = ON");
   db.exec(SCHEMA);
+  // Idempotent migration: CREATE TABLE IF NOT EXISTS never alters an existing
+  // table, so a DB file created before these columns existed needs them added.
+  // Duplicate-column ALTER throws on a fresh DB (already has them) — caught.
+  for (const col of ["analysis_status", "analysis_reason"]) {
+    try {
+      db.exec(`ALTER TABLE opportunity ADD COLUMN ${col} TEXT`);
+    } catch {
+      // column already present — expected on a schema-current DB.
+    }
+  }
   return db;
 }
 
@@ -285,6 +300,36 @@ export function setOpportunityVisible(db: DB, opportunityId: string, visible: bo
   db.prepare("UPDATE opportunity SET visible = ? WHERE id = ?").run(visible ? 1 : 0, opportunityId);
 }
 
+// Async /apply analysis lifecycle. 'analyzing' on submit, then the background job
+// flips to 'ready' (real graph/axes/memo persisted) or 'analysis_unavailable' with an
+// honest reason (no ANTHROPIC_API_KEY, clone failure, LLM failure). Never fabricates.
+export type AnalysisStatus = "analyzing" | "ready" | "analysis_unavailable";
+
+export function setAnalysisStatus(
+  db: DB,
+  opportunityId: string,
+  status: AnalysisStatus,
+  reason: string | null = null,
+): void {
+  db.prepare(
+    "UPDATE opportunity SET analysis_status = ?, analysis_reason = ?, updated_at = ? WHERE id = ?",
+  ).run(status, reason, new Date().toISOString(), opportunityId);
+}
+
+export function getAnalysisStatus(
+  db: DB,
+  opportunityId: string,
+): { status: AnalysisStatus | null; reason: string | null } | null {
+  const row = db
+    .prepare("SELECT analysis_status, analysis_reason FROM opportunity WHERE id = ?")
+    .get(opportunityId) as { analysis_status: string | null; analysis_reason: string | null } | undefined;
+  if (!row) return null;
+  return {
+    status: (row.analysis_status as AnalysisStatus | null) ?? null,
+    reason: row.analysis_reason ?? null,
+  };
+}
+
 // ---- read helpers (pipeline page) ----
 
 export function getThesis(db: DB, id = "thesis-default"): ThesisView & { id: string; name: string } {
@@ -319,6 +364,8 @@ export type OpportunityCard = {
   whySurfaced: string | null;
   whySurfacedEvidence: { locator: string; excerpt: string } | null;
   history: { appliedAt: string; founderScore: number; note: string | null }[];
+  analysisStatus: string | null;
+  analysisReason: string | null;
   fit: FitResult;
 };
 
@@ -371,6 +418,8 @@ export function getOpportunityCards(db: DB, thesis: ThesisView): OpportunityCard
         founderScore: h.founder_score,
         note: h.note,
       })),
+      analysisStatus: (r.analysis_status as string) ?? null,
+      analysisReason: (r.analysis_reason as string) ?? null,
       fit: evaluateThesisFit(opp, thesis),
     };
   });

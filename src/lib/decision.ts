@@ -17,6 +17,20 @@ export type DecisionRow = {
 
 export const VERDICTS: Verdict[] = ["invest", "pass", "more_info"];
 
+export const MAX_NOTE_LEN = 2000;
+
+// Route-boundary guard for the untyped `note` field (red-team N-1, N-2): it must
+// be absent/null, or a string within the length cap. A non-string note would
+// otherwise reach better-sqlite3 `.run()` and throw a raw DB error (leaked to the
+// caller); an unbounded note has no cap. Keeps validation out of the write path.
+export function isValidNote(note: unknown): boolean {
+  return (
+    note === undefined ||
+    note === null ||
+    (typeof note === "string" && note.length <= MAX_NOTE_LEN)
+  );
+}
+
 export function ensureDecisionTable(db: DB): void {
   db.exec(`
     CREATE TABLE IF NOT EXISTS decision (

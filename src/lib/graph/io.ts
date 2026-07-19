@@ -62,7 +62,15 @@ export function loadProvenance(slug: string): Provenance | null {
   if (!existsSync(p)) return null;
   const raw = JSON.parse(readFileSync(p, "utf8"));
   const parsed = provenanceSchema.safeParse(raw);
-  return parsed.success ? parsed.data : null;
+  if (!parsed.success) {
+    // Don't swallow a corrupt artifact silently (red-team N-3): log which file
+    // and why before disabling the R5 reasoning drawer.
+    console.warn(
+      `[graph/io] provenance for "${slug}" failed schema validation (${entry.provenance}): ${parsed.error.message}`,
+    );
+    return null;
+  }
+  return parsed.data;
 }
 
 // R8 guided tour. null when no precomputed tour exists for the slug.
@@ -71,5 +79,13 @@ export function loadTour(slug: string): Tour | null {
   if (!existsSync(p)) return null;
   const raw = JSON.parse(readFileSync(p, "utf8"));
   const parsed = tourSchema.safeParse(raw);
-  return parsed.success ? parsed.data : null;
+  if (!parsed.success) {
+    // Don't swallow a corrupt artifact silently (red-team N-3): log which file
+    // and why before disabling the R8 guided tour.
+    console.warn(
+      `[graph/io] tour for "${slug}" failed schema validation (${p}): ${parsed.error.message}`,
+    );
+    return null;
+  }
+  return parsed.data;
 }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0L8,4L0,8z" fill="#5a637f"/></marker></defs>
+  <g font-size="17" fill="#e8eaf0" text-anchor="middle" font-weight="600" font-family="-apple-system,'Helvetica Neue',Arial,sans-serif">
+    <rect x="20"  y="60"  width="170" height="70" rx="12" fill="#141824" stroke="#2a3044"/><text x="105" y="90">Founder repo</text><text x="105" y="112">+ deck</text>
+    <rect x="20"  y="190" width="170" height="70" rx="12" fill="#141824" stroke="#1f6feb"/><text x="105" y="220" fill="#58a6ff">Tavily scan</text><text x="105" y="242" fill="#8b93a7" font-size="14">captured · replayed</text>
+    <rect x="270" y="120" width="200" height="80" rx="12" fill="#141824" stroke="#D97757"/><text x="370" y="152" fill="#f4a988">2 LLM calls</text><text x="370" y="176" fill="#8b93a7" font-size="14">Anthropic API · zod-validated</text>
+    <rect x="550" y="40"  width="190" height="70" rx="12" fill="#141824" stroke="#2a3044"/><text x="645" y="70">Knowledge graph</text><text x="645" y="92" fill="#8b93a7" font-size="14">42 nodes · React Flow</text>
+    <rect x="550" y="200" width="190" height="70" rx="12" fill="#141824" stroke="#2a3044"/><text x="645" y="230">12 claims</text><text x="645" y="252" fill="#8b93a7" font-size="14">trust-scored vs code</text>
+    <rect x="800" y="120" width="230" height="80" rx="12" fill="#141824" stroke="#7ee0a3"/><text x="915" y="150" fill="#7ee0a3">Deterministic rubric</text><text x="915" y="174" fill="#8b93a7" font-size="14">TypeScript · no invented numbers</text>
+    <rect x="1080" y="60" width="100" height="60" rx="12" fill="#141824" stroke="#2a3044"/><text x="1130" y="96">Memo</text>
+    <rect x="1080" y="190" width="100" height="60" rx="12" fill="#141824" stroke="#6d7cff"/><text x="1130" y="226" fill="#a9b3ff">Human</text>
+    <g stroke="#5a637f" stroke-width="2" fill="none" marker-end="url(#a)">
+      <path d="M190,95 C230,95 230,140 270,150"/><path d="M190,225 C230,225 230,180 270,170"/>
+      <path d="M470,140 C510,130 510,85 550,78"/><path d="M470,180 C510,190 510,232 550,236"/>
+      <path d="M740,75 C780,85 780,140 820,150"/><path d="M740,235 C780,225 780,180 820,170"/>
+      <path d="M1010,145 C1040,135 1050,100 1080,92"/><path d="M1010,175 C1040,185 1050,212 1080,218"/>
+    </g>
+  </g>
+</svg>

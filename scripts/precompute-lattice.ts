@@ -8,7 +8,7 @@ import { analyzeRepo } from "../src/lib/ingest/analyze.ts";
 const repoDir = process.argv[2] ?? "data/demo/repos/lattice-db";
 const source = process.argv[3] ?? "asg017/sqlite-vec (github.com/asg017/sqlite-vec)";
 
-const { graph, provenance } = analyzeRepo({
+const { graph, provenance } = await analyzeRepo({
   repoDir,
   slug: "lattice-db",
   source,

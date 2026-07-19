@@ -1,9 +1,9 @@
 // Graph-grounded chat API (VC-BRAIN-PLAN.md §0.5 d7). SSE stream: the answer streams
 // token-by-token, then a final citations event lists the node ids it grounded on — or a
 // clean refusal when nothing in the graph supports the question (cite-or-refuse). Answers
-// come from a live `claude -p` call over the opportunity's knowledge-graph NODES; if that
+// come from a live Anthropic API call over the opportunity's knowledge-graph NODES; if that
 // is unavailable the captured rehearsed Q&A (data/replay/chat/) is replayed instead.
-import { spawnSync } from "node:child_process";
+import { streamClaude } from "@/lib/llm";
 import { loadGraph } from "@/lib/graph/io";
 import {
   buildGraphContext,
@@ -19,18 +19,9 @@ export const dynamic = "force-dynamic";
 
 type Mode = "live" | "replay" | "refused";
 
-function liveAnswer(prompt: string, allowedNodeIds: Set<string>): FinalAnswer | null {
+async function liveAnswer(prompt: string, allowedNodeIds: Set<string>): Promise<FinalAnswer | null> {
   try {
-    const res = spawnSync("claude", ["-p", "--output-format", "json"], {
-      input: prompt,
-      encoding: "utf8",
-      maxBuffer: 32 * 1024 * 1024,
-      timeout: 60_000,
-    });
-    if (res.status !== 0 || !res.stdout) return null;
-    const env = JSON.parse(res.stdout);
-    if (env.is_error) return null;
-    let s = String(env.result).trim();
+    let s = (await streamClaude({ prompt })).trim();
     const fence = s.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (fence) s = fence[1].trim();
     const start = s.indexOf("{");
@@ -69,7 +60,7 @@ export async function POST(req: Request) {
   // 1) live claude, grounded in the graph nodes. 2) captured replay for the rehearsed
   // question. 3) clean refusal. Never an ungrounded answer.
   let mode: Mode = "live";
-  let final: FinalAnswer | null = liveAnswer(prompt, allowedNodeIds);
+  let final: FinalAnswer | null = await liveAnswer(prompt, allowedNodeIds);
   if (!final || final.refused) {
     const capture = loadChatCapture(slug);
     if (capture && normalizeQuestion(capture.question) === normalizeQuestion(question)) {

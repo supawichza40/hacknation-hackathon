@@ -40,7 +40,7 @@ Four surfaces, one golden path from an inbound founder to a signed decision.
 - **Single Next.js 16 app** (App Router, React 19, TypeScript). The graph renders with [`@xyflow/react`](https://reactflow.dev); schema validation is [`zod`](https://zod.dev).
 - **Persistent Memory** in `better-sqlite3`: a founder's Score carries across sightings, so a second appearance is never a cold start.
 - **Two schema-validated LLM calls** run the scored diligence — a claim extractor and an axes/memo writer. Scores come from a deterministic TypeScript rubric, not from a model, so no number is invented. The graph chat is a separate grounded, streaming call.
-- **LLM work runs through the local `claude` CLI** (Claude subscription — no API key lives in the app).
+- **LLM work runs through the Anthropic API** (`@anthropic-ai/sdk`, model `claude-opus-4-8`, one shared client in `src/lib/llm.ts`). Set `ANTHROPIC_API_KEY` to run real inference in production; without it the app serves the captured replays under `data/replay/` (demo mode), so the full walkthrough works with no key.
 - **Founder sourcing runs on Tavily.** One real web scan was captured and is replayed deterministically in the demo (see Limitations).
 
 ## Setup

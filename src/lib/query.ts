@@ -2,10 +2,10 @@
 // (VC-BRAIN-PLAN.md §7 M4). Deterministic intent parse over KNOWN fields runs FIRST —
 // fast and offline-safe — so "founders with improving scores" or "off-thesis companies"
 // resolve with no model call. Every result row carries a citation chip (an evidence
-// locator + excerpt) so a match is never unexplained. An optional `claude -p` fallback
+// locator + excerpt) so a match is never unexplained. An optional Anthropic API fallback
 // covers free-form questions the deterministic layer can't map; when it is unavailable
 // the result is simply "No cited matches" (the base pipeline stays unchanged).
-import { spawnSync } from "node:child_process";
+import { callClaudeJson } from "./llm.ts";
 import type { OpportunityCard } from "./db.ts";
 import type { ThesisView } from "./thesis.ts";
 
@@ -161,9 +161,9 @@ export function runDeterministicQuery(
 }
 
 // Optional LLM fallback for free-form questions. Best-effort and offline-safe: any
-// failure (claude missing, timeout, unparseable) yields an empty cited result rather than
+// failure (no API key, timeout, unparseable) yields an empty cited result rather than
 // an error. The model may only pick from the provided opportunity ids — it invents nothing.
-export function runLlmQuery(query: string, cards: OpportunityCard[]): QueryResult {
+export async function runLlmQuery(query: string, cards: OpportunityCard[]): Promise<QueryResult> {
   const empty: QueryResult = { query, intent: null, usedLlm: true, matches: [] };
   try {
     const roster = (cards as Card[])
@@ -179,16 +179,7 @@ ${roster}
 
 === QUESTION ===
 ${query}`;
-    const res = spawnSync("claude", ["-p", "--output-format", "json"], {
-      input: prompt,
-      encoding: "utf8",
-      maxBuffer: 16 * 1024 * 1024,
-      timeout: 60_000,
-    });
-    if (res.status !== 0 || !res.stdout) return empty;
-    const env = JSON.parse(res.stdout);
-    if (env.is_error) return empty;
-    let s = String(env.result).trim();
+    let s = (await callClaudeJson({ prompt })).trim();
     const start = s.indexOf("{");
     const end = s.lastIndexOf("}");
     if (start !== -1 && end !== -1) s = s.slice(start, end + 1);

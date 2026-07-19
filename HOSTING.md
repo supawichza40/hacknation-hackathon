@@ -10,7 +10,7 @@ FounderGraph is a **stateful, long-running Node server**, not a serverless app:
 
 So **do not deploy to Vercel / Netlify / Cloudflare serverless.** Their filesystems are ephemeral and read-only per invocation, which breaks the native binary, the file reads, and every write. Host it as a **container or a persistent Node process** instead.
 
-**No LLM key is needed on the server.** The demo runs entirely from precomputed data + captured replays: memo/graph/claims are prebuilt files, scan/query are deterministic/replay, and chat tries `claude -p` then falls back to the captured Q&A in `data/replay/chat/`. The `claude` CLI and an Anthropic key are absent on the host — that is fine and by design.
+**No key is needed for the demo (replay); set `ANTHROPIC_API_KEY` for real inference.** The demo runs entirely from precomputed data + captured replays: memo/graph/claims are prebuilt files, scan/query are deterministic/replay, and chat falls back to the captured Q&A in `data/replay/chat/`. Set `ANTHROPIC_API_KEY` on the host and the LLM paths (memo, graph ingest, the free-form query, and graph chat) run live inference through the Anthropic API instead; leave it unset and the deployed app serves those captured replays. See "Live LLM (production)" below.
 
 ## Recommended: Railway or Render (no Docker, ~10 min)
 
@@ -25,10 +25,15 @@ Both build straight from the GitHub repo and run a persistent process.
    - `DEMO_INVESTOR_EMAIL` = `investor@foundergraph.demo`
    - `DEMO_INVESTOR_PASSWORD` = `demo`
    - `TAVILY_API_KEY` = *(optional — only if you want a live Tavily call; the demo uses the captured replay, so it can be omitted)*
+   - `ANTHROPIC_API_KEY` = *(optional — set it to run real LLM inference; unset, the LLM paths serve the captured replays, see below)*
    - `PORT` is provided by the platform; `next start` already respects it.
 7. Open the generated URL, log in with the demo credentials, walk the golden path.
 
-That's it. No Anthropic key, no database add-on, no Docker.
+That's it. No database add-on, no Docker; the Anthropic key is optional.
+
+## Live LLM (production)
+
+The memo writer, graph ingest, the free-form founder query, and graph chat call the Anthropic API through one shared client (`src/lib/llm.ts`, model `claude-opus-4-8`). Set `ANTHROPIC_API_KEY` on the host to run real inference. Leave it unset and those paths throw an internal `NoLlmError` that each caller catches and answers from the captured replays under `data/replay/` — the same demo mode the app has always shipped, now with no `claude` CLI dependency. So the deployed app is safe either way: a key gives live answers, no key gives the rehearsed replay.
 
 ## Database strategy
 
@@ -58,5 +63,5 @@ Check the submission form first: **many hackathons accept a repo + video and do 
 ## Known checks (not yet run on a real host)
 
 - Docker isn't installed on the build machine, so the image build hasn't been exercised locally — the platform will build it on deploy.
-- The `claude`-CLI-absent chat fallback is confirmed in code (`src/lib/chat.ts` replays the capture on live failure) but hasn't been driven against a running host. Test it once deployed: ask the rehearsed question and confirm it returns the cited replay rather than an error.
+- The key-absent replay fallback is confirmed in code (with `ANTHROPIC_API_KEY` unset, `src/lib/llm.ts` throws `NoLlmError` and each caller replays its capture) and was driven locally against the golden path, but not yet against a live host. Test it once deployed: with no key set, ask the rehearsed chat question and confirm it returns the cited replay rather than an error. The live path (with a key set) is not yet verified against a real host — see the smoke script `scripts/llm-smoke.mjs`.
 - If the `node:26-bookworm` Docker tag isn't published yet, either use the Railway/Render path (no Docker) or install Node 26 via NodeSource in the Dockerfile.

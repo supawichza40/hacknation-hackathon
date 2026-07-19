@@ -1,4 +1,4 @@
-// Precompute the ECC investment memo with ONE real `claude -p` call (LLM call #2).
+// Precompute the ECC investment memo with ONE real Anthropic API call (LLM call #2).
 // Writes the committed runtime artifact (data/demo/memos/ecc/memo.json), the honest
 // replay capture (data/replay/memo/: raw output, prompt, provenance.json), and the memo
 // row into the SQLite DB. Runnable: `node scripts/precompute-memo.ts`.
@@ -20,7 +20,7 @@ function conceptNames(): string[] {
   return g.nodes.filter((n) => n.type === "concept").slice(0, 8).map((n) => n.name);
 }
 
-function main(): void {
+async function main(): Promise<void> {
   // Ensure the DB is seeded so the diligence view (facts/claims/axes) is present.
   const seedDb = getDb();
   seedDemo(seedDb);
@@ -46,8 +46,8 @@ function main(): void {
     slideTitles: view.slides.map((s) => `${s.slideNo}: ${s.title}`),
   };
 
-  console.log("Calling claude -p for the ECC memo (real call, may take ~30-90s)…");
-  const { memo, provenance, raw, prompt } = generateMemo({
+  console.log("Calling the Anthropic API for the ECC memo (real call, may take ~30-90s)…");
+  const { memo, provenance, raw, prompt } = await generateMemo({
     input,
     artifact: `memo:${SLUG}`,
     source: "ECC screening facts + deck claims + deterministic axis scores + knowledge graph",
@@ -84,4 +84,4 @@ function main(): void {
   console.log("Stored memo row into data/vc-brain.db");
 }
 
-main();
+await main();

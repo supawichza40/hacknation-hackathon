@@ -8,7 +8,7 @@
 // the Lattice-DB showcase graph once, offline.
 import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, relative, extname } from "node:path";
-import { spawnSync } from "node:child_process";
+import { callClaudeJson, MODEL } from "../llm.ts";
 import { parseGraph, provenanceSchema, type KnowledgeGraph, type Provenance } from "../graph/schema.ts";
 import { loadGraph } from "../graph/io.ts";
 import { saveGraph } from "../graph/io-write.ts";
@@ -103,24 +103,17 @@ function extractJson(result: string): unknown {
 
 type ClaudeRun = { graphData: unknown; model: string | null; costUsd: number; durationMs: number };
 
-function runClaude(prompt: string): ClaudeRun {
-  const res = spawnSync("claude", ["-p", "--output-format", "json"], {
-    input: prompt,
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
-    timeout: 240_000,
-  });
-  if (res.status !== 0 || !res.stdout) {
-    throw new Error(`claude -p failed (status ${res.status}): ${(res.stderr || "").slice(0, 400)}`);
-  }
-  const env = JSON.parse(res.stdout);
-  if (env.is_error) throw new Error(`claude -p returned error: ${env.subtype ?? "unknown"}`);
-  const model = env.modelUsage ? (Object.keys(env.modelUsage)[0] ?? null) : null;
+// One live ingest call via the Anthropic API — returns the graph JSON as text, extracted
+// into the same shape the pipeline expected from `claude -p`. costUsd is not tracked on the
+// API path (0, not a fabricated figure); durationMs is measured locally.
+async function runClaude(prompt: string): Promise<ClaudeRun> {
+  const startedAt = Date.now();
+  const raw = await callClaudeJson({ prompt });
   return {
-    graphData: extractJson(env.result),
-    model,
-    costUsd: env.total_cost_usd ?? 0,
-    durationMs: env.duration_ms ?? 0,
+    graphData: extractJson(raw),
+    model: MODEL,
+    costUsd: 0,
+    durationMs: Date.now() - startedAt,
   };
 }
 
@@ -132,7 +125,7 @@ export type AnalyzeOptions = {
   fallbackSlug?: string; // captured replay graph to fall back to
 };
 
-export function analyzeRepo(opts: AnalyzeOptions): { graph: KnowledgeGraph; provenance: Provenance } {
+export async function analyzeRepo(opts: AnalyzeOptions): Promise<{ graph: KnowledgeGraph; provenance: Provenance }> {
   const steps: Provenance["steps"] = [];
   const stamp = () => new Date().toISOString();
 
@@ -147,7 +140,7 @@ export function analyzeRepo(opts: AnalyzeOptions): { graph: KnowledgeGraph; prov
   steps.push({ stage: "llm-extract", startedAt: stamp(), promptVersion: PROMPT_VERSION, note: `${files.length} files -> claude -p` });
   let run: ClaudeRun;
   try {
-    run = runClaude(buildPrompt(flattened, opts.source));
+    run = await runClaude(buildPrompt(flattened, opts.source));
     model = run.model;
     costUsd += run.costUsd;
     durationMs += run.durationMs;
@@ -159,7 +152,7 @@ export function analyzeRepo(opts: AnalyzeOptions): { graph: KnowledgeGraph; prov
     // ONE repair attempt.
     try {
       steps.push({ stage: "repair", startedAt: stamp(), promptVersion: PROMPT_VERSION, note: "re-prompt with validation error" });
-      const repair = runClaude(buildPrompt(flattened, opts.source, msg));
+      const repair = await runClaude(buildPrompt(flattened, opts.source, msg));
       model = repair.model;
       costUsd += repair.costUsd;
       durationMs += repair.durationMs;
@@ -186,7 +179,7 @@ export function analyzeRepo(opts: AnalyzeOptions): { graph: KnowledgeGraph; prov
     source: opts.source,
     promptVersion: PROMPT_VERSION,
     model: model ? [model] : [],
-    generator: "claude -p --output-format json (subscription auth, headless)",
+    generator: "@anthropic-ai/sdk client.messages.create (ANTHROPIC_API_KEY)",
     isoTimestamp: new Date().toISOString(),
     durationMs,
     totalCostUsd: costUsd,

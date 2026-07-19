@@ -7,8 +7,8 @@
 // TS (never inferred by the model) so an undisclosed category can never gain a value.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { spawnSync } from "node:child_process";
 import { z } from "zod";
+import { callClaudeJson, MODEL } from "./llm.ts";
 import { provenanceSchema, type Provenance } from "./graph/schema.ts";
 
 export const MEMO_PROMPT_VERSION = "vc-memo-v1";
@@ -179,25 +179,19 @@ function extractJson(result: string): unknown {
 
 type ClaudeRun = { data: unknown; raw: string; model: string | null; costUsd: number; durationMs: number };
 
-function runClaude(prompt: string): ClaudeRun {
-  const res = spawnSync("claude", ["-p", "--output-format", "json"], {
-    input: prompt,
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
-    timeout: 240_000,
-  });
-  if (res.status !== 0 || !res.stdout) {
-    throw new Error(`claude -p failed (status ${res.status}): ${(res.stderr || "").slice(0, 400)}`);
-  }
-  const env = JSON.parse(res.stdout);
-  if (env.is_error) throw new Error(`claude -p returned error: ${env.subtype ?? "unknown"}`);
-  const model = env.modelUsage ? (Object.keys(env.modelUsage)[0] ?? null) : null;
+// One live memo call via the Anthropic API. The model returns the memo JSON as text; we
+// extract + return it in the same shape the pipeline expected from `claude -p`. costUsd is
+// not tracked on the API path (the SDK usage would have to be summed) — 0, honestly, rather
+// than a fabricated figure; durationMs is measured locally.
+async function runClaude(prompt: string): Promise<ClaudeRun> {
+  const startedAt = Date.now();
+  const raw = await callClaudeJson({ prompt });
   return {
-    data: extractJson(env.result),
-    raw: env.result,
-    model,
-    costUsd: env.total_cost_usd ?? 0,
-    durationMs: env.duration_ms ?? 0,
+    data: extractJson(raw),
+    raw,
+    model: MODEL,
+    costUsd: 0,
+    durationMs: Date.now() - startedAt,
   };
 }
 
@@ -226,7 +220,7 @@ export type GenerateOptions = {
 
 // Generates the memo: LLM sections + TS-computed gaps. One repair, then fallback to a
 // captured replay memo. Never fabricates — a hard failure with no fallback throws.
-export function generateMemo(opts: GenerateOptions): GenerateResult {
+export async function generateMemo(opts: GenerateOptions): Promise<GenerateResult> {
   const { input } = opts;
   const claimIds = new Set(input.claims.map((c) => c.id));
   const gaps = computeGaps(input.facts, input.unknowns);
@@ -245,7 +239,7 @@ export function generateMemo(opts: GenerateOptions): GenerateResult {
   steps.push({ stage: "llm-memo", startedAt: stamp(), promptVersion: MEMO_PROMPT_VERSION, note: "claude -p investment-memo writer" });
 
   try {
-    const run = runClaude(prompt);
+    const run = await runClaude(prompt);
     raw = run.raw;
     model = run.model;
     costUsd += run.costUsd;
@@ -260,7 +254,7 @@ export function generateMemo(opts: GenerateOptions): GenerateResult {
     steps.push({ stage: "validate-failed", startedAt: stamp(), note: msg });
     try {
       steps.push({ stage: "repair", startedAt: stamp(), promptVersion: MEMO_PROMPT_VERSION, note: "re-prompt with validation error" });
-      const run = runClaude(buildPrompt(input, msg));
+      const run = await runClaude(buildPrompt(input, msg));
       raw = run.raw;
       model = run.model;
       costUsd += run.costUsd;
@@ -289,7 +283,7 @@ export function generateMemo(opts: GenerateOptions): GenerateResult {
     source: opts.source,
     promptVersion: MEMO_PROMPT_VERSION,
     model: model ? [model] : [],
-    generator: "claude -p --output-format json (subscription auth, headless)",
+    generator: "@anthropic-ai/sdk client.messages.create (ANTHROPIC_API_KEY)",
     isoTimestamp: new Date().toISOString(),
     durationMs,
     totalCostUsd: costUsd,

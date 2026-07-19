@@ -1,0 +1,36 @@
+{
+  "run": "render-live-pipeline",
+  "date": "2026-07-19",
+  "goal": "/apply submits real public repo -> live LLM pipeline (ingest->graph->claims->scoring->memo) -> viewable opp; whole app deployed live on Render",
+  "approved": "2026-07-19 ~11:25 BST, defaults on all 6 forced decisions (see PREFLIGHT-render.md)",
+  "branch": "dispatch/lovable-frontend (merge->main at Wave 5)",
+  "budget": {"cap_tokens": 550000, "descope": "if >=80%: deploy current app + verify replay-mode golden path live (drop live-analyze wiring)"},
+  "acceptance_checklist": [
+    "submit real PUBLIC repo via /apply on LIVE Render URL -> analyzes (real Anthropic) -> appears as scored opp",
+    "diligence page shows REAL generated graph+claims+memo (not replay) + axis scores",
+    "golden path works on HOSTED URL: login->pipeline->diligence(wow)->graph->chat(real,cited)->decide->apply",
+    "async job: long analysis doesn't hang request (status + poll, no Render timeout)",
+    "ANTHROPIC_API_KEY live; scripts/llm-smoke.mjs passes",
+    "red-team clean on repo-URL path (no SSRF/arbitrary-clone/cost blowup)",
+    "npm run check:done 7/7; merged to main; Render auto-deploys main",
+    "live URL recorded; no 500s on any golden-path beat"
+  ],
+  "subtasks": {
+    "0-preflight": {"status": "DONE", "note": "PREFLIGHT-render.md written; 6 decisions answered at gate"},
+    "0b-plan-attack": {"status": "spawning", "agent": "plan-attack", "model": "gpt-5.6-sol via codex"},
+    "1-eng-pipeline-apply-to-analyze": {"status": "spawning", "agent": "eng-pipeline", "model": "opus", "note": "CRITICAL PATH: async /apply->real analyze pipeline + status; SSRF-safe repo clone"},
+    "2-eng-deploy-render-blueprint": {"status": "spawning", "agent": "eng-deploy", "model": "opus", "note": "render.yaml + deploy runbook"},
+    "3-redteam-pipeline": {"status": "pending", "depends": ["1"]},
+    "4-HUMAN-deploy-render": {"status": "pending", "depends": ["2","3"], "note": "human connects repo + sets env (ANTHROPIC_API_KEY, demo creds) + deploys main"},
+    "5-verify-live": {"status": "pending", "depends": ["4"], "note": "drive hosted URL e2e with a real repo submission"},
+    "6-loop-babysit-merge-main": {"status": "pending", "depends": ["5"]},
+    "7-synth-run-record": {"status": "pending", "depends": ["6"]}
+  },
+  "unknowns_ledger": [
+    "CONTEXT: lead session at ~69% at spawn time — a FRESH session should shepherd the /loop deploy+verify. Resume from this file.",
+    "Render account + ANTHROPIC_API_KEY are human-supplied (Wave 4 gate) — build waves 1-3 proceed without them.",
+    "analyze.ts currently triggered by precompute scripts, NOT by /apply — eng-pipeline wires the live trigger.",
+    "Render request timeout vs minutes-long analysis -> async job is the mitigation (decision 3)."
+  ],
+  "resume_instructions": "Fresh session: read this file + PREFLIGHT-render.md. If eng-pipeline/eng-deploy already committed (check git log), proceed to red-team then the HUMAN Render-deploy gate, then verify-live against the live URL, then /loop until acceptance_checklist all green, then merge->main."
+}

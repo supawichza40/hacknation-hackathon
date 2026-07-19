@@ -17,14 +17,14 @@
   ],
   "subtasks": {
     "0-preflight": {"status": "DONE", "note": "PREFLIGHT-render.md written; 6 decisions answered at gate"},
-    "0b-plan-attack": {"status": "spawning", "agent": "plan-attack", "model": "gpt-5.6-sol via codex"},
-    "1-eng-pipeline-apply-to-analyze": {"status": "spawning", "agent": "eng-pipeline", "model": "opus", "note": "CRITICAL PATH: async /apply->real analyze pipeline + status; SSRF-safe repo clone"},
-    "2-eng-deploy-render-blueprint": {"status": "spawning", "agent": "eng-deploy", "model": "opus", "note": "render.yaml + deploy runbook"},
-    "3-redteam-pipeline": {"status": "pending", "depends": ["1"]},
-    "4-HUMAN-deploy-render": {"status": "pending", "depends": ["2","3"], "note": "human connects repo + sets env (ANTHROPIC_API_KEY, demo creds) + deploys main"},
+    "0b-plan-attack": {"status": "DONE"},
+    "1-eng-pipeline-apply-to-analyze": {"status": "DONE", "note": "commit 9d1261d — async /apply->real analyze + status polling + SSRF gate"},
+    "2-eng-deploy-render-blueprint": {"status": "DONE", "note": "commit fe73d00 — render.yaml + HOSTING.md runbook"},
+    "3-redteam-pipeline": {"status": "DONE", "note": "2026-07-19 13:35 BST: NO CRIT (SSRF gate + SQL params sound). HIGH rate-limit/cost, MED stuck-analyzing watchdog, LOW reason leak — ALL FIXED in commit 6660652"},
+    "4-HUMAN-deploy-render": {"status": "pending", "depends": [], "note": "UNBLOCKED: human connects repo + sets env (ANTHROPIC_API_KEY, demo creds) + deploys main via Blueprint"},
     "5-verify-live": {"status": "pending", "depends": ["4"], "note": "drive hosted URL e2e with a real repo submission"},
-    "6-loop-babysit-merge-main": {"status": "pending", "depends": ["5"]},
-    "7-synth-run-record": {"status": "pending", "depends": ["6"]}
+    "6-loop-babysit-merge-main": {"status": "DONE", "note": "main fast-forwarded to branch head 6660652, pushed 13:39 BST; check:done 7/7"},
+    "7-synth-run-record": {"status": "pending", "depends": ["5"]}
   },
   "unknowns_ledger": [
     "CONTEXT: lead session at ~69% at spawn time — a FRESH session should shepherd the /loop deploy+verify. Resume from this file.",

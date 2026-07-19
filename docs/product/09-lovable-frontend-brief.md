@@ -82,6 +82,7 @@ States: loading / staged analysis (stage-by-stage progress, cached stages shown)
 
 ### 5.3 Graph `/opportunities/[id]/graph`
 React Flow (or equivalent) canvas: pan/zoom, ~40 nodes typed by color-coded category (file / claim / concept), node click → right drawer (name, summary, type, sourceRef, "Ask about this" button, text-selection → "ask about selection"). Chat panel: streaming simulated answers that ALWAYS end with node citations (chips that focus the cited node) or a clean refusal ("No citable evidence for that — try narrower"). **"Start here" tour button**: steps through 7 precomputed nodes with captions, prev/next, highlights current node, dims rest.
+> **DELTA 2026-07-19 (build):** prototype renders the canvas as an **SVG-based graph** (40 nodes · 61 edges), not React Flow — this is the brief's sanctioned "or equivalent". QA confirmed pan/zoom, drawer, 7-step tour, and streaming chat with node-focusing citation chips all work. If the real build wants React Flow, swap the canvas component; the data + interactions are unchanged.
 States: loading (with graph-source/replay status) / ready no-selection / node selected / empty graph / parse error / chat streaming / chat cited / chat refuses / chat unavailable (offers rehearsed replay Q&A) / source target missing (honest broken-locator error) / tour active.
 
 ### 5.4 Apply `/apply` (public)

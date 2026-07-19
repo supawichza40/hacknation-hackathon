@@ -5,18 +5,27 @@
   "preview_url": "https://id-preview--a7405de7-87c8-48fc-803a-8a8f89f404ed.lovable.app",
   "editor_url": "https://lovable.dev/projects/a7405de7-87c8-48fc-803a-8a8f89f404ed",
   "workspace": "Supavich's Lovable (mvPqC5cG5cH6KIwSSrDN, pro)",
-  "budget": { "cap_tokens": 300000, "spent_est": 95000 },
+  "budget": { "cap_tokens": 300000, "spent_est": 175000 },
+  "commits": {
+    "foundation": "a788f446",
+    "pipeline": "c0fa0701",
+    "diligence": "34e19e71",
+    "graph": "fd249bf7 (SVG canvas, not React Flow — brief-permitted)",
+    "apply": "a8c4f6bf"
+  },
   "stages": {
     "0_preflight": "done — Lovable MCP live",
     "1_foundation": "done — 6 data files, 5 routes, login on-spec; DELTA stack=TanStack Start",
-    "2_pipeline": "in_progress — Lovable task k8146jn4x (Pipeline + dev state switcher)",
-    "3_diligence_wow": "pending",
-    "4_graph": "pending",
-    "5_apply": "pending",
-    "6_qa_browser": "pending",
-    "7_sol_final_audit": "pending",
-    "8_writeback_push": "pending"
+    "2_pipeline": "done — c0fa0701",
+    "3_diligence_wow": "done — 34e19e71 (needs browser verify of split-view)",
+    "4_graph": "done — fd249bf7",
+    "5_apply": "done — a8c4f6bf",
+    "6_qa_browser": "done — golden path PASS; 2 defects found (PipeWarden column, timer chips)",
+    "6b_fix": "done — c53e77fc; re-verify PASS (timer chips on all 4 cards; PipeWarden in Outbound w/ threshold highlight)",
+    "7_sol_final_audit": "in_progress — Sol reconciliation resuming for Codex verdict",
+    "8_writeback_push": "in_progress — brief deltas (TanStack, SVG graph) written; committing"
   },
+  "qa_verdict": "all core beats PASS incl. wow split-view, 3 axes never-blended, graph tour+cited chat, live thesis re-score, gate-free apply. Audio playback unverified (no real MP3 in prototype — control+script fallback present).",
   "sol_audit": "done — 45 objections folded into DoD Sol-hardened QA script; DoD #10 fixed (frozen-contract).",
   "open_unknowns": [
     "upload MIME/size limits — TBD in docs, needs human approve",

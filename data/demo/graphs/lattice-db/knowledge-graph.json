@@ -1,0 +1,641 @@
+{
+  "nodes": [
+    {
+      "id": "file_readme",
+      "type": "file",
+      "name": "README.md",
+      "summary": "Project overview: sqlite-vec is a small pure-C vector search SQLite extension storing float, int8, and binary vectors in vec0 virtual tables, with install matrix across languages.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "1-80"
+      }
+    },
+    {
+      "id": "file_rust_binding",
+      "type": "file",
+      "name": "bindings/rust/src/lib.rs",
+      "summary": "Rust binding linking the sqlite_vec0 C library, exposing sqlite3_vec_init and a test that auto-registers the extension and queries vec_version().",
+      "sourceRef": {
+        "file": "bindings/rust/src/lib.rs",
+        "lines": "1-31"
+      }
+    },
+    {
+      "id": "file_rust_build",
+      "type": "file",
+      "name": "bindings/rust/build.rs",
+      "summary": "Rust build script compiling sqlite-vec.c with SQLITE_CORE defined into the sqlite_vec0 native library via cc.",
+      "sourceRef": {
+        "file": "bindings/rust/build.rs",
+        "lines": "1-3"
+      }
+    },
+    {
+      "id": "file_python_extra_init",
+      "type": "file",
+      "name": "bindings/python/extra_init.py",
+      "summary": "Python helpers serialize_float32 and serialize_int8 that pack float/int lists into the raw byte format sqlite-vec expects.",
+      "sourceRef": {
+        "file": "bindings/python/extra_init.py",
+        "lines": "1-13"
+      }
+    },
+    {
+      "id": "file_micro_lib",
+      "type": "file",
+      "name": "benchmarks/micro/src/lib.rs",
+      "summary": "Micro-benchmark harness init that registers sqlite_vec0 as a SQLite auto-extension for benchmarking.",
+      "sourceRef": {
+        "file": "benchmarks/micro/src/lib.rs",
+        "lines": "1-13"
+      }
+    },
+    {
+      "id": "file_micro_build",
+      "type": "file",
+      "name": "benchmarks/micro/build.rs",
+      "summary": "Build script compiling ../../sqlite-vec.c into sqlite_vec0 for the micro benchmark crate.",
+      "sourceRef": {
+        "file": "benchmarks/micro/build.rs",
+        "lines": "1-5"
+      }
+    },
+    {
+      "id": "file_core_init",
+      "type": "file",
+      "name": "examples/sqlite3-cli/core_init.c",
+      "summary": "C entrypoint using sqlite3_auto_extension to statically inject sqlite3_vec_init into a custom sqlite3 CLI build.",
+      "sourceRef": {
+        "file": "examples/sqlite3-cli/core_init.c",
+        "lines": "1-6"
+      }
+    },
+    {
+      "id": "file_wasm",
+      "type": "file",
+      "name": "examples/wasm/wasm.c",
+      "summary": "WASM extra-init hook registering sqlite3_vec_init via sqlite3_wasm_extra_init for in-browser SQLite builds.",
+      "sourceRef": {
+        "file": "examples/wasm/wasm.c",
+        "lines": "1-5"
+      }
+    },
+    {
+      "id": "file_sqlite_dist",
+      "type": "file",
+      "name": "sqlite-dist.toml",
+      "summary": "Distribution manifest defining package metadata and build targets: github releases, sqlpkg, spm, amalgamation, pip, datasette, sqlite_utils, npm, gem.",
+      "sourceRef": {
+        "file": "sqlite-dist.toml",
+        "lines": "1-24"
+      }
+    },
+    {
+      "id": "file_vendor_sh",
+      "type": "file",
+      "name": "scripts/vendor.sh",
+      "summary": "Shell script vendoring the SQLite amalgamation 3.45.03 into vendor/ for local compilation.",
+      "sourceRef": {
+        "file": "scripts/vendor.sh",
+        "lines": "1-7"
+      }
+    },
+    {
+      "id": "file_site_project_data",
+      "type": "file",
+      "name": "site/project.data.ts",
+      "summary": "VitePress data loader reading the VERSION file to expose PROJECT and VERSION to the docs site.",
+      "sourceRef": {
+        "file": "site/project.data.ts",
+        "lines": "1-22"
+      }
+    },
+    {
+      "id": "file_site_package",
+      "type": "file",
+      "name": "site/package.json",
+      "summary": "Docs site built with VitePress, using better-sqlite3, valibot, and js-yaml for reference generation.",
+      "sourceRef": {
+        "file": "site/package.json",
+        "lines": "1-18"
+      }
+    },
+    {
+      "id": "file_distill_model",
+      "type": "file",
+      "name": "benchmarks-ann/datasets/nyt-768/distill-model.py",
+      "summary": "Script distilling BAAI/bge-base-en-v1.5 to 768 PCA dims via model2vec for ANN benchmark embeddings.",
+      "sourceRef": {
+        "file": "benchmarks-ann/datasets/nyt-768/distill-model.py",
+        "lines": "1-13"
+      }
+    },
+    {
+      "id": "file_rust_example",
+      "type": "file",
+      "name": "examples/simple-rust/Cargo.toml",
+      "summary": "Rust demo crate depending on sqlite-vec, rusqlite (bundled), and zerocopy.",
+      "sourceRef": {
+        "file": "examples/simple-rust/Cargo.toml",
+        "lines": "1-12"
+      }
+    },
+    {
+      "id": "file_using_c",
+      "type": "file",
+      "name": "site/using/c.md",
+      "summary": "Docs stating sqlite-vec is a single sqlite-vec.c + sqlite-vec.h that can be vendored and compiled into C/C++ projects.",
+      "sourceRef": {
+        "file": "site/using/c.md",
+        "lines": "1-5"
+      }
+    },
+    {
+      "id": "concept_vec0_vtable",
+      "type": "concept",
+      "name": "vec0 virtual table",
+      "summary": "The core SQLite virtual table module for storing and querying vectors, plus non-vector metadata/auxiliary/partition-key columns.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "13-18"
+      }
+    },
+    {
+      "id": "concept_vector_types",
+      "type": "concept",
+      "name": "Float/int8/binary vector types",
+      "summary": "Supported vector element types stored in vec0 tables, with serialization helpers per binding.",
+      "sourceRef": {
+        "file": "bindings/python/extra_init.py",
+        "lines": "1-13"
+      }
+    },
+    {
+      "id": "concept_single_file_c",
+      "type": "concept",
+      "name": "Single-file pure-C core",
+      "summary": "Entire extension is one sqlite-vec.c and sqlite-vec.h with no dependencies, vendorable and compilable anywhere SQLite runs.",
+      "sourceRef": {
+        "file": "site/using/c.md",
+        "lines": "1-5"
+      }
+    },
+    {
+      "id": "concept_auto_extension",
+      "type": "concept",
+      "name": "Auto-extension registration",
+      "summary": "Pattern of registering sqlite3_vec_init via sqlite3_auto_extension so every new connection loads the extension.",
+      "sourceRef": {
+        "file": "examples/sqlite3-cli/core_init.c",
+        "lines": "1-6"
+      }
+    },
+    {
+      "id": "concept_language_bindings",
+      "type": "concept",
+      "name": "Multi-language bindings",
+      "summary": "Distribution across Python, Node.js, Ruby, Go, Rust, Datasette, rqlite, and sqlite-utils.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "40-60"
+      }
+    },
+    {
+      "id": "concept_wasm_target",
+      "type": "concept",
+      "name": "WASM/browser target",
+      "summary": "Extension compiles to WebAssembly to run inside SQLite in the browser.",
+      "sourceRef": {
+        "file": "examples/wasm/wasm.c",
+        "lines": "1-5"
+      }
+    },
+    {
+      "id": "concept_amalgamation",
+      "type": "concept",
+      "name": "Amalgamation build",
+      "summary": "Release artifact bundling sqlite-vec.c and sqlite-vec.h for direct C/C++ inclusion.",
+      "sourceRef": {
+        "file": "sqlite-dist.toml",
+        "lines": "12-13"
+      }
+    },
+    {
+      "id": "concept_serialization_format",
+      "type": "concept",
+      "name": "Raw-bytes vector serialization",
+      "summary": "Compact binary format (struct-packed floats/int8) that vectors use in addition to JSON input.",
+      "sourceRef": {
+        "file": "bindings/python/extra_init.py",
+        "lines": "4-12"
+      }
+    },
+    {
+      "id": "concept_docs_site",
+      "type": "concept",
+      "name": "VitePress docs site",
+      "summary": "Documentation and reference generation subsystem under site/ using VitePress and a VERSION-driven data loader.",
+      "sourceRef": {
+        "file": "site/project.data.ts",
+        "lines": "1-22"
+      }
+    },
+    {
+      "id": "concept_benchmarks",
+      "type": "concept",
+      "name": "Benchmark suites",
+      "summary": "Micro benchmarks (criterion/rusqlite) and ANN dataset benchmarks with distilled embedding models.",
+      "sourceRef": {
+        "file": "benchmarks/micro/Cargo.toml",
+        "lines": "1-24"
+      }
+    },
+    {
+      "id": "concept_dist_targets",
+      "type": "concept",
+      "name": "Distribution pipeline",
+      "summary": "sqlite-dist driven multi-target packaging: github releases, sqlpkg, spm, pip, datasette, npm, gem, amalgamation.",
+      "sourceRef": {
+        "file": "sqlite-dist.toml",
+        "lines": "5-24"
+      }
+    },
+    {
+      "id": "concept_sqlite_core_compile",
+      "type": "concept",
+      "name": "SQLITE_CORE static compilation",
+      "summary": "Building sqlite-vec.c with SQLITE_CORE / SQLITE_EXTRA_INIT to statically link the extension into a host binary.",
+      "sourceRef": {
+        "file": "bindings/rust/build.rs",
+        "lines": "1-3"
+      }
+    },
+    {
+      "id": "concept_semantic_search",
+      "type": "concept",
+      "name": "Vector/semantic search use cases",
+      "summary": "Documented application guides: semantic search, hybrid search, RAG, classifiers, and vector arithmetic.",
+      "sourceRef": {
+        "file": "site/guides/arithmetic.md",
+        "lines": "1-6"
+      }
+    },
+    {
+      "id": "concept_successor_vss",
+      "type": "concept",
+      "name": "Successor to sqlite-vss",
+      "summary": "sqlite-vec is positioned as the smaller, dependency-free successor to the earlier sqlite-vss extension.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "6-9"
+      }
+    },
+    {
+      "id": "concept_sponsorship",
+      "type": "concept",
+      "name": "Mozilla Builders sponsorship",
+      "summary": "Project is a Mozilla Builders project with additional sponsors (Fly.io, Turso, SQLite Cloud, Shinkai).",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "20-38"
+      }
+    },
+    {
+      "id": "claim_pure_c_no_deps",
+      "type": "claim",
+      "name": "Written in pure C with no dependencies",
+      "summary": "README asserts the extension is pure C with no dependencies and runs anywhere SQLite runs.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "14-16"
+      }
+    },
+    {
+      "id": "claim_stores_three_types",
+      "type": "claim",
+      "name": "Stores float, int8, and binary vectors",
+      "summary": "vec0 tables support float, int8, and binary vector column types.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "13-13"
+      }
+    },
+    {
+      "id": "claim_vec_version_starts_v",
+      "type": "claim",
+      "name": "vec_version() returns a 'v'-prefixed string",
+      "summary": "Rust test asserts the result of select vec_version() starts with 'v'.",
+      "sourceRef": {
+        "file": "bindings/rust/src/lib.rs",
+        "lines": "20-25"
+      }
+    },
+    {
+      "id": "claim_vectors_json_or_binary",
+      "type": "claim",
+      "name": "Vectors accepted as JSON or compact binary",
+      "summary": "README sample notes vectors can be provided as JSON or in a compact binary format.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "73-76"
+      }
+    },
+    {
+      "id": "claim_serialize_pack_format",
+      "type": "claim",
+      "name": "serialize_float32 packs '%sf' bytes",
+      "summary": "Python serialize_float32 uses struct.pack('%sf', ...) to produce the expected raw bytes.",
+      "sourceRef": {
+        "file": "bindings/python/extra_init.py",
+        "lines": "6-7"
+      }
+    },
+    {
+      "id": "claim_vendor_pin_3450300",
+      "type": "claim",
+      "name": "Vendors SQLite amalgamation 3.45.03",
+      "summary": "vendor.sh downloads the sqlite-amalgamation-3450300 zip to populate vendor/.",
+      "sourceRef": {
+        "file": "scripts/vendor.sh",
+        "lines": "2-6"
+      }
+    },
+    {
+      "id": "claim_micro_uses_criterion",
+      "type": "claim",
+      "name": "Micro benchmarks use criterion harness",
+      "summary": "benchmarks/micro configures a criterion bench (my_benchmark, harness=false) with rand and zerocopy.",
+      "sourceRef": {
+        "file": "benchmarks/micro/Cargo.toml",
+        "lines": "9-24"
+      }
+    },
+    {
+      "id": "claim_distill_768",
+      "type": "claim",
+      "name": "Distills bge-base to 768 dims",
+      "summary": "distill-model.py distills BAAI/bge-base-en-v1.5 with pca_dims=768 and saves it locally.",
+      "sourceRef": {
+        "file": "benchmarks-ann/datasets/nyt-768/distill-model.py",
+        "lines": "9-13"
+      }
+    },
+    {
+      "id": "claim_node_engine_23",
+      "type": "claim",
+      "name": "Node example requires Node >=23.5.0",
+      "summary": "examples/simple-node2 sets an engines constraint of node >=23.5.0 for the built-in SQLite demo.",
+      "sourceRef": {
+        "file": "examples/simple-node2/package.json",
+        "lines": "5-7"
+      }
+    },
+    {
+      "id": "claim_prev1_breaking",
+      "type": "claim",
+      "name": "Pre-v1: expect breaking changes",
+      "summary": "README warns the project is pre-v1 and breaking changes should be expected.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "11-11"
+      }
+    },
+    {
+      "id": "claim_gem_module_name",
+      "type": "claim",
+      "name": "Ruby gem module is SqliteVec",
+      "summary": "sqlite-dist.toml sets the gem module_name to SqliteVec.",
+      "sourceRef": {
+        "file": "sqlite-dist.toml",
+        "lines": "24-24"
+      }
+    },
+    {
+      "id": "claim_security_contact",
+      "type": "claim",
+      "name": "Vulnerabilities reported to maintainer email",
+      "summary": "SECURITY.md directs vulnerability reports to alexsebastian.garcia@gmail.com and to avoid public issues.",
+      "sourceRef": {
+        "file": "SECURITY.md",
+        "lines": "1-1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "file_readme",
+      "target": "concept_vec0_vtable",
+      "relation": "describes"
+    },
+    {
+      "source": "concept_vec0_vtable",
+      "target": "concept_vector_types",
+      "relation": "stores"
+    },
+    {
+      "source": "concept_vec0_vtable",
+      "target": "concept_single_file_c",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_using_c",
+      "target": "concept_single_file_c",
+      "relation": "describes"
+    },
+    {
+      "source": "file_rust_build",
+      "target": "concept_sqlite_core_compile",
+      "relation": "implements"
+    },
+    {
+      "source": "file_micro_build",
+      "target": "concept_single_file_c",
+      "relation": "depends_on"
+    },
+    {
+      "source": "file_core_init",
+      "target": "concept_auto_extension",
+      "relation": "implements"
+    },
+    {
+      "source": "file_wasm",
+      "target": "concept_auto_extension",
+      "relation": "implements"
+    },
+    {
+      "source": "file_wasm",
+      "target": "concept_wasm_target",
+      "relation": "implements"
+    },
+    {
+      "source": "file_rust_binding",
+      "target": "concept_auto_extension",
+      "relation": "implements"
+    },
+    {
+      "source": "file_rust_binding",
+      "target": "concept_language_bindings",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_python_extra_init",
+      "target": "concept_serialization_format",
+      "relation": "implements"
+    },
+    {
+      "source": "file_python_extra_init",
+      "target": "concept_language_bindings",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_sqlite_dist",
+      "target": "concept_dist_targets",
+      "relation": "defines"
+    },
+    {
+      "source": "file_sqlite_dist",
+      "target": "concept_amalgamation",
+      "relation": "defines"
+    },
+    {
+      "source": "file_vendor_sh",
+      "target": "concept_single_file_c",
+      "relation": "supports"
+    },
+    {
+      "source": "file_site_project_data",
+      "target": "concept_docs_site",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_site_package",
+      "target": "concept_docs_site",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_micro_lib",
+      "target": "concept_benchmarks",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_distill_model",
+      "target": "concept_benchmarks",
+      "relation": "part_of"
+    },
+    {
+      "source": "file_rust_example",
+      "target": "concept_language_bindings",
+      "relation": "part_of"
+    },
+    {
+      "source": "concept_language_bindings",
+      "target": "concept_serialization_format",
+      "relation": "depends_on"
+    },
+    {
+      "source": "concept_docs_site",
+      "target": "concept_semantic_search",
+      "relation": "documents"
+    },
+    {
+      "source": "file_readme",
+      "target": "concept_successor_vss",
+      "relation": "supports"
+    },
+    {
+      "source": "file_readme",
+      "target": "concept_sponsorship",
+      "relation": "supports"
+    },
+    {
+      "source": "claim_pure_c_no_deps",
+      "target": "concept_single_file_c",
+      "relation": "supports"
+    },
+    {
+      "source": "file_readme",
+      "target": "claim_pure_c_no_deps",
+      "relation": "defines"
+    },
+    {
+      "source": "file_readme",
+      "target": "claim_stores_three_types",
+      "relation": "defines"
+    },
+    {
+      "source": "claim_stores_three_types",
+      "target": "concept_vector_types",
+      "relation": "supports"
+    },
+    {
+      "source": "file_rust_binding",
+      "target": "claim_vec_version_starts_v",
+      "relation": "defines"
+    },
+    {
+      "source": "file_readme",
+      "target": "claim_vectors_json_or_binary",
+      "relation": "defines"
+    },
+    {
+      "source": "claim_vectors_json_or_binary",
+      "target": "concept_serialization_format",
+      "relation": "supports"
+    },
+    {
+      "source": "file_python_extra_init",
+      "target": "claim_serialize_pack_format",
+      "relation": "defines"
+    },
+    {
+      "source": "claim_serialize_pack_format",
+      "target": "concept_serialization_format",
+      "relation": "supports"
+    },
+    {
+      "source": "file_vendor_sh",
+      "target": "claim_vendor_pin_3450300",
+      "relation": "defines"
+    },
+    {
+      "source": "file_micro_lib",
+      "target": "claim_micro_uses_criterion",
+      "relation": "supports"
+    },
+    {
+      "source": "file_distill_model",
+      "target": "claim_distill_768",
+      "relation": "defines"
+    },
+    {
+      "source": "claim_distill_768",
+      "target": "concept_benchmarks",
+      "relation": "supports"
+    },
+    {
+      "source": "claim_node_engine_23",
+      "target": "concept_language_bindings",
+      "relation": "supports"
+    },
+    {
+      "source": "file_readme",
+      "target": "claim_prev1_breaking",
+      "relation": "defines"
+    },
+    {
+      "source": "file_sqlite_dist",
+      "target": "claim_gem_module_name",
+      "relation": "defines"
+    },
+    {
+      "source": "claim_gem_module_name",
+      "target": "concept_dist_targets",
+      "relation": "supports"
+    },
+    {
+      "source": "claim_security_contact",
+      "target": "file_readme",
+      "relation": "part_of"
+    }
+  ]
+}

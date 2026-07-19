@@ -1,0 +1,35 @@
+{
+  "artifact": "graph:lattice-db",
+  "source": "asg017/sqlite-vec (github.com/asg017/sqlite-vec)",
+  "promptVersion": "ecc-kg-v2",
+  "model": [
+    "claude-opus-4-8"
+  ],
+  "generator": "claude -p --output-format json (subscription auth, headless)",
+  "isoTimestamp": "2026-07-19T00:11:02.750Z",
+  "durationMs": 92506,
+  "totalCostUsd": 0.7340880000000001,
+  "steps": [
+    {
+      "stage": "flatten",
+      "startedAt": "2026-07-19T00:09:20.440Z",
+      "note": "bounded flatten of asg017/sqlite-vec (github.com/asg017/sqlite-vec)"
+    },
+    {
+      "stage": "llm-extract",
+      "startedAt": "2026-07-19T00:09:20.470Z",
+      "promptVersion": "ecc-kg-v2",
+      "note": "32 files -> claude -p"
+    },
+    {
+      "stage": "validate",
+      "startedAt": "2026-07-19T00:11:02.740Z",
+      "note": "zod schema passed"
+    },
+    {
+      "stage": "write",
+      "startedAt": "2026-07-19T00:11:02.750Z",
+      "note": "/Users/supavichaussawaauschariyakul/dev/Hacknation Hackathon/data/demo/graphs/lattice-db/knowledge-graph.json"
+    }
+  ]
+}

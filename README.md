@@ -35,6 +35,18 @@ AI OS for deploying $100K checks in 24 hours — founder sourcing, technical kno
 | Weekend playbook | [docs/ops/PLAYBOOK.md](docs/ops/PLAYBOOK.md) |
 | All docs index | [docs/README.md](docs/README.md) |
 
+## Setup
+
+```sh
+npm install
+cp .env.example .env.local   # every key optional — replay/text fallbacks cover the full demo
+npm run seed                 # seed the three demo opportunities (repeatable)
+npm run dev                  # http://localhost:3000
+npm test                     # node --test suite
+```
+
+Investor surfaces sit behind a demo-lite login (credentials = `DEMO_INVESTOR_EMAIL` / `DEMO_INVESTOR_PASSWORD` from `.env.example`, shown on the login screen); the founder `/apply` form is public.
+
 ## Agent triggers (Claude Code)
 
 Type in chat: `start` · `dryrun` · `retro` — see [CLAUDE.md](CLAUDE.md) and [docs/ops/PROMPTS.md](docs/ops/PROMPTS.md).

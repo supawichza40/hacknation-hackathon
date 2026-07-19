@@ -54,6 +54,7 @@ Source: plan §0.5 d4/d5/d8/d12 + never-cut list; §1b; §2; §5; §7 M3–M5b; 
 - [ ] Pipeline distinguishes inbound, outbound, off-thesis, cold-start, returning-founder states.
 - [ ] Diligence is one scrolling page: overview → claims → memo → decision.
 - [ ] Graph gives a non-technical investor pan/zoom, node summary, sourceRef, grounded chat.
+- [ ] R8 guided tour steps run prev/next from precomputed JSON, highlighting the current node; a broken locator shows an honest error, never a crash — if retained (committed by human ruling 2026-07-19 00:05 BST, plan §0.5 d14; T-4h ladder placement).
 - [ ] Loading, empty, error, replay, unavailable, and fallback states are explicit.
 - [ ] Evidence links and the contradiction jump are understandable without documentation.
 - [ ] No vanity dashboard; evidence and decisions stay visually dominant; "investor OS" brand, not a generic AI-SaaS clone.
@@ -61,7 +62,9 @@ Source: plan §0.5 d4/d5/d8/d12 + never-cut list; §1b; §2; §5; §7 M3–M5b; 
 
 Source: plan §0.5 d6/d7/d11; §10; §12; §15.
 
-> Event-wide layer (rubric §1 note): the two ≤60-sec videos and the docs are themselves a scored axis (Communication). Video quality checks live in the manual table below — treat them as rubric points, not packaging.
+> Event-wide layer (rubric §1 note): the two ≤60-sec videos and the docs are themselves a scored axis (Communication). Video quality checks live in the manual table below — treat them as rubric points, not packaging. The other two event-wide axes (Technical depth, Innovation & creativity) are judged from the whole submission — no single check carries them.
+
+> Winner layer (rubric §5 — decides who wins): real niche with a face, agentic framing, sourced problem statistics, and 3-minute comprehension are pitch-layer gates owned by `docs/ops/PITCH.md` (script beats 0:00–0:20 hook stats, 0:20–0:45 the face, 2:15–2:40 agentic + sponsor tools, 2:40–3:00 track-sentence close) — deliberately not duplicated as product checks here. Human-in-the-loop and sponsor-tool visibility already appear above as functional checks; the pitch must present them as strengths, never apologies.
 
 ## Layer 2: functional-requirement traceability
 
@@ -74,7 +77,7 @@ Every FR from 03-functional-requirements.md appears exactly once. No FR without 
 | FR-PIPE-01 | `npm run smoke:golden` Pipeline step | Exactly three planned cards in correct columns with required fields |
 | FR-PIPE-02 | SMK-M1-04 + evidence-integrity test | R3 reason resolves to Evidence, or badge-only fallback recorded |
 | FR-PIPE-03 | SMK-M4-07 | Retained R1 returns ranked cited results; else cut status recorded |
-| FR-PIPE-04 | SMK-M2-05 with network disabled | Retained R7 deterministically pops the captured candidate; else seeded fallback passes |
+| FR-PIPE-04 | SMK-M2-05 with network disabled + SMK-W0-TV / SMK-W0-SRC-FB capture proof | Retained R7 deterministically pops the captured candidate; else seeded fallback passes |
 | FR-PIPE-05 | Golden-smoke hero assertion + manual screenshot | Cold-start hero surfaced through public-artifact evidence |
 | FR-APPLY-01 | Optional Apply smoke + traversal/validation tests | Valid retained Apply creates one Inbound record; invalid input creates none; or seeded fallback recorded |
 | FR-AUTH-01 | Manual check: fresh browser hits `/` and `/apply` | `/apply` public; investor surfaces gated behind the single demo login |
@@ -84,7 +87,7 @@ Every FR from 03-functional-requirements.md appears exactly once. No FR without 
 | FR-MEM-03 | SMK-M1-03 | Prior Founder Score/history remains; new dated row appended |
 | FR-MEM-04 | SMK-M3-05 | No material record has a dangling Evidence ID |
 | FR-ANALYZE-01 | SMK-M2-02 + SMK-M2-03 | Stages report progress, cache completed work, recover via replay |
-| FR-ANALYZE-02 | SMK-W0-LLM, SMK-W0-GH, SMK-W0-PDF, SMK-M2-01 | Repo/deck inputs produce graph, claims, locators via live or planned fallback |
+| FR-ANALYZE-02 | SMK-W0-LLM, SMK-W0-GH, SMK-W0-PDF, SMK-W0-PDF-FB, SMK-M2-01 | Repo/deck inputs produce graph, claims, locators via live or planned fallback |
 | FR-ANALYZE-03 | SMK-W0-LLM-FB | One repair, then the real captured replay with provenance |
 | FR-GRAPH-01 | SMK-M2-01 + screenshot | Graph interactive; selected node sourceRef resolves |
 | FR-GRAPH-02 | SMK-M2-04 if retained | Timeline from provenance metadata, no raw JSON; or R5 cut recorded |
@@ -101,7 +104,7 @@ Every FR from 03-functional-requirements.md appears exactly once. No FR without 
 | FR-MEMO-02 | SMK-M4-02 | Each absent R6 category appears as "not disclosed" |
 | FR-DECIDE-01 | SMK-M4-03 | Each decision persists after reload; distinct from generated recommendation |
 | FR-DECIDE-02 | SMK-M4-08 | R2 renders from persisted timestamps per the human-approved formula |
-| FR-VOICE-01 | SMK-M5B-01 through SMK-M5B-03 | Local MP3 plays/pauses; script matches Memory; missing audio shows text fallback |
+| FR-VOICE-01 | SMK-W0-VOICE / SMK-W0-VOICE-FB capture proof + SMK-M5B-01 through SMK-M5B-03 | Local MP3 plays/pauses; script matches Memory; missing audio shows text fallback |
 | FR-DEMO-01 | Full `npm run smoke:golden` with network disabled | Exactly three demo opportunities complete the retained golden path offline |
 | FR-ATTR-01 | Manual LICENSE/NOTICE/README audit + adapted-file inventory | License decision recorded; all adapted code attributed, or self-written path used |
 
@@ -131,7 +134,7 @@ npm run check:done
 |---|---|---|
 | Product README | Pitch, setup, track framing, conditional UA attribution | `README.md` |
 | Locked plan | Scope source included in submission | `VC-BRAIN-PLAN.md` |
-| Requirements suite | These eight docs | `docs/product/01…08` |
+| Requirements suite | Product docs 01–08 plus Lovable-track 09–10 (09 = prototype brief; 10 = prototype-only build gate for `lovable/Founder Graph Core/` — it never gates this product DoD) | `docs/product/01…10` |
 | Demo script | Rehearsed flow (plan §17 DEMO_SCRIPT) | `docs/ops/DEMO-SCRIPT.md` — created at feature freeze from PITCH.md + SUBMISSION.md shot list |
 | License | Repo license present | `LICENSE` (plan §6) |
 | NOTICE | Present when UA code adapted | `NOTICE`, conditional |
@@ -148,7 +151,7 @@ npm run check:done
 |---|---|---|---|
 | UX/design quality | TBD (owner: human) | Review all four surfaces at demo viewport; capture Pipeline, contradiction, Graph/chat, memo/decision, voice states | Rubric §1 UX |
 | Contradiction truth | TBD (owner: human) | Read both cited source facts; confirm genuine incompatibility | Plan §0.5 d6 |
-| External preflight | TBD (owner: human) | Inspect real-call proof + fallback for LLM, ElevenLabs, GitHub, PDF parser | Design §5; plan §0.5 Wave 0 |
+| External preflight | TBD (owner: human) | Inspect real-call proof + fallback for LLM, ElevenLabs, GitHub, Tavily, PDF parser (capture smokes: SMK-W0-VOICE, SMK-W0-VOICE-FB, SMK-W0-TV, SMK-W0-SRC-FB, SMK-W0-PDF-FB) | Design §5; plan §0.5 Wave 0 |
 | Offline rehearsal | TBD (owner: human) | Run the retained golden path 3× with network disabled; log pass/fail | Plan §0.5 freeze |
 | Voice brief content | TBD (owner: human) | Listen once; compare every spoken value with Memory/Memo | Plan §1b P0 |
 | License decision | TBD (owner: human) | Read the actual UA LICENSE/NOTICE requirements; approve adapted or self-written path | Plan §0.5 d10; §1 |
@@ -181,4 +184,3 @@ The suite design says "no check without an FR." Plan §17 additionally requires 
 - Realtime conversational voice, voice intake, outbound voice notes, live stage-time sourcing, actual outreach sending, validator agent, sourcing-channel graph.
 - Portfolio monitoring, fund ops, personal workspace, idea-to-scaffold, browser extension, local-LLM mode.
 - A mandatory live Apply path — seeded inbound remains the never-cut fallback.
-- Guided graph tour (pending human ruling).

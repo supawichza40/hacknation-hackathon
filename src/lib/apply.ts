@@ -180,9 +180,27 @@ export function applyOpportunity(db: DB, value: ApplyValue): ApplyResult {
 
   // The submission is now queued for the async pipeline. The card/diligence page
   // show "analyzing…" until the background job flips this to ready/unavailable.
-  setAnalysisStatus(db, opportunityId, "analyzing");
+  // Only a NEW opportunity is queued — a deduped re-submit must not re-queue the
+  // pipeline (cost guard) or clobber an existing ready/unavailable status.
+  if (existing === undefined) setAnalysisStatus(db, opportunityId, "analyzing");
 
   return { opportunityId, deduped: existing !== undefined };
+}
+
+// In-memory sliding-window rate limiter. Unauthenticated /apply spawns a git clone
+// plus a live LLM call per submission, so the route must cap the burn. Single-process
+// state is fine for the one-service Render deploy; a restart resets it, which only
+// ever fails open.
+const rateLog = new Map<string, number[]>();
+export function rateLimitAllow(key: string, limit: number, windowMs: number, now = Date.now()): boolean {
+  const hits = (rateLog.get(key) ?? []).filter((t) => now - t < windowMs);
+  if (hits.length >= limit) {
+    rateLog.set(key, hits);
+    return false;
+  }
+  hits.push(now);
+  rateLog.set(key, hits);
+  return true;
 }
 
 // Graph-slug for an apply opportunity — inverse of the diligence resolver's

@@ -7,6 +7,12 @@
 // Usage: node scripts/analyze-apply.ts --opp <opportunityId> --repo <githubUrl> --slug <slug>
 import { validateGithubRepoUrl } from "../src/lib/apply.ts";
 import { runApplyAnalysis } from "../src/lib/apply-analyze.ts";
+import { getDb, setAnalysisStatus } from "../src/lib/db.ts";
+
+// Whole-job deadline (red-team 2026-07-19: MED). The clone has its own timeout, but
+// the LLM stages did not — if anything hangs past this, flip the DB status honestly
+// and die rather than leave the row stuck "analyzing" forever.
+const OVERALL_TIMEOUT_MS = 10 * 60 * 1000;
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -30,7 +36,20 @@ async function main(): Promise<void> {
     process.exit(2);
   }
 
+  const watchdog = setTimeout(() => {
+    try {
+      const db = getDb();
+      setAnalysisStatus(db, opportunityId, "analysis_unavailable", "Analysis timed out; please resubmit.");
+      db.close();
+    } catch {
+      // Row may already be gone; exiting is still the right move.
+    }
+    console.error(`analyze-apply: watchdog fired after ${OVERALL_TIMEOUT_MS}ms for ${opportunityId}`);
+    process.exit(1);
+  }, OVERALL_TIMEOUT_MS);
+
   const outcome = await runApplyAnalysis({ opportunityId, slug, cloneUrl: gh.cloneUrl });
+  clearTimeout(watchdog);
   console.log(`analyze-apply: ${opportunityId} -> ${outcome.status}${outcome.reason ? ` (${outcome.reason})` : ""}`);
   process.exit(0);
 }

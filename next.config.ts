@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
     config.resolve.alias["@"] = path.resolve(process.cwd(), "src");
     return config;
   },
+  // Presence of a `webpack` key makes Turbopack hard-error ("webpack config and
+  // no turbopack config") — an empty turbopack config is Next's documented
+  // opt-back-in, keeping the primary Turbopack build path alive.
+  turbopack: {},
   serverExternalPackages: ["better-sqlite3"],
   // Next 16.2.10's built-in `next build` type-check worker cannot drive the
   // installed native typescript@7 package (its `exports` omit the JS API and

@@ -1,0 +1,58 @@
+{
+  "purpose": "Tavily live founder-sourcing capture for deterministic demo replay (displaces GitHub R7 scan per commit 4062322; prize track 'Best Use of Tavily'). The demo replays these captures; no live Tavily call on stage.",
+  "generatedAt": "2026-07-19T01:18:54Z",
+  "referenceTime": "2026-07-19T01:18:54Z",
+  "referenceTimeNote": "Fixed 'now' anchor for the Tavily source. Deterministic scoring computes relevance against these fixed captures (NOT a live call), so reruns reproduce an identical ranking — same contract as data/replay/scan/metadata.json.",
+  "engine": {
+    "provider": "tavily",
+    "tool": "mcp__tavily__tavily_search",
+    "keyStatus": "live — verified with a real search that returned results (request_id 9e43b561-6e41-4ab6-a70f-fd9249e52ee7)",
+    "creditNote": "6 live searches total this session (q1 basic verify + q2/q3/q4 advanced). Tavily bills 1 API credit per basic search and 2 per advanced search; captured 4, so ~7 credits consumed. Finite free-tier credits — do not re-run for demo; replay from raw/ instead."
+  },
+  "thesis": "AI infra, developer tools, agents — surface pre-fundraise founders and early-stage signals via live web search (Tavily), complementing the GitHub repo scan.",
+  "queries": [
+    {
+      "id": "q1",
+      "label": "ai-infra-preseed",
+      "file": "raw/q1_ai-infra-preseed.json",
+      "query": "AI infrastructure open source startup pre-seed 2026 GitHub",
+      "searchDepth": "basic",
+      "capturedAt": "2026-07-19T01:16Z",
+      "resultCount": 5,
+      "requestId": "9e43b561-6e41-4ab6-a70f-fd9249e52ee7"
+    },
+    {
+      "id": "q2",
+      "label": "new-ai-infra-funding",
+      "file": "raw/q2_new-ai-infra-funding.json",
+      "query": "new AI infrastructure startup launch pre-seed funding 2026 founder",
+      "searchDepth": "advanced",
+      "timeRange": "month",
+      "capturedAt": "2026-07-19T01:17Z",
+      "resultCount": 6,
+      "requestId": "35912308-58e2-4bfe-a45a-83e8824aac59"
+    },
+    {
+      "id": "q3",
+      "label": "ai-hackathon-winners",
+      "file": "raw/q3_ai-hackathon-winners.json",
+      "query": "AI hackathon winners 2026 founders building infrastructure tools",
+      "searchDepth": "advanced",
+      "capturedAt": "2026-07-19T01:17Z",
+      "resultCount": 6,
+      "requestId": "6610d540-bd88-48e3-900f-4f1e41972fa5"
+    },
+    {
+      "id": "q4",
+      "label": "indie-ai-tools",
+      "file": "raw/q4_indie-ai-tools.json",
+      "query": "indie AI developer tool launch open source 2026 Show HN Product Hunt",
+      "searchDepth": "advanced",
+      "timeRange": "month",
+      "capturedAt": "2026-07-19T01:17Z",
+      "resultCount": 6,
+      "requestId": "3071d355-2a44-40e2-b992-3c4d46c5a6c3"
+    }
+  ],
+  "provenance": "Raw captures are the verbatim tavily_search JSON responses (query, results[].url/title/content/score, response_time, request_id) with no post-processing. Honest note: results are web-article/directory hits, not a structured founder table — the scoring layer extracts founder/company signals from results[].content."
+}

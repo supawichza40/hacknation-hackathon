@@ -10,7 +10,8 @@ import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync } from "n
 import { join, relative, extname } from "node:path";
 import { spawnSync } from "node:child_process";
 import { parseGraph, provenanceSchema, type KnowledgeGraph, type Provenance } from "../graph/schema.ts";
-import { saveGraph, loadGraph } from "../graph/io.ts";
+import { loadGraph } from "../graph/io.ts";
+import { saveGraph } from "../graph/io-write.ts";
 
 export const PROMPT_VERSION = "ecc-kg-v2";
 

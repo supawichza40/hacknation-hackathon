@@ -4,41 +4,36 @@
       "text": "ECC presents as an AI-infrastructure play at pre-seed with a $100K ask (sector, stage, and ask are disclosed in the screening facts; ARR and cap table are explicitly undisclosed). The pitch fits an infra-tooling thesis: a layer that cuts agent latency and token spend without prompt changes and drops in beside existing harnesses with no rewrite or lock-in — the latter being one of only two claims verified against evidence, which gives the wedge some real grounding even though the headline value proposition itself remains unsupported.",
       "citations": [
         {
-          "ref": "c1",
+          "ref": "product-identity",
           "quote": "ECC cuts agent latency and token spend without touching your prompts."
         },
         {
-          "ref": "c5",
+          "ref": "cross-harness-drop-in",
           "quote": "ECC drops in beside existing harnesses with no rewrite and no lock-in (cross-harness portability)."
         }
       ]
     },
     "team": {
       "text": "The deck names Supawich as the solo founder and sole author of the ECC harness, though this claim is unsupported by evidence. The deterministic founder axis scores 82 and improving, noting a returning founder whose score rose from 61 since 2025-10-01, which is the strongest signal in the package. Solo-founder concentration is a structural risk at this stage, and the cap table is explicitly undisclosed, so ownership and any prior commitments cannot be assessed.",
-      "citations": [
-        {
-          "ref": "c12",
-          "quote": "Supawich is the solo founder and sole author of the ECC harness."
-        }
-      ]
+      "citations": []
     },
     "market": {
       "text": "The deck positions ECC in AI infrastructure tooling (slide 5) but discloses no market sizing, and the deterministic market axis sits at a baseline 50 because of five market/traction claims only one is verified. The verified anchor is that the harness instrumentation is shipped and open-sourced; the growth signals — 9 design partners, a median 38% token-cost reduction across partner workloads, and 410 GitHub stars with 27 external contributors in 8 weeks — are all unsupported, and ARR is explicitly undisclosed, so real market pull cannot be confirmed from this package.",
       "citations": [
         {
-          "ref": "c8",
+          "ref": "shipped-open-source",
           "quote": "ECC harness instrumentation is shipped and open-sourced."
         },
         {
-          "ref": "c9",
+          "ref": "design-partners",
           "quote": "9 design partners are running ECC against their own agent stacks."
         },
         {
-          "ref": "c10",
+          "ref": "token-cost-reduction",
           "quote": "A median 38% token-cost reduction was observed across partner workloads."
         },
         {
-          "ref": "c11",
+          "ref": "stars-contributors",
           "quote": "ECC has 410 GitHub stars and 27 external contributors in the first 8 weeks."
         }
       ]
@@ -47,19 +42,19 @@
       "text": "The product is described as a profiler that instruments every agent hop with zero prompt changes, an optimizer that auto-routes each step to the cheapest model that still passes its eval, and a regression gate that blocks changes making an agent slower or more expensive — all unsupported — while cross-harness drop-in portability is verified. One core claim is directly contradicted by repo evidence: the slide-4 assertion that ECC delivers sub-100ms agent routing in production does not hold, which drives the idea-vs-market axis down to 37 and undermines the deck's named wow moment. Pricing per traced agent-run is stated but unsupported.",
       "citations": [
         {
-          "ref": "c2",
+          "ref": "hop-instrumentation",
           "quote": "ECC is a profiler that instruments every agent hop (tool calls, model routes, token cost) with zero prompt changes."
         },
         {
-          "ref": "c3",
+          "ref": "cheapest-model-auto-routing",
           "quote": "ECC auto-routes each step to the cheapest model that still passes its eval."
         },
         {
-          "ref": "c4",
+          "ref": "regression-gate",
           "quote": "A regression gate blocks any change that makes an agent slower or more expensive."
         },
         {
-          "ref": "c5",
+          "ref": "cross-harness-drop-in",
           "quote": "ECC drops in beside existing harnesses with no rewrite and no lock-in (cross-harness portability)."
         },
         {
@@ -67,7 +62,7 @@
           "quote": "ECC delivers sub-100ms agent routing in production."
         },
         {
-          "ref": "c7",
+          "ref": "per-run-pricing",
           "quote": "ECC is priced per traced agent-run."
         }
       ]
@@ -80,24 +75,20 @@
           "quote": "ECC delivers sub-100ms agent routing in production."
         },
         {
-          "ref": "c9",
+          "ref": "design-partners",
           "quote": "9 design partners are running ECC against their own agent stacks."
         },
         {
-          "ref": "c10",
+          "ref": "token-cost-reduction",
           "quote": "A median 38% token-cost reduction was observed across partner workloads."
         },
         {
-          "ref": "c7",
+          "ref": "per-run-pricing",
           "quote": "ECC is priced per traced agent-run."
         },
         {
-          "ref": "c8",
+          "ref": "shipped-open-source",
           "quote": "ECC harness instrumentation is shipped and open-sourced."
-        },
-        {
-          "ref": "c12",
-          "quote": "Supawich is the solo founder and sole author of the ECC harness."
         }
       ]
     }

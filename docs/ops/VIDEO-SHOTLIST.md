@@ -42,15 +42,44 @@ recording — it is written as one continuous story.
 - Voice brief is NOT in the 60s cut (text fallback is honest but weaker on video) — it lives in
   the tech video and the stage pitch instead.
 
-## Tech video (≤60s) — single talking-head or voiceover over the repo/README, three beats
+# Tech video — ≤60 seconds ("CTO giving a 1-minute investor update")
 
-1. 0:00–0:15 stack: "Single Next.js 16 app, TypeScript, SQLite Memory. Two schema-validated
-   LLM calls through the local claude CLI — a claim extractor and a memo writer. Every score is
-   a deterministic TypeScript rubric, so no model invents a number."
-2. 0:15–0:35 highlights: "The hard part was epistemic honesty: cite-or-refuse chat, per-claim
-   trust states, one genuinely contradicted claim grounded in my real repo, and a replay layer
-   so one real Tavily scan and one real LLM run replay deterministically — the demo can't die
-   on venue Wi-Fi. 62 automated tests, offline golden-path smoke."
-3. 0:35–0:55 limitations: "Auth is a demo gate, not production auth. The voice brief ships as
-   a text-script fallback — ElevenLabs rendering is the planned layer. Scans are labeled
-   replays by design. Everything else you saw runs live on seeded data."
+Voiceover over screen recordings of the repo + app internals. Same rules: record per shot,
+straight cuts. Narration ~145 words ≈ 58s.
+
+## The continuous narration (read aloud first)
+
+> One Next.js app, TypeScript end to end, SQLite as persistent founder Memory. Exactly two
+> schema-validated LLM calls run the diligence — a claim extractor and a memo writer — through
+> the local claude CLI. Every score comes from a deterministic TypeScript rubric, so no model
+> ever invents a number. The hard part was epistemic honesty: chat that cites or refuses,
+> per-claim trust states, and one genuinely contradicted claim grounded in my real repository.
+> Everything external is captured once for real — the Tavily sourcing scan, the LLM runs —
+> and replayed deterministically with provenance, so the demo can't die on venue Wi-Fi.
+> Sixty-two automated tests and a thirteen-beat offline smoke gate the golden path. Honest
+> limits: auth is a demo gate, the voice brief ships as a text fallback, and every replay is
+> labeled a replay. The rest runs live.
+
+## The shots
+
+| # | Clock | On screen | ACTION | SAY |
+|---|---|---|---|---|
+| 1 | 0:00–0:12 | README "How it works" section on GitHub | Scroll slowly through the bullets | "One Next.js app, TypeScript end to end, SQLite as persistent founder Memory. Exactly two schema-validated LLM calls run the diligence — a claim extractor and a memo writer — through the local claude CLI." |
+| 2 | 0:12–0:20 | `src/lib/scoring.ts` open in editor (computeAxisScores) | Hold; move cursor down the function once | "Every score comes from a deterministic TypeScript rubric, so no model ever invents a number." |
+| 3 | 0:20–0:33 | Diligence claims list (trust badges) then the chat refusing/citing | Hover a VERIFIED then the CONTRADICTED badge | "The hard part was epistemic honesty: chat that cites or refuses, per-claim trust states, and one genuinely contradicted claim grounded in my real repository." |
+| 4 | 0:33–0:45 | `data/replay/` folder open; `provenance.json` visible (model, cost, timestamp) | Open data/replay/scan/ then a provenance.json | "Everything external is captured once for real — the Tavily sourcing scan, the LLM runs — and replayed deterministically with provenance, so the demo can't die on venue Wi-Fi." |
+| 5 | 0:45–0:52 | Terminal: `npm test` output ending "62 pass, 0 fail" | Run it live (finishes in ~4s) | "Sixty-two automated tests and a thirteen-beat offline smoke gate the golden path." |
+| 6 | 0:52–0:60 | README "Limitations" section | Scroll it once; freeze | "Honest limits: auth is a demo gate, the voice brief ships as a text fallback, and every replay is labeled a replay. The rest runs live." |
+
+# Team video — "explain who you are" (no official cap; keep ~30s)
+
+Single talking-head shot, camera or laptop webcam. No screen share needed. One take.
+
+> Hi, I'm Supawich — a solo technical founder, and the whole team behind FounderGraph.
+> I built it in one weekend for Hack-Nation's VC Brain challenge. The founder being
+> diligenced in the demo is me: that's my real repository, my real deck claims, and one
+> real contradiction the system caught in my own pitch. I'm exactly the kind of founder
+> this tool is built to make visible — technical, no warm intro, all the evidence sitting
+> in the code. Thanks for watching.
+
+(~75 words ≈ 30s. If you want it shorter, cut the middle sentence about the weekend.)

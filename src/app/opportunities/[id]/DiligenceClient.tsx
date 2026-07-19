@@ -6,6 +6,7 @@ import type { DiligenceView, Slide } from "@/lib/diligence";
 import type { Claim } from "@/lib/claims";
 import type { AxisScore, Trend } from "@/lib/scoring";
 import type { Verdict, DecisionRow } from "@/lib/decision";
+import type { Memo } from "@/lib/memo";
 
 const TRUST: Record<Claim["status"], { color: string; label: string }> = {
   verified: { color: "var(--positive)", label: "verified" },
@@ -318,15 +319,21 @@ export default function DiligenceClient({ view }: { view: DiligenceView }) {
         )}
       </div>
 
-      {/* Memo — empty state (M4 fills) */}
+      {/* Investment memo (M4 — LLM call #2) */}
       <div style={card}>
-        <div style={sectionTitle}>Investment memo</div>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <span style={{ color: "var(--muted)" }}>No memo yet.</span>
-          <span style={{ color: "var(--muted)", fontSize: "var(--text-body)" }}>
-            The structured memo is generated in a later step.
-          </span>
+        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "12px" }}>
+          <div style={sectionTitle}>Investment memo</div>
+          {view.memoProvenanceLabel && (
+            <span style={{ color: "var(--muted)", fontSize: "var(--text-label)" }}>
+              {view.memoProvenanceLabel}
+            </span>
+          )}
         </div>
+        {view.memo ? (
+          <MemoView memo={view.memo} claims={view.claims} />
+        ) : (
+          <span style={{ color: "var(--muted)" }}>No memo generated for this opportunity yet.</span>
+        )}
       </div>
 
       {/* Decision CTA */}
@@ -438,6 +445,81 @@ export default function DiligenceClient({ view }: { view: DiligenceView }) {
         <ReasoningDrawer view={view} onClose={() => setShowReasoning(false)} />
       )}
     </section>
+  );
+}
+
+const MEMO_SECTIONS: { key: keyof Memo["sections"]; label: string }[] = [
+  { key: "thesisFit", label: "Thesis fit" },
+  { key: "team", label: "Team" },
+  { key: "market", label: "Market" },
+  { key: "product", label: "Product" },
+  { key: "risks", label: "Risks" },
+];
+
+function MemoView({ memo, claims }: { memo: Memo; claims: Claim[] }) {
+  const claimText = new Map(claims.map((c) => [c.id, c.text]));
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "4px" }}>
+      {memo.recommendation && (
+        <p style={{ margin: 0, lineHeight: 1.6, fontWeight: 500 }}>{memo.recommendation}</p>
+      )}
+      <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+        {MEMO_SECTIONS.map(({ key, label }) => {
+          const s = memo.sections[key];
+          return (
+            <div key={key}>
+              <div style={{ ...sectionTitle, margin: "0 0 4px" }}>{label}</div>
+              <p style={{ margin: 0, lineHeight: 1.6 }}>{s.text}</p>
+              {s.citations.length > 0 && (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "6px" }}>
+                  {s.citations.map((c, i) => (
+                    <span
+                      key={`${c.ref}-${i}`}
+                      className="mono"
+                      title={c.quote ?? claimText.get(c.ref) ?? c.ref}
+                      style={{
+                        ...badge,
+                        color: "var(--accent)",
+                        borderColor: "var(--accent)",
+                        textTransform: "none",
+                      }}
+                    >
+                      ↳ {c.ref}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* R6 gaps — honest "not disclosed" rows, never inferred values */}
+      {memo.gaps.length > 0 && (
+        <div>
+          <div style={{ ...sectionTitle, margin: "0 0 6px" }}>Disclosure gaps</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            {memo.gaps.map((g) => (
+              <div
+                key={g.category}
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  alignItems: "baseline",
+                  padding: "6px 10px",
+                  border: "1px solid var(--border)",
+                  borderLeft: "3px solid var(--warning)",
+                  borderRadius: "var(--radius)",
+                }}
+              >
+                <span style={{ fontWeight: 600, minWidth: "128px" }}>{g.category}</span>
+                <span style={{ color: "var(--warning)", fontSize: "var(--text-body)" }}>{g.note}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

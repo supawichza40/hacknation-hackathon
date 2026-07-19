@@ -44,7 +44,7 @@ export default async function GraphPage({
       <p style={{ color: "var(--muted)", margin: "0 0 16px" }}>
         {graph.nodes.length} nodes, {graph.edges.length} edges.
       </p>
-      <GraphClient graph={graph} provenance={provenance} tour={tour} />
+      <GraphClient graph={graph} provenance={provenance} tour={tour} slug={id} />
     </section>
   );
 }

@@ -1,0 +1,42 @@
+You are a venture-capital analyst writing a STRUCTURED INVESTMENT MEMO. Output STRICT JSON only (no prose, no markdown fences).
+
+Schema EXACTLY:
+{"sections":{"thesisFit":{"text":string,"citations":[{"ref":string,"quote":string}]},"team":{...},"market":{...},"product":{...},"risks":{...}},"recommendation":string}
+
+Write ONE tight paragraph per section (thesisFit, team, market, product, risks). GROUND every material assertion in a citation: "ref" MUST be one of these claim ids [c1, c2, c3, c4, c5, claim-slide4-sub100ms, c7, c8, c9, c10, c11, c12] or an evidence locator that appears in the inputs below. Do NOT invent numbers, traction, or partners — if a fact is absent, say it is undisclosed rather than estimating it. Note the one contradicted claim explicitly in "product" or "risks". "recommendation" is a one-line read (never a fabricated verdict). Do NOT include a "gaps" field — gaps are computed separately.
+
+=== OPPORTUNITY ===
+ECC · AI infra · pre-seed · US · ask $100,000
+
+=== SCREENING FACTS (disclosed) ===
+sector: AI infra [ev-ecc-why]
+stage: pre-seed [ev-ecc-why]
+ask: $100K [ev-ecc-why]
+
+=== EXPLICIT UNKNOWNS ===
+ARR, cap table
+
+=== DECK CLAIMS (id · slide · status · text) ===
+c1 · s1 · unsupported · ECC cuts agent latency and token spend without touching your prompts.
+c2 · s3 · unsupported · ECC is a profiler that instruments every agent hop (tool calls, model routes, token cost) with zero prompt changes.
+c3 · s3 · unsupported · ECC auto-routes each step to the cheapest model that still passes its eval.
+c4 · s3 · unsupported · A regression gate blocks any change that makes an agent slower or more expensive.
+c5 · s3 · verified · ECC drops in beside existing harnesses with no rewrite and no lock-in (cross-harness portability).
+claim-slide4-sub100ms · s4 · contradicted · ECC delivers sub-100ms agent routing in production.
+c7 · s5 · unsupported · ECC is priced per traced agent-run.
+c8 · s6 · verified · ECC harness instrumentation is shipped and open-sourced.
+c9 · s6 · unsupported · 9 design partners are running ECC against their own agent stacks.
+c10 · s6 · unsupported · A median 38% token-cost reduction was observed across partner workloads.
+c11 · s6 · unsupported · ECC has 410 GitHub stars and 27 external contributors in the first 8 weeks.
+c12 · s7 · unsupported · Supawich is the solo founder and sole author of the ECC harness.
+
+=== DETERMINISTIC AXIS SCORES ===
+Founder: 82 (improving) — Returning founder — score 61→82 since 2025-10-01.
+Market: 50 (baseline) — 5 market/traction claims — 1 verified, 4 unsupported.
+Idea vs Market: 39 (baseline) — 1 core product claim contradicted by repo evidence.
+
+=== KNOWLEDGE GRAPH ===
+42 nodes / 49 edges. Key concepts: Provider-agnostic LLM abstraction, Provider adapter pattern, OpenAI-compatible endpoint reuse, Cross-provider tool calling, Unified error taxonomy, Layered provider config resolution, Prompt normalization, Immutable value objects
+
+=== DECK SLIDES ===
+1: ECC — Every Agent, Faster | 2: Agents are slow and expensive by default | 3: ECC: a profiler and optimizer that sits under the harness | 4: The wow moment: live latency board | 5: Market: AI infrastructure tooling | 6: Traction | 7: Team | 8: The ask

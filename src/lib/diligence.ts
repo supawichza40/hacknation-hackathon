@@ -11,6 +11,7 @@ import { parseClaims, type Claims } from "./claims.ts";
 import { loadGraph } from "./graph/io.ts";
 import { computeAxisScores, type AxisScore, type ScoringInput } from "./scoring.ts";
 import { getDecision, type DecisionRow } from "./decision.ts";
+import { loadMemo, type Memo } from "./memo.ts";
 
 const ROOT = process.cwd();
 
@@ -53,7 +54,20 @@ export type DiligenceView = {
   reasoning: ReasoningStep[];
   provenanceLabel: string | null;
   decision: DecisionRow | null;
+  memo: Memo | null;
+  memoProvenanceLabel: string | null;
 };
+
+// Memo provenance label (mirrors the claims replay label): present only when a
+// precomputed memo exists for the slug, so the UI can show it was really generated.
+function loadMemoProvenanceLabel(slug: string): string | null {
+  const p = join(ROOT, "data/replay/memo/provenance.json");
+  if (slug !== "ecc" || !existsSync(p)) return null;
+  const raw = JSON.parse(readFileSync(p, "utf8")) as { isoTimestamp?: string; promptVersion?: string };
+  return raw.isoTimestamp
+    ? `Replay mode — memo generated ${raw.isoTimestamp.slice(0, 10)} (${raw.promptVersion ?? "provenance"})`
+    : null;
+}
 
 function loadClaimsForSlug(slug: string): Claims {
   const p = join(ROOT, `data/demo/claims/${slug}/claims.json`);
@@ -165,6 +179,8 @@ export function getDiligenceView(slug: string): DiligenceView | null {
       reasoning: prov?.steps ?? [],
       provenanceLabel,
       decision,
+      memo: loadMemo(slug),
+      memoProvenanceLabel: loadMemoProvenanceLabel(slug),
     };
   } finally {
     db.close();

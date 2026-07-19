@@ -5,14 +5,30 @@ import { useRouter } from "next/navigation";
 import { evaluateThesisFit, formatUsd, type ThesisView } from "@/lib/thesis";
 
 type ScanStep = { rank: number; fullName: string; score: number; crossed: boolean };
+type ScanSource = "github" | "tavily";
 type ScanResult = {
+  source?: ScanSource;
   capturedAt: string;
   replaySource: string;
   totalScanned: number;
   threshold: number;
   steps: ScanStep[];
-  surfaced: { id: string; companyName: string; founderScore: number; sourceChannel: string; score: number };
+  label?: string;
+  surfaced:
+    | { id: string; companyName: string; founderScore: number; sourceChannel: string; score: number }
+    | { name: string; source: "tavily"; score: number; url: string; evidenceLocator: string; excerpt: string }
+    | null;
 };
+
+type QueryMatch = {
+  opportunityId: string;
+  companyName: string;
+  personName: string;
+  founderScore: number;
+  reason: string;
+  citation: { locator: string; excerpt: string };
+};
+type QueryResult = { query: string; intent: string | null; usedLlm: boolean; matches: QueryMatch[] };
 
 export type CardData = {
   id: string;
@@ -53,34 +69,81 @@ export default function PipelineBoard({
   const effectiveMax = wideCheck ? 200_000_000 : thesis.checkSizeMaxCents;
   const activeThesis: ThesisView = { ...thesis, checkSizeMaxCents: effectiveMax };
 
-  // R7 Scan button: replays a captured scan against /api/scan and reveals PipeWarden.
+  // R7 Scan button: replays a captured scan against /api/scan. GitHub reveals
+  // PipeWarden in the DB; Tavily surfaces an extracted company with a source badge.
   const router = useRouter();
+  const [scanSource, setScanSource] = useState<ScanSource>("github");
   const [scanning, setScanning] = useState(false);
   const [scanSteps, setScanSteps] = useState<ScanStep[]>([]);
   const [revealedCount, setRevealedCount] = useState(0);
   const [scanError, setScanError] = useState<string | null>(null);
   const [surfacedId, setSurfacedId] = useState<string | null>(null);
+  const [tavilySurfaced, setTavilySurfaced] = useState<
+    { name: string; score: number; url: string; excerpt: string } | null
+  >(null);
+  const [scanLabel, setScanLabel] = useState<string | null>(null);
 
   const runScan = async () => {
     setScanning(true);
     setScanError(null);
     setScanSteps([]);
     setRevealedCount(0);
+    setTavilySurfaced(null);
+    setSurfacedId(null);
     try {
-      const res = await fetch("/api/scan", { method: "POST" });
+      const res = await fetch("/api/scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ source: scanSource }),
+      });
       if (!res.ok) throw new Error(`scan failed (${res.status})`);
       const data: ScanResult = await res.json();
+      setScanLabel(data.label ?? `replaying captured ${scanSource} scan`);
       setScanSteps(data.steps);
       for (let i = 0; i < data.steps.length; i++) {
         setRevealedCount(i + 1);
         await new Promise((r) => setTimeout(r, 120));
       }
-      setSurfacedId(data.surfaced?.id ?? null);
-      router.refresh();
+      const s = data.surfaced;
+      if (s && "id" in s) {
+        setSurfacedId(s.id);
+        router.refresh();
+      } else if (s && "name" in s) {
+        setTavilySurfaced({ name: s.name, score: s.score, url: s.url, excerpt: s.excerpt });
+      }
     } catch (err) {
       setScanError(err instanceof Error ? err.message : "scan failed");
     } finally {
       setScanning(false);
+    }
+  };
+
+  // R1 natural-language query over the seeded founders' structured facts.
+  const [query, setQuery] = useState("");
+  const [querying, setQuerying] = useState(false);
+  const [queryResult, setQueryResult] = useState<QueryResult | null>(null);
+  const [queryError, setQueryError] = useState<string | null>(null);
+
+  const runQuery = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = query.trim();
+    if (!q) return;
+    setQuerying(true);
+    setQueryError(null);
+    setQueryResult(null);
+    try {
+      const res = await fetch("/api/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "query failed");
+      setQueryResult(data as QueryResult);
+    } catch (err) {
+      setQueryError(err instanceof Error ? err.message : "query failed");
+    } finally {
+      setQuerying(false);
     }
   };
 
@@ -121,7 +184,126 @@ export default function PipelineBoard({
         </span>
       </button>
 
-      {/* R7 Scan control */}
+      {/* R1 natural-language query box */}
+      <form
+        onSubmit={runQuery}
+        style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          marginBottom: "20px",
+          flexWrap: "wrap",
+        }}
+      >
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder='Ask the pipeline — e.g. "founders with improving scores", "off-thesis companies"'
+          style={{
+            flex: "1 1 340px",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "10px 14px",
+            font: "inherit",
+            background: "var(--surface)",
+          }}
+        />
+        <button
+          type="submit"
+          disabled={querying}
+          style={{
+            background: querying ? "var(--bg)" : "var(--accent)",
+            color: querying ? "var(--muted)" : "#fff",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "10px 18px",
+            cursor: querying ? "not-allowed" : "pointer",
+            fontWeight: 600,
+          }}
+        >
+          {querying ? "Querying…" : "Query"}
+        </button>
+        {queryResult && (
+          <button
+            type="button"
+            onClick={() => {
+              setQueryResult(null);
+              setQuery("");
+            }}
+            style={{
+              background: "var(--surface)",
+              color: "var(--muted)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius)",
+              padding: "10px 14px",
+              cursor: "pointer",
+            }}
+          >
+            Clear
+          </button>
+        )}
+      </form>
+
+      {(queryResult || queryError) && (
+        <div
+          style={{
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "12px 16px",
+            marginBottom: "20px",
+          }}
+        >
+          {queryError && (
+            <span style={{ color: "var(--negative)", fontSize: "var(--text-body)" }}>{queryError}</span>
+          )}
+          {queryResult && queryResult.matches.length === 0 && (
+            <span style={{ color: "var(--muted)" }}>No cited matches.</span>
+          )}
+          {queryResult && queryResult.matches.length > 0 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <span style={{ color: "var(--muted)", fontSize: "var(--text-label)" }}>
+                {queryResult.matches.length} cited match{queryResult.matches.length === 1 ? "" : "es"}
+                {queryResult.intent ? ` · ${queryResult.intent}` : ""}
+                {queryResult.usedLlm ? " · via LLM" : ""}
+              </span>
+              {queryResult.matches.map((m) => (
+                <div
+                  key={m.opportunityId}
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "baseline",
+                    gap: "8px",
+                    padding: "8px 10px",
+                    border: "1px solid var(--border)",
+                    borderLeft: "3px solid var(--accent)",
+                    borderRadius: "var(--radius)",
+                  }}
+                >
+                  <span style={{ fontWeight: 600 }}>{m.companyName}</span>
+                  <span style={{ color: "var(--muted)", fontSize: "var(--text-label)" }}>
+                    {m.personName} · score {m.founderScore} · {m.reason}
+                  </span>
+                  <span
+                    className="mono"
+                    title={m.citation.excerpt}
+                    style={{
+                      marginLeft: "auto",
+                      color: "var(--accent)",
+                      fontSize: "var(--text-label)",
+                    }}
+                  >
+                    ↳ {m.citation.locator}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* R7 Scan control — GitHub (reveals PipeWarden) or Tavily (prize track) */}
       <div
         style={{
           background: "var(--surface)",
@@ -148,9 +330,30 @@ export default function PipelineBoard({
           >
             Scan
           </button>
+          <div style={{ display: "flex", gap: "4px" }}>
+            {(["github", "tavily"] as ScanSource[]).map((src) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setScanSource(src)}
+                disabled={scanning}
+                style={{
+                  background: scanSource === src ? "var(--accent)" : "var(--surface)",
+                  color: scanSource === src ? "#fff" : "var(--text)",
+                  border: `1px solid ${scanSource === src ? "var(--accent)" : "var(--border)"}`,
+                  borderRadius: "var(--radius)",
+                  padding: "6px 12px",
+                  cursor: scanning ? "not-allowed" : "pointer",
+                  fontSize: "var(--text-label)",
+                }}
+              >
+                {src === "github" ? "GitHub" : "Tavily"}
+              </button>
+            ))}
+          </div>
           {scanning && (
             <span style={{ color: "var(--muted)", fontSize: "var(--text-body)" }}>
-              replaying captured scan from 2026-07-18
+              {scanLabel ?? `replaying captured ${scanSource} scan`}
             </span>
           )}
           {scanError && !scanning && (
@@ -158,7 +361,7 @@ export default function PipelineBoard({
           )}
         </div>
 
-        {scanning && scanSteps.length > 0 && (
+        {scanSteps.length > 0 && (
           <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "4px" }}>
             {scanSteps.slice(0, revealedCount).map((s) => (
               <div
@@ -173,6 +376,47 @@ export default function PipelineBoard({
                 {s.crossed ? " · threshold crossed" : ""}
               </div>
             ))}
+          </div>
+        )}
+
+        {tavilySurfaced && !scanning && (
+          <div
+            style={{
+              marginTop: "12px",
+              padding: "10px 12px",
+              border: "1px solid var(--accent)",
+              borderRadius: "var(--radius)",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "baseline",
+              gap: "8px",
+            }}
+          >
+            <span
+              style={{
+                background: "rgba(79,70,229,0.10)",
+                color: "var(--accent)",
+                borderRadius: "999px",
+                padding: "2px 8px",
+                fontSize: "var(--text-label)",
+                fontWeight: 600,
+              }}
+            >
+              tavily
+            </span>
+            <span style={{ fontWeight: 600 }}>{tavilySurfaced.name}</span>
+            <span style={{ color: "var(--muted)", fontSize: "var(--text-label)" }}>
+              relevance {tavilySurfaced.score} · replaying captured Tavily run
+            </span>
+            <a
+              href={tavilySurfaced.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mono"
+              style={{ marginLeft: "auto", color: "var(--accent)", fontSize: "var(--text-label)" }}
+            >
+              ↳ source
+            </a>
           </div>
         )}
       </div>

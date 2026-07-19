@@ -1,14 +1,29 @@
-// R7 Scan API — deterministic replay of the captured GitHub sourcing scan.
-// POST replays data/replay/scan/ranking.json, flips PipeWarden visible in the DB
-// so it pops into Outbound, and returns the replay view for the progress UI.
-// No live GitHub call (VC-BRAIN-PLAN.md §0.5 R7).
+// R7 Scan API — deterministic replay of a captured sourcing scan.
+// Two sources, same replay contract: 'github' (default) replays data/replay/scan/ and
+// flips PipeWarden visible so it pops into Outbound; 'tavily' replays data/replay/tavily/
+// (prize track "Best Use of Tavily") and surfaces an extracted company with a source badge.
+// No live GitHub/Tavily call (VC-BRAIN-PLAN.md §0.5 R7 + Tavily beat).
 import { NextResponse } from "next/server";
 import { getDb, setOpportunityVisible } from "@/lib/db";
 import { loadRanking, computeScanReplay } from "@/lib/scan";
+import { loadTavilyCaptures, computeTavilyReplay } from "@/lib/tavily";
 
 export const dynamic = "force-dynamic";
 
-export async function POST() {
+export async function POST(req: Request) {
+  let source: "github" | "tavily" = "github";
+  try {
+    const body = await req.json();
+    if (body?.source === "tavily") source = "tavily";
+  } catch {
+    // no body -> default github source (back-compat with the existing Scan button)
+  }
+
+  if (source === "tavily") {
+    const replay = computeTavilyReplay(loadTavilyCaptures());
+    return NextResponse.json(replay);
+  }
+
   const replay = computeScanReplay(loadRanking());
 
   const db = getDb();
@@ -28,6 +43,7 @@ export async function POST() {
 
   return NextResponse.json({
     ...replay,
+    source: "github",
     surfaced: {
       id: "opp-pipewarden",
       companyName: pw.company_name,

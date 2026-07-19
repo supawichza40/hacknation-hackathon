@@ -1,0 +1,31 @@
+{
+  "question": "What does the routing layer actually do?",
+  "slug": "ecc",
+  "answer": "The routing layer is the provider resolver: a factory that picks which LLM backend to use. It resolves the provider type from an explicit arg, then the LLM_PROVIDER env var, then the saved .llm.env file, defaulting to claude, and maps the chosen ProviderType to its adapter class. Its _PROVIDER_MAP wires six backends — Astraflow, Astraflow_CN, Atlas, Claude, OpenAI, and Ollama.",
+  "citations": [
+    {
+      "nodeId": "provider-resolver",
+      "quote": "Provider factory resolving type from arg, LLM_PROVIDER env, or saved .llm.env; maps ProviderType to class"
+    },
+    {
+      "nodeId": "c-config-resolution",
+      "quote": "chosen from explicit arg, then env vars, then saved .llm.env file, defaulting to claude"
+    },
+    {
+      "nodeId": "claim-six-providers",
+      "quote": "resolver's _PROVIDER_MAP wires Astraflow, Astraflow_CN, Atlas, Claude, OpenAI, and Ollama"
+    }
+  ],
+  "provenance": {
+    "artifact": "chat:ecc",
+    "source": "ECC knowledge graph (nodes only) — rehearsed Q&A capture",
+    "promptVersion": "graph-chat-v1",
+    "model": [
+      "claude-opus-4-8"
+    ],
+    "generator": "claude -p --output-format json (subscription auth, headless)",
+    "isoTimestamp": "2026-07-19T01:43:04.970Z",
+    "durationMs": 17155,
+    "totalCostUsd": 0.550386
+  }
+}

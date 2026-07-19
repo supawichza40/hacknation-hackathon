@@ -1,0 +1,22 @@
+# Never copy the host's node_modules — the native better-sqlite3 binary would be the
+# wrong ABI. `npm ci` inside the image rebuilds it from source.
+node_modules
+.next
+.git
+
+# Generated at boot by `npm run seed`.
+data/vc-brain.db
+data/vc-brain.db-shm
+data/vc-brain.db-wal
+
+# The 78 MB cloned hero-repo mirror (only needed to *generate* the graph, not to serve it).
+data/demo/repos
+
+# The separate Lovable prototype app — not part of the deployed Next.js server.
+lovable
+
+# Local noise.
+*.log
+.env
+.env.local
+.DS_Store

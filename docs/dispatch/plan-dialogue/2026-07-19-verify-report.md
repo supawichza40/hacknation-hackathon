@@ -25,19 +25,23 @@ Seed: `Seeded 4 opportunities (3 visible), 4 evidence rows`. Outbound network di
 
 Planned demo set: `opp-ecc`, `opp-lattice`, `opp-brightcart`, `opp-pipewarden` (3 shown + 1 hidden inbound).
 
-## 2. `npm run check:done` — 7-gate authoritative result (post-commit)
+## 2. `npm run check:done` — 7-gate authoritative result (post-commit, HEAD f7f6069)
 
-Gates (a–g) from `scripts/check-done.mjs`. Result of the authoritative run after committing the doc/board edits:
+**5/7 PASS.** Both red gates trace to the live swarm editing the tree — neither is a committed product defect.
 
 | Gate | Name | Result |
 |---|---|---|
-| a | test — `npm test` | _pending authoritative run_ |
-| b | typecheck — `tsc --noEmit` | _pending authoritative run_ |
-| c | build — `npm run build` | _pending authoritative run_ |
-| d | smoke:golden — offline golden path | _pending authoritative run_ |
-| e | artifacts — schema + dangling IDs + demo set | _pending authoritative run_ |
-| f | secrets — no live keys in tracked/untracked files | _pending authoritative run_ |
-| g | push-state — clean tree pushed to origin branch | _pending authoritative run_ |
+| a | test — `npm test` | PASS |
+| b | typecheck — `tsc --noEmit` | PASS (clean) |
+| c | build — `npm run build` | PASS (next build ok) |
+| d | smoke:golden — offline golden path | PASS (13/13) |
+| e | artifacts — schema + dangling IDs + demo set | **FAIL** — working-tree only (see below) |
+| f | secrets — no live keys in tracked/untracked files | PASS (clean) |
+| g | push-state — clean tree == origin branch | **FAIL** — 10 uncommitted non-mine paths; HEAD == origin |
+
+**artifacts (e) root cause — transient, NOT a committed defect:** a live worker is mid-migrating ECC claim ids from numeric (`c1`…`c12`) to descriptive slugs (`product-identity`, `hop-instrumentation`, …). It has rewritten `data/demo/claims/ecc/claims.json` to slugs (uncommitted) but has **not yet updated** `data/demo/memos/ecc/memo.json`, which still cites `c1/c5/c8/c9/c10/c12`. At **HEAD f7f6069 the memo and claims are self-consistent** (both numeric — the gate passes on a clean checkout); the red is purely the half-done working-tree edit. **If the slug migration is committed without updating the memo, the demo memo's evidence links will dangle** (violates "no dangling Evidence ID"). Owner: eng-m4 — land `claims.json` + `memo.json` together.
+
+**push-state (g) root cause:** 10 uncommitted non-mine paths (claims/graphs/replay provenance, `overnight-build.run-state.json`, untracked `lovable/.../package-lock.json`) from active workers. HEAD == origin (my push landed). Clears on the final clean freeze commit once the swarm quiesces.
 
 ## 3. DoD Layer-1 tally by rubric axis
 
@@ -52,12 +56,13 @@ Gates (a–g) from `scripts/check-done.mjs`. Result of the authoritative run aft
 ## 4. Demo risks / still-open (ranked)
 
 1. **[HIGH — env, demo-breaking] `better-sqlite3` ABI mismatch.** The prebuilt binary was Node 22 (ABI 127); the prescribed runtime is Node 26.3.1 (ABI 147). Under Node 26 every DB path crashed (`ERR_DLOPEN_FAILED`) until I ran `npm rebuild better-sqlite3` (node_modules only, no tracked change). Any later `npm install`/`npm ci` re-fetches the ABI-127 prebuilt and re-breaks the app + gate under Node 26. **Demo/gate machine must run `npm rebuild better-sqlite3` on Node 26 (or pin one Node version) before the demo.**
-2. **[MED — process] push-state gate stays red while the swarm is active.** At reconcile time the tree held uncommitted non-mine files (`data/demo/memos/ecc/memo.json`, `data/replay/memo/{provenance,raw-model-output}.json`, `overnight-build.run-state.json`, untracked `lovable/Founder Graph Core/package-lock.json`). Gate (g) requires a clean tree == origin; it clears only when workers quiesce and the lead does the final clean commit + push.
-3. **[MED] ElevenLabs voice-brief MP3 not built** (committed/never-cut item). Text-script fallback is present; needs a live key/credits.
-4. **[MED] 2×60s demo + tech videos not recorded** — feature-freeze deliverable, Communication axis.
-5. **[LOW-MED] Cold-start demonstration unverified** — 4/5 pipeline states present (inbound/outbound/off-thesis/returning); cold-start absent. Either an unlabeled state or a real gap.
-6. **[LOW] Final UX eyeball** at demo viewport not done (rubric "intuitive, clear, beautifully designed").
-7. **[LOW] Live-URL submission requirement** unconfirmed against the platform form.
+2. **[HIGH — integrity, uncommitted] ECC claim-id migration is half-done in the working tree.** `claims/ecc/claims.json` was rewritten from numeric ids (`c1`…`c12`) to descriptive slugs, but `memos/ecc/memo.json` still cites the numeric ids → `artifacts` gate red. HEAD is self-consistent, but if this lands half-migrated the memo's evidence links dangle. eng-m4 must commit memo + claims together (consistent ids).
+3. **[MED — process] push-state gate stays red while the swarm is active.** At reconcile time the tree held 10 uncommitted non-mine paths (claims/graphs/replay provenance, `overnight-build.run-state.json`, untracked `lovable/Founder Graph Core/package-lock.json`). Gate (g) requires a clean tree == origin; it clears only when workers quiesce and the lead does the final clean commit + push.
+4. **[MED] ElevenLabs voice-brief MP3 not built** (committed/never-cut item). Text-script fallback is present; needs a live key/credits.
+5. **[MED] 2×60s demo + tech videos not recorded** — feature-freeze deliverable, Communication axis.
+6. **[LOW-MED] Cold-start demonstration unverified** — 4/5 pipeline states present (inbound/outbound/off-thesis/returning); cold-start absent. Either an unlabeled state or a real gap.
+7. **[LOW] Final UX eyeball** at demo viewport not done (rubric "intuitive, clear, beautifully designed").
+8. **[LOW] Live-URL submission requirement** unconfirmed against the platform form.
 
 ## 5. Verdict
 

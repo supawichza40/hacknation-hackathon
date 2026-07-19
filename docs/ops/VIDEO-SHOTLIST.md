@@ -107,9 +107,14 @@ card with its "threshold crossed" badge is visible; hold 2 beats.
 
 # 2 · Tech video — max 60 seconds ("CTO giving a 1-minute investor update")
 
-**Format ruling: screen recording, not PowerPoint** — judges reward real code and a live test
-run; slides hide what this video must prove. Narration 101 words ≈ 40s, leaving ~20s for
-code navigation and the test run.
+**Format (human ruling 2026-07-19 12:15 BST): professional slide deck** — open
+[`docs/ops/tech-deck.html`](tech-deck.html) in the browser, press **F** for fullscreen,
+advance with **→** (or click). **Slide N = Shot N** below; the deck contains real code
+excerpts, the architecture diagram with the stack, and your SAY lines only as invisible
+HTML comments — nothing you read appears on the recorded screen. Read your lines from this
+file on a phone/printout. Narration 101 words ≈ 40s, leaving ~20s of air. The per-shot
+"Screen:" file paths below remain as optional live b-roll if you prefer mixing in real
+editor/terminal shots (Shot 5's live `npm test` is still the strongest on camera).
 
 ## Continuous narration
 

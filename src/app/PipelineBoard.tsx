@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { evaluateThesisFit, formatUsd, type ThesisView } from "@/lib/thesis";
 
@@ -29,6 +30,17 @@ type QueryMatch = {
   citation: { locator: string; excerpt: string };
 };
 type QueryResult = { query: string; intent: string | null; usedLlm: boolean; matches: QueryMatch[] };
+
+// Diligence routes key on the graph-slug, not the DB id (inverse of
+// SLUG_TO_OPP in src/lib/diligence.ts, which is server-only and can't be
+// imported from this client component).
+const OPP_TO_SLUG: Record<string, string> = {
+  "opp-ecc": "ecc",
+  "opp-lattice": "lattice-db",
+};
+function oppIdToSlug(id: string): string {
+  return OPP_TO_SLUG[id] ?? id.replace(/^opp-/, "");
+}
 
 export type CardData = {
   id: string;
@@ -489,8 +501,14 @@ function OpportunityCard({
   const offThesis = !fit.onThesis;
 
   return (
+    <Link
+      href={`/opportunities/${oppIdToSlug(card.id)}`}
+      style={{ display: "block", textDecoration: "none", color: "inherit" }}
+      aria-label={`Open diligence for ${card.companyName}`}
+    >
     <article
       style={{
+        cursor: "pointer",
         background: "var(--surface)",
         border: justSurfaced ? "1px solid var(--accent)" : "1px solid var(--border)",
         boxShadow: justSurfaced ? "0 0 0 3px rgba(79,70,229,0.18)" : "none",
@@ -575,6 +593,7 @@ function OpportunityCard({
         </div>
       ))}
     </article>
+    </Link>
   );
 }
 

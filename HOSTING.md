@@ -31,6 +31,32 @@ Both build straight from the GitHub repo and run a persistent process.
 
 That's it. No database add-on, no Docker; the Anthropic key is optional.
 
+## Deploy to Render — step by step
+
+The repo ships a `render.yaml` Blueprint at its root, so Render can stand up the whole web service in one flow. Point Render at **`main`** — that is the branch judges browse, and `dispatch/lovable-frontend` merges into it before submission.
+
+**Option A — Blueprint (one click, recommended).**
+
+1. Merge your work to `main` and push. Render deploys from the GitHub remote, not your laptop.
+2. In the [Render Dashboard](https://dashboard.render.com), click **New +** → **Blueprint**.
+3. Connect this GitHub repo and choose branch **`main`**. Render auto-detects `render.yaml` and shows the `foundergraph` web service.
+4. Render prompts for the four `sync: false` variables — fill them in:
+   - `DEMO_INVESTOR_EMAIL` = `investor@foundergraph.demo`
+   - `DEMO_INVESTOR_PASSWORD` = `demo`
+   - `ANTHROPIC_API_KEY` = *(optional — leave blank to serve replays)*
+   - `TAVILY_API_KEY` = *(optional — leave blank to use the captured replay)*
+5. **Apply**. Render runs `npm ci && npm run build`, then `npm run seed && npm start`, and waits for `/login` to return 200 before going live.
+6. Open the generated `…onrender.com` URL, log in with the demo credentials, and walk the golden path.
+
+**Option B — Web Service (manual, no Blueprint).** Same result without `render.yaml`: **New +** → **Web Service** → connect the repo, branch **`main`**, runtime **Node**. Set **Build Command** `npm ci && npm run build`, **Start Command** `npm run seed && npm start`, and **Health Check Path** `/login`. Add the same environment variables (Settings → Environment) and create the service.
+
+**Notes.**
+
+- The Blueprint pins `plan: starter` (a paid instance with no idle spin-down) so a live demo never cold-starts mid-pitch. To run at zero cost, change it to `plan: free`: the free instance spins down after 15 minutes idle and takes about a minute (~50s) to cold-start on the next request.
+- `npm run seed` runs on **every** boot, so each deploy or restart resets the demo data to a clean, known-good state. That is intended — no volume needed.
+- **No Anthropic key is required.** With `ANTHROPIC_API_KEY` unset, the LLM paths (memo, graph ingest, founder query, chat) serve the captured replays under `data/replay/`; set the key to run live inference instead.
+- Render reads the Node version from `.nvmrc` (26.3.1); the Blueprint also sets `NODE_VERSION=26.3.1` explicitly, so `better-sqlite3` always compiles against Node 26.
+
 ## Live LLM (production)
 
 The memo writer, graph ingest, the free-form founder query, and graph chat call the Anthropic API through one shared client (`src/lib/llm.ts`, model `claude-opus-4-8`). Set `ANTHROPIC_API_KEY` on the host to run real inference. Leave it unset and those paths throw an internal `NoLlmError` that each caller catches and answers from the captured replays under `data/replay/` — the same demo mode the app has always shipped, now with no `claude` CLI dependency. So the deployed app is safe either way: a key gives live answers, no key gives the rehearsed replay.

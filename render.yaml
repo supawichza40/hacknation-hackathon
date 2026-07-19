@@ -1,0 +1,50 @@
+# render.yaml — Render Blueprint for FounderGraph (VC Brain)
+#
+# Stateful Next.js 16 web service: the better-sqlite3 native addon (compiled
+# from source via .npmrc) plus a file-backed SQLite database. This is a
+# persistent Node process, NOT serverless — do not deploy to Vercel / Netlify /
+# Cloudflare (ephemeral, read-only FS breaks the native binary and every write).
+#
+# Deploy the `main` branch — judges browse main, and dispatch/lovable-frontend
+# merges into main before submission.
+#
+# Every field and enum below was verified on 2026-07-19 against Render's
+# Blueprint YAML reference (https://render.com/docs/blueprint-spec):
+# services[].type=web, runtime=node, name, plan, region, buildCommand,
+# startCommand, healthCheckPath, branch, and envVars (key/value | key/sync:false).
+services:
+  - type: web
+    name: foundergraph
+    runtime: node
+    # `starter` is a paid instance with no idle spin-down — safest for a live,
+    # judged demo. Zero-cost alternative: change this to `free`, which spins
+    # down after 15 min idle and cold-starts (~50s) on the next request.
+    # Valid web plans: free, starter, standard, pro, pro plus, pro max, pro ultra.
+    plan: starter
+    # region: oregon   # default if omitted; also: ohio, virginia, frankfurt, singapore
+    branch: main
+    buildCommand: npm ci && npm run build
+    # Seed writes the gitignored SQLite DB, then start the persistent server.
+    # Runs on every boot, so each deploy/restart resets demo data to a known-good
+    # state (intended for the demo — no persistent disk needed).
+    startCommand: npm run seed && npm start
+    # /login is public and returns 200 without a DB session; `/` redirects.
+    healthCheckPath: /login
+    envVars:
+      # Pin Node 26.3.1 explicitly (highest-precedence source; .nvmrc also pins
+      # it). Guards against Render's post-2026-04-21 default of Node 24.
+      - key: NODE_VERSION
+        value: 26.3.1
+      # Demo login credentials — Render prompts for these at Blueprint creation.
+      - key: DEMO_INVESTOR_EMAIL
+        sync: false
+      - key: DEMO_INVESTOR_PASSWORD
+        sync: false
+      # Optional. Set it for real Anthropic inference; leave unset and the LLM
+      # paths (memo, graph ingest, query, chat) serve the captured replays.
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      # Optional. Set it for a live Tavily founder-sourcing call; unset uses the
+      # captured replay.
+      - key: TAVILY_API_KEY
+        sync: false

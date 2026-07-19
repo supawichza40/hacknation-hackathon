@@ -1,0 +1,12 @@
+{
+  "capturedAt": "2026-07-18T09:14:22Z",
+  "steps": [
+    { "stage": "ingest", "label": "Ingested apply form + linked GitHub repo", "ts": "09:14:22", "durationMs": 340, "cached": true },
+    { "stage": "extract", "label": "Extracted 47 candidate claims from deck (12 slides)", "ts": "09:14:24", "durationMs": 1820, "cached": true },
+    { "stage": "extract", "label": "Extracted 63 code artifacts + 3 benchmark files from repo", "ts": "09:14:27", "durationMs": 2610, "cached": true },
+    { "stage": "verify", "label": "Cross-referenced 8 material claims against 40 artifacts", "ts": "09:14:31", "durationMs": 3900, "cached": false },
+    { "stage": "verify", "label": "Detected 1 contradiction: deck slide 7 vs bench/README.md:22-24", "ts": "09:14:35", "durationMs": 210, "cached": false },
+    { "stage": "score", "label": "Scored 3 axes independently (founder, market, idea-vs-market)", "ts": "09:14:36", "durationMs": 890, "cached": false },
+    { "stage": "memo", "label": "Drafted memo with 2 explicit \"Not disclosed\" gaps flagged", "ts": "09:14:38", "durationMs": 1450, "cached": false }
+  ]
+}

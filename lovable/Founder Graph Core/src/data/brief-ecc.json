@@ -1,0 +1,4 @@
+{
+  "durationSec": 92,
+  "script": "ECC. Solo builder, Supawich, six years at Stripe infrastructure. Open-source agent harness — 1.2k GitHub stars, MIT-licensed core. Founder score 82, up 21 points since October. Thesis fit: pre-seed, US, AI infra — passes. One material contradiction: the deck claims sub-100ms agent routing in production; the repo's own benchmark reports 340ms median across 10k runs. Two disclosures missing — prior founding experience and bottom-up TAM. Recommend: proceed to founder Q&A, anchor first question on the latency gap."
+}

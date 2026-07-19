@@ -1,0 +1,9 @@
+[
+  { "order": 1, "nodeId": "file-readme", "caption": "Start at the repo README — the founder's own framing of what ECC is." },
+  { "order": 2, "nodeId": "claim-oss-traction", "caption": "1.2k stars confirms the open-source traction claim from the deck." },
+  { "order": 3, "nodeId": "file-replay", "caption": "Deterministic replay lives in src/replay.ts — the core technical moat." },
+  { "order": 4, "nodeId": "claim-routing-latency", "caption": "The deck's headline claim: sub-100ms agent routing in production." },
+  { "order": 5, "nodeId": "file-bench-readme", "caption": "But the repo's own benchmark reports 340ms median — a direct contradiction." },
+  { "order": 6, "nodeId": "concept-agent-orchestration", "caption": "Both sides ladder up to the same concept: agent orchestration performance." },
+  { "order": 7, "nodeId": "claim-design-partners", "caption": "Design-partner count is unsupported by any artifact — ask the founder." }
+]

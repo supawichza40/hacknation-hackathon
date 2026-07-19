@@ -1,0 +1,748 @@
+{
+  "opportunityId": "ecc",
+  "nodes": [
+    {
+      "id": "file-readme",
+      "type": "file",
+      "name": "README.md",
+      "summary": "Project overview and quick start.",
+      "sourceRef": {
+        "file": "README.md",
+        "lines": "1-40"
+      }
+    },
+    {
+      "id": "file-replay",
+      "type": "file",
+      "name": "src/replay.ts",
+      "summary": "Deterministic replay engine for agent traces.",
+      "sourceRef": {
+        "file": "src/replay.ts",
+        "lines": "14-92"
+      }
+    },
+    {
+      "id": "file-router",
+      "type": "file",
+      "name": "src/router.ts",
+      "summary": "Routing layer that dispatches agent calls.",
+      "sourceRef": {
+        "file": "src/router.ts",
+        "lines": "1-180"
+      }
+    },
+    {
+      "id": "file-bench-readme",
+      "type": "file",
+      "name": "bench/README.md",
+      "summary": "Benchmark methodology and headline numbers \u2014 median 340ms across 10k runs.",
+      "sourceRef": {
+        "file": "bench/README.md",
+        "lines": "22-24"
+      }
+    },
+    {
+      "id": "file-bench-comparison",
+      "type": "file",
+      "name": "bench/comparison.md",
+      "summary": "Head-to-head vs LangGraph and CrewAI.",
+      "sourceRef": {
+        "file": "bench/comparison.md",
+        "lines": "1-40"
+      }
+    },
+    {
+      "id": "file-license",
+      "type": "file",
+      "name": "LICENSE",
+      "summary": "MIT license for open-source core.",
+      "sourceRef": {
+        "file": "LICENSE",
+        "lines": "1-3"
+      }
+    },
+    {
+      "id": "file-deck-7",
+      "type": "file",
+      "name": "deck.pdf#7",
+      "summary": "Deck slide 7 \u2014 performance claims.",
+      "sourceRef": {
+        "file": "deck.pdf",
+        "slide": 7
+      }
+    },
+    {
+      "id": "file-deck-11",
+      "type": "file",
+      "name": "deck.pdf#11",
+      "summary": "Deck slide 11 \u2014 traction and design partners.",
+      "sourceRef": {
+        "file": "deck.pdf",
+        "slide": 11
+      }
+    },
+    {
+      "id": "file-deck-12",
+      "type": "file",
+      "name": "deck.pdf#12",
+      "summary": "Deck slide 12 \u2014 revenue.",
+      "sourceRef": {
+        "file": "deck.pdf",
+        "slide": 12
+      }
+    },
+    {
+      "id": "file-linkedin",
+      "type": "file",
+      "name": "linkedin/supawich",
+      "summary": "Founder LinkedIn profile.",
+      "sourceRef": {
+        "file": "linkedin/supawich",
+        "lines": "profile"
+      }
+    },
+    {
+      "id": "file-tests",
+      "type": "file",
+      "name": "tests/replay.spec.ts",
+      "summary": "Test suite covering replay determinism.",
+      "sourceRef": {
+        "file": "tests/replay.spec.ts",
+        "lines": "1-220"
+      }
+    },
+    {
+      "id": "file-issues",
+      "type": "file",
+      "name": "github/issues",
+      "summary": "Open GitHub issue tracker snapshot.",
+      "sourceRef": {
+        "file": "github/issues",
+        "lines": "summary"
+      }
+    },
+    {
+      "id": "file-changelog",
+      "type": "file",
+      "name": "CHANGELOG.md",
+      "summary": "Release history since v0.1.",
+      "sourceRef": {
+        "file": "CHANGELOG.md",
+        "lines": "1-60"
+      }
+    },
+    {
+      "id": "file-pkg",
+      "type": "file",
+      "name": "package.json",
+      "summary": "Runtime and dev dependencies.",
+      "sourceRef": {
+        "file": "package.json",
+        "lines": "1-45"
+      }
+    },
+    {
+      "id": "file-arch",
+      "type": "file",
+      "name": "docs/architecture.md",
+      "summary": "System architecture overview.",
+      "sourceRef": {
+        "file": "docs/architecture.md",
+        "lines": "1-120"
+      }
+    },
+    {
+      "id": "claim-oss-traction",
+      "type": "claim",
+      "name": "1.2k GitHub stars",
+      "summary": "Traction claim \u2014 verified via repo star count.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-routing-latency",
+      "type": "claim",
+      "name": "Sub-100ms agent routing",
+      "summary": "Deck claim \u2014 contradicted by benchmark file.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-founder-experience",
+      "type": "claim",
+      "name": "6 years Stripe infra",
+      "summary": "Founder background \u2014 verified via LinkedIn.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-design-partners",
+      "type": "claim",
+      "name": "3 paying design partners",
+      "summary": "Unsupported by artifacts.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-replay-determinism",
+      "type": "claim",
+      "name": "Deterministic trace replay",
+      "summary": "Verified in src/replay.ts and tests.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-license-oss",
+      "type": "claim",
+      "name": "MIT-licensed core",
+      "summary": "Verified via LICENSE file.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-mrr",
+      "type": "claim",
+      "name": "$18k MRR",
+      "summary": "Unsupported by artifacts.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-benchmark-competitors",
+      "type": "claim",
+      "name": "Benchmarked vs LangGraph/CrewAI",
+      "summary": "Verified in bench/comparison.md.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-bench-median",
+      "type": "claim",
+      "name": "Median routing 340ms",
+      "summary": "Repo-side counter-evidence to sub-100ms claim.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "claim-test-coverage",
+      "type": "claim",
+      "name": "220 replay tests passing",
+      "summary": "Verified via tests/replay.spec.ts.",
+      "sourceRef": {
+        "file": "claims-ecc.json"
+      }
+    },
+    {
+      "id": "concept-agent-orchestration",
+      "type": "concept",
+      "name": "Agent orchestration",
+      "summary": "Multi-agent coordination and control.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-routing",
+      "type": "concept",
+      "name": "Agent routing",
+      "summary": "Dispatching calls between agents/tools.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-replay",
+      "type": "concept",
+      "name": "Deterministic replay",
+      "summary": "Reproducing a run bit-for-bit.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-benchmarking",
+      "type": "concept",
+      "name": "Benchmarking",
+      "summary": "Measured performance under load.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-oss-strategy",
+      "type": "concept",
+      "name": "Open-source strategy",
+      "summary": "OSS core, commercial add-ons.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-traction",
+      "type": "concept",
+      "name": "Traction",
+      "summary": "Evidence of adoption or revenue.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-founder-fit",
+      "type": "concept",
+      "name": "Founder fit",
+      "summary": "Founder background vs problem space.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-market",
+      "type": "concept",
+      "name": "Market \u2014 AI infra",
+      "summary": "AI infrastructure market.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-testing",
+      "type": "concept",
+      "name": "Testing rigor",
+      "summary": "Test coverage and CI signals.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-revenue",
+      "type": "concept",
+      "name": "Revenue signals",
+      "summary": "MRR, pilots, contracts.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-competition",
+      "type": "concept",
+      "name": "Competitive landscape",
+      "summary": "LangGraph, CrewAI, others.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-architecture",
+      "type": "concept",
+      "name": "System architecture",
+      "summary": "How the pieces fit together.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-performance",
+      "type": "concept",
+      "name": "Performance claims",
+      "summary": "Latency and throughput assertions.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-community",
+      "type": "concept",
+      "name": "Community signals",
+      "summary": "Stars, issues, PRs.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    },
+    {
+      "id": "concept-licensing",
+      "type": "concept",
+      "name": "Licensing",
+      "summary": "Legal posture of the code.",
+      "sourceRef": {
+        "file": "thesis.json"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "file-readme",
+      "target": "claim-oss-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e2",
+      "source": "file-issues",
+      "target": "claim-oss-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e3",
+      "source": "file-deck-7",
+      "target": "claim-routing-latency",
+      "kind": "supports"
+    },
+    {
+      "id": "e4",
+      "source": "file-bench-readme",
+      "target": "claim-bench-median",
+      "kind": "supports"
+    },
+    {
+      "id": "e5",
+      "source": "file-bench-readme",
+      "target": "claim-routing-latency",
+      "kind": "contradicts"
+    },
+    {
+      "id": "e6",
+      "source": "file-linkedin",
+      "target": "claim-founder-experience",
+      "kind": "supports"
+    },
+    {
+      "id": "e7",
+      "source": "file-deck-11",
+      "target": "claim-design-partners",
+      "kind": "supports"
+    },
+    {
+      "id": "e8",
+      "source": "file-replay",
+      "target": "claim-replay-determinism",
+      "kind": "supports"
+    },
+    {
+      "id": "e9",
+      "source": "file-tests",
+      "target": "claim-replay-determinism",
+      "kind": "supports"
+    },
+    {
+      "id": "e10",
+      "source": "file-tests",
+      "target": "claim-test-coverage",
+      "kind": "supports"
+    },
+    {
+      "id": "e11",
+      "source": "file-license",
+      "target": "claim-license-oss",
+      "kind": "supports"
+    },
+    {
+      "id": "e12",
+      "source": "file-deck-12",
+      "target": "claim-mrr",
+      "kind": "supports"
+    },
+    {
+      "id": "e13",
+      "source": "file-bench-comparison",
+      "target": "claim-benchmark-competitors",
+      "kind": "supports"
+    },
+    {
+      "id": "e14",
+      "source": "file-router",
+      "target": "claim-routing-latency",
+      "kind": "supports"
+    },
+    {
+      "id": "e15",
+      "source": "file-arch",
+      "target": "claim-replay-determinism",
+      "kind": "supports"
+    },
+    {
+      "id": "e16",
+      "source": "claim-oss-traction",
+      "target": "concept-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e17",
+      "source": "claim-oss-traction",
+      "target": "concept-community",
+      "kind": "supports"
+    },
+    {
+      "id": "e18",
+      "source": "claim-routing-latency",
+      "target": "concept-routing",
+      "kind": "supports"
+    },
+    {
+      "id": "e19",
+      "source": "claim-routing-latency",
+      "target": "concept-performance",
+      "kind": "supports"
+    },
+    {
+      "id": "e20",
+      "source": "claim-bench-median",
+      "target": "concept-performance",
+      "kind": "supports"
+    },
+    {
+      "id": "e21",
+      "source": "claim-bench-median",
+      "target": "concept-benchmarking",
+      "kind": "supports"
+    },
+    {
+      "id": "e22",
+      "source": "claim-founder-experience",
+      "target": "concept-founder-fit",
+      "kind": "supports"
+    },
+    {
+      "id": "e23",
+      "source": "claim-design-partners",
+      "target": "concept-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e24",
+      "source": "claim-replay-determinism",
+      "target": "concept-replay",
+      "kind": "supports"
+    },
+    {
+      "id": "e25",
+      "source": "claim-replay-determinism",
+      "target": "concept-architecture",
+      "kind": "supports"
+    },
+    {
+      "id": "e26",
+      "source": "claim-license-oss",
+      "target": "concept-licensing",
+      "kind": "supports"
+    },
+    {
+      "id": "e27",
+      "source": "claim-license-oss",
+      "target": "concept-oss-strategy",
+      "kind": "supports"
+    },
+    {
+      "id": "e28",
+      "source": "claim-mrr",
+      "target": "concept-revenue",
+      "kind": "supports"
+    },
+    {
+      "id": "e29",
+      "source": "claim-benchmark-competitors",
+      "target": "concept-competition",
+      "kind": "supports"
+    },
+    {
+      "id": "e30",
+      "source": "claim-benchmark-competitors",
+      "target": "concept-benchmarking",
+      "kind": "supports"
+    },
+    {
+      "id": "e31",
+      "source": "claim-test-coverage",
+      "target": "concept-testing",
+      "kind": "supports"
+    },
+    {
+      "id": "e32",
+      "source": "file-arch",
+      "target": "concept-architecture",
+      "kind": "supports"
+    },
+    {
+      "id": "e33",
+      "source": "file-router",
+      "target": "concept-routing",
+      "kind": "supports"
+    },
+    {
+      "id": "e34",
+      "source": "file-replay",
+      "target": "concept-replay",
+      "kind": "supports"
+    },
+    {
+      "id": "e35",
+      "source": "file-bench-readme",
+      "target": "concept-benchmarking",
+      "kind": "supports"
+    },
+    {
+      "id": "e36",
+      "source": "file-bench-comparison",
+      "target": "concept-competition",
+      "kind": "supports"
+    },
+    {
+      "id": "e37",
+      "source": "file-tests",
+      "target": "concept-testing",
+      "kind": "supports"
+    },
+    {
+      "id": "e38",
+      "source": "file-license",
+      "target": "concept-licensing",
+      "kind": "supports"
+    },
+    {
+      "id": "e39",
+      "source": "file-changelog",
+      "target": "concept-community",
+      "kind": "supports"
+    },
+    {
+      "id": "e40",
+      "source": "file-pkg",
+      "target": "concept-architecture",
+      "kind": "supports"
+    },
+    {
+      "id": "e41",
+      "source": "file-issues",
+      "target": "concept-community",
+      "kind": "supports"
+    },
+    {
+      "id": "e42",
+      "source": "file-linkedin",
+      "target": "concept-founder-fit",
+      "kind": "supports"
+    },
+    {
+      "id": "e43",
+      "source": "file-deck-7",
+      "target": "concept-performance",
+      "kind": "supports"
+    },
+    {
+      "id": "e44",
+      "source": "file-deck-11",
+      "target": "concept-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e45",
+      "source": "file-deck-12",
+      "target": "concept-revenue",
+      "kind": "supports"
+    },
+    {
+      "id": "e46",
+      "source": "concept-routing",
+      "target": "concept-agent-orchestration",
+      "kind": "supports"
+    },
+    {
+      "id": "e47",
+      "source": "concept-replay",
+      "target": "concept-agent-orchestration",
+      "kind": "supports"
+    },
+    {
+      "id": "e48",
+      "source": "concept-benchmarking",
+      "target": "concept-performance",
+      "kind": "supports"
+    },
+    {
+      "id": "e49",
+      "source": "concept-traction",
+      "target": "concept-market",
+      "kind": "supports"
+    },
+    {
+      "id": "e50",
+      "source": "concept-revenue",
+      "target": "concept-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e51",
+      "source": "concept-community",
+      "target": "concept-traction",
+      "kind": "supports"
+    },
+    {
+      "id": "e52",
+      "source": "concept-competition",
+      "target": "concept-market",
+      "kind": "supports"
+    },
+    {
+      "id": "e53",
+      "source": "concept-founder-fit",
+      "target": "concept-market",
+      "kind": "supports"
+    },
+    {
+      "id": "e54",
+      "source": "concept-oss-strategy",
+      "target": "concept-market",
+      "kind": "supports"
+    },
+    {
+      "id": "e55",
+      "source": "concept-testing",
+      "target": "concept-architecture",
+      "kind": "supports"
+    },
+    {
+      "id": "e56",
+      "source": "concept-architecture",
+      "target": "concept-agent-orchestration",
+      "kind": "supports"
+    },
+    {
+      "id": "e57",
+      "source": "concept-licensing",
+      "target": "concept-oss-strategy",
+      "kind": "supports"
+    },
+    {
+      "id": "e58",
+      "source": "concept-performance",
+      "target": "concept-agent-orchestration",
+      "kind": "supports"
+    },
+    {
+      "id": "e59",
+      "source": "file-readme",
+      "target": "concept-agent-orchestration",
+      "kind": "supports"
+    },
+    {
+      "id": "e60",
+      "source": "file-deck-7",
+      "target": "file-bench-readme",
+      "kind": "supports"
+    },
+    {
+      "id": "e61",
+      "source": "file-router",
+      "target": "file-replay",
+      "kind": "supports"
+    }
+  ]
+}

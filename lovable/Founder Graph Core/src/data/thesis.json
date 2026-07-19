@@ -1,0 +1,8 @@
+{
+  "stages": ["pre-seed", "seed"],
+  "checkSize": 100000,
+  "currency": "USD",
+  "geo": ["US", "EU"],
+  "focus": "AI infra",
+  "technicalBar": "high"
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "ecc",
+    "name": "ECC — agent harness performance optimization system",
+    "founder": "Supawich",
+    "founderType": "solo builder",
+    "founderScore": 82,
+    "thesisFit": "pass",
+    "sourceChannels": ["apply", "github"],
+    "whySurfaced": "inbound apply + rich GitHub repo",
+    "timer": "4h 12m from signal",
+    "history": "Applied Oct 2025 — passed; score then 61 → now 82, +21",
+    "hero": true,
+    "inbound": true
+  },
+  {
+    "id": "lattice-db",
+    "name": "Lattice-DB",
+    "founder": "Rina Okafor",
+    "founderType": "technical cofounder",
+    "founderScore": 74,
+    "thesisFit": "pass",
+    "sourceChannels": ["github"],
+    "whySurfaced": "outbound: rich GitHub repo, distributed systems",
+    "allVerified": true,
+    "timer": "1d 06h from signal",
+    "inbound": false,
+    "summary": "Rust-based distributed vector index for infra teams."
+  },
+  {
+    "id": "brightcart",
+    "name": "BrightCart",
+    "founder": "Julia Ostrowski",
+    "founderType": "second-time founder",
+    "founderScore": 68,
+    "thesisFit": "fail",
+    "offThesisReason": "fails thesis: check size ($2M round, thesis cap $100K)",
+    "sourceChannels": ["outbound"],
+    "greyed": true,
+    "timer": "3d 02h from signal",
+    "inbound": false,
+    "summary": "AI merchandising for mid-market e-commerce."
+  },
+  {
+    "id": "pipewarden",
+    "name": "PipeWarden",
+    "founder": "Ade Bello",
+    "founderType": "ex-infra lead",
+    "founderScore": 71,
+    "thesisFit": "pass",
+    "sourceChannels": ["apply"],
+    "arrivesViaScan": true,
+    "timer": "22m from signal",
+    "inbound": true,
+    "summary": "Runtime guardrails for data pipelines. Crossed conviction threshold on this scan."
+  }
+]

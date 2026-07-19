@@ -1,0 +1,27 @@
+{
+  "opportunityId": "ecc",
+  "sections": {
+    "thesisFit": {
+      "title": "Thesis fit",
+      "content": "AI infra, pre-seed, solo technical founder in US. Check size $100K aligns with founder's $500K target round. Strong signal on both technical bar and stage."
+    },
+    "team": {
+      "title": "Team",
+      "content": "Supawich — solo builder, 6 years at Stripe infrastructure, shipped internal agent tooling used by 200+ engineers. Not disclosed — prior founding experience.",
+      "notDisclosed": ["Prior founding experience"]
+    },
+    "market": {
+      "title": "Market",
+      "content": "Agent orchestration tooling. TAM estimated by founder at $4B by 2028, cited from a16z report. Comparable: LangGraph (open source), CrewAI (seed). Not disclosed — bottom-up TAM breakdown.",
+      "notDisclosed": ["Bottom-up TAM breakdown"]
+    },
+    "product": {
+      "title": "Product",
+      "content": "Deterministic replay + routing layer for agent systems. Verified in repo. Contradiction: deck claims sub-100ms routing; repo benchmark reports 340ms median."
+    },
+    "risks": {
+      "title": "Risks",
+      "content": "Solo founder concentration. Open-source commercialization path unproven. One material contradiction between deck and repo requires founder Q&A."
+    }
+  }
+}

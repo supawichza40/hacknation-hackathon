@@ -1,0 +1,23 @@
+[
+  {
+    "id": "founder",
+    "label": "Founder",
+    "score": 82,
+    "rationale": "6 years Stripe infra, shipped internal agent tooling used by 200+ engineers.",
+    "evidenceCount": 4
+  },
+  {
+    "id": "market",
+    "label": "Market",
+    "score": 71,
+    "rationale": "Agent orchestration is early but crowded; TAM cited from a16z, not bottom-up.",
+    "evidenceCount": 3
+  },
+  {
+    "id": "idea-vs-market",
+    "label": "Idea vs Market",
+    "score": 68,
+    "rationale": "Deterministic replay is a real wedge, but latency claim conflicts with own benchmark.",
+    "evidenceCount": 5
+  }
+]

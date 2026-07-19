@@ -50,3 +50,9 @@ data/demo/repos/
 data/vc-brain.db
 data/vc-brain.db-shm
 data/vc-brain.db-wal
+
+# --- Lovable export (TanStack Start app; separate from the Next.js app) ---
+lovable/node_modules/
+lovable/.output/
+lovable/.vinxi/
+lovable/dist/

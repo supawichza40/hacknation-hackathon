@@ -25,6 +25,16 @@ Four surfaces, one golden path from an inbound founder to a signed decision.
 
 **The wow moment:** click a red **CONTRADICTED** claim and the app jumps straight to the exact deck slide and graph node holding the incompatible evidence. Every conclusion cites where it came from, so any score walks back to something you can see.
 
+## Screenshots
+
+| The wow moment — contradiction, deck vs repo | Pipeline |
+|---|---|
+| ![Contradiction split view](docs/screenshots/wow-contradiction.png) | ![Pipeline board](docs/screenshots/pipeline.png) |
+
+| Diligence — axes, Trust claims, memo | Graph explorer + tour + grounded chat |
+|---|---|
+| ![Diligence page](docs/screenshots/diligence.png) | ![Knowledge graph](docs/screenshots/graph.png) |
+
 ## How it works
 
 - **Single Next.js 16 app** (App Router, React 19, TypeScript). The graph renders with [`@xyflow/react`](https://reactflow.dev); schema validation is [`zod`](https://zod.dev).

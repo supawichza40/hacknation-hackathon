@@ -25,7 +25,13 @@
     "7_sol_final_audit": "in_progress — Sol reconciliation resuming for Codex verdict",
     "8_writeback_push": "in_progress — brief deltas (TanStack, SVG graph) written; committing"
   },
-  "qa_verdict": "all core beats PASS incl. wow split-view, 3 axes never-blended, graph tour+cited chat, live thesis re-score, gate-free apply. Audio playback unverified (no real MP3 in prototype — control+script fallback present).",
+  "qa_verdict": "all core beats PASS incl. wow split-view, 3 axes never-blended, graph tour+cited chat, live thesis re-score, gate-free apply.",
+  "sol_final": {
+    "closed": ["PipeWarden->Outbound (re-verified PASS)", "timer chips all cards (re-verified PASS)"],
+    "genuine_gap_fixing": "audio play/pause had no playable clip — brief §5.2/§7 wants working local MP3 → fix dispatched umsg_01kxvvty",
+    "needs_human": ["upload MIME/size limits (DoD TBD)", "timer-chip computation/rounding (DoD TBD)"],
+    "not_exhaustively_proven": "full state-matrix, computed-style token audit, network-audit, 1280px audit, portability audit — QA covered golden path + visual checks but not every state positively; not known failures, deferred as DONE_WITH_CONCERNS"
+  },
   "sol_audit": "done — 45 objections folded into DoD Sol-hardened QA script; DoD #10 fixed (frozen-contract).",
   "open_unknowns": [
     "upload MIME/size limits — TBD in docs, needs human approve",

@@ -82,3 +82,18 @@ export const provenanceSchema = z.object({
   steps: z.array(provenanceStepSchema).default([]),
 });
 export type Provenance = z.infer<typeof provenanceSchema>;
+
+// ---- R8 guided tour ("Start here" overlay) ----
+export const tourStepSchema = z.object({
+  nodeId: z.string().min(1),
+  name: z.string().min(1),
+  type: kgNodeType,
+  caption: z.string().min(1),
+});
+export type TourStep = z.infer<typeof tourStepSchema>;
+
+export const tourSchema = z.object({
+  graphId: z.string().min(1),
+  steps: z.array(tourStepSchema).min(1),
+});
+export type Tour = z.infer<typeof tourSchema>;

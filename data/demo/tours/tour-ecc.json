@@ -1,0 +1,47 @@
+{
+  "graphId": "ecc",
+  "steps": [
+    {
+      "nodeId": "llm-interface",
+      "name": "src/llm/core/interface.py",
+      "type": "file",
+      "caption": "Abstract LLMProvider base class (generate/list_models/validate_config) plus the LLMError exception hierarchy."
+    },
+    {
+      "nodeId": "c-llm-abstraction",
+      "name": "Provider-agnostic LLM abstraction",
+      "type": "concept",
+      "caption": "Unified interface letting one codebase call Claude, OpenAI, Ollama, Astraflow, and Atlas backends interchangeably."
+    },
+    {
+      "nodeId": "claim-count-mismatch",
+      "name": "Catalog counts disagree across docs",
+      "type": "claim",
+      "caption": "AGENTS.md claims 67 agents/271 skills/92 commands while SOUL.md says 30 agents/135 skills/60 commands."
+    },
+    {
+      "nodeId": "agents-md",
+      "name": "AGENTS.md",
+      "type": "file",
+      "caption": "Agent instruction doc: 67 agents, 271 skills, 92 commands, core principles, orchestration, security, testing, and workflow policy."
+    },
+    {
+      "nodeId": "c-openai-compat",
+      "name": "OpenAI-compatible endpoint reuse",
+      "type": "concept",
+      "caption": "Astraflow and Atlas reuse the OpenAI SDK chat-completions flow against alternate base URLs."
+    },
+    {
+      "nodeId": "claim-enforce-creds-false",
+      "name": "OpenAI clients skip credential enforcement",
+      "type": "claim",
+      "caption": "OpenAI-compatible adapters pass _enforce_credentials=False so missing keys don't block client construction."
+    },
+    {
+      "nodeId": "provider-openai",
+      "name": "src/llm/providers/openai.py",
+      "type": "file",
+      "caption": "OpenAI adapter using chat.completions, parsing tool_calls and usage, with GPT-4o/3.5 model registry."
+    }
+  ]
+}

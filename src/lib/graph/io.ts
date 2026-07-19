@@ -6,8 +6,10 @@ import { join, dirname } from "node:path";
 import {
   parseGraph,
   provenanceSchema,
+  tourSchema,
   type KnowledgeGraph,
   type Provenance,
+  type Tour,
 } from "./schema.ts";
 
 const ROOT = process.cwd();
@@ -60,5 +62,14 @@ export function loadProvenance(slug: string): Provenance | null {
   if (!existsSync(p)) return null;
   const raw = JSON.parse(readFileSync(p, "utf8"));
   const parsed = provenanceSchema.safeParse(raw);
+  return parsed.success ? parsed.data : null;
+}
+
+// R8 guided tour. null when no precomputed tour exists for the slug.
+export function loadTour(slug: string): Tour | null {
+  const p = join(ROOT, `data/demo/tours/tour-${slug}.json`);
+  if (!existsSync(p)) return null;
+  const raw = JSON.parse(readFileSync(p, "utf8"));
+  const parsed = tourSchema.safeParse(raw);
   return parsed.success ? parsed.data : null;
 }

@@ -8,7 +8,7 @@ Per the suite design §6, Layer 1 **extends** `VC-BRAIN-PLAN.md` §12 (evaluatio
 
 ### Data Architecture and Intelligence — 30% (plan §12 first block)
 
-- [x] A real repository + hero deck were ingested during Wave 0, with precomputed/replay fallbacks preserved. — Evidence: precomputed graph in `data/graphs/` + `data/demo/repos/ecc/` (commit fa92d3c); deck claims extracted via real `claude -p` (a9df838); smoke `graph-ecc-42-nodes` (42n/49e) + `contradiction-resolves-slide4-graph`.
+- [x] A real repository + hero deck were ingested during Wave 0, with precomputed/replay fallbacks preserved. — Evidence: precomputed graph in `data/demo/graphs/ecc/` + `data/demo/repos/ecc/` (commit fa92d3c); deck claims extracted via real `claude -p` (a9df838); smoke `graph-ecc-42-nodes` (42n/49e) + `contradiction-resolves-slide4-graph`.
 - [x] Memory stores structured Person, Opportunity, ScreeningFacts, Evidence, Claim, AxisScore, Memo data. — Evidence: `src/lib/db.ts` tables `person`/`opportunity`/`screening_facts`/`evidence`/`claim`/`axis_score`/`memo` (+ `decision` in `src/lib/decision.ts`).
 - [x] Normalized GitHub URL or email deduplicates the returning founder across opportunities. — Evidence: `normalizeRepoUrl` (`src/lib/thesis.ts`, plan §5) + deterministic dedup in `src/lib/apply.ts`; returning-founder delta line in `src/lib/scoring.ts`.
 - [x] Founder Score history persists across applications — never resets. — Evidence: smoke `r1-query-improving` cites `score-history://opp-ecc/2025-10-01`; `FounderObservation` history in `src/lib/scoring.ts`.
@@ -138,7 +138,8 @@ npm run check:done
 | Demo script | Rehearsed flow (plan §17 DEMO_SCRIPT) | `docs/ops/DEMO-SCRIPT.md` — created at feature freeze from PITCH.md + SUBMISSION.md shot list |
 | License | Repo license present | `LICENSE` (plan §6) |
 | NOTICE | Present when UA code adapted | `NOTICE`, conditional |
-| Hero graph + claims | Validated precomputed artifacts | `data/graphs/` + `data/demo/repos/ecc/` — present (ECC 42n/49e graph + claims) |
+| Hero graph + claims | Validated precomputed artifacts | `data/demo/graphs/{ecc,lattice-db}/` + `data/demo/repos/ecc/` — present (ECC 42n/49e graph + claims) |
+| Producer scripts | Reproducibility path for every demo artifact | `scripts/` — seed-demo.ts, precompute-lattice.ts, precompute-memo.ts, precompute-chat.ts, extract-claims.ts, scan-score.mjs, build-tour.ts; `npm run seed` + committed outputs |
 | Provenance replay | Real captured LLM run | `data/replay/memo/provenance.json` + `raw-model-output.json` — present |
 | Scan replay | Real captured Tavily sourcing scan | `data/replay/scan/` |
 | Voice brief | Pre-rendered hero MP3 + text script | Path TBD (owner: human) |
@@ -173,7 +174,7 @@ Resolved tonight (human rulings + implementation):
 - Score math: **RESOLVED-by-implementation** — deterministic `computeAxisScores` + Founder/Trend formulas in `src/lib/scoring.ts`; determinism enforced by check:done `artifacts` + smoke.
 - Cut-status + script names: **RESOLVED-by-implementation** — concrete `test`/`build`/`smoke:golden`/`check:done` scripts exist; retained-vs-fallback enforced by the smoke + artifacts gates.
 - Pushed-state contract: **RESOLVED-by-implementation** — check:done gate (g) asserts a clean tree AND `HEAD == origin/dispatch/lovable-frontend`.
-- Artifact paths: **PARTIAL** — demo script (`docs/ops/DEMO-SCRIPT.md`), replay (`data/replay/`), scan replay (`data/replay/scan/`), graph (`data/graphs/`, `data/demo/`) all exist; MP3 + videos pending (below).
+- Artifact paths: **PARTIAL** — demo script (`docs/ops/DEMO-SCRIPT.md`), replay (`data/replay/`), scan replay (`data/replay/scan/`), graph (`data/demo/graphs/`, `data/demo/`) all exist; MP3 + videos pending (below).
 
 Still open — genuinely block a literal done verdict (HUMAN):
 

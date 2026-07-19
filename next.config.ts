@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   // and exits 1. Type safety is enforced out-of-band by `tsc --noEmit`, which
   // passes clean against typescript@7. This only skips Next's redundant re-check.
   typescript: { ignoreBuildErrors: true },
+  // Hide the dev-mode floating Next.js indicator so screen recordings and
+  // screenshots stay clean (development-only UI; no production effect).
+  devIndicators: false,
 };
 
 export default nextConfig;

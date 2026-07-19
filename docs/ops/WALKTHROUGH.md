@@ -59,8 +59,8 @@ Your screen becomes four terminal tabs, each opened with its lane prompt from **
 
 ```
 ┌─ Tab: A-backend ──┐ ┌─ Tab: B-frontend ─┐ ┌─ Tab: C-qa ───────┐ ┌─ Tab: D-pitch ────┐
-│ owns src/backend  │ │ owns src/frontend │ │ drives the app,   │ │ owns docs/, deck, │
-│ spec 05 track A   │ │ mock.ts from spec │ │ files TODO issues │ │ video script,     │
+│ owns src/app/api  │ │ owns src/app UI    │ │ drives the app,   │ │ owns docs/, deck, │
+│ + src/lib         │ │ replay from spec  │ │ files TODO issues │ │ video script,     │
 │ tests same commit │ │ 03, then track A  │ │ NEVER edits code  │ │ Q&A bank answers  │
 └───────────────────┘ └───────────────────┘ └───────────────────┘ └───────────────────┘
      Rotation: ~15 min per tab → read output → ONE steering message → next tab

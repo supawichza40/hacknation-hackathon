@@ -24,8 +24,8 @@ How one person replicates the 5-person pipeline using N parallel Claude Code ses
 
 | Lane | Owns (directories) | Contract it builds against | Never touches |
 |---|---|---|---|
-| **A — Backend** | `src/backend/` | API spec + PREFLIGHT capability table; real external calls with **captured provenance replay** as the runtime/demo fallback (mocks stay only in tests) + the day-1 live smoke | frontend, docs |
-| **B — Frontend** | `src/frontend/` | API spec via **captured provenance replay** (capture real responses FIRST, replay them — the frontend then never waits for the backend and the demo fallback is real data, not fixtures) | backend, docs |
+| **A — Backend** | `src/app/api/`, `src/lib/` (route handlers + domain logic) | API spec + PREFLIGHT capability table; real external calls with **captured provenance replay** as the runtime/demo fallback (mocks stay only in tests) + the day-1 live smoke | frontend surfaces, docs |
+| **B — Frontend** | `src/app/` pages + components (excl. `api/`) | API spec via **captured provenance replay** (capture real responses FIRST, replay them — the frontend then never waits for the backend and the demo fallback is real data, not fixtures) | `src/app/api/`, `src/lib/`, docs |
 | **C — Verify/QA** | `TODO.md` issues only | The deployed/running app — drives real flows, files findings as TODO entries with repro steps | **any source file** (a QA lane that edits code collides with A/B) |
 | **D — Pitch/Content** | `docs/`, deck, README, screenshots, video script | `docs/ops/PITCH.md` + `docs/ops/SUBMISSION.md` gates | `src/` entirely |
 

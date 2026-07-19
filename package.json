@@ -18,8 +18,8 @@
     "url": "git+https://github.com/supawichza40/hacknation-hackathon.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Supawich (supawichza40)",
+  "license": "MIT",
   "type": "module",
   "bugs": {
     "url": "https://github.com/supawichza40/hacknation-hackathon/issues"
